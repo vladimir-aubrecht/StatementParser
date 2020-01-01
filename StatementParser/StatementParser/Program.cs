@@ -10,7 +10,7 @@ namespace StatementParser
         public static void Main(string[] args)
         {
             args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
-            args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
+            //args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
             //args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls" };
 
             var parser = new Parser(with => with.EnableDashDash = true);

@@ -14,18 +14,9 @@ namespace StatementParserLibrary.Parsers
         private const string SheetName = "4_Stock Award Plan_Completed";
         private const string Signature = "Morgan Stanley Smith Barney LLC. Member SIPC.";
 
-        private Dictionary<string, TransactionType> transactionTypeMapping = new Dictionary<string, TransactionType> {
-            { "Dividend Reinvested", TransactionType.DividendReinvestment },
-            { "IRS Withholding", TransactionType.IRSWitholding },
-            { "Dividend Credit", TransactionType.DividendCredit },
-            { "Share Deposit", TransactionType.ShareDeposit },
-            { "Sale", TransactionType.Sell },
-            { "Wire Transfer", TransactionType.WireTransfer }
-        };
-
         public bool CanParse(string statementFilePath)
         {
-            if (!statementFilePath.EndsWith(".xls", StringComparison.InvariantCultureIgnoreCase))
+            if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".xls")
             {
                 return false;
             }
@@ -43,20 +34,75 @@ namespace StatementParserLibrary.Parsers
 
             var name = sheet.GetRow(3).Cells[1].StringCellValue;
 
-            for (int i = HeaderRowOffset; i <= sheet.LastRowNum - FooterRowOffset; i++)
+            foreach (var row in GetTransactionRows(sheet))
             {
-                var row = sheet.GetRow(i);
+                var transaction = ParseTransaction(sheet, ParseTransactionType(row), row, name);
 
-                var date = DateTime.Parse(row.Cells[0].StringCellValue);
-                var type = this.ResolveTransactionType(row.Cells[1].StringCellValue);
-                var amount = Convert.ToDecimal(row.Cells[3].NumericCellValue);
-                var price = Convert.ToDecimal(row.Cells[4].NumericCellValue);
-                var grossProceeds = Convert.ToDecimal(row.Cells[5].NumericCellValue);
-
-                transactions.Add(new Transaction(Broker.MorganStanley, date, name, type, amount, price, grossProceeds, Currency.USD));
+                if (transaction != null)
+                {
+                    transactions.Add(transaction);
+                }
             }
 
             return new Statement(transactions);
+        }
+
+        private Transaction ParseTransaction(ISheet sheet, string type, IRow row, string name)
+        {
+            switch (type)
+            {
+                case "Share Deposit":
+                    return ParseDepositTransaction(row, name);
+
+                case "Dividend Credit":
+                    var taxRow = SearchTaxRow(sheet, row);
+                    return ParseDividendTransaction(row, taxRow, name);
+
+                case "IRS Withholding":
+                case "Dividend Reinvested":
+                case "Sale":
+                case "Wire Transfer":
+                    // no usecase for now, lets ignore them.
+                    return null;
+            }
+
+            return null;
+        }
+
+        private DividendTransaction ParseDividendTransaction(IRow dividendRow, IRow taxRow, string name)
+        {
+            var date = ParseTransactionDate(dividendRow);
+            var grossProceed = Convert.ToDecimal(dividendRow.Cells[5].NumericCellValue);
+            var tax = Convert.ToDecimal(taxRow?.Cells[5].NumericCellValue);
+            var income = grossProceed + tax;
+
+            return new DividendTransaction(Broker.MorganStanley, date, name, income, tax, Currency.USD);
+        }
+
+        private DepositTransaction ParseDepositTransaction(IRow row, string name)
+        {
+            var date = ParseTransactionDate(row);
+            var amount = Convert.ToDecimal(row.Cells[3].NumericCellValue);
+            var price = Convert.ToDecimal(row.Cells[4].NumericCellValue);
+
+            return new DepositTransaction(Broker.MorganStanley, date, name, amount, price, Currency.USD);
+        }
+
+        private IRow SearchTaxRow(ISheet sheet, IRow creditRow)
+        {
+            var creditRowDate = ParseTransactionDate(creditRow);
+
+            foreach (var row in GetTransactionRows(sheet))
+            {
+                var type = ParseTransactionType(row);
+
+                if (type == "IRS Withholding" && ParseTransactionDate(row) == creditRowDate)
+                {
+                    return row;
+                }
+            }
+
+            return null;
         }
 
         private ISheet GetSheet(string statementFilePath)
@@ -70,14 +116,27 @@ namespace StatementParserLibrary.Parsers
             return workbook.GetSheet(SheetName);
         }
 
-        private TransactionType ResolveTransactionType(string type)
+        private IList<IRow> GetTransactionRows(ISheet sheet)
         {
-            if (transactionTypeMapping.TryGetValue(type, out var result))
+            var output = new List<IRow>();
+
+            for (int i = HeaderRowOffset; i <= sheet.LastRowNum - FooterRowOffset; i++)
             {
-                return result;
+                var row = sheet.GetRow(i);
+                output.Add(row);
             }
 
-            throw new NotSupportedException($"Transaction type: {type} is not supported");
+            return output;
+        }
+
+        private DateTime ParseTransactionDate(IRow row)
+        {
+            return DateTime.Parse(row.Cells[0].StringCellValue);
+        }
+
+        private string ParseTransactionType(IRow row)
+        {
+            return row.Cells[1].StringCellValue;
         }
     }
 }
