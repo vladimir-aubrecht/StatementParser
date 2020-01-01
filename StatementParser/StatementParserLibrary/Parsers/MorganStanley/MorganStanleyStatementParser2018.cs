@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
-using StatementParserLibrary.Extensions;
 using StatementParserLibrary.Models;
-using UglyToad.PdfPig;
-using UglyToad.PdfPig.Content;
 
 namespace StatementParserLibrary.Parsers
 {
