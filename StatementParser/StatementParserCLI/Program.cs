@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
-using CommandLine;
+using Commander.NET;
+using Commander.NET.Exceptions;
 using Newtonsoft.Json;
+using StatementParser;
 
 namespace StatementParserCLI
 {
@@ -9,29 +10,41 @@ namespace StatementParserCLI
     {
         public static void Main(string[] args)
         {
-            args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
-            //args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
-            args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls" };
+            //args = new string[] { "-json", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
+            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
+            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
+            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls" };
+            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
 
-            var parser = new Parser(with => with.EnableDashDash = true);
+            var parser = new CommanderParser<Options>();
 
-            var result = parser.ParseArguments<Options>(args)
-                            .WithParsed(options => Run(options));
-
+            try
+            {
+                var options = parser.Parse(args);
+                Run(options);
+            }
+            catch (ParameterMissingException)
+            {
+                Console.WriteLine(parser.Usage());
+            }
         }
 
         private static void Run(Options option)
         {
-            var parser = new StatementParser.StatementParser();
-            var result = parser.Parse(option.StatementFilePath);
+            var parser = new TransactionParser();
 
-            var output = result?.ToString();
-            if (option.ShouldPrintAsJson)
+            foreach (var file in option.StatementFilePaths)
             {
-                output = JsonConvert.SerializeObject(result);
-            }
+                var result = parser.Parse(file);
 
-            Console.WriteLine(output);
+                var output = String.Join("\r\n", result);
+                if (option.ShouldPrintAsJson)
+                {
+                    output = JsonConvert.SerializeObject(result);
+                }
+
+                Console.WriteLine(output);
+            }
         }
     }
 }

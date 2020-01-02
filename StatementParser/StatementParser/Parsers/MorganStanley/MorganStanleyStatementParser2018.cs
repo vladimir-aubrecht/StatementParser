@@ -7,7 +7,7 @@ using StatementParser.Models;
 
 namespace StatementParser.Parsers.MorganStanley
 {
-    internal class MorganStanleyStatementParser2018 : IStatementParser
+    internal class MorganStanleyStatementParser2018 : ITransactionParser
     {
         private const int HeaderRowOffset = 8;
         private const int FooterRowOffset = 6;
@@ -26,7 +26,7 @@ namespace StatementParser.Parsers.MorganStanley
             return sheet.GetRow(sheet.LastRowNum).Cells[0].StringCellValue == Signature;
         }
 
-        public Statement Parse(string statementFilePath)
+        public IList<Transaction> Parse(string statementFilePath)
         {
             var transactions = new List<Transaction>();
 
@@ -44,7 +44,7 @@ namespace StatementParser.Parsers.MorganStanley
                 }
             }
 
-            return new Statement(transactions);
+            return transactions;
         }
 
         private Transaction ParseTransaction(ISheet sheet, string type, IRow row, string name)

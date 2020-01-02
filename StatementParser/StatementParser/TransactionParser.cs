@@ -7,17 +7,17 @@ using StatementParser.Parsers.MorganStanley;
 
 namespace StatementParser
 {
-    public class StatementParser
+    public class TransactionParser
     {
-        private IList<IStatementParser> parsers = new List<IStatementParser>();
+        private IList<ITransactionParser> parsers = new List<ITransactionParser>();
 
-        public StatementParser()
+        public TransactionParser()
         {
             parsers.Add(new MorganStanleyStatementParser2018());
             parsers.Add(new FidelityStatementParser2018());
         }
 
-        public Statement Parse(string statementFilePath)
+        public IList<Transaction> Parse(string statementFilePath)
         {
             foreach (var parser in parsers)
             {

@@ -1,13 +1,16 @@
-﻿using CommandLine;
+﻿using System.ComponentModel;
+using Commander.NET.Attributes;
 
 namespace StatementParserCLI
 {
     internal class Options
     {
-        [Option('i', "inputStatementFilePath", Required = true, HelpText = "Relative or absolute path to statement file.")]
-        public string StatementFilePath { get; set; }
+        [Parameter("j", "json", Description = "Switch output format into json.")]
+        public bool ShouldPrintAsJson { get; set; } = false;
 
-        [Option('j', "json", Required = false, HelpText = "Switch output format into json.")]
-        public bool ShouldPrintAsJson { get; set; }
+        [PositionalParameter(0, "inputStatementFilePath", Description = "Relative or absolute path to statement file or multiple paths each as one argument.")]
+        [PositionalParameterList]
+        public string[] StatementFilePaths { get; set; }
+
     }
 }

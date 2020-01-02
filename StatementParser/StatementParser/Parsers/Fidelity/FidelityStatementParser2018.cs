@@ -10,7 +10,7 @@ using UglyToad.PdfPig.Content;
 
 namespace StatementParser.Parsers.Fidelity
 {
-    public class FidelityStatementParser2018 : IStatementParser
+    public class FidelityStatementParser2018 : ITransactionParser
     {
         private const string DepositTransactionTableHeader = "Other Activity In SettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceTransactionCostAmount";
         private const string DepositTransactionTableFooter = "Total Other Activity In--";
@@ -34,7 +34,7 @@ namespace StatementParser.Parsers.Fidelity
             return true;
         }
 
-        public Statement Parse(string statementFilePath)
+        public IList<Transaction> Parse(string statementFilePath)
         {
             var transactions = new List<Transaction>();
 
@@ -49,7 +49,7 @@ namespace StatementParser.Parsers.Fidelity
                     ParseTransactions(document, year, DividendTransactionTableHeader, DividendTransactionTableFooter, (doc, ts, year) => ParseDividendTransaction(doc, ts, year)));
             }
 
-            return new Statement(transactions);
+            return transactions;
         }
 
         private string SearchForTaxString(PdfDocument document, DateTime date)

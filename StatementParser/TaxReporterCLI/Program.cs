@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using CommandLine;
+using Commander.NET;
+using Commander.NET.Exceptions;
 using ExchangeRateProvider.Models;
 using ExchangeRateProvider.Providers;
 using ExchangeRateProvider.Providers.Czk;
-using Newtonsoft.Json;
 using StatementParser.Models;
 
 namespace TaxReporterCLI
@@ -16,14 +15,23 @@ namespace TaxReporterCLI
     {
         public static async Task Main(string[] args)
         {
-            args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
-            //args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
-            args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls" };
+            //args = new string[] { "-json", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
+            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
+            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
+            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls" };
+            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
 
-            var parser = new Parser(with => with.EnableDashDash = true);
+            var parser = new CommanderParser<Options>();
 
-            var result = parser.ParseArguments<Options>(args)
-                            .WithParsed(async options => await RunAsync(options));
+            try
+            {
+                var options = parser.Parse(args);
+                await RunAsync(options);
+            }
+            catch (ParameterMissingException)
+            {
+                Console.WriteLine(parser.Usage());
+            }
 
         }
 
@@ -34,43 +42,47 @@ namespace TaxReporterCLI
 
 
 
-            var parser = new StatementParser.StatementParser();
-            var result = parser.Parse(option.StatementFilePath);
+            var parser = new StatementParser.TransactionParser();
 
-            var kurzyPerYear = await FetchExchangeRatesForEveryYearAsync(kurzyCzProvider, result.Transactions);
-
-            foreach (var transaction in result.Transactions)
+            foreach (var file in option.StatementFilePaths)
             {
-                var cnbCurrencyList = await cnbProvider.FetchCurrencyListByDateAsync(transaction.Date);
-                var cnbPrice = cnbCurrencyList[transaction.Currency.ToString()].Price;
+                var result = parser.Parse(file);
 
-                // TODO: Refactor this, it's ugly like hell.
-                if (transaction is DepositTransaction)
+                var kurzyPerYear = await FetchExchangeRatesForEveryYearAsync(kurzyCzProvider, result);
+
+                foreach (var transaction in result)
                 {
-                    var castedTransaction = transaction as DepositTransaction;
+                    var cnbCurrencyList = await cnbProvider.FetchCurrencyListByDateAsync(transaction.Date);
+                    var cnbPrice = cnbCurrencyList[transaction.Currency.ToString()].Price;
 
-                    if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
+                    // TODO: Refactor this, it's ugly like hell.
+                    if (transaction is DepositTransaction)
                     {
-                        var kurzyPrice = kurzyPerYear[transaction.Date.Year][transaction.Currency.ToString()].Price;
-                        Console.WriteLine($"{transaction} Price in CZK (CNB): {castedTransaction.Price * cnbPrice} Price in CZK (year average): {castedTransaction.Price * kurzyPrice}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{transaction} Price in CZK (CNB): {castedTransaction.Price * cnbPrice} Price in CZK (year average): N/A");
-                    }
-                }
-                else if (transaction is DividendTransaction)
-                {
-                    var castedTransaction = transaction as DividendTransaction;
+                        var castedTransaction = transaction as DepositTransaction;
 
-                    if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
-                    {
-                        var kurzyPrice = kurzyPerYear[transaction.Date.Year][transaction.Currency.ToString()].Price;
-                        Console.WriteLine($"{transaction} Income in CZK (CNB): {castedTransaction.Income * cnbPrice} Income in CZK (year average): {castedTransaction.Income * kurzyPrice} Tax in CZK (CNB): {castedTransaction.Tax * cnbPrice} Tax in CZK (year average): {castedTransaction.Tax * kurzyPrice}");
+                        if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
+                        {
+                            var kurzyPrice = kurzyPerYear[transaction.Date.Year][transaction.Currency.ToString()].Price;
+                            Console.WriteLine($"{transaction} Price in CZK (CNB): {castedTransaction.Price * cnbPrice} Price in CZK (year average): {castedTransaction.Price * kurzyPrice}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{transaction} Price in CZK (CNB): {castedTransaction.Price * cnbPrice} Price in CZK (year average): N/A");
+                        }
                     }
-                    else
+                    else if (transaction is DividendTransaction)
                     {
-                        Console.WriteLine($"{transaction} Income in CZK (CNB): {castedTransaction.Income * cnbPrice} Income in CZK (year average): N/A Tax in CZK (CNB): {castedTransaction.Tax * cnbPrice} Tax in CZK (year average): N/A");
+                        var castedTransaction = transaction as DividendTransaction;
+
+                        if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
+                        {
+                            var kurzyPrice = kurzyPerYear[transaction.Date.Year][transaction.Currency.ToString()].Price;
+                            Console.WriteLine($"{transaction} Income in CZK (CNB): {castedTransaction.Income * cnbPrice} Income in CZK (year average): {castedTransaction.Income * kurzyPrice} Tax in CZK (CNB): {castedTransaction.Tax * cnbPrice} Tax in CZK (year average): {castedTransaction.Tax * kurzyPrice}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{transaction} Income in CZK (CNB): {castedTransaction.Income * cnbPrice} Income in CZK (year average): N/A Tax in CZK (CNB): {castedTransaction.Tax * cnbPrice} Tax in CZK (year average): N/A");
+                        }
                     }
                 }
             }
