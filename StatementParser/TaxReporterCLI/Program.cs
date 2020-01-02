@@ -84,6 +84,20 @@ namespace TaxReporterCLI
                             Console.WriteLine($"{transaction} Income in CZK (CNB): {castedTransaction.Income * cnbPrice} Income in CZK (year average): N/A Tax in CZK (CNB): {castedTransaction.Tax * cnbPrice} Tax in CZK (year average): N/A");
                         }
                     }
+                    else if (transaction is DiscountBuyTransaction)
+                    {
+                        var castedTransaction = transaction as DiscountBuyTransaction;
+
+                        if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
+                        {
+                            var kurzyPrice = kurzyPerYear[transaction.Date.Year][transaction.Currency.ToString()].Price;
+                            Console.WriteLine($"{transaction} Purchase Price in CZK (CNB): {castedTransaction.PurchasePrice * cnbPrice} Purchase Price in CZK (year average): {castedTransaction.PurchasePrice * kurzyPrice} Market Price in CZK (CNB): {castedTransaction.MarketPrice * cnbPrice} Market Price in CZK (year average): {castedTransaction.MarketPrice * kurzyPrice}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{transaction} Purchase Price in CZK (CNB): {castedTransaction.PurchasePrice * cnbPrice} Purchase Price in CZK (year average): N/A Market Price in CZK (CNB): {castedTransaction.MarketPrice * cnbPrice} Market Price in CZK (year average): N/A");
+                        }
+                    }
                 }
             }
         }

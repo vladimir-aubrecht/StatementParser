@@ -13,7 +13,7 @@ namespace StatementParser.Parsers.Fidelity
     public class FidelityStatementParser2018 : ITransactionParser
     {
         private const string DepositTransactionTableHeader = "Other Activity In SettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceTransactionCostAmount";
-        private const string DepositTransactionTableFooter = "Total Other Activity In--";
+        private const string DepositTransactionTableFooter = "Total Other Activity In";
 
         private const string DividendTransactionTableHeader = "Dividends, Interest & Other Income (Includes dividend reinvestment)SettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceAmount";
         private const string DividendTransactionTableFooter = "Total Dividends, Interest & Other Income";
@@ -21,8 +21,16 @@ namespace StatementParser.Parsers.Fidelity
         private const string TaxTransactionTableHeader = "STOCK PLAN ACCOUNTActivityTaxes Withheld DateSecurityDescriptionAmount";
         private const string TaxTransactionTableFooter = "Total Federal Taxes Withheld";
 
-        private static readonly Regex rowSplitRegex = new Regex("([0-9]{2}/[0-9]{2} )", RegexOptions.Compiled);
+        private const string DiscountedBuyTransactionTableHeader = "Employee Stock Purchase SummaryOffering PeriodDescriptionPurchaseDatePurchase PricePurchase DateFair Market ValueSharesPurchasedGain fromPurchase ";
+        private const string DiscountedBuyTransactionTableFooter = "Total for all Offering Periods";
+
+        private const string DiscountedBuyCompanyNameTransactionTableHeader = "Securities Bought & SoldSettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceTransactionCostAmounti";
+        private const string DiscountedBuyCompanyNameTransactionTableFooter = "Total Securities Bought";
+
+        private static readonly Regex employeePurchaseSanitizeRegex = new Regex("[0-9]{2}/[0-9]{2}/[0-9]{4}-[0-9]{2}/[0-9]{2}/[0-9]{4}Employee Purchase", RegexOptions.Compiled);
+        private static readonly Regex rowSplitRegex = new Regex("([0-9]{2}/[0-9]{2}(?: |/[0-9]{4}))", RegexOptions.Compiled);
         private static readonly Regex dividendTransactionRegex = new Regex("([0-9]{2}/[0-9]{2}) (.+?)  ?[0-9]+ Dividend Received  --\\$?([0-9]+\\.[0-9]{2})", RegexOptions.Compiled);
+        private static readonly Regex discountedBuyRegex = new Regex("([0-9]{2}/[0-9]{2}/[0-9]{4})\\$([0-9]+\\.[0-9]{5})\\$([0-9]+\\.[0-9]{3})([0-9]+\\.[0-9]{3})", RegexOptions.Compiled);
 
         public bool CanParse(string statementFilePath)
         {
@@ -47,9 +55,31 @@ namespace StatementParser.Parsers.Fidelity
 
                 transactions.AddRange(
                     ParseTransactions(document, year, DividendTransactionTableHeader, DividendTransactionTableFooter, (doc, ts, year) => ParseDividendTransaction(doc, ts, year)));
+
+                transactions.AddRange(
+                    ParseTransactions(document, year, DiscountedBuyTransactionTableHeader, DiscountedBuyTransactionTableFooter, (doc, ts, year) => ParseDiscountedBuyTransaction(doc, ts, year)));
             }
 
             return transactions;
+        }
+
+        public string SearchForCompanyName(PdfDocument document, string amount, string price)
+        {
+            var transactionStrings = ParseTransactionStringsFromDocument(document, DiscountedBuyCompanyNameTransactionTableHeader, DiscountedBuyCompanyNameTransactionTableFooter);
+
+            var foundTransactions = transactionStrings.Where(i => i.Contains($" You Bought {amount}${price}") && i.Contains("ESPP"));
+
+            if (foundTransactions.Count() > 1)
+            {
+                // Probability that somebody will get ESPP for 2 companies of exact discounted price and exact amount on one report is close to 0, lets consider it's impossible.
+                // I don't know better way how to find it based on artifacts from page about ESPP.
+
+                throw new Exception("Couldn't properly detect name of company for ESPP.");
+            }
+
+            var transaction = foundTransactions.First();
+
+            return transaction.Substring(6, transaction.IndexOf("ESPP", StringComparison.Ordinal) - 7);
         }
 
         private string SearchForTaxString(PdfDocument document, DateTime date)
@@ -130,6 +160,27 @@ namespace StatementParser.Parsers.Fidelity
             return Convert.ToInt32(parts[parts.Length - 1]);
         }
 
+        private DiscountBuyTransaction ParseDiscountedBuyTransaction(PdfDocument document, string transactionString, int year)
+        {
+            //06/28/2019$120.56000$133.96020.631$276.46
+
+            var match = discountedBuyRegex.Match(transactionString);
+
+            var dateString = match.Groups[1].Value;
+            var purchasePriceString = match.Groups[2].Value;
+            var marketPriceString = match.Groups[3].Value;
+            var amountString = match.Groups[4].Value;
+
+            var name = SearchForCompanyName(document, amountString, purchasePriceString);
+
+            var date = DateTime.Parse(dateString);
+            var purchasePrice = Convert.ToDecimal(purchasePriceString);
+            var marketPrice = Convert.ToDecimal(marketPriceString);
+            var amount = Convert.ToDecimal(amountString);
+
+            return new DiscountBuyTransaction(Broker.Fidelity, date, name, Currency.USD, purchasePrice, marketPrice, amount);
+        }
+
         private DividendTransaction ParseDividendTransaction(PdfDocument document, string transactionString, int year)
         {
             //09/12 MICROSOFT CORP  594918104 Dividend Received  --$128.82
@@ -187,11 +238,16 @@ namespace StatementParser.Parsers.Fidelity
 
             var transactionsTableString = page.Text.Substring(startIndex, endIndex - startIndex);
 
-            var parts = rowSplitRegex.Split(transactionsTableString);
+            if (employeePurchaseSanitizeRegex.IsMatch(transactionsTableString))
+            {
+                transactionsTableString = employeePurchaseSanitizeRegex.Replace(transactionsTableString, "");
+            }
+
+            var parts = rowSplitRegex.Split(transactionsTableString).Where(i => i.Trim() != String.Empty).ToArray();
 
             var output = new List<string>();
 
-            for (int i = 1; i < parts.Length; i += 2)
+            for (int i = 0; i < parts.Length - 1; i += 2)
             {
                 output.Add(parts[i] + parts[i + 1]);
             }

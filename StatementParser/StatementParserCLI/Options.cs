@@ -10,6 +10,5 @@ namespace StatementParserCLI
         [PositionalParameter(0, "inputStatementFilePath", Description = "Relative or absolute path to statement file or multiple paths each as one argument.")]
         [PositionalParameterList]
         public string[] StatementFilePaths { get; set; }
-
     }
 }
