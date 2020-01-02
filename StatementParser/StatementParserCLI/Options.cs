@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Commander.NET.Attributes;
+﻿using Commander.NET.Attributes;
 
 namespace StatementParserCLI
 {

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Commander.NET;
 using Commander.NET.Exceptions;
 using Newtonsoft.Json;
 using StatementParser;
+using StatementParser.Models;
 
 namespace StatementParserCLI
 {
@@ -33,18 +35,36 @@ namespace StatementParserCLI
         {
             var parser = new TransactionParser();
 
+            var transactions = new List<Transaction>();
             foreach (var file in option.StatementFilePaths)
             {
                 var result = parser.Parse(file);
 
-                var output = String.Join("\r\n", result);
-                if (option.ShouldPrintAsJson)
+                if (result != null)
                 {
-                    output = JsonConvert.SerializeObject(result);
+                    transactions.AddRange(result);
                 }
-
-                Console.WriteLine(output);
             }
+
+            if (option.ShouldPrintAsJson)
+            {
+                PrintAsJson(transactions);
+            }
+            else
+            {
+                PrintAsPlainText(transactions);
+            }
+
+        }
+
+        private static void PrintAsJson(IList<Transaction> transactions)
+        {
+            Console.WriteLine(JsonConvert.SerializeObject(transactions));
+        }
+
+        private static void PrintAsPlainText(IList<Transaction> transactions)
+        {
+            Console.WriteLine(String.Join("\r\n", transactions));
         }
     }
 }
