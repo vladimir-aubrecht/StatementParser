@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using StatementParserLibrary.Models;
-using StatementParserLibrary.Parsers;
-using StatementParserLibrary.Parsers.MorganStanley;
+using StatementParser.Models;
+using StatementParser.Parsers;
+using StatementParser.Parsers.Fidelity;
+using StatementParser.Parsers.MorganStanley;
 
-namespace StatementParserLibrary
+namespace StatementParser
 {
     public class StatementParser
     {

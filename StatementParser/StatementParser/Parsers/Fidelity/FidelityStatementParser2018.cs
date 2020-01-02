@@ -4,11 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using NPOI.SS.UserModel;
-using StatementParserLibrary.Models;
+using StatementParser.Models;
 using UglyToad.PdfPig;
 using UglyToad.PdfPig.Content;
 
-namespace StatementParserLibrary.Parsers.MorganStanley
+namespace StatementParser.Parsers.Fidelity
 {
     public class FidelityStatementParser2018 : IStatementParser
     {

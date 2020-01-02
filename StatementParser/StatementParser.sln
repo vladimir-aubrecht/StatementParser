@@ -1,9 +1,13 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatementParser", "StatementParser\StatementParser.csproj", "{B43397D5-8424-4154-9594-BE302654CC5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatementParserCLI", "StatementParserCLI\StatementParserCLI.csproj", "{B43397D5-8424-4154-9594-BE302654CC5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatementParserLibrary", "StatementParserLibrary\StatementParserLibrary.csproj", "{C1F43E1F-01B6-4482-A35C-0280A818E92B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatementParser", "StatementParser\StatementParser.csproj", "{C1F43E1F-01B6-4482-A35C-0280A818E92B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeRateProvider", "ExchangeRateProvider\ExchangeRateProvider.csproj", "{BA97580E-8D79-4C1B-9076-640442CD47D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxReporterCLI", "TaxReporterCLI\TaxReporterCLI.csproj", "{95B0C722-ED06-4077-9A38-96330B0FC910}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,14 @@ Global
 		{C1F43E1F-01B6-4482-A35C-0280A818E92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1F43E1F-01B6-4482-A35C-0280A818E92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1F43E1F-01B6-4482-A35C-0280A818E92B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA97580E-8D79-4C1B-9076-640442CD47D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA97580E-8D79-4C1B-9076-640442CD47D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA97580E-8D79-4C1B-9076-640442CD47D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA97580E-8D79-4C1B-9076-640442CD47D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95B0C722-ED06-4077-9A38-96330B0FC910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95B0C722-ED06-4077-9A38-96330B0FC910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95B0C722-ED06-4077-9A38-96330B0FC910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95B0C722-ED06-4077-9A38-96330B0FC910}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

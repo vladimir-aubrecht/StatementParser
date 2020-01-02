@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace StatementParserLibrary.Models
+namespace StatementParser.Models
 {
     public class Statement
     {

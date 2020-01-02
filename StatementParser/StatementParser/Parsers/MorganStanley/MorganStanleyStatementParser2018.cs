@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
-using StatementParserLibrary.Models;
+using StatementParser.Models;
 
-namespace StatementParserLibrary.Parsers
+namespace StatementParser.Parsers.MorganStanley
 {
     internal class MorganStanleyStatementParser2018 : IStatementParser
     {

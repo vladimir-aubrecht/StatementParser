@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace StatementParser
+namespace TaxReporterCLI
 {
     internal class Options
     {

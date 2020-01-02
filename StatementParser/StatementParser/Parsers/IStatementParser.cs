@@ -1,6 +1,6 @@
-﻿using StatementParserLibrary.Models;
+﻿using StatementParser.Models;
 
-namespace StatementParserLibrary.Parsers
+namespace StatementParser.Parsers
 {
     public interface IStatementParser
     {

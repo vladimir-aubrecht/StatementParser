@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using CommandLine;
 using Newtonsoft.Json;
 
-namespace StatementParser
+namespace StatementParserCLI
 {
     public class Program
     {
@@ -11,7 +11,7 @@ namespace StatementParser
         {
             args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
             //args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
-            //args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls" };
+            args = new string[] { "-i", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls" };
 
             var parser = new Parser(with => with.EnableDashDash = true);
 
@@ -22,7 +22,7 @@ namespace StatementParser
 
         private static void Run(Options option)
         {
-            var parser = new StatementParserLibrary.StatementParser();
+            var parser = new StatementParser.StatementParser();
             var result = parser.Parse(option.StatementFilePath);
 
             var output = result?.ToString();

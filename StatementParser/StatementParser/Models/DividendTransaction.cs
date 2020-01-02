@@ -1,5 +1,5 @@
 ﻿using System;
-namespace StatementParserLibrary.Models
+namespace StatementParser.Models
 {
     public class DividendTransaction : Transaction
     {
