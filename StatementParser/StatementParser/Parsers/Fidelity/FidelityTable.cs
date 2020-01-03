@@ -11,13 +11,13 @@ namespace StatementParser.Parsers.Fidelity
         private static readonly Regex DefaultSplitRegex = new Regex("([0-9]{2}/[0-9]{2} )", RegexOptions.Compiled);
         private static readonly Regex PeriodSplitRegex = new Regex("([0-9]{2}/[0-9]{2}/[0-9]{4}-[0-9]{2}/[0-9]{2}/[0-9]{4})", RegexOptions.Compiled);
 
-        private static readonly IDictionary<TableName, Regex> rowSplitRegexes = new Dictionary<TableName, Regex>
+        private static readonly IDictionary<FidelityTableName, Regex> rowSplitRegexes = new Dictionary<FidelityTableName, Regex>
         {
-            [TableName.ActivityBuy] = DefaultSplitRegex,
-            [TableName.ActivityDividend] = DefaultSplitRegex,
-            [TableName.ActivityOther] = DefaultSplitRegex,
-            [TableName.ActivityTaxes] = DefaultSplitRegex,
-            [TableName.SummaryESPP] = PeriodSplitRegex
+            [FidelityTableName.ActivityBuy] = DefaultSplitRegex,
+            [FidelityTableName.ActivityDividend] = DefaultSplitRegex,
+            [FidelityTableName.ActivityOther] = DefaultSplitRegex,
+            [FidelityTableName.ActivityTaxes] = DefaultSplitRegex,
+            [FidelityTableName.SummaryESPP] = PeriodSplitRegex
         };
 
         private IList<string> rows;
@@ -30,7 +30,7 @@ namespace StatementParser.Parsers.Fidelity
             }
         }
 
-        public FidelityTable(string tableContent, TableName tableName)
+        public FidelityTable(string tableContent, FidelityTableName tableName)
         {
             this.rows = SplitTableContentIntoRows(tableContent, tableName);
         }
@@ -45,7 +45,7 @@ namespace StatementParser.Parsers.Fidelity
             return GetEnumerator();
         }
 
-        private static IList<string> SplitTableContentIntoRows(string tableContent, TableName tableName)
+        private static IList<string> SplitTableContentIntoRows(string tableContent, FidelityTableName tableName)
         {
             var parts = rowSplitRegexes[tableName].Split(tableContent).Where(i => i.Trim() != String.Empty).ToArray();
 

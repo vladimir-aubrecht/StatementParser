@@ -10,29 +10,29 @@ namespace StatementParser.Parsers.Fidelity
     {
         private enum Separators { Header, Footer }
 
-        private readonly Dictionary<TableName, Dictionary<Separators, string>> tableSeparatorsMap = new Dictionary<TableName, Dictionary<Separators, string>>
+        private readonly Dictionary<FidelityTableName, Dictionary<Separators, string>> tableSeparatorsMap = new Dictionary<FidelityTableName, Dictionary<Separators, string>>
         {
-            [TableName.ActivityOther] = new Dictionary<Separators, string>
+            [FidelityTableName.ActivityOther] = new Dictionary<Separators, string>
             {
                 [Separators.Header] = "Other Activity In SettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceTransactionCostAmount",
                 [Separators.Footer] = "Total Other Activity In"
             },
-            [TableName.ActivityDividend] = new Dictionary<Separators, string>
+            [FidelityTableName.ActivityDividend] = new Dictionary<Separators, string>
             {
                 [Separators.Header] = "Dividends, Interest & Other Income (Includes dividend reinvestment)SettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceAmount",
                 [Separators.Footer] = "Total Dividends, Interest & Other Income"
             },
-            [TableName.ActivityTaxes] = new Dictionary<Separators, string>
+            [FidelityTableName.ActivityTaxes] = new Dictionary<Separators, string>
             {
                 [Separators.Header] = "STOCK PLAN ACCOUNTActivityTaxes Withheld DateSecurityDescriptionAmount",
                 [Separators.Footer] = "Total Federal Taxes Withheld"
             },
-            [TableName.ActivityBuy] = new Dictionary<Separators, string>
+            [FidelityTableName.ActivityBuy] = new Dictionary<Separators, string>
             {
                 [Separators.Header] = "Securities Bought & SoldSettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceTransactionCostAmounti",
                 [Separators.Footer] = "Total Securities Bought"
             },
-            [TableName.SummaryESPP] = new Dictionary<Separators, string>
+            [FidelityTableName.SummaryESPP] = new Dictionary<Separators, string>
             {
                 [Separators.Header] = "Employee Stock Purchase SummaryOffering PeriodDescriptionPurchaseDatePurchase PricePurchase DateFair Market ValueSharesPurchasedGain fromPurchase ",
                 [Separators.Footer] = "Total for all Offering Periods"
@@ -41,7 +41,7 @@ namespace StatementParser.Parsers.Fidelity
 
         private readonly PdfDocument document;
 
-        public FidelityTable this[TableName tableName]
+        public FidelityTable this[FidelityTableName tableName]
         {
             get
             {
@@ -54,7 +54,7 @@ namespace StatementParser.Parsers.Fidelity
             this.document = document ?? throw new ArgumentNullException(nameof(document));
         }
 
-        private string ParseTableContent(TableName tableName)
+        private string ParseTableContent(FidelityTableName tableName)
         {
             var contents = GetPagesByHeader(this.document, tableName)
                 .Select(page => ParseTransactionStringsFromPage(page, tableName));
@@ -62,7 +62,7 @@ namespace StatementParser.Parsers.Fidelity
             return String.Join("", contents); //Lets merge tables splitted cross multiple pages
         }
 
-        private IList<Page> GetPagesByHeader(PdfDocument pdfDocument, TableName tableName)
+        private IList<Page> GetPagesByHeader(PdfDocument pdfDocument, FidelityTableName tableName)
         {
             var output = new List<Page>();
 
@@ -79,7 +79,7 @@ namespace StatementParser.Parsers.Fidelity
             return output;
         }
 
-        private string ParseTransactionStringsFromPage(Page page, TableName tableName)
+        private string ParseTransactionStringsFromPage(Page page, FidelityTableName tableName)
         {
             var header = this.tableSeparatorsMap[tableName][Separators.Header];
             var footer = this.tableSeparatorsMap[tableName][Separators.Footer];
