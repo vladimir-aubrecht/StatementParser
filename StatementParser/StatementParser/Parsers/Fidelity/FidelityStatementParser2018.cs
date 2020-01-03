@@ -12,21 +12,6 @@ namespace StatementParser.Parsers.Fidelity
 {
     public class FidelityStatementParser2018 : ITransactionParser
     {
-        private const string DepositTransactionTableHeader = "Other Activity In SettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceTransactionCostAmount";
-        private const string DepositTransactionTableFooter = "Total Other Activity In";
-
-        private const string DividendTransactionTableHeader = "Dividends, Interest & Other Income (Includes dividend reinvestment)SettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceAmount";
-        private const string DividendTransactionTableFooter = "Total Dividends, Interest & Other Income";
-
-        private const string TaxTransactionTableHeader = "STOCK PLAN ACCOUNTActivityTaxes Withheld DateSecurityDescriptionAmount";
-        private const string TaxTransactionTableFooter = "Total Federal Taxes Withheld";
-
-        private const string DiscountedBuyTransactionTableHeader = "Employee Stock Purchase SummaryOffering PeriodDescriptionPurchaseDatePurchase PricePurchase DateFair Market ValueSharesPurchasedGain fromPurchase ";
-        private const string DiscountedBuyTransactionTableFooter = "Total for all Offering Periods";
-
-        private const string DiscountedBuyCompanyNameTransactionTableHeader = "Securities Bought & SoldSettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceTransactionCostAmounti";
-        private const string DiscountedBuyCompanyNameTransactionTableFooter = "Total Securities Bought";
-
         private static readonly Regex employeePurchaseSanitizeRegex = new Regex("[0-9]{2}/[0-9]{2}/[0-9]{4}-[0-9]{2}/[0-9]{2}/[0-9]{4}Employee Purchase", RegexOptions.Compiled);
         private static readonly Regex rowSplitRegex = new Regex("([0-9]{2}/[0-9]{2}(?: |/[0-9]{4}))", RegexOptions.Compiled);
         private static readonly Regex dividendTransactionRegex = new Regex("([0-9]{2}/[0-9]{2}) (.+?)  ?[0-9]+ Dividend Received  --\\$?([0-9]+\\.[0-9]{2})", RegexOptions.Compiled);
@@ -51,13 +36,13 @@ namespace StatementParser.Parsers.Fidelity
                 var year = ParseYear(document);
 
                 transactions.AddRange(
-                    ParseTransactions(document, year, DepositTransactionTableHeader, DepositTransactionTableFooter, (doc, ts, year) => ParseDepositTransaction(doc, ts, year)));
+                    ParseTransactions(document, year, FidelityTable.TableName.ActivityOther, (doc, ts, year) => ParseDepositTransaction(doc, ts, year)));
 
                 transactions.AddRange(
-                    ParseTransactions(document, year, DividendTransactionTableHeader, DividendTransactionTableFooter, (doc, ts, year) => ParseDividendTransaction(doc, ts, year)));
+                    ParseTransactions(document, year, FidelityTable.TableName.ActivityDividend, (doc, ts, year) => ParseDividendTransaction(doc, ts, year)));
 
                 transactions.AddRange(
-                    ParseTransactions(document, year, DiscountedBuyTransactionTableHeader, DiscountedBuyTransactionTableFooter, (doc, ts, year) => ParseDiscountedBuyTransaction(doc, ts, year)));
+                    ParseTransactions(document, year, FidelityTable.TableName.SummaryESPP, (doc, ts, year) => ParseDiscountedBuyTransaction(doc, ts, year)));
             }
 
             return transactions;
@@ -65,7 +50,7 @@ namespace StatementParser.Parsers.Fidelity
 
         public string SearchForCompanyName(PdfDocument document, string amount, string price)
         {
-            var transactionStrings = ParseTransactionStringsFromDocument(document, DiscountedBuyCompanyNameTransactionTableHeader, DiscountedBuyCompanyNameTransactionTableFooter);
+            var transactionStrings = ParseTransactionStringsFromDocument(document, FidelityTable.TableName.ActivityBuy);
 
             var foundTransactions = transactionStrings.Where(i => i.Contains($" You Bought {amount}${price}") && i.Contains("ESPP"));
 
@@ -84,7 +69,7 @@ namespace StatementParser.Parsers.Fidelity
 
         private string SearchForTaxString(PdfDocument document, DateTime date)
         {
-            var transactionStrings = ParseTransactionStringsFromDocument(document, TaxTransactionTableHeader, TaxTransactionTableFooter);
+            var transactionStrings = ParseTransactionStringsFromDocument(document, FidelityTable.TableName.ActivityTaxes);
 
             foreach (var transaction in transactionStrings)
             {
@@ -97,11 +82,11 @@ namespace StatementParser.Parsers.Fidelity
             return null;
         }
 
-        private IList<Transaction> ParseTransactions(PdfDocument document, int year, string header, string footer, Func<PdfDocument, string, int, Transaction> parseFunc)
+        private IList<Transaction> ParseTransactions(PdfDocument document, int year, FidelityTable.TableName tableName, Func<PdfDocument, string, int, Transaction> parseFunc)
         {
             var output = new List<Transaction>();
 
-            var transactionStrings = ParseTransactionStringsFromDocument(document, header, footer);
+            var transactionStrings = ParseTransactionStringsFromDocument(document, tableName);
 
             foreach (var transactionString in transactionStrings)
             {
@@ -116,32 +101,11 @@ namespace StatementParser.Parsers.Fidelity
             return output;
         }
 
-        private IList<string> ParseTransactionStringsFromDocument(PdfDocument document, string header, string footer)
+        private IList<string> ParseTransactionStringsFromDocument(PdfDocument document, FidelityTable.TableName tableName)
         {
-            var output = new List<string>();
-
-            foreach (Page page in GetPagesByHeader(document, header))
-            {
-                var transactionStrings = ParseTransactionStringsFromPage(page, header, footer);
-                output.AddRange(transactionStrings);
-            }
-
-            return output;
-        }
-
-        private IList<Page> GetPagesByHeader(PdfDocument pdfDocument, string header)
-        {
-            var output = new List<Page>();
-
-            foreach (var page in pdfDocument.GetPages())
-            {
-                if (page.Text.Contains(header))
-                {
-                    output.Add(page);
-                }
-            }
-
-            return output;
+            var table = new FidelityTable(document);
+            var tableContent = table.ParseTableContent(tableName);
+            return SplitTableContentIntoRows(tableContent);
         }
 
         private int ParseYear(PdfDocument document)
@@ -231,19 +195,14 @@ namespace StatementParser.Parsers.Fidelity
             return new DepositTransaction(Broker.Fidelity, date, name, amount, price, Currency.USD);
         }
 
-        private static IList<string> ParseTransactionStringsFromPage(Page page, string header, string footer)
+        private static IList<string> SplitTableContentIntoRows(string tableContent)
         {
-            var startIndex = page.Text.IndexOf(header, StringComparison.Ordinal) + header.Length;
-            var endIndex = page.Text.IndexOf(footer, StringComparison.Ordinal);
-
-            var transactionsTableString = page.Text.Substring(startIndex, endIndex - startIndex);
-
-            if (employeePurchaseSanitizeRegex.IsMatch(transactionsTableString))
+            if (employeePurchaseSanitizeRegex.IsMatch(tableContent))
             {
-                transactionsTableString = employeePurchaseSanitizeRegex.Replace(transactionsTableString, "");
+                tableContent = employeePurchaseSanitizeRegex.Replace(tableContent, "");
             }
 
-            var parts = rowSplitRegex.Split(transactionsTableString).Where(i => i.Trim() != String.Empty).ToArray();
+            var parts = rowSplitRegex.Split(tableContent).Where(i => i.Trim() != String.Empty).ToArray();
 
             var output = new List<string>();
 
