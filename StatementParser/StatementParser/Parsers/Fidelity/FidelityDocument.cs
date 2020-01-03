@@ -8,7 +8,6 @@ namespace StatementParser.Parsers.Fidelity
 {
     internal class FidelityDocument
     {
-        public enum TableName { ActivityOther, ActivityDividend, ActivityTaxes, ActivityBuy, SummaryESPP }
         private enum Separators { Header, Footer }
 
         private readonly Dictionary<TableName, Dictionary<Separators, string>> tableSeparatorsMap = new Dictionary<TableName, Dictionary<Separators, string>>
@@ -42,12 +41,11 @@ namespace StatementParser.Parsers.Fidelity
 
         private readonly PdfDocument document;
 
-        // TODO: don't return string but rather array of rows ...
-        public string this[TableName tableName]
+        public FidelityTable this[TableName tableName]
         {
             get
             {
-                return ParseTableContent(tableName);
+                return new FidelityTable(ParseTableContent(tableName), tableName);
             }
         }
 
