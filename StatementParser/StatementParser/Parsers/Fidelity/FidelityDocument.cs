@@ -6,7 +6,7 @@ using UglyToad.PdfPig.Content;
 
 namespace StatementParser.Parsers.Fidelity
 {
-    internal class FidelityTable
+    internal class FidelityDocument
     {
         public enum TableName { ActivityOther, ActivityDividend, ActivityTaxes, ActivityBuy, SummaryESPP }
         private enum Separators { Header, Footer }
@@ -42,23 +42,33 @@ namespace StatementParser.Parsers.Fidelity
 
         private readonly PdfDocument document;
 
-        public FidelityTable(PdfDocument document)
+        // TODO: don't return string but rather array of rows ...
+        public string this[TableName tableName]
+        {
+            get
+            {
+                return ParseTableContent(tableName);
+            }
+        }
+
+        public FidelityDocument(PdfDocument document)
         {
             this.document = document ?? throw new ArgumentNullException(nameof(document));
         }
 
-        public string ParseTableContent(TableName tableName)
+        private string ParseTableContent(TableName tableName)
         {
-            var tableSeparators = this.tableSeparatorsMap[tableName];
-            var contents = GetPagesByHeader(this.document, tableSeparators[Separators.Header])
-                .Select(page => ParseTransactionStringsFromPage(page, tableSeparators[Separators.Header], tableSeparators[Separators.Footer]));
+            var contents = GetPagesByHeader(this.document, tableName)
+                .Select(page => ParseTransactionStringsFromPage(page, tableName));
 
             return String.Join("", contents); //Lets merge tables splitted cross multiple pages
         }
 
-        private IList<Page> GetPagesByHeader(PdfDocument pdfDocument, string header)
+        private IList<Page> GetPagesByHeader(PdfDocument pdfDocument, TableName tableName)
         {
             var output = new List<Page>();
+
+            var header = this.tableSeparatorsMap[tableName][Separators.Header];
 
             foreach (var page in pdfDocument.GetPages())
             {
@@ -71,8 +81,11 @@ namespace StatementParser.Parsers.Fidelity
             return output;
         }
 
-        private static string ParseTransactionStringsFromPage(Page page, string header, string footer)
+        private string ParseTransactionStringsFromPage(Page page, TableName tableName)
         {
+            var header = this.tableSeparatorsMap[tableName][Separators.Header];
+            var footer = this.tableSeparatorsMap[tableName][Separators.Footer];
+
             var startIndex = page.Text.IndexOf(header, StringComparison.Ordinal) + header.Length;
             var endIndex = page.Text.IndexOf(footer, StringComparison.Ordinal);
 
