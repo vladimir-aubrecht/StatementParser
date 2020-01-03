@@ -5,7 +5,7 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using StatementParser.Models;
 
-namespace StatementParser.Parsers.MorganStanley
+namespace StatementParser.Parsers.Brokers.MorganStanley
 {
     internal class MorganStanleyStatementParser : ITransactionParser
     {

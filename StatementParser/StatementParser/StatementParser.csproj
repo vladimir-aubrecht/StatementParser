@@ -11,9 +11,11 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Parsers\" />
-    <Folder Include="Parsers\MorganStanley\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Parsers\Fidelity\" />
     <Folder Include="Resources\" />
+    <Folder Include="Parsers\Pdf\" />
+    <Folder Include="Parsers\Brokers\" />
+    <Folder Include="Parsers\Brokers\Fidelity\" />
+    <Folder Include="Parsers\Brokers\MorganStanley\" />
   </ItemGroup>
 </Project>

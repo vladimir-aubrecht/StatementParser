@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using StatementParser.Models;
 using StatementParser.Parsers;
-using StatementParser.Parsers.Fidelity;
-using StatementParser.Parsers.MorganStanley;
+using StatementParser.Parsers.Brokers.Fidelity;
+using StatementParser.Parsers.Brokers.MorganStanley;
 
 namespace StatementParser
 {
@@ -14,7 +14,7 @@ namespace StatementParser
         public TransactionParser()
         {
             parsers.Add(new MorganStanleyStatementParser());
-            parsers.Add(new FidelityStatementParser());
+            parsers.Add(new FidelityStatementParser(new FidelityPdfConfiguration()));
         }
 
         public IList<Transaction> Parse(string statementFilePath)

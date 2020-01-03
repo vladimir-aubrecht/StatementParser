@@ -5,16 +5,24 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using NPOI.SS.UserModel;
 using StatementParser.Models;
+using StatementParser.Parsers.Pdf;
 using UglyToad.PdfPig;
 using UglyToad.PdfPig.Content;
+using PigPdfDocument = UglyToad.PdfPig.PdfDocument;
 
-namespace StatementParser.Parsers.Fidelity
+namespace StatementParser.Parsers.Brokers.Fidelity
 {
-    public class FidelityStatementParser : ITransactionParser
+    internal class FidelityStatementParser : ITransactionParser
     {
         private static readonly Regex employeePurchaseSanitizeRegex = new Regex("[0-9]{2}/[0-9]{2}/[0-9]{4}-[0-9]{2}/[0-9]{2}/[0-9]{4}Employee Purchase", RegexOptions.Compiled);
         private static readonly Regex dividendTransactionRegex = new Regex("([0-9]{2}/[0-9]{2}) (.+?)  ?[0-9]+ Dividend Received  --\\$?([0-9]+\\.[0-9]{2})", RegexOptions.Compiled);
         private static readonly Regex discountedBuyRegex = new Regex("([0-9]{2}/[0-9]{2}/[0-9]{4})\\$([0-9]+\\.[0-9]{5})\\$([0-9]+\\.[0-9]{3})([0-9]+\\.[0-9]{3})", RegexOptions.Compiled);
+        private readonly IPdfConfiguration pdfConfiguration;
+
+        public FidelityStatementParser(IPdfConfiguration pdfConfiguration)
+        {
+            this.pdfConfiguration = pdfConfiguration ?? throw new ArgumentNullException(nameof(pdfConfiguration));
+        }
 
         public bool CanParse(string statementFilePath)
         {
@@ -30,26 +38,26 @@ namespace StatementParser.Parsers.Fidelity
         {
             var transactions = new List<Transaction>();
 
-            using (PdfDocument document = PdfDocument.Open(statementFilePath))
+            using (var document = PigPdfDocument.Open(statementFilePath))
             {
                 var year = ParseYear(document);
 
                 transactions.AddRange(
-                    ParseTransactions(document, year, FidelityTableName.ActivityOther, (doc, ts, year) => ParseDepositTransaction(doc, ts, year)));
+                    ParseTransactions(document, year, PdfTableName.ActivityOther, (doc, ts, year) => ParseDepositTransaction(doc, ts, year)));
 
                 transactions.AddRange(
-                    ParseTransactions(document, year, FidelityTableName.ActivityDividend, (doc, ts, year) => ParseDividendTransaction(doc, ts, year)));
+                    ParseTransactions(document, year, PdfTableName.ActivityDividend, (doc, ts, year) => ParseDividendTransaction(doc, ts, year)));
 
                 transactions.AddRange(
-                    ParseTransactions(document, year, FidelityTableName.SummaryESPP, (doc, ts, year) => ParseDiscountedBuyTransaction(doc, ts, year)));
+                    ParseTransactions(document, year, PdfTableName.SummaryESPP, (doc, ts, year) => ParseDiscountedBuyTransaction(doc, ts, year)));
             }
 
             return transactions;
         }
 
-        public string SearchForCompanyName(PdfDocument document, string amount, string price)
+        public string SearchForCompanyName(PigPdfDocument document, string amount, string price)
         {
-            var transactionStrings = new FidelityDocument(document)[FidelityTableName.ActivityBuy];
+            var transactionStrings = new Pdf.PdfDocument(document, pdfConfiguration)[PdfTableName.ActivityBuy];
 
             var foundTransactions = transactionStrings.Where(i => i.Contains($" You Bought {amount}${price}") && i.Contains("ESPP"));
 
@@ -66,9 +74,9 @@ namespace StatementParser.Parsers.Fidelity
             return transaction.Substring(6, transaction.IndexOf("ESPP", StringComparison.Ordinal) - 7);
         }
 
-        private string SearchForTaxString(PdfDocument document, DateTime date)
+        private string SearchForTaxString(PigPdfDocument document, DateTime date)
         {
-            var transactionStrings = new FidelityDocument(document)[FidelityTableName.ActivityTaxes];
+            var transactionStrings = new Pdf.PdfDocument(document, this.pdfConfiguration)[PdfTableName.ActivityTaxes];
 
             foreach (var transaction in transactionStrings)
             {
@@ -81,11 +89,11 @@ namespace StatementParser.Parsers.Fidelity
             return null;
         }
 
-        private IList<Transaction> ParseTransactions(PdfDocument document, int year, FidelityTableName tableName, Func<PdfDocument, string, int, Transaction> parseFunc)
+        private IList<Transaction> ParseTransactions(PigPdfDocument document, int year, PdfTableName tableName, Func<PigPdfDocument, string, int, Transaction> parseFunc)
         {
             var output = new List<Transaction>();
 
-            var transactionStrings = new FidelityDocument(document)[tableName];
+            var transactionStrings = new Pdf.PdfDocument(document, this.pdfConfiguration)[tableName];
 
             foreach (var transactionString in transactionStrings)
             {
@@ -100,7 +108,7 @@ namespace StatementParser.Parsers.Fidelity
             return output;
         }
 
-        private int ParseYear(PdfDocument document)
+        private int ParseYear(PigPdfDocument document)
         {
             var page = document.GetPage(1);
             var stockPlanServicesReport = "STOCK PLAN SERVICES REPORT";
@@ -116,7 +124,7 @@ namespace StatementParser.Parsers.Fidelity
             return Convert.ToInt32(parts[parts.Length - 1]);
         }
 
-        private DiscountBuyTransaction ParseDiscountedBuyTransaction(PdfDocument document, string transactionString, int year)
+        private DiscountBuyTransaction ParseDiscountedBuyTransaction(PigPdfDocument document, string transactionString, int year)
         {
             //06/28/2019$120.56000$133.96020.631$276.46
 
@@ -142,7 +150,7 @@ namespace StatementParser.Parsers.Fidelity
             return new DiscountBuyTransaction(Broker.Fidelity, date, name, Currency.USD, purchasePrice, marketPrice, amount);
         }
 
-        private DividendTransaction ParseDividendTransaction(PdfDocument document, string transactionString, int year)
+        private DividendTransaction ParseDividendTransaction(PigPdfDocument document, string transactionString, int year)
         {
             //09/12 MICROSOFT CORP  594918104 Dividend Received  --$128.82
 
@@ -165,7 +173,7 @@ namespace StatementParser.Parsers.Fidelity
             return new DividendTransaction(Broker.Fidelity, date, name, income, tax, Currency.USD);
         }
 
-        private DepositTransaction ParseDepositTransaction(PdfDocument document, string transactionString, int year)
+        private DepositTransaction ParseDepositTransaction(PigPdfDocument document, string transactionString, int year)
         {
             if (!transactionString.Contains("SHARES DEPOSITED"))
             {
