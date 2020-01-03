@@ -10,7 +10,7 @@ using UglyToad.PdfPig.Content;
 
 namespace StatementParser.Parsers.Fidelity
 {
-    public class FidelityStatementParser2018 : ITransactionParser
+    public class FidelityStatementParser : ITransactionParser
     {
         private static readonly Regex employeePurchaseSanitizeRegex = new Regex("[0-9]{2}/[0-9]{2}/[0-9]{4}-[0-9]{2}/[0-9]{2}/[0-9]{4}Employee Purchase", RegexOptions.Compiled);
         private static readonly Regex dividendTransactionRegex = new Regex("([0-9]{2}/[0-9]{2}) (.+?)  ?[0-9]+ Dividend Received  --\\$?([0-9]+\\.[0-9]{2})", RegexOptions.Compiled);

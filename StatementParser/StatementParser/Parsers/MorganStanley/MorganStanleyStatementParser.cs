@@ -7,7 +7,7 @@ using StatementParser.Models;
 
 namespace StatementParser.Parsers.MorganStanley
 {
-    internal class MorganStanleyStatementParser2018 : ITransactionParser
+    internal class MorganStanleyStatementParser : ITransactionParser
     {
         private const int HeaderRowOffset = 8;
         private const int FooterRowOffset = 6;

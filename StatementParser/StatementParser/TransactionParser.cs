@@ -13,8 +13,8 @@ namespace StatementParser
 
         public TransactionParser()
         {
-            parsers.Add(new MorganStanleyStatementParser2018());
-            parsers.Add(new FidelityStatementParser2018());
+            parsers.Add(new MorganStanleyStatementParser());
+            parsers.Add(new FidelityStatementParser());
         }
 
         public IList<Transaction> Parse(string statementFilePath)
