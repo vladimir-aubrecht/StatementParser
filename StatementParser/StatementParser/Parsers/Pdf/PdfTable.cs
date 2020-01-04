@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using StatementParser.Parsers.Pdf.Exceptions;
 
 namespace StatementParser.Parsers.Pdf
 {
     internal class PdfTable<TRowDescriptor> : IEnumerable<PdfTableRow<TRowDescriptor>> where TRowDescriptor : new()
     {
-        private readonly IPdfConfiguration pdfConfiguration;
         private IList<PdfTableRow<TRowDescriptor>> rows;
 
         public PdfTableRow<TRowDescriptor> this[int index]
@@ -19,10 +19,9 @@ namespace StatementParser.Parsers.Pdf
             }
         }
 
-        public PdfTable(string tableContent, PdfTableName tableName, IPdfConfiguration pdfConfiguration)
+        public PdfTable(string tableContent)
         {
-            this.pdfConfiguration = pdfConfiguration ?? throw new ArgumentNullException(nameof(pdfConfiguration));
-            this.rows = ConvertToPdfTableRows(SplitTableContentIntoRows(tableContent, tableName));
+            this.rows = ConvertToPdfTableRows(SplitTableContentIntoRows(tableContent));
         }
 
         public IEnumerator<PdfTableRow<TRowDescriptor>> GetEnumerator()
@@ -52,9 +51,12 @@ namespace StatementParser.Parsers.Pdf
              ).Where(i => i != null).ToList();
         }
 
-        private IList<string> SplitTableContentIntoRows(string tableContent, PdfTableName tableName)
+        private IList<string> SplitTableContentIntoRows(string tableContent)
         {
-            var parts = this.pdfConfiguration.TableRowSplitRegexes[tableName].Split(tableContent).Where(i => i.Trim() != String.Empty).ToArray();
+            var attribute = typeof(TRowDescriptor).GetCustomAttribute<DeserializeByRegexAttribute>(true)
+                ?? throw new InvalidOperationException($"Class {nameof(TRowDescriptor)} must use {nameof(DeserializeByRegexAttribute)} attribute.");
+
+            var parts = attribute.RowSplitRegex.Split(tableContent).Where(i => i.Trim() != String.Empty).ToArray();
 
             var output = new List<string>();
 

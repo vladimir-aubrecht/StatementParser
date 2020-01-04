@@ -11,13 +11,6 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 {
     internal class FidelityStatementParser : ITransactionParser
     {
-        private readonly IPdfConfiguration pdfConfiguration;
-
-        public FidelityStatementParser(IPdfConfiguration pdfConfiguration)
-        {
-            this.pdfConfiguration = pdfConfiguration ?? throw new ArgumentNullException(nameof(pdfConfiguration));
-        }
-
         public bool CanParse(string statementFilePath)
         {
             if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".pdf")
@@ -46,7 +39,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
         public string SearchForCompanyName(PigPdfDocument document, decimal amount, decimal price)
         {
-            var transactionStrings = new Pdf.PdfDocument(document, pdfConfiguration).ParseTable<ActivityBuyRow>(PdfTableName.ActivityBuy);
+            var transactionStrings = new Pdf.PdfDocument(document).ParseTable<ActivityBuyRow>();
 
             var foundTransactions = transactionStrings.Where(i => i.Value.Price == price && i.Value.Amount == amount);
 
@@ -65,7 +58,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
         private decimal SearchForTaxString(PigPdfDocument document, DateTime date)
         {
-            var transactionStrings = new Pdf.PdfDocument(document, this.pdfConfiguration).ParseTable<ActivityTaxesRow>(PdfTableName.ActivityTaxes);
+            var transactionStrings = new Pdf.PdfDocument(document).ParseTable<ActivityTaxesRow>();
 
             foreach (var transaction in transactionStrings)
             {
@@ -81,7 +74,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
         private IList<Transaction> ParseDiscountedBuyRow(PigPdfDocument document)
         {
             var output = new List<Transaction>();
-            var transactionStrings = new Pdf.PdfDocument(document, this.pdfConfiguration).ParseTable<DiscountedBuyRow>(PdfTableName.SummaryESPP);
+            var transactionStrings = new Pdf.PdfDocument(document).ParseTable<DiscountedBuyRow>();
 
             foreach (var transactionString in transactionStrings)
             {
@@ -94,7 +87,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
         private IList<Transaction> ParseDividendRow(PigPdfDocument document, int year)
         {
             var output = new List<Transaction>();
-            var transactionStrings = new Pdf.PdfDocument(document, this.pdfConfiguration).ParseTable<ActivityDividendRow>(PdfTableName.ActivityDividend);
+            var transactionStrings = new Pdf.PdfDocument(document).ParseTable<ActivityDividendRow>();
 
             foreach (var transactionString in transactionStrings)
             {
@@ -107,7 +100,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
         private IList<Transaction> ParseOtherRow(PigPdfDocument document, int year)
         {
             var output = new List<Transaction>();
-            var transactionStrings = new Pdf.PdfDocument(document, this.pdfConfiguration).ParseTable<ActivityOtherRow>(PdfTableName.ActivityOther);
+            var transactionStrings = new Pdf.PdfDocument(document).ParseTable<ActivityOtherRow>();
 
             foreach (var transactionString in transactionStrings)
             {

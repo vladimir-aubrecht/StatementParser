@@ -45,13 +45,13 @@ namespace StatementParser.Parsers.Pdf
             var attribute = typeof(TRowDescriptor).GetCustomAttribute<DeserializeByRegexAttribute>(true)
                 ?? throw new InvalidOperationException($"Class {nameof(TRowDescriptor)} must use {nameof(DeserializeByRegexAttribute)} attribute.");
 
-            var matchResults = attribute.ParsingRegex.Match(RawValue);
+            var matchResults = attribute.DeserizalizationRegex.Match(RawValue);
 
             var output = new Dictionary<string, string>();
 
             if (matchResults.Success)
             {
-                foreach (var groupName in attribute.ParsingRegex.GetGroupNames())
+                foreach (var groupName in attribute.DeserizalizationRegex.GetGroupNames())
                 {
                     if (groupName == "0")
                     {

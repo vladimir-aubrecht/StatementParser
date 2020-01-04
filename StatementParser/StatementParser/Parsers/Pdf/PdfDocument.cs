@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UglyToad.PdfPig;
 using UglyToad.PdfPig.Content;
 
@@ -9,53 +10,41 @@ namespace StatementParser.Parsers.Pdf
     internal class PdfDocument
     {
         private readonly UglyToad.PdfPig.PdfDocument document;
-        private readonly IPdfConfiguration pdfConfiguration;
 
-        public PdfDocument(UglyToad.PdfPig.PdfDocument document, IPdfConfiguration pdfConfiguration)
+        public PdfDocument(UglyToad.PdfPig.PdfDocument document)
         {
             this.document = document ?? throw new ArgumentNullException(nameof(document));
-            this.pdfConfiguration = pdfConfiguration ?? throw new ArgumentNullException(nameof(pdfConfiguration));
         }
 
-        public PdfTable<TRowDescriptor> ParseTable<TRowDescriptor>(PdfTableName tableName) where TRowDescriptor : new()
+        public PdfTable<TRowDescriptor> ParseTable<TRowDescriptor>() where TRowDescriptor : new()
         {
-            return new PdfTable<TRowDescriptor>(ParseTableContent(tableName), tableName, pdfConfiguration);
+            var attribute = typeof(TRowDescriptor).GetCustomAttribute<DeserializeByRegexAttribute>(true)
+                ?? throw new InvalidOperationException($"Class {nameof(TRowDescriptor)} must use {nameof(DeserializeByRegexAttribute)} attribute.");
+
+            return new PdfTable<TRowDescriptor>(ParseTableContent(attribute));
         }
 
-        private string ParseTableContent(PdfTableName tableName)
+        private string ParseTableContent(DeserializeByRegexAttribute deserializeByRegexAttribute)
         {
-            var contents = GetPagesByHeader(this.document, tableName)
-                .Select(page => ParseTransactionStringsFromPage(page, tableName));
+            var contents = GetPagesByHeader(this.document, deserializeByRegexAttribute)
+                .Select(page => deserializeByRegexAttribute.PageBodyRegex.Match(page.Text).Groups[1].Value);
 
             return String.Join("", contents); //Lets merge tables splitted cross multiple pages
         }
 
-        private IList<Page> GetPagesByHeader(UglyToad.PdfPig.PdfDocument pdfDocument, PdfTableName tableName)
+        private IList<Page> GetPagesByHeader(UglyToad.PdfPig.PdfDocument pdfDocument, DeserializeByRegexAttribute deserializeByRegexAttribute)
         {
             var output = new List<Page>();
 
-            var header = this.pdfConfiguration.TableRestrictorsMap[tableName][Separators.Header];
-
             foreach (var page in pdfDocument.GetPages())
             {
-                if (page.Text.Contains(header))
+                if (deserializeByRegexAttribute.PageBodyRegex.Match(page.Text).Success)
                 {
                     output.Add(page);
                 }
             }
 
             return output;
-        }
-
-        private string ParseTransactionStringsFromPage(Page page, PdfTableName tableName)
-        {
-            var header = this.pdfConfiguration.TableRestrictorsMap[tableName][Separators.Header];
-            var footer = this.pdfConfiguration.TableRestrictorsMap[tableName][Separators.Footer];
-
-            var startIndex = page.Text.IndexOf(header, StringComparison.Ordinal) + header.Length;
-            var endIndex = page.Text.IndexOf(footer, StringComparison.Ordinal);
-
-            return page.Text.Substring(startIndex, endIndex - startIndex);
         }
     }
 }
