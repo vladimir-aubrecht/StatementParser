@@ -17,7 +17,7 @@
     <Folder Include="Parsers\Brokers\" />
     <Folder Include="Parsers\Brokers\Fidelity\" />
     <Folder Include="Parsers\Brokers\MorganStanley\" />
-    <Folder Include="Parsers\Brokers\Fidelity\PdfRows\" />
+    <Folder Include="Parsers\Brokers\Fidelity\PdfModels\" />
     <Folder Include="Parsers\Pdf\Exceptions\" />
   </ItemGroup>
 </Project>

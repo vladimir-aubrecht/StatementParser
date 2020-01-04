@@ -10,7 +10,7 @@ namespace StatementParser.Parsers.Pdf
         public Regex PageBodyRegex { get; }
         public Regex RowSplitRegex { get; }
 
-        public DeserializeByRegexAttribute(string deserializationRegexPattern, string pageBodyRegexPattern, string rowSplitRegexPattern)
+        public DeserializeByRegexAttribute(string deserializationRegexPattern, string pageBodyRegexPattern, string rowSplitRegexPattern = null)
         {
             if (string.IsNullOrWhiteSpace(deserializationRegexPattern))
             {
@@ -24,7 +24,11 @@ namespace StatementParser.Parsers.Pdf
 
             this.DeserizalizationRegex = new Regex(deserializationRegexPattern, RegexOptions.Compiled);
             this.PageBodyRegex = new Regex(pageBodyRegexPattern, RegexOptions.Compiled);
-            this.RowSplitRegex = new Regex(rowSplitRegexPattern, RegexOptions.Compiled);
+
+            if (rowSplitRegexPattern != null)
+            {
+                this.RowSplitRegex = new Regex(rowSplitRegexPattern, RegexOptions.Compiled);
+            }
         }
     }
 }

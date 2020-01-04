@@ -84,9 +84,9 @@ namespace TaxReporterCLI
                             Console.WriteLine($"{transaction} Income in CZK (CNB): {castedTransaction.Income * cnbPrice} Income in CZK (year average): N/A Tax in CZK (CNB): {castedTransaction.Tax * cnbPrice} Tax in CZK (year average): N/A");
                         }
                     }
-                    else if (transaction is DiscountBuyTransaction)
+                    else if (transaction is ESPPTransaction)
                     {
-                        var castedTransaction = transaction as DiscountBuyTransaction;
+                        var castedTransaction = transaction as ESPPTransaction;
 
                         if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
                         {

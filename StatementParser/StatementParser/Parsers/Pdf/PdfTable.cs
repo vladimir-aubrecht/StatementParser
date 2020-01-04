@@ -56,9 +56,15 @@ namespace StatementParser.Parsers.Pdf
             var attribute = typeof(TRowDescriptor).GetCustomAttribute<DeserializeByRegexAttribute>(true)
                 ?? throw new InvalidOperationException($"Class {nameof(TRowDescriptor)} must use {nameof(DeserializeByRegexAttribute)} attribute.");
 
-            var parts = attribute.RowSplitRegex.Split(tableContent).Where(i => i.Trim() != String.Empty).ToArray();
-
             var output = new List<string>();
+
+            if (attribute.RowSplitRegex == null)
+            {
+                output.Add(tableContent);
+                return output;
+            }
+
+            var parts = attribute.RowSplitRegex.Split(tableContent).Where(i => i.Trim() != String.Empty).ToArray();
 
             for (int i = 0; i < parts.Length - 1; i += 2)
             {
