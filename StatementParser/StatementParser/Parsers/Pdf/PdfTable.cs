@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace StatementParser.Parsers.Pdf
 {
-    internal class PdfTable : IEnumerable<string>
+    internal class PdfTable : IEnumerable<PdfTableRow>
     {
         private readonly IPdfConfiguration pdfConfiguration;
-        private IList<string> rows;
+        private IList<PdfTableRow> rows;
 
-        public string this[int index]
+        public PdfTableRow this[int index]
         {
             get
             {
@@ -21,10 +21,10 @@ namespace StatementParser.Parsers.Pdf
         public PdfTable(string tableContent, PdfTableName tableName, IPdfConfiguration pdfConfiguration)
         {
             this.pdfConfiguration = pdfConfiguration ?? throw new ArgumentNullException(nameof(pdfConfiguration));
-            this.rows = SplitTableContentIntoRows(tableContent, tableName);
+            this.rows = SplitTableContentIntoRows(tableContent, tableName).Select(i => new PdfTableRow(i)).ToList();
         }
 
-        public IEnumerator<string> GetEnumerator()
+        public IEnumerator<PdfTableRow> GetEnumerator()
         {
             return rows.GetEnumerator();
         }

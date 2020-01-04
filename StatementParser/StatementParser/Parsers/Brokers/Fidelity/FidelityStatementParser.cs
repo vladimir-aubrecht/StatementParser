@@ -59,7 +59,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
         {
             var transactionStrings = new Pdf.PdfDocument(document, pdfConfiguration)[PdfTableName.ActivityBuy];
 
-            var foundTransactions = transactionStrings.Where(i => i.Contains($" You Bought {amount}${price}") && i.Contains("ESPP"));
+            var foundTransactions = transactionStrings.Where(i => i.Value.Contains($" You Bought {amount}${price}") && i.Value.Contains("ESPP"));
 
             if (foundTransactions.Count() > 1)
             {
@@ -71,7 +71,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
             var transaction = foundTransactions.First();
 
-            return transaction.Substring(6, transaction.IndexOf("ESPP", StringComparison.Ordinal) - 7);
+            return transaction.Value.Substring(6, transaction.Value.IndexOf("ESPP", StringComparison.Ordinal) - 7);
         }
 
         private string SearchForTaxString(PigPdfDocument document, DateTime date)
@@ -80,9 +80,9 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
             foreach (var transaction in transactionStrings)
             {
-                if (transaction.StartsWith(date.ToString("MM/dd"), StringComparison.Ordinal))
+                if (transaction.Value.StartsWith(date.ToString("MM/dd"), StringComparison.Ordinal))
                 {
-                    return transaction;
+                    return transaction.Value;
                 }
             }
 
@@ -97,7 +97,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
             foreach (var transactionString in transactionStrings)
             {
-                var result = parseFunc(document, transactionString, year);
+                var result = parseFunc(document, transactionString.Value, year);
 
                 if (result != null)
                 {
