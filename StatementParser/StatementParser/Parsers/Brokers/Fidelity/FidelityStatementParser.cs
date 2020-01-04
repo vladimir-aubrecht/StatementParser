@@ -136,9 +136,8 @@ namespace StatementParser.Parsers.Brokers.Fidelity
         private DiscountBuyTransaction CreateDiscountBuyTransaction(PigPdfDocument document, DiscountedBuyRow discountedBuyRow)
         {
             var name = SearchForCompanyName(document, discountedBuyRow.Amount, discountedBuyRow.PurchasePrice);
-            var date = DateTime.Parse(discountedBuyRow.Date);
 
-            return new DiscountBuyTransaction(Broker.Fidelity, date, name, Currency.USD, discountedBuyRow.PurchasePrice, discountedBuyRow.MarketPrice, discountedBuyRow.Amount);
+            return new DiscountBuyTransaction(Broker.Fidelity, discountedBuyRow.Date, name, Currency.USD, discountedBuyRow.PurchasePrice, discountedBuyRow.MarketPrice, discountedBuyRow.Amount);
         }
 
         private DividendTransaction CreateDividendTransaction(PigPdfDocument document, ActivityDividendRow activityDividendRow, int year)
