@@ -11,18 +11,15 @@ namespace StatementParser.Parsers.Pdf
         private readonly UglyToad.PdfPig.PdfDocument document;
         private readonly IPdfConfiguration pdfConfiguration;
 
-        public PdfTable this[PdfTableName tableName]
-        {
-            get
-            {
-                return new PdfTable(ParseTableContent(tableName), tableName, pdfConfiguration);
-            }
-        }
-
         public PdfDocument(UglyToad.PdfPig.PdfDocument document, IPdfConfiguration pdfConfiguration)
         {
             this.document = document ?? throw new ArgumentNullException(nameof(document));
             this.pdfConfiguration = pdfConfiguration ?? throw new ArgumentNullException(nameof(pdfConfiguration));
+        }
+
+        public PdfTable<TRowDescriptor> ParseTable<TRowDescriptor>(PdfTableName tableName) where TRowDescriptor : new()
+        {
+            return new PdfTable<TRowDescriptor>(ParseTableContent(tableName), tableName, pdfConfiguration);
         }
 
         private string ParseTableContent(PdfTableName tableName)
