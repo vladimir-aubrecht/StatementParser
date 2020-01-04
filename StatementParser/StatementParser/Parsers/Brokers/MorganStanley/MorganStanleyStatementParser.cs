@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using StatementParser.Models;
@@ -28,23 +29,11 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
 
         public IList<Transaction> Parse(string statementFilePath)
         {
-            var transactions = new List<Transaction>();
-
             var sheet = GetSheet(statementFilePath);
 
             var name = sheet.GetRow(3).Cells[1].StringCellValue;
 
-            foreach (var row in GetTransactionRows(sheet))
-            {
-                var transaction = ParseTransaction(sheet, ParseTransactionType(row), row, name);
-
-                if (transaction != null)
-                {
-                    transactions.Add(transaction);
-                }
-            }
-
-            return transactions;
+            return GetTransactionRows(sheet).Select(i => ParseTransaction(sheet, ParseTransactionType(i), i, name)).Where(i => i != null).ToList();
         }
 
         private Transaction ParseTransaction(ISheet sheet, string type, IRow row, string name)
@@ -92,17 +81,7 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
         {
             var creditRowDate = ParseTransactionDate(creditRow);
 
-            foreach (var row in GetTransactionRows(sheet))
-            {
-                var type = ParseTransactionType(row);
-
-                if (type == "IRS Withholding" && ParseTransactionDate(row) == creditRowDate)
-                {
-                    return row;
-                }
-            }
-
-            return null;
+            return GetTransactionRows(sheet).FirstOrDefault(i => ParseTransactionType(i) == "IRS Withholding" && ParseTransactionDate(i) == creditRowDate);
         }
 
         private ISheet GetSheet(string statementFilePath)
