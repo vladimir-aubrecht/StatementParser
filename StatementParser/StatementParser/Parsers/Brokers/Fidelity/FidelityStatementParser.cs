@@ -44,7 +44,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
             return transactions;
         }
 
-        public string SearchForCompanyName(PigPdfDocument document, string amount, string price)
+        public string SearchForCompanyName(PigPdfDocument document, decimal amount, decimal price)
         {
             var transactionStrings = new Pdf.PdfDocument(document, pdfConfiguration).ParseTable<ActivityBuyRow>(PdfTableName.ActivityBuy);
 
@@ -71,7 +71,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
             {
                 if (transaction.Value.Date == date.ToString("MM/dd"))
                 {
-                    return Convert.ToDecimal(transaction.Value.Tax);
+                    return transaction.Value.Tax;
                 }
             }
 
@@ -136,37 +136,24 @@ namespace StatementParser.Parsers.Brokers.Fidelity
         private DiscountBuyTransaction CreateDiscountBuyTransaction(PigPdfDocument document, DiscountedBuyRow discountedBuyRow)
         {
             var name = SearchForCompanyName(document, discountedBuyRow.Amount, discountedBuyRow.PurchasePrice);
-
             var date = DateTime.Parse(discountedBuyRow.Date);
-            var purchasePrice = Convert.ToDecimal(discountedBuyRow.PurchasePrice);
-            var marketPrice = Convert.ToDecimal(discountedBuyRow.MarketPrice);
-            var amount = Convert.ToDecimal(discountedBuyRow.Amount);
 
-            return new DiscountBuyTransaction(Broker.Fidelity, date, name, Currency.USD, purchasePrice, marketPrice, amount);
+            return new DiscountBuyTransaction(Broker.Fidelity, date, name, Currency.USD, discountedBuyRow.PurchasePrice, discountedBuyRow.MarketPrice, discountedBuyRow.Amount);
         }
 
         private DividendTransaction CreateDividendTransaction(PigPdfDocument document, ActivityDividendRow activityDividendRow, int year)
         {
             var dateString = activityDividendRow.Date + "/" + year;
-            var name = activityDividendRow.Name;
-
             var date = DateTime.Parse(dateString);
-            var income = Convert.ToDecimal(activityDividendRow.Income);
             var tax = SearchForTaxString(document, date);
 
-            return new DividendTransaction(Broker.Fidelity, date, name, income, tax, Currency.USD);
+            return new DividendTransaction(Broker.Fidelity, date, activityDividendRow.Name, activityDividendRow.Income, tax, Currency.USD);
         }
 
         private DepositTransaction CreateOtherTransaction(ActivityOtherRow activityOtherRow, int year)
         {
-            var dateString = activityOtherRow.Date + "/" + year;
-            var name = activityOtherRow.Name;
-
-            var date = DateTime.Parse(dateString);
-            var amount = Convert.ToDecimal(activityOtherRow.Amount);
-            var price = Convert.ToDecimal(activityOtherRow.Price);
-
-            return new DepositTransaction(Broker.Fidelity, date, name, amount, price, Currency.USD);
+            var date = DateTime.Parse(activityOtherRow.Date + "/" + year);
+            return new DepositTransaction(Broker.Fidelity, date, activityOtherRow.Name, activityOtherRow.Amount, activityOtherRow.Price, Currency.USD);
         }
     }
 }

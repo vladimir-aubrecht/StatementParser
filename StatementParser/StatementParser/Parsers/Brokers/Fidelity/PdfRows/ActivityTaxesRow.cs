@@ -8,6 +8,6 @@ namespace StatementParser.Parsers.Brokers.Fidelity.PdfRows
     {
         public string Date { get; set; }
 
-        public string Tax { get; set; }
+        public decimal Tax { get; set; }
     }
 }

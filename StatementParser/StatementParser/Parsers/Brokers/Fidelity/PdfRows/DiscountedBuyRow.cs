@@ -7,8 +7,8 @@ namespace StatementParser.Parsers.Brokers.Fidelity.PdfRows
     internal class DiscountedBuyRow
     {
         public string Date { get; set; }
-        public string PurchasePrice { get; set; }
-        public string MarketPrice { get; set; }
-        public string Amount { get; set; }
+        public decimal PurchasePrice { get; set; }
+        public decimal MarketPrice { get; set; }
+        public decimal Amount { get; set; }
     }
 }

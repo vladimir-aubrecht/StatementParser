@@ -18,6 +18,11 @@ namespace StatementParser.Parsers.Pdf
 
         public TRowDescriptor Value { get; }
 
+        private object ConvertValueToPropertyType(PropertyInfo propertyInfo, string value)
+        {
+            return Convert.ChangeType(value, propertyInfo.PropertyType);
+        }
+
         private TRowDescriptor CreateRow(IDictionary<string, string> properties)
         {
             var result = new TRowDescriptor();
@@ -27,7 +32,9 @@ namespace StatementParser.Parsers.Pdf
                 var propertyInfo = typeof(TRowDescriptor).GetProperty(property.Key)
                     ?? throw new InvalidOperationException($"Trying to set property with name: {property.Key}, but such property cannot be found.");
 
-                propertyInfo.SetValue(result, property.Value);
+                var convertedValue = ConvertValueToPropertyType(propertyInfo, property.Value);
+
+                propertyInfo.SetValue(result, convertedValue);
             }
 
             return result;
