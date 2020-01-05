@@ -15,7 +15,7 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
         private const string SheetName = "4_Stock Award Plan_Completed";
         private const string Signature = "Morgan Stanley Smith Barney LLC. Member SIPC.";
 
-        public bool CanParse(string statementFilePath)
+        private bool CanParse(string statementFilePath)
         {
             if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".xls")
             {
@@ -29,6 +29,11 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
 
         public IList<Transaction> Parse(string statementFilePath)
         {
+            if (!CanParse(statementFilePath))
+            {
+                return null;
+            }
+
             var sheet = GetSheet(statementFilePath);
 
             var name = sheet.GetRow(3).Cells[1].StringCellValue;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NPOI.HSSF.Record.Aggregates;
 using StatementParser.Models;
 using StatementParser.Parsers;
 using StatementParser.Parsers.Brokers.Fidelity;
@@ -23,9 +24,11 @@ namespace StatementParser
         {
             foreach (var parser in parsers)
             {
-                if (parser.CanParse(statementFilePath))
+                var result = parser.Parse(statementFilePath);
+
+                if (result != null)
                 {
-                    return parser.Parse(statementFilePath);
+                    return result;
                 }
             }
 

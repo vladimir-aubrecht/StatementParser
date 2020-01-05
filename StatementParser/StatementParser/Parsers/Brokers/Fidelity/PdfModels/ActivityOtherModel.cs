@@ -1,12 +1,8 @@
-﻿using System;
-using StatementParser.Parsers.Pdf;
+﻿using StatementParser.Parsers.Pdf.Attributes;
 
 namespace StatementParser.Parsers.Brokers.Fidelity.PdfModels
 {
-    [DeserializeByRegex(
-        deserializationRegexPattern: "(?<Date>[0-9]{2}/[0-9]{2}) (?<Name>.+?) SHARES DEPOSITED VALUE OF TRANSACTION .+?Conversion (?<Amount>[0-9]+\\.[0-9]{3})\\$?(?<Price>[0-9]+\\.[0-9]{4})",
-        pageBodyRegexPattern: "Other Activity In SettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceTransactionCostAmount(.+?)Total Other Activity In",
-        rowSplitRegexPattern: "([0-9]{2}/[0-9]{2} )")]
+    [DeserializeByRegex("(?<Date>[0-9]{2}/[0-9]{2}) (?<Name>.+?) SHARES DEPOSITED VALUE OF TRANSACTION .+?Conversion (?<Amount>[0-9]+\\.[0-9]{3})\\$?(?<Price>[0-9]+\\.[0-9]{4})")]
     internal class ActivityOtherModel
     {
         public string Date { get; set; }

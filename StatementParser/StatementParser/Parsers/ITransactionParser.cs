@@ -5,7 +5,6 @@ namespace StatementParser.Parsers
 {
     public interface ITransactionParser
     {
-        bool CanParse(string statementFilePath);
         IList<Transaction> Parse(string statementFilePath);
     }
 }

@@ -9,7 +9,7 @@ namespace StatementParser.Parsers.Brokers.FxChoice
 {
     public class FxChoiceStatementParser : ITransactionParser
     {
-        public bool CanParse(string statementFilePath)
+        private bool CanParse(string statementFilePath)
         {
             if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".pdf")
             {
@@ -21,6 +21,11 @@ namespace StatementParser.Parsers.Brokers.FxChoice
 
         public IList<Transaction> Parse(string statementFilePath)
         {
+            if (!CanParse(statementFilePath))
+            {
+                return null;
+            }
+
             using (var document = PigPdfDocument.Open(statementFilePath))
             {
 

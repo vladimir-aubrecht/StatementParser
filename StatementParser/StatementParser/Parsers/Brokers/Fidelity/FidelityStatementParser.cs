@@ -5,29 +5,18 @@ using System.Linq;
 using StatementParser.Models;
 using StatementParser.Parsers.Brokers.Fidelity.PdfModels;
 using StatementParser.Parsers.Pdf;
+using StatementParser.Parsers.Pdf.Exceptions;
 using PigPdfDocument = UglyToad.PdfPig.PdfDocument;
 
 namespace StatementParser.Parsers.Brokers.Fidelity
 {
     internal class FidelityStatementParser : ITransactionParser
     {
-        public bool CanParse(string statementFilePath)
+        private bool CanParse(string statementFilePath)
         {
             if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".pdf")
             {
                 return false;
-            }
-
-            using (var document = PigPdfDocument.Open(statementFilePath))
-            {
-                try
-                {
-                    ParseYear(document);
-                }
-                catch
-                {
-                    return false;
-                }
             }
 
             return true;
@@ -35,31 +24,41 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
         public IList<Transaction> Parse(string statementFilePath)
         {
+            if (!CanParse(statementFilePath))
+            {
+                return null;
+            }
+
             var transactions = new List<Transaction>();
 
             using (var document = PigPdfDocument.Open(statementFilePath))
             {
-                var year = ParseYear(document);
+                try
+                {
+                    var parsedDocument = new Pdf.PdfDocumentParser<StatementModel>().Parse(new PdfSource(document));
 
-                transactions.AddRange(ParseTransactions<ActivityOtherModel>(document, i => CreateOtherTransaction(i.Value, year)));
-                transactions.AddRange(ParseTransactions<ActivityDividendModel>(document, i => CreateDividendTransaction(document, i.Value, year)));
-                transactions.AddRange(ParseTransactions<ESPPModel>(document, i => CreateESPPTransaction(document, i.Value)));
+                    transactions.AddRange(parsedDocument.ActivityOther.Select(i => CreateOtherTransaction(i, parsedDocument.Year)));
+                    transactions.AddRange(parsedDocument.ActivityDividend.Select(i => CreateDividendTransaction(parsedDocument.ActivityTaxes, i, parsedDocument.Year)));
+                    transactions.AddRange(parsedDocument.ESPP.Select(i => CreateESPPTransaction(parsedDocument.ActivityBuy, i)));
+                }
+                catch (PdfException)
+                {
+                    return null;
+                }
             }
 
             return transactions;
         }
 
-        public string SearchForCompanyName(PigPdfDocument document, decimal amount, decimal price)
+        public string SearchForCompanyName(ActivityBuyModel[] activityBuyModels, ESPPModel esppRow)
         {
-            var transactionStrings = new Pdf.PdfDocument(document).ParseTable<ActivityBuyModel>();
-
             string removeLastCharFunc(decimal number)
             {
                 return number.ToString().Remove(number.ToString().Length - 1);
             }
 
             // Fidelity has a bug in generation and amount can be rounded up in some tables on third number after digit.
-            var foundTransactions = transactionStrings.Where(i => i.Value.Price == price && removeLastCharFunc(i.Value.Amount) == removeLastCharFunc(amount));
+            var foundTransactions = activityBuyModels.Where(i => i.Price == esppRow.PurchasePrice && removeLastCharFunc(i.Amount) == removeLastCharFunc(esppRow.Amount));
 
             if (foundTransactions.Count() > 1)
             {
@@ -69,37 +68,26 @@ namespace StatementParser.Parsers.Brokers.Fidelity
                 throw new InvalidOperationException("Couldn't properly detect name of company for ESPP.");
             }
 
-            return foundTransactions.First().Value.Name;
+            return foundTransactions.First().Name;
         }
 
-        private decimal SearchForTaxString(PigPdfDocument document, DateTime date)
+        private decimal SearchForTaxString(ActivityTaxesModel[] activityTaxesModels, DateTime date)
         {
-            var row = new Pdf.PdfDocument(document).ParseTable<ActivityTaxesModel>().Where(i => i.Value.Date == date.ToString("MM/dd")).FirstOrDefault();
-            return row?.Value.Tax ?? 0;
+            return activityTaxesModels.Where(i => i.Date == date.ToString("MM/dd")).FirstOrDefault()?.Tax ?? 0;
         }
 
-        private IEnumerable<Transaction> ParseTransactions<TModel>(PigPdfDocument document, Func<PdfTableRow<TModel>, Transaction> createTransactionFunc) where TModel : new()
+        private ESPPTransaction CreateESPPTransaction(ActivityBuyModel[] activityBuyModels, ESPPModel esppRow)
         {
-            return new Pdf.PdfDocument(document).ParseTable<TModel>().Select(i => createTransactionFunc(i));
-        }
-
-        private int ParseYear(PigPdfDocument document)
-        {
-            return new Pdf.PdfDocument(document).ParseTable<StatementModel>().First().Value.Year;
-        }
-
-        private ESPPTransaction CreateESPPTransaction(PigPdfDocument document, ESPPModel esppRow)
-        {
-            var name = SearchForCompanyName(document, esppRow.Amount, esppRow.PurchasePrice);
+            var name = SearchForCompanyName(activityBuyModels, esppRow);
 
             return new ESPPTransaction(Broker.Fidelity, esppRow.Date, name, Currency.USD, esppRow.PurchasePrice, esppRow.MarketPrice, esppRow.Amount);
         }
 
-        private DividendTransaction CreateDividendTransaction(PigPdfDocument document, ActivityDividendModel activityDividendRow, int year)
+        private DividendTransaction CreateDividendTransaction(ActivityTaxesModel[] activityTaxesModels, ActivityDividendModel activityDividendRow, int year)
         {
             var dateString = activityDividendRow.Date + "/" + year;
             var date = DateTime.Parse(dateString);
-            var tax = SearchForTaxString(document, date);
+            var tax = SearchForTaxString(activityTaxesModels, date);
 
             return new DividendTransaction(Broker.Fidelity, date, activityDividendRow.Name, activityDividendRow.Income, tax, Currency.USD);
         }
