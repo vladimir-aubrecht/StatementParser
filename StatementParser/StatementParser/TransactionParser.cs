@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using StatementParser.Models;
 using StatementParser.Parsers;
 using StatementParser.Parsers.Brokers.Fidelity;
+using StatementParser.Parsers.Brokers.FxChoice;
 using StatementParser.Parsers.Brokers.MorganStanley;
 
 namespace StatementParser
@@ -15,6 +16,7 @@ namespace StatementParser
         {
             parsers.Add(new MorganStanleyStatementParser());
             parsers.Add(new FidelityStatementParser());
+            parsers.Add(new FxChoiceStatementParser());
         }
 
         public IList<Transaction> Parse(string statementFilePath)

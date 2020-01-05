@@ -18,6 +18,18 @@ namespace StatementParser.Parsers.Brokers.Fidelity
                 return false;
             }
 
+            using (var document = PigPdfDocument.Open(statementFilePath))
+            {
+                try
+                {
+                    ParseYear(document);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
 
@@ -41,7 +53,13 @@ namespace StatementParser.Parsers.Brokers.Fidelity
         {
             var transactionStrings = new Pdf.PdfDocument(document).ParseTable<ActivityBuyModel>();
 
-            var foundTransactions = transactionStrings.Where(i => i.Value.Price == price && i.Value.Amount == amount);
+            string removeLastCharFunc(decimal number)
+            {
+                return number.ToString().Remove(number.ToString().Length - 1);
+            }
+
+            // Fidelity has a bug in generation and amount can be rounded up in some tables on third number after digit.
+            var foundTransactions = transactionStrings.Where(i => i.Value.Price == price && removeLastCharFunc(i.Value.Amount) == removeLastCharFunc(amount));
 
             if (foundTransactions.Count() > 1)
             {

@@ -19,5 +19,6 @@
     <Folder Include="Parsers\Brokers\MorganStanley\" />
     <Folder Include="Parsers\Brokers\Fidelity\PdfModels\" />
     <Folder Include="Parsers\Pdf\Exceptions\" />
+    <Folder Include="Parsers\Brokers\FxChoice\" />
   </ItemGroup>
 </Project>
