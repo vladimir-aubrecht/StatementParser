@@ -3,6 +3,9 @@ namespace StatementParser.Models
 {
     public class DividendTransaction : Transaction
     {
+        /// <summary>
+        /// Income before taxation
+        /// </summary>
         public decimal Income { get; }
 
         public decimal Tax { get; }

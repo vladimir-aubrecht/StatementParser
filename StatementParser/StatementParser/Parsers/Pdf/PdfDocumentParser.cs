@@ -39,7 +39,7 @@ namespace StatementParser.Parsers.Pdf
                     GetDeserializationRegexByType(property.PropertyType),
                     GetDeserializationRegexByType(property.PropertyType.GetCollectionElementType()));
 
-                if (property.PropertyType.IsPrimitive)
+                if (this.pdfInstanceCreator.IsSimpleType(property.PropertyType))
                 {
                     property.SetValue(output, property.GetValue(value));
                 }

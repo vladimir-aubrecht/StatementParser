@@ -19,7 +19,7 @@ namespace StatementParserCLI
             //args = new string[] { "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls" };
             //args = new string[] { "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
             //args = new string[] { "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements/FXChoice/January 2019.pdf" };
-            args = new string[] { "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements" };
+            //args = new string[] { "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements" };
 
             var parser = new CommanderParser<Options>();
 

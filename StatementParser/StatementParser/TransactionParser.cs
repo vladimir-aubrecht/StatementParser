@@ -16,6 +16,7 @@ namespace StatementParser
         public TransactionParser()
         {
             parsers.Add(new MorganStanleyStatementParser());
+            parsers.Add(new MorganStanleyStatementPdfParser());
             parsers.Add(new FidelityStatementParser());
             parsers.Add(new FxChoiceStatementParser());
         }

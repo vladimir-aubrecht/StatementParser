@@ -31,7 +31,7 @@ namespace StatementParser.Parsers.Pdf
             {
                 return this.DeserializeCollection(propertyType, content, elementDeserializationRegex, collectionRegex);
             }
-            else if (propertyType.IsPrimitive)
+            else if (IsSimpleType(propertyType))
             {
                 return this.DeserializeClass(propertyClassType, content, documentDeserializationRegex);
             }
@@ -41,6 +41,10 @@ namespace StatementParser.Parsers.Pdf
             }
         }
 
+        public bool IsSimpleType(Type type)
+        {
+            return type.IsPrimitive || typeof(string) == type;
+        }
 
         private object ConvertToCollectionOfType(IList<object> items, Type propertyType)
         {
@@ -108,8 +112,11 @@ namespace StatementParser.Parsers.Pdf
                         continue;
                     }
 
-                    var value = matchResults.Groups[groupName].Value;
-                    output.Add(groupName, value);
+                    if (matchResults.Groups[groupName].Success)
+                    {
+                        var value = matchResults.Groups[groupName].Value;
+                        output.Add(groupName, value);
+                    }
                 }
             }
             else

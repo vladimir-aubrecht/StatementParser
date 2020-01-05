@@ -23,5 +23,6 @@
     <Folder Include="Parsers\Pdf\Attributes\" />
     <Folder Include="Parsers\Pdf\Extensions\" />
     <Folder Include="Parsers\Pdf\Exceptions\" />
+    <Folder Include="Parsers\Brokers\MorganStanley\PdfModels\" />
   </ItemGroup>
 </Project>
