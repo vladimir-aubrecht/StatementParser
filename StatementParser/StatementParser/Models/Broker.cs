@@ -1,4 +1,4 @@
 ﻿namespace StatementParser.Models
 {
-    public enum Broker { MorganStanley, Fidelity }
+    public enum Broker { MorganStanley, Fidelity, FxChoice }
 }
