@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Commander.NET;
 using Commander.NET.Exceptions;
 using Newtonsoft.Json;
@@ -70,24 +71,31 @@ namespace StatementParserCLI
                 }
             }
 
-            if (option.ShouldPrintAsJson)
+            var groupedTransactions = transactions.GroupBy(i => i.GetType());
+
+            foreach (var typeGroup in groupedTransactions)
             {
-                PrintAsJson(transactions);
-            }
-            else
-            {
-                PrintAsPlainText(transactions);
+                if (option.ShouldPrintAsJson)
+                {
+                    PrintAsJson(typeGroup.Key, typeGroup.ToList());
+                }
+                else
+                {
+                    PrintAsPlainText(typeGroup.Key, typeGroup.ToList());
+                }
             }
 
         }
 
-        private static void PrintAsJson(IList<Transaction> transactions)
+        private static void PrintAsJson(Type transactionsType, IList<Transaction> transactions)
         {
-            Console.WriteLine(JsonConvert.SerializeObject(transactions));
+            Console.WriteLine(JsonConvert.SerializeObject(new { Type = transactionsType, Transactions = transactions }));
         }
 
-        private static void PrintAsPlainText(IList<Transaction> transactions)
+        private static void PrintAsPlainText(Type transactionsType, IList<Transaction> transactions)
         {
+            Console.WriteLine("\r\n");
+            Console.WriteLine(transactionsType.Name);
             Console.WriteLine(String.Join("\r\n", transactions));
         }
     }
