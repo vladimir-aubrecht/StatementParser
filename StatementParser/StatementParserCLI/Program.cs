@@ -14,12 +14,8 @@ namespace StatementParserCLI
     {
         public static void Main(string[] args)
         {
-            //args = new string[] { "-json", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
-            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
-            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
-            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls" };
-            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
-            //args = new string[] { "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements/FXChoice/January 2019.pdf" };
+            //args = new string[] { "-j", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
+            //args = new string[] { "-x", "/Users/vladimiraubrecht/test.xls", "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements" };
             //args = new string[] { "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements" };
 
             var parser = new CommanderParser<Options>();
@@ -71,32 +67,19 @@ namespace StatementParserCLI
                 }
             }
 
-            var groupedTransactions = transactions.GroupBy(i => i.GetType());
-
-            foreach (var typeGroup in groupedTransactions)
+            var printer = new Output();
+            if (option.ShouldPrintAsJson)
             {
-                if (option.ShouldPrintAsJson)
-                {
-                    PrintAsJson(typeGroup.Key, typeGroup.ToList());
-                }
-                else
-                {
-                    PrintAsPlainText(typeGroup.Key, typeGroup.ToList());
-                }
+                printer.PrintAsJson(transactions);
             }
-
-        }
-
-        private static void PrintAsJson(Type transactionsType, IList<Transaction> transactions)
-        {
-            Console.WriteLine(JsonConvert.SerializeObject(new { Type = transactionsType, Transactions = transactions }));
-        }
-
-        private static void PrintAsPlainText(Type transactionsType, IList<Transaction> transactions)
-        {
-            Console.WriteLine("\r\n");
-            Console.WriteLine(transactionsType.Name);
-            Console.WriteLine(String.Join("\r\n", transactions));
+            else if (option.ExcelSheetPath != null)
+            {
+                printer.SaveAsExcelSheet(option.ExcelSheetPath, transactions);
+            }
+            else
+            {
+                printer.PrintAsPlainText(transactions);
+            }
         }
     }
 }

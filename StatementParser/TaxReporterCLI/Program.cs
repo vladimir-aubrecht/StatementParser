@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Commander.NET;
@@ -16,10 +17,9 @@ namespace TaxReporterCLI
         public static async Task Main(string[] args)
         {
             //args = new string[] { "-json", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
-            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
-            //args = new string[] { "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
             //args = new string[] { "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls" };
             //args = new string[] { "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf" };
+            //args = new string[] { "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements" };
 
             var parser = new CommanderParser<Options>();
 
@@ -35,18 +35,41 @@ namespace TaxReporterCLI
 
         }
 
+        private static IList<string> ResolveFilePaths(string[] paths)
+        {
+            var output = new List<string>();
+            foreach (var path in paths)
+            {
+                if (Directory.Exists(path))
+                {
+                    var directoryFiles = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
+                    output.AddRange(directoryFiles);
+                }
+                else if (File.Exists(path))
+                {
+                    output.Add(path);
+                }
+            }
+
+            return output;
+        }
+
         private static async Task RunAsync(Options option)
         {
             var cnbProvider = new CzechNationalBankProvider();
             var kurzyCzProvider = new KurzyCzProvider();
 
-
-
             var parser = new StatementParser.TransactionParser();
+            var filePaths = ResolveFilePaths(option.StatementFilePaths);
 
-            foreach (var file in option.StatementFilePaths)
+            foreach (var file in filePaths)
             {
                 var result = parser.Parse(file);
+
+                if (result == null)
+                {
+                    continue;
+                }
 
                 var kurzyPerYear = await FetchExchangeRatesForEveryYearAsync(kurzyCzProvider, result);
 
@@ -96,6 +119,20 @@ namespace TaxReporterCLI
                         else
                         {
                             Console.WriteLine($"{transaction} Purchase Price in CZK (CNB): {castedTransaction.PurchasePrice * cnbPrice} Purchase Price in CZK (year average): N/A Market Price in CZK (CNB): {castedTransaction.MarketPrice * cnbPrice} Market Price in CZK (year average): N/A");
+                        }
+                    }
+                    else if (transaction is SaleTransaction)
+                    {
+                        var castedTransaction = transaction as SaleTransaction;
+
+                        if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
+                        {
+                            var kurzyPrice = kurzyPerYear[transaction.Date.Year][transaction.Currency.ToString()].Price;
+                            Console.WriteLine($"{transaction} Purchase Price in CZK (CNB): {castedTransaction.PurchasePrice * cnbPrice} Purchase Price in CZK (year average): {castedTransaction.PurchasePrice * kurzyPrice} Sale Price in CZK (CNB): {castedTransaction.SalePrice * cnbPrice} Sale Price in CZK (year average): {castedTransaction.SalePrice * kurzyPrice}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{transaction} Purchase Price in CZK (CNB): {castedTransaction.PurchasePrice * cnbPrice} Purchase Price in CZK (year average): N/A Sale Price in CZK (CNB): {castedTransaction.SalePrice * cnbPrice} Sale Price in CZK (year average): N/A");
                         }
                     }
                 }

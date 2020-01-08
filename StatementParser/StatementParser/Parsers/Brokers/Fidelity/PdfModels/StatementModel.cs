@@ -14,7 +14,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity.PdfModels
 
         [DeserializeCollectionByRegex(
             "([0-9]{2}/[0-9]{2} )",
-            "STOCK PLAN ACCOUNTActivityTaxes Withheld DateSecurityDescriptionAmount(.+?)Total Federal Taxes Withheld")]
+            "Taxes Withheld DateSecurityDescriptionAmount(.+?)Total Federal Taxes Withheld")]
         public ActivityTaxesModel[] ActivityTaxes { get; set; }
 
         [DeserializeCollectionByRegex(
