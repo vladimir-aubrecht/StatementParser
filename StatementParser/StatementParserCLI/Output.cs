@@ -81,7 +81,7 @@ namespace StatementParserCLI
         private IDictionary<string, string> GetPublicProperties(Transaction transaction)
         {
             var properties = transaction.GetType().GetProperties();
-            return properties.ToDictionary(k => k.Name, i => i.GetValue(transaction).ToString());
+            return properties.Reverse().ToDictionary(k => k.Name, i => i.GetValue(transaction).ToString());
         }
     }
 }
