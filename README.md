@@ -36,7 +36,8 @@ XSLT conversion:
 
 ``dotnet StatementParserCLI.dll -x <path to file with output xslt file> <path to the file or folder containing statements>``
 
-# Supported brokers - input file format
+# Supported brokers
+(supported input format after dash)
 - Fidelity - Pdf
 - Morgan Stanley - Pdf, XLS
 - FxChoice (in general MetaTrader reports should work, but tested only with FxChoice) - HTM
