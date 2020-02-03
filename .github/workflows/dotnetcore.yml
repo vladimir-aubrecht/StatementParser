@@ -20,12 +20,10 @@ jobs:
         dotnet-version: 3.1.100
     - name: Build with dotnet
       run: dotnet build StatementParser/StatementParser.sln --configuration Release
-
     - name: Publish with dotnet
       run: dotnet publish -r ${{matrix.platform}} --configuration Release --self-contained true StatementParser/StatementParser.sln
-      
     - name: Publish artifacts to GitHub
       uses: actions/upload-artifact@v1
       with:
         name: StatementParserCLI
-        path: StatementParser/StatementParserCLI/bin/Release/netcoreapp3.1/publish
+        path: StatementParser/StatementParserCLI/bin/Release/netcoreapp3.0/${{matrix.platform}}/publish
