@@ -27,5 +27,5 @@ jobs:
     - name: Publish artifacts to GitHub
       uses: actions/upload-artifact@v1
       with:
-        name: StatementParser
-        path: ${GITHUB_WORKSPACE}/bin/netcoreapp3.1/publish
+        name: StatementParserCLI
+        path: StatementParserCLI/bin/Release/netcoreapp3.1/publish
