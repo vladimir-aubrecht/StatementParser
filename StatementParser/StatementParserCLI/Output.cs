@@ -37,7 +37,7 @@ namespace StatementParserCLI
 
                     var headerRow = sheet.CreateRow(0);
                     var headerProperties = GetPublicProperties(group.Value[0]);
-                    SetRowValues(headerRow, headerProperties.Values);
+                    SetRowValues(headerRow, headerProperties.Keys);
 
                     for (int rowIndex = 1; rowIndex < group.Value.Count() + 1; rowIndex++)
                     {
