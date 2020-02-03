@@ -41,6 +41,7 @@ XSLT conversion:
 - Fidelity - Pdf
 - Morgan Stanley - Pdf, XLS
 - FxChoice (in general MetaTrader reports should work, but tested only with FxChoice) - HTM
+- Degiro - Csv (only support for Dividend transactions for now)
 
 # Supported output formats
 - JSON
