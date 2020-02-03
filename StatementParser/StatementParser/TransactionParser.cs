@@ -17,10 +17,11 @@ namespace StatementParser
 
         public TransactionParser()
         {
-            parsers.Add(new MorganStanleyStatementParser());
+            parsers.Add(new MorganStanleyStatementXlsParser());
             parsers.Add(new MorganStanleyStatementPdfParser());
             parsers.Add(new FidelityStatementParser());
             parsers.Add(new FxChoiceStatementParser());
+            parsers.Add(new DegiroParser());
         }
 
         public Task<IList<Transaction>> ParseAsync(string statementFilePath)

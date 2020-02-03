@@ -1,5 +1,5 @@
 ﻿using System;
 namespace StatementParser.Models
 {
-    public enum Currency { USD, EUR }
+    public enum Currency { USD, EUR, JPY }
 }
