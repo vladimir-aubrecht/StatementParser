@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using StatementParser.Models;
@@ -73,7 +74,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
         private decimal SearchForTaxString(ActivityTaxesModel[] activityTaxesModels, DateTime date)
         {
-            return activityTaxesModels.Where(i => i.Date == date.ToString("MM/dd")).FirstOrDefault()?.Tax ?? 0;
+            return activityTaxesModels.Where(i => i.Date == date.ToString("MM/dd").Replace("-","/")).FirstOrDefault()?.Tax ?? 0;
         }
 
         private ESPPTransaction CreateESPPTransaction(ActivityBuyModel[] activityBuyModels, ESPPModel esppRow)
@@ -85,8 +86,12 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
         private DividendTransaction CreateDividendTransaction(ActivityTaxesModel[] activityTaxesModels, ActivityDividendModel activityDividendRow, int year)
         {
+            var ci = new CultureInfo("en-US");
+            var formats = new[] { "M-d-yyyy", "dd-MM-yyyy", "MM/dd/yyyy", "M.d.yyyy", "MM.dd.yyyy" }
+                .Union(ci.DateTimeFormat.GetAllDateTimePatterns()).ToArray();
+
             var dateString = activityDividendRow.Date + "/" + year;
-            var date = DateTime.Parse(dateString);
+            var date = DateTime.ParseExact(dateString, formats, ci, DateTimeStyles.AssumeLocal);
             var tax = SearchForTaxString(activityTaxesModels, date);
 
             return new DividendTransaction(Broker.Fidelity, date, activityDividendRow.Name, activityDividendRow.Income, tax, Currency.USD);
@@ -94,7 +99,13 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
         private DepositTransaction CreateOtherTransaction(ActivityOtherModel activityOtherRow, int year)
         {
-            var date = DateTime.Parse(activityOtherRow.Date + "/" + year);
+            var ci = new CultureInfo("en-US");
+            var formats = new[] { "M-d-yyyy", "dd-MM-yyyy", "MM/dd/yyyy", "M.d.yyyy", "MM.dd.yyyy" }
+                .Union(ci.DateTimeFormat.GetAllDateTimePatterns()).ToArray();
+
+            var dateString = activityOtherRow.Date + "/" + year;
+            var date = DateTime.ParseExact(dateString, formats, ci, DateTimeStyles.AssumeLocal);
+
             return new DepositTransaction(Broker.Fidelity, date, activityOtherRow.Name, activityOtherRow.Amount, activityOtherRow.Price, Currency.USD);
         }
     }
