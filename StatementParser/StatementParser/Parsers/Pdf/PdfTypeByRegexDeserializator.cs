@@ -54,13 +54,6 @@ namespace StatementParser.Parsers.Pdf
 
         private object ConvertValueToPropertyType(Type propertyType, string value)
         {
-            var ci = new CultureInfo("en-US");
-            var formats = new[] { "M-d-yyyy", "dd-MM-yyyy", "MM/dd/yyyy", "M.d.yyyy", "MM.dd.yyyy" }
-                .Union(ci.DateTimeFormat.GetAllDateTimePatterns()).ToArray();
-            if (propertyType == typeof(DateTime))
-            {
-                return DateTime.ParseExact(value, formats, ci, DateTimeStyles.AssumeLocal); ;
-            }
             return Convert.ChangeType(value, propertyType);
         }
 

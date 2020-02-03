@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Commander.NET;
 using Commander.NET.Exceptions;
 using Newtonsoft.Json;
@@ -12,7 +14,7 @@ namespace StatementParserCLI
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             //args = new string[] { "-j", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
             //args = new string[] { "-x", "/Users/vladimiraubrecht/test.xls", "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements" };
@@ -23,7 +25,7 @@ namespace StatementParserCLI
             try
             {
                 var options = parser.Parse(args);
-                Run(options);
+                await RunAsync(options);
             }
             catch (ParameterMissingException)
             {
@@ -50,7 +52,7 @@ namespace StatementParserCLI
             return output;
         }
 
-        private static void Run(Options option)
+        private static async Task RunAsync(Options option)
         {
             var parser = new TransactionParser();
 
@@ -59,7 +61,7 @@ namespace StatementParserCLI
             foreach (var file in filePaths)
             {
                 Console.WriteLine($"Processing file: {file}");
-                var result = parser.Parse(file);
+                var result = await parser.ParseAsync(file);
 
                 if (result != null)
                 {

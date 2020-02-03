@@ -86,12 +86,8 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
         private DividendTransaction CreateDividendTransaction(ActivityTaxesModel[] activityTaxesModels, ActivityDividendModel activityDividendRow, int year)
         {
-            var ci = new CultureInfo("en-US");
-            var formats = new[] { "M-d-yyyy", "dd-MM-yyyy", "MM/dd/yyyy", "M.d.yyyy", "MM.dd.yyyy" }
-                .Union(ci.DateTimeFormat.GetAllDateTimePatterns()).ToArray();
-
             var dateString = activityDividendRow.Date + "/" + year;
-            var date = DateTime.ParseExact(dateString, formats, ci, DateTimeStyles.AssumeLocal);
+            var date = DateTime.Parse(dateString);
             var tax = SearchForTaxString(activityTaxesModels, date);
 
             return new DividendTransaction(Broker.Fidelity, date, activityDividendRow.Name, activityDividendRow.Income, tax, Currency.USD);
@@ -99,12 +95,8 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
         private DepositTransaction CreateOtherTransaction(ActivityOtherModel activityOtherRow, int year)
         {
-            var ci = new CultureInfo("en-US");
-            var formats = new[] { "M-d-yyyy", "dd-MM-yyyy", "MM/dd/yyyy", "M.d.yyyy", "MM.dd.yyyy" }
-                .Union(ci.DateTimeFormat.GetAllDateTimePatterns()).ToArray();
-
             var dateString = activityOtherRow.Date + "/" + year;
-            var date = DateTime.ParseExact(dateString, formats, ci, DateTimeStyles.AssumeLocal);
+            var date = DateTime.Parse(dateString);
 
             return new DepositTransaction(Broker.Fidelity, date, activityOtherRow.Name, activityOtherRow.Amount, activityOtherRow.Price, Currency.USD);
         }

@@ -64,7 +64,7 @@ namespace TaxReporterCLI
 
             foreach (var file in filePaths)
             {
-                var result = parser.Parse(file);
+                var result = await parser.ParseAsync(file);
 
                 if (result == null)
                 {

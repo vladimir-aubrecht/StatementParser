@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using NPOI.HSSF.Record.Aggregates;
 using StatementParser.Models;
 using StatementParser.Parsers;
@@ -21,7 +23,14 @@ namespace StatementParser
             parsers.Add(new FxChoiceStatementParser());
         }
 
-        public IList<Transaction> Parse(string statementFilePath)
+        public Task<IList<Transaction>> ParseAsync(string statementFilePath)
+        {
+            return RunWithGlobalSettings(() => {
+                return ParseFiles(statementFilePath);
+            });
+        }
+
+        private IList<Transaction> ParseFiles(string statementFilePath)
         {
             foreach (var parser in parsers)
             {
@@ -34,6 +43,16 @@ namespace StatementParser
             }
 
             return null;
+        }
+
+        private Task<IList<Transaction>> RunWithGlobalSettings(Func<IList<Transaction>> action)
+        {
+            return Task.Run(() => {
+                var culture = new System.Globalization.CultureInfo("en-US");
+                Thread.CurrentThread.CurrentCulture = culture;
+
+                return action();
+            });
         }
     }
 }
