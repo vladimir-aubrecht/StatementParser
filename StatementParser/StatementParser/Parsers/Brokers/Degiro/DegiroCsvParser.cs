@@ -53,7 +53,7 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
 
         private decimal SearchForTax(IList<StatementRowModel> statementRows, string isin, DateTime date)
         {
-            var row = statementRows.Where(i => i.Date.Value == date && i.ISIN == isin).FirstOrDefault();
+            var row = statementRows.Where(i => i.Date.Value == date && i.ISIN == isin && i.Description.Contains("z dividendy")).FirstOrDefault();
             return row.Income.Value;
         }
 
