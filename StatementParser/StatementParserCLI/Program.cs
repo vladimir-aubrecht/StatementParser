@@ -16,10 +16,6 @@ namespace StatementParserCLI
     {
         public static async Task Main(string[] args)
         {
-            //args = new string[] { "-j", "/Users/vladimiraubrecht/Downloads/Microsoft Corporation_31Dec2019_222406.xls", "/Users/vladimiraubrecht/Downloads/Fidelity Deposit.pdf", "/Users/vladimiraubrecht/Downloads/Fidelity ESPP.pdf" };
-            //args = new string[] { "-x", "/Users/vladimiraubrecht/test.xls", "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements" };
-            //args = new string[] { "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements" };
-
             var parser = new CommanderParser<Options>();
 
             try
