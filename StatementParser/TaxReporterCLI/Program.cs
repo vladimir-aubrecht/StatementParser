@@ -8,6 +8,7 @@ using Commander.NET.Exceptions;
 using ExchangeRateProvider.Models;
 using ExchangeRateProvider.Providers;
 using ExchangeRateProvider.Providers.Czk;
+using StatementParser;
 using StatementParser.Models;
 
 namespace TaxReporterCLI
@@ -54,83 +55,68 @@ namespace TaxReporterCLI
             var cnbProvider = new CzechNationalBankProvider();
             var kurzyCzProvider = new KurzyCzProvider();
 
-            var parser = new StatementParser.TransactionParser();
+            var parser = new TransactionParser();
+            var transactions = new List<Transaction>();
             var filePaths = ResolveFilePaths(option.StatementFilePaths);
-
             foreach (var file in filePaths)
             {
+                Console.WriteLine($"Processing file: {file}");
                 var result = await parser.ParseAsync(file);
 
-                if (result == null)
+                if (result != null)
                 {
-                    continue;
+                    transactions.AddRange(result);
                 }
+            }
 
-                var kurzyPerYear = await FetchExchangeRatesForEveryYearAsync(kurzyCzProvider, result);
+            var kurzyPerYear = await FetchExchangeRatesForEveryYearAsync(kurzyCzProvider, transactions);
 
-                foreach (var transaction in result)
-                {
-                    var cnbCurrencyList = await cnbProvider.FetchCurrencyListByDateAsync(transaction.Date);
-                    var cnbPrice = cnbCurrencyList[transaction.Currency.ToString()].Price;
-
-                    // TODO: Refactor this, it's ugly like hell.
-                    if (transaction is DepositTransaction)
+            var transactionsByPerYearExchangeRate = 
+                transactions.Select(i => {
+                    if (!kurzyPerYear[i.Date.Year].IsEmpty)
                     {
-                        var castedTransaction = transaction as DepositTransaction;
-
-                        if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
-                        {
-                            var kurzyPrice = kurzyPerYear[transaction.Date.Year][transaction.Currency.ToString()].Price;
-                            Console.WriteLine($"{transaction} Price in CZK (CNB): {castedTransaction.Price * cnbPrice} Price in CZK (year average): {castedTransaction.Price * kurzyPrice}");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"{transaction} Price in CZK (CNB): {castedTransaction.Price * cnbPrice} Price in CZK (year average): N/A");
-                        }
+                        var exchangeRatio = kurzyPerYear[i.Date.Year][i.Currency.ToString()].Price;
+                        return i.ConvertToCurrency(Currency.CZK, exchangeRatio);
                     }
-                    else if (transaction is DividendTransaction)
-                    {
-                        var castedTransaction = transaction as DividendTransaction;
 
-                        if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
-                        {
-                            var kurzyPrice = kurzyPerYear[transaction.Date.Year][transaction.Currency.ToString()].Price;
-                            Console.WriteLine($"{transaction} Income in CZK (CNB): {castedTransaction.Income * cnbPrice} Income in CZK (year average): {castedTransaction.Income * kurzyPrice} Tax in CZK (CNB): {castedTransaction.Tax * cnbPrice} Tax in CZK (year average): {castedTransaction.Tax * kurzyPrice}");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"{transaction} Income in CZK (CNB): {castedTransaction.Income * cnbPrice} Income in CZK (year average): N/A Tax in CZK (CNB): {castedTransaction.Tax * cnbPrice} Tax in CZK (year average): N/A");
-                        }
-                    }
-                    else if (transaction is ESPPTransaction)
-                    {
-                        var castedTransaction = transaction as ESPPTransaction;
+                    return i;
 
-                        if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
-                        {
-                            var kurzyPrice = kurzyPerYear[transaction.Date.Year][transaction.Currency.ToString()].Price;
-                            Console.WriteLine($"{transaction} Purchase Price in CZK (CNB): {castedTransaction.PurchasePrice * cnbPrice} Purchase Price in CZK (year average): {castedTransaction.PurchasePrice * kurzyPrice} Market Price in CZK (CNB): {castedTransaction.MarketPrice * cnbPrice} Market Price in CZK (year average): {castedTransaction.MarketPrice * kurzyPrice}");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"{transaction} Purchase Price in CZK (CNB): {castedTransaction.PurchasePrice * cnbPrice} Purchase Price in CZK (year average): N/A Market Price in CZK (CNB): {castedTransaction.MarketPrice * cnbPrice} Market Price in CZK (year average): N/A");
-                        }
-                    }
-                    else if (transaction is SaleTransaction)
-                    {
-                        var castedTransaction = transaction as SaleTransaction;
+                    }).ToList();
 
-                        if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
-                        {
-                            var kurzyPrice = kurzyPerYear[transaction.Date.Year][transaction.Currency.ToString()].Price;
-                            Console.WriteLine($"{transaction} Purchase Price in CZK (CNB): {castedTransaction.PurchasePrice * cnbPrice} Purchase Price in CZK (year average): {castedTransaction.PurchasePrice * kurzyPrice} Sale Price in CZK (CNB): {castedTransaction.SalePrice * cnbPrice} Sale Price in CZK (year average): {castedTransaction.SalePrice * kurzyPrice}");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"{transaction} Purchase Price in CZK (CNB): {castedTransaction.PurchasePrice * cnbPrice} Purchase Price in CZK (year average): N/A Sale Price in CZK (CNB): {castedTransaction.SalePrice * cnbPrice} Sale Price in CZK (year average): N/A");
-                        }
-                    }
-                }
+            var transactionsByPerDayExchangeRateTasks =
+                transactions.Select(async i => {
+                    var cnbCurrencyList = await cnbProvider.FetchCurrencyListByDateAsync(i.Date);    
+                    return i.ConvertToCurrency(Currency.CZK, cnbCurrencyList[i.Currency.ToString()].Price);
+                }).ToList();
+
+            await Task.WhenAll(transactionsByPerDayExchangeRateTasks);
+            var transactionsByPerDayExchangeRate = transactionsByPerDayExchangeRateTasks.Select(i => i.Result).ToList();
+
+            var pathBackup = option.ExcelSheetPath;
+
+            Console.WriteLine("Transactions calculated with yearly average exchange rate:");
+            option.ExcelSheetPath = Path.ChangeExtension(pathBackup, "yearly.xlsx");
+            Print(option, transactionsByPerYearExchangeRate);
+            
+            Console.WriteLine("\r\nTransactions calculated with daily exchange rate:");
+            option.ExcelSheetPath = Path.ChangeExtension(pathBackup, "daily.xlsx");
+            Print(option, transactionsByPerDayExchangeRate);
+        }
+
+        private static void Print(Options option, IList<Transaction> transactions)
+        {
+            var printer = new Output();
+            if (option.ShouldPrintAsJson)
+            {
+                printer.PrintAsJson(transactions);
+            }
+            else if (option.ExcelSheetPath != null)
+            {
+                printer.SaveAsExcelSheet(option.ExcelSheetPath, transactions);
+            }
+            else
+            {
+                printer.PrintAsPlainText(transactions);
             }
         }
 

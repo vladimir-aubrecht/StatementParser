@@ -13,6 +13,11 @@ namespace StatementParser.Models
             this.Price = price;
         }
 
+        public override Transaction ConvertToCurrency(Currency currency, decimal exchangeRate)
+        {
+            return new DepositTransaction(Broker, Date, Name, Amount, Price * exchangeRate, currency);
+        }
+
         public override string ToString()
         {
             return $"{base.ToString()} Amount: {Amount} Price: {Price}";

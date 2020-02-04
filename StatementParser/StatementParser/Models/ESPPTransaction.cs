@@ -14,6 +14,11 @@ namespace StatementParser.Models
             this.Amount = amount;
         }
 
+        public override Transaction ConvertToCurrency(Currency currency, decimal exchangeRate)
+        {
+            return new ESPPTransaction(Broker, Date, Name, currency, PurchasePrice * exchangeRate, MarketPrice * exchangeRate, Amount);
+        }
+
         public override string ToString()
         {
             return $"{base.ToString()} Purchase Price: {PurchasePrice} Market Price: {MarketPrice} Amount: {Amount}";

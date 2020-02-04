@@ -24,6 +24,11 @@ namespace StatementParser.Models
         public decimal Swap { get; }
         public decimal Profit { get; }
 
+        public override Transaction ConvertToCurrency(Currency currency, decimal exchangeRate)
+        {
+            return new SaleTransaction(Broker, Date, Name, currency, Laverage, Amount, PurchasePrice * exchangeRate, SalePrice * exchangeRate, Commission * exchangeRate, Taxes * exchangeRate, Swap * exchangeRate, Profit * exchangeRate);
+        }
+
         public override string ToString()
         {
             return $"{base.ToString()} {nameof(Laverage)} {Laverage} {nameof(Amount)}: {Amount} {nameof(PurchasePrice)} {PurchasePrice} {nameof(SalePrice)} {SalePrice} {nameof(Commission)} {Commission} {nameof(Taxes)} {Taxes} {nameof(Swap)} {Swap} {nameof(Profit)} {Profit}";

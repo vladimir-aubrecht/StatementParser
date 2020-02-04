@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/StatementParser/StatementParserCLI/StatementParserCLI.csproj",
+                "${workspaceFolder}/StatementParser/StatementParser.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/StatementParser/StatementParserCLI/StatementParserCLI.csproj",
+                "${workspaceFolder}/StatementParser/StatementParser.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

@@ -50,13 +50,6 @@ namespace ExchangeRateProvider.Providers.Czk
                 var name = this.SanitizeValue(cellNode[0].SelectNodes("a/span")[1].InnerHtml);
                 var code = this.SanitizeValue(cellNode[2].InnerHtml);
                 var amount = Convert.ToDecimal(this.SanitizeValue(cellNode[3].InnerHtml));
-
-                if (amount == 0)
-                {
-                    // Kurzy.cz has bug on website for Indonesia in 2013. Reported to them, hopefully they fix it soon.
-                    continue;
-                }
-
                 var price = Decimal.Parse(this.SanitizeValue(cellNode[4].InnerHtml), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.GetCultureInfo("en-US"));
 
                 output.Add(new CurrencyDescriptor(code, name, price, amount, country));

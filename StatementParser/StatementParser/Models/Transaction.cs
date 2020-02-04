@@ -1,7 +1,7 @@
 ﻿using System;
 namespace StatementParser.Models
 {
-    public class Transaction
+    public abstract class Transaction
     {
         public Broker Broker { get; }
         public DateTime Date { get; }
@@ -15,6 +15,8 @@ namespace StatementParser.Models
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.Currency = currency;
         }
+
+        public abstract Transaction ConvertToCurrency(Currency currency, decimal exchangeRate);
 
         public override string ToString()
         {
