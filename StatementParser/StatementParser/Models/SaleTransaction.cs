@@ -3,6 +3,10 @@ namespace StatementParser.Models
 {
     public class SaleTransaction : Transaction
     {
+        public SaleTransaction(SaleTransaction saleTransaction) : this(saleTransaction.Broker, saleTransaction.Date, saleTransaction.Name, saleTransaction.Currency, saleTransaction.Laverage, saleTransaction.Amount, saleTransaction.PurchasePrice, saleTransaction.SalePrice, saleTransaction.Commission, saleTransaction.Taxes, saleTransaction.Swap, saleTransaction.Profit)
+        {
+        }
+
         public SaleTransaction(Broker broker, DateTime date, string name, Currency currency, int laverage, decimal amount, decimal purchasePrice, decimal salePrice, decimal commission, decimal taxes, decimal swap, decimal profit) : base(broker, date, name, currency)
         {
             this.Laverage = laverage;
@@ -23,11 +27,6 @@ namespace StatementParser.Models
         public decimal Taxes { get; }
         public decimal Swap { get; }
         public decimal Profit { get; }
-
-        public override Transaction ConvertToCurrency(Currency currency, decimal exchangeRate)
-        {
-            return new SaleTransaction(Broker, Date, Name, currency, Laverage, Amount, PurchasePrice * exchangeRate, SalePrice * exchangeRate, Commission * exchangeRate, Taxes * exchangeRate, Swap * exchangeRate, Profit * exchangeRate);
-        }
 
         public override string ToString()
         {

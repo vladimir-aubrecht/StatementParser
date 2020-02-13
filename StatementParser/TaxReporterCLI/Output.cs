@@ -11,19 +11,19 @@ namespace TaxReporterCLI
 {
     public class Output
     {
-        private Dictionary<string, List<Transaction>> GroupTransactions(IList<Transaction> transactions)
+        private Dictionary<string, List<EnrichedTransaction>> GroupTransactions(IList<EnrichedTransaction> transactions)
         {
-            return transactions.GroupBy(i => i.GetType()).ToDictionary(k => k.Key.Name, i => i.Select(a => a).ToList());
+            return transactions.GroupBy(i => i.Transaction.GetType()).ToDictionary(k => k.Key.Name, i => i.Select(a => a).ToList());
         }
 
-        public void PrintAsJson(IList<Transaction> transactions)
+        public void PrintAsJson(IList<EnrichedTransaction> transactions)
         {
             var groupedTransactions = GroupTransactions(transactions);
 
             Console.WriteLine(JsonConvert.SerializeObject(groupedTransactions));
         }
 
-        public void SaveAsExcelSheet(string filePath, IList<Transaction> transactions)
+        public void SaveAsExcelSheet(string filePath, IList<EnrichedTransaction> transactions)
         {
             var groupedTransactions = GroupTransactions(transactions);
 
@@ -35,14 +35,19 @@ namespace TaxReporterCLI
                 {
                     var sheet = wb1.CreateSheet(group.Key);
 
+                    var headerProperties = GetPublicProperties(group.Value[0].Transaction);
+                    headerProperties.Add(nameof(EnrichedTransaction.ExchangeRatePerDay), "");
+                    headerProperties.Add(nameof(EnrichedTransaction.ExchangeRatePerYear), "");
+                    
                     var headerRow = sheet.CreateRow(0);
-                    var headerProperties = GetPublicProperties(group.Value[0]);
                     SetRowValues(headerRow, headerProperties.Keys);
 
                     for (int rowIndex = 1; rowIndex < group.Value.Count() + 1; rowIndex++)
                     {
                         var row = sheet.CreateRow(rowIndex);
-                        var properties = GetPublicProperties(group.Value[rowIndex - 1]);
+                        var properties = GetPublicProperties(group.Value[rowIndex - 1].Transaction);
+                        properties.Add(nameof(EnrichedTransaction.ExchangeRatePerDay), group.Value[rowIndex - 1].ExchangeRatePerDay.ToString());
+                        properties.Add(nameof(EnrichedTransaction.ExchangeRatePerYear), group.Value[rowIndex - 1].ExchangeRatePerYear.ToString());
 
                         SetRowValues(row, properties.Values);
                     }
@@ -53,7 +58,7 @@ namespace TaxReporterCLI
             }
         }
 
-        public void PrintAsPlainText(IList<Transaction> transactions)
+        public void PrintAsPlainText(IList<EnrichedTransaction> transactions)
         {
             var groupedTransactions = GroupTransactions(transactions);
 
@@ -72,7 +77,15 @@ namespace TaxReporterCLI
             {
                 var cell = row.CreateCell(columnIndex);
 
-                cell.SetCellValue(rowValue);
+                // In case it's a number lets store it as a number
+                if (Decimal.TryParse(rowValue, out var value))
+                {
+                    cell.SetCellValue((double)value);
+                }
+                else
+                {
+                    cell.SetCellValue(rowValue);
+                }
 
                 columnIndex++;
             }

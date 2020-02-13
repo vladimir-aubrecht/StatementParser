@@ -69,41 +69,12 @@ namespace TaxReporterCLI
                 }
             }
 
-            var kurzyPerYear = await FetchExchangeRatesForEveryYearAsync(kurzyCzProvider, transactions);
+            var enrichedTransactions = await CreateEnrichedTransactions(transactions, kurzyCzProvider, cnbProvider);
 
-            var transactionsByPerYearExchangeRate = 
-                transactions.Select(i => {
-                    if (!kurzyPerYear[i.Date.Year].IsEmpty)
-                    {
-                        var exchangeRatio = kurzyPerYear[i.Date.Year][i.Currency.ToString()].Price;
-                        return i.ConvertToCurrency(Currency.CZK, exchangeRatio);
-                    }
-
-                    return i;
-
-                    }).ToList();
-
-            var transactionsByPerDayExchangeRateTasks =
-                transactions.Select(async i => {
-                    var cnbCurrencyList = await cnbProvider.FetchCurrencyListByDateAsync(i.Date);    
-                    return i.ConvertToCurrency(Currency.CZK, cnbCurrencyList[i.Currency.ToString()].Price);
-                }).ToList();
-
-            await Task.WhenAll(transactionsByPerDayExchangeRateTasks);
-            var transactionsByPerDayExchangeRate = transactionsByPerDayExchangeRateTasks.Select(i => i.Result).ToList();
-
-            var pathBackup = option.ExcelSheetPath;
-
-            Console.WriteLine("Transactions calculated with yearly average exchange rate:");
-            option.ExcelSheetPath = Path.ChangeExtension(pathBackup, "yearly.xlsx");
-            Print(option, transactionsByPerYearExchangeRate);
-            
-            Console.WriteLine("\r\nTransactions calculated with daily exchange rate:");
-            option.ExcelSheetPath = Path.ChangeExtension(pathBackup, "daily.xlsx");
-            Print(option, transactionsByPerDayExchangeRate);
+            Print(option, enrichedTransactions);
         }
 
-        private static void Print(Options option, IList<Transaction> transactions)
+        private static void Print(Options option, IList<EnrichedTransaction> transactions)
         {
             var printer = new Output();
             if (option.ShouldPrintAsJson)
@@ -118,6 +89,31 @@ namespace TaxReporterCLI
             {
                 printer.PrintAsPlainText(transactions);
             }
+        }
+
+        private static async Task<IList<EnrichedTransaction>> CreateEnrichedTransactions(IList<Transaction> transactions, IExchangeProvider exchangeProviderPerYear, IExchangeProvider exchangeProviderPerDay)
+        {
+            var kurzyPerYear = await FetchExchangeRatesForEveryYearAsync(exchangeProviderPerYear, transactions);
+
+            var enrichedTransactions = new List<EnrichedTransaction>();
+            foreach (var transaction in transactions)
+            {
+                var cnbCurrencyList = await exchangeProviderPerDay.FetchCurrencyListByDateAsync(transaction.Date);
+
+                var currency = transaction.Currency.ToString();
+                decimal exchangeRatePerYear = 0;
+                
+                if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
+                {
+                    exchangeRatePerYear = kurzyPerYear[transaction.Date.Year][currency].Price;
+                }
+                
+                var exchangeRatePerDay = cnbCurrencyList[currency].Price;
+
+                enrichedTransactions.Add(new EnrichedTransaction(transaction, exchangeRatePerDay, exchangeRatePerYear));
+            }
+
+            return enrichedTransactions;
         }
 
         private static async Task<IDictionary<int, CurrencyList>> FetchExchangeRatesForEveryYearAsync(IExchangeProvider provider, IList<Transaction> transactions)

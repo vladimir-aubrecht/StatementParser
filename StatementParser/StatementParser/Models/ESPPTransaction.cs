@@ -7,16 +7,16 @@ namespace StatementParser.Models
         public decimal MarketPrice { get; }
         public decimal Amount { get; }
 
+        public ESPPTransaction(ESPPTransaction eSPPTransaction) : this(eSPPTransaction.Broker, eSPPTransaction.Date, eSPPTransaction.Name, eSPPTransaction.Currency, eSPPTransaction.PurchasePrice, eSPPTransaction.MarketPrice, eSPPTransaction.Amount)
+        {
+
+        }
+
         public ESPPTransaction(Broker broker, DateTime date, string name, Currency currency, decimal purchasePrice, decimal marketPrice, decimal amount) : base(broker, date, name, currency)
         {
             this.PurchasePrice = purchasePrice;
             this.MarketPrice = marketPrice;
             this.Amount = amount;
-        }
-
-        public override Transaction ConvertToCurrency(Currency currency, decimal exchangeRate)
-        {
-            return new ESPPTransaction(Broker, Date, Name, currency, PurchasePrice * exchangeRate, MarketPrice * exchangeRate, Amount);
         }
 
         public override string ToString()
