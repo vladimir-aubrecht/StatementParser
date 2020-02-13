@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ExchangeRateProvider.Models
 {
-    public class CurrencyList
+    public class CurrencyList : ICurrencyList
     {
         private Dictionary<string, CurrencyDescriptor> currencyList = new Dictionary<string, CurrencyDescriptor>();
 
