@@ -4,12 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using CsvHelper;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
 using StatementParser.Models;
 using StatementParser.Parsers.Brokers.Degiro.CsvModels;
 
-namespace StatementParser.Parsers.Brokers.MorganStanley
+namespace StatementParser.Parsers.Brokers.Degiro
 {
     internal class DegiroParser : ITransactionParser
     {

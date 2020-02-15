@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using NPOI.HSSF.Record.Aggregates;
 using StatementParser.Models;
 using StatementParser.Parsers;
+using StatementParser.Parsers.Brokers.Degiro;
 using StatementParser.Parsers.Brokers.Fidelity;
 using StatementParser.Parsers.Brokers.FxChoice;
+using StatementParser.Parsers.Brokers.Lynx;
 using StatementParser.Parsers.Brokers.MorganStanley;
 
 namespace StatementParser
@@ -21,6 +23,7 @@ namespace StatementParser
             parsers.Add(new MorganStanleyStatementPdfParser());
             parsers.Add(new FidelityStatementParser());
             parsers.Add(new FxChoiceStatementParser());
+            parsers.Add(new LynxCsvParser());
             parsers.Add(new DegiroParser());
         }
 

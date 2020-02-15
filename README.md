@@ -42,6 +42,7 @@ XSLT conversion:
 - Morgan Stanley - Pdf, XLS
 - FxChoice (in general MetaTrader reports should work, but tested only with FxChoice) - HTM
 - Degiro - Csv in Czech (only support for Dividend transactions for now)
+- Lynx (in theory also Interactive Brokers, not tested) - Csv (only support for Dividend transactions for now)
 
 # Supported output formats
 - JSON
