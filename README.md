@@ -36,13 +36,14 @@ XSLT conversion:
 
 ``dotnet StatementParserCLI.dll -x <path to file with output xslt file> <path to the file or folder containing statements>``
 
-# Supported brokers
-(supported input format after dash)
-- Fidelity - Pdf
-- Morgan Stanley - Pdf, XLS
-- FxChoice (in general MetaTrader reports should work, but tested only with FxChoice) - HTM
-- Degiro - Csv in Czech (only support for Dividend transactions for now)
-- Lynx (in theory also Interactive Brokers, not tested) - Csv (only support for Dividend transactions for now)
+# Supported file formats for brokers
+
+| Type / Broker         | Fidelity | Morgan Stanley | MetaTrader | FxChoice | Degiro       | Lynx | Interactive Broker |
+| --------------------- | -------- | -------------- | ---------- | -------- | ------------ | ---- | ------------------ |
+| Sale transactions     | -        | -              | Htm        | Htm      | -            | -    | -                  |
+| Dividend transactions | Pdf      | Pdf, Xls       | -          | -        | Csv in Czech | Csv  | Csv                |
+| ESPP transactions     | Pdf      | -              | -          | -        | -            | -    | -                  |
+| Deposit transactions  | Pdf      | Pdf, Xls       | -          | -        | -            | -    | -                  |
 
 # Supported output formats
 - JSON
