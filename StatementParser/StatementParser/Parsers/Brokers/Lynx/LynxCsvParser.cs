@@ -72,6 +72,11 @@ namespace StatementParser.Parsers.Brokers.Lynx
                 {    
                     var statement = csv.ReadObject<StatementModel>(0, () => csv.GetField(1) == "Header");
                     
+                    if (statement == null)
+                    {
+                        return null;
+                    }
+
                     statement.Dividends = statement.Dividends.Where(i => i.Date != null).ToList();
                     statement.WithholdingTaxes = statement.WithholdingTaxes.Where(i => i.Date != null).ToList();
                     
