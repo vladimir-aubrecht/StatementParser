@@ -36,14 +36,16 @@ namespace TaxReporterCLI
             var output = new List<string>();
             foreach (var path in paths)
             {
-                if (Directory.Exists(path))
+                var sanitizedPath = path.TrimEnd('/', '\\');
+
+                if (Directory.Exists(sanitizedPath))
                 {
-                    var directoryFiles = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
+                    var directoryFiles = Directory.GetFiles(sanitizedPath, "*.*", SearchOption.AllDirectories);
                     output.AddRange(directoryFiles);
                 }
-                else if (File.Exists(path))
+                else if (File.Exists(sanitizedPath))
                 {
-                    output.Add(path);
+                    output.Add(sanitizedPath);
                 }
             }
 
@@ -58,6 +60,13 @@ namespace TaxReporterCLI
             var parser = new TransactionParser();
             var transactions = new List<Transaction>();
             var filePaths = ResolveFilePaths(option.StatementFilePaths);
+
+            if (filePaths.Count == 0)
+            {
+                Console.WriteLine("No valid path to scan found. Check that file or directory exist.");
+                return;
+            }
+
             foreach (var file in filePaths)
             {
                 Console.WriteLine($"Processing file: {file}");
