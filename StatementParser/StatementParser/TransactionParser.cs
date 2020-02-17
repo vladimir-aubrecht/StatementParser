@@ -29,9 +29,7 @@ namespace StatementParser
 
         public Task<IList<Transaction>> ParseAsync(string statementFilePath)
         {
-            return RunWithGlobalSettings(() => {
-                return ParseFiles(statementFilePath);
-            });
+            return Task.Run(() => ParseFiles(statementFilePath));
         }
 
         private IList<Transaction> ParseFiles(string statementFilePath)
@@ -47,16 +45,6 @@ namespace StatementParser
             }
 
             return null;
-        }
-
-        private Task<IList<Transaction>> RunWithGlobalSettings(Func<IList<Transaction>> action)
-        {
-            return Task.Run(() => {
-                var culture = new System.Globalization.CultureInfo("en-US");
-                Thread.CurrentThread.CurrentCulture = culture;
-
-                return action();
-            });
         }
     }
 }

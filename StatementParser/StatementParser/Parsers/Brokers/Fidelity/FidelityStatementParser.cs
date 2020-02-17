@@ -87,7 +87,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
         private DividendTransaction CreateDividendTransaction(ActivityTaxesModel[] activityTaxesModels, ActivityDividendModel activityDividendRow, int year)
         {
             var dateString = activityDividendRow.Date + "/" + year;
-            var date = DateTime.Parse(dateString);
+            var date = DateTime.ParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
             var tax = SearchForTaxString(activityTaxesModels, date);
 
             return new DividendTransaction(Broker.Fidelity, date, activityDividendRow.Name, activityDividendRow.Income, tax, Currency.USD);
@@ -96,7 +96,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
         private DepositTransaction CreateOtherTransaction(ActivityOtherModel activityOtherRow, int year)
         {
             var dateString = activityOtherRow.Date + "/" + year;
-            var date = DateTime.Parse(dateString);
+            var date = DateTime.ParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
             return new DepositTransaction(Broker.Fidelity, date, activityOtherRow.Name, activityOtherRow.Amount, activityOtherRow.Price, Currency.USD);
         }

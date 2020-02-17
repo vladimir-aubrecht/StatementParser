@@ -54,7 +54,7 @@ namespace StatementParser.Parsers.Pdf
 
         private object ConvertValueToPropertyType(Type propertyType, string value)
         {
-            return Convert.ChangeType(value, propertyType);
+            return Convert.ChangeType(value, propertyType, CultureInfo.InvariantCulture);
         }
 
         private object CreateCollectionInstance(Type propertyType, Type itemType, IList<string> items, Regex deserializationRegex)

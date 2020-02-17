@@ -8,7 +8,7 @@ namespace StatementParser.Parsers.Brokers.Lynx.Extensions
 {
     public static class CsvReaderExtensions
     {
-        public static T ReadObject<T>(this CsvReader csvReader, int headerFieldIndex, Func<bool> isHeaderFunc)
+        public static T ReadObject<T>(this CsvReader csvReader, int headerFieldIndex, Func<bool> isHeaderFunc) where T : class
         {
             var output = (T)Activator.CreateInstance(typeof(T));
             var dataSets = GetDataSetsProperties(output);
@@ -19,6 +19,11 @@ namespace StatementParser.Parsers.Brokers.Lynx.Extensions
                 {
                     csvReader.ReadHeader();
                     continue;
+                }
+
+                if (csvReader.Context.HeaderRecord == null)
+                {
+                    return null;
                 }
 
                 var key = csvReader.Context.HeaderRecord[headerFieldIndex];
