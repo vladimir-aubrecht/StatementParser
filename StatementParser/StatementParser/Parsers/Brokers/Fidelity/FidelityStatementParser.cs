@@ -7,7 +7,6 @@ using ASoft.TextDeserializer;
 using ASoft.TextDeserializer.Exceptions;
 using StatementParser.Models;
 using StatementParser.Parsers.Brokers.Fidelity.PdfModels;
-using PigPdfDocument = UglyToad.PdfPig.PdfDocument;
 
 namespace StatementParser.Parsers.Brokers.Fidelity
 {
@@ -32,11 +31,11 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
 			var transactions = new List<Transaction>();
 
-			using (var document = PigPdfDocument.Open(statementFilePath))
+			using (var textSource = new TextSource(statementFilePath))
 			{
 				try
 				{
-					var parsedDocument = new TextDocumentParser<StatementModel>().Parse(new TextSource(document));
+					var parsedDocument = new TextDocumentParser<StatementModel>().Parse(textSource);
 
 					transactions.AddRange(parsedDocument.ActivityOther.Select(i => CreateOtherTransaction(i, parsedDocument.Year)));
 					transactions.AddRange(parsedDocument.ActivityDividend.Select(i => CreateDividendTransaction(parsedDocument.ActivityTaxes, i, parsedDocument.Year)));
@@ -86,8 +85,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
 		private DividendTransaction CreateDividendTransaction(ActivityTaxesModel[] activityTaxesModels, ActivityDividendModel activityDividendRow, int year)
 		{
-			var dateString = activityDividendRow.Date + "/" + year;
-			var date = DateTime.ParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+			var date = CreateDateTime(activityDividendRow.Date, year);
 			var tax = SearchForTaxString(activityTaxesModels, date);
 
 			return new DividendTransaction(Broker.Fidelity, date, activityDividendRow.Name, activityDividendRow.Income, tax, Currency.USD);
@@ -95,10 +93,14 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
 		private DepositTransaction CreateOtherTransaction(ActivityOtherModel activityOtherRow, int year)
 		{
-			var dateString = activityOtherRow.Date + "/" + year;
-			var date = DateTime.ParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
+			var date = CreateDateTime(activityOtherRow.Date, year);
 			return new DepositTransaction(Broker.Fidelity, date, activityOtherRow.Name, activityOtherRow.Amount, activityOtherRow.Price, Currency.USD);
+		}
+
+		private DateTime CreateDateTime(string dayAndYear, int year)
+		{
+			var dateString = dayAndYear + "/" + year;
+			return DateTime.ParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
 		}
 	}
 }

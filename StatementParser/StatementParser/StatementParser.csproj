@@ -11,7 +11,7 @@
     <None Remove="Resources\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ASoft.TextDeserializer" Version="1.0.0.17-prerelease" />
+    <PackageReference Include="ASoft.TextDeserializer" Version="1.0.0.18-prerelease" />
     <PackageReference Include="PdfPig" Version="0.0.11" />
     <PackageReference Include="NPOI" Version="2.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
