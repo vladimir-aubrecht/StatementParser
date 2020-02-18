@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ASoft.TextDeserializer;
+using ASoft.TextDeserializer.Exceptions;
 using StatementParser.Models;
 using StatementParser.Parsers.Brokers.MorganStanley.PdfModels;
-using StatementParser.Parsers.Pdf;
-using StatementParser.Parsers.Pdf.Exceptions;
 using PigPdfDocument = UglyToad.PdfPig.PdfDocument;
 
 namespace StatementParser.Parsers.Brokers.MorganStanley
@@ -34,11 +34,11 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
 			{
 				try
 				{
-					var parsedDocument = new Pdf.PdfDocumentParser<StatementModel>().Parse(new PdfSource(document));
+					var parsedDocument = new TextDocumentParser<StatementModel>().Parse(new TextSource(document));
 
 					transactions.AddRange(GetTransactions(parsedDocument));
 				}
-				catch (PdfException)
+				catch (TextException)
 				{
 					return null;
 				}

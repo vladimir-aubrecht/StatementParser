@@ -1,4 +1,4 @@
-﻿using StatementParser.Parsers.Pdf.Attributes;
+﻿using ASoft.TextDeserializer.Attributes;
 
 namespace StatementParser.Parsers.Brokers.Fidelity.PdfModels
 {

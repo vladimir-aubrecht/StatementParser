@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using ASoft.TextDeserializer;
+using ASoft.TextDeserializer.Exceptions;
 using StatementParser.Models;
 using StatementParser.Parsers.Brokers.Fidelity.PdfModels;
-using StatementParser.Parsers.Pdf;
-using StatementParser.Parsers.Pdf.Exceptions;
 using PigPdfDocument = UglyToad.PdfPig.PdfDocument;
 
 namespace StatementParser.Parsers.Brokers.Fidelity
@@ -36,13 +36,13 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 			{
 				try
 				{
-					var parsedDocument = new Pdf.PdfDocumentParser<StatementModel>().Parse(new PdfSource(document));
+					var parsedDocument = new TextDocumentParser<StatementModel>().Parse(new TextSource(document));
 
 					transactions.AddRange(parsedDocument.ActivityOther.Select(i => CreateOtherTransaction(i, parsedDocument.Year)));
 					transactions.AddRange(parsedDocument.ActivityDividend.Select(i => CreateDividendTransaction(parsedDocument.ActivityTaxes, i, parsedDocument.Year)));
 					transactions.AddRange(parsedDocument.ESPP.Select(i => CreateESPPTransaction(parsedDocument.ActivityBuy, i)));
 				}
-				catch (PdfException)
+				catch (TextException)
 				{
 					return null;
 				}
