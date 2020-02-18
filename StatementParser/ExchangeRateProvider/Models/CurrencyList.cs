@@ -2,7 +2,7 @@
 
 namespace ExchangeRateProvider.Models
 {
-	public class CurrencyList : ICurrencyList
+	internal class CurrencyList : ICurrencyList
 	{
 		private Dictionary<string, CurrencyDescriptor> currencyList = new Dictionary<string, CurrencyDescriptor>();
 
@@ -10,7 +10,7 @@ namespace ExchangeRateProvider.Models
 
 		public bool IsEmpty { get { return currencyList.Count == 0; } }
 
-		public CurrencyList(List<CurrencyDescriptor> currencyList)
+		public CurrencyList(IList<CurrencyDescriptor> currencyList)
 		{
 			foreach (var currencyDescriptor in currencyList)
 			{

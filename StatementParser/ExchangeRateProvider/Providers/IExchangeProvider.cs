@@ -6,6 +6,6 @@ namespace ExchangeRateProvider.Providers
 {
 	public interface IExchangeProvider
 	{
-		Task<CurrencyList> FetchCurrencyListByDateAsync(DateTime date);
+		Task<ICurrencyList> FetchCurrencyListByDateAsync(DateTime date);
 	}
 }

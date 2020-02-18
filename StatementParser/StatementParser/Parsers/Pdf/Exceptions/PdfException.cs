@@ -1,7 +1,7 @@
 ﻿using System;
 namespace StatementParser.Parsers.Pdf.Exceptions
 {
-	public class PdfException : Exception
+	internal class PdfException : Exception
 	{
 		public PdfException(string message) : base(message)
 		{

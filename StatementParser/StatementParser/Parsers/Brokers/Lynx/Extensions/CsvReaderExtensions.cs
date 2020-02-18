@@ -6,7 +6,7 @@ using CsvHelper.Configuration.Attributes;
 
 namespace StatementParser.Parsers.Brokers.Lynx.Extensions
 {
-	public static class CsvReaderExtensions
+	internal static class CsvReaderExtensions
 	{
 		public static T ReadObject<T>(this CsvReader csvReader, int headerFieldIndex, Func<bool> isHeaderFunc) where T : class
 		{

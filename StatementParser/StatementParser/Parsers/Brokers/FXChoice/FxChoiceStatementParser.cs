@@ -8,7 +8,7 @@ using StatementParser.Models;
 
 namespace StatementParser.Parsers.Brokers.FxChoice
 {
-	public class FxChoiceStatementParser : ITransactionParser
+	internal class FxChoiceStatementParser : ITransactionParser
 	{
 		private bool CanParse(string statementFilePath)
 		{

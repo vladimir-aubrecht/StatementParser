@@ -125,11 +125,11 @@ namespace TaxReporterCLI
 			return enrichedTransactions;
 		}
 
-		private static async Task<IDictionary<int, CurrencyList>> FetchExchangeRatesForEveryYearAsync(IExchangeProvider provider, IList<Transaction> transactions)
+		private static async Task<IDictionary<int, ICurrencyList>> FetchExchangeRatesForEveryYearAsync(IExchangeProvider provider, IList<Transaction> transactions)
 		{
 			var years = transactions.Select(i => i.Date.Year).ToHashSet();
 
-			var output = new Dictionary<int, CurrencyList>();
+			var output = new Dictionary<int, ICurrencyList>();
 
 			foreach (var year in years)
 			{

@@ -20,7 +20,7 @@ namespace ExchangeRateProvider.Providers.Czk
 			Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 		}
 
-		public Task<CurrencyList> FetchCurrencyListByDateAsync(DateTime date)
+		public Task<ICurrencyList> FetchCurrencyListByDateAsync(DateTime date)
 		{
 			var url = this.CreateUrlByDate(date);
 
@@ -55,7 +55,7 @@ namespace ExchangeRateProvider.Providers.Czk
 				output.Add(new CurrencyDescriptor(code, name, price, amount, country));
 			}
 
-			return Task.FromResult(new CurrencyList(output));
+			return Task.FromResult<ICurrencyList>(new CurrencyList(output));
 		}
 
 		private string SanitizeValue(string value)

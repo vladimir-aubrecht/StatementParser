@@ -9,7 +9,7 @@ using PigPdfDocument = UglyToad.PdfPig.PdfDocument;
 
 namespace StatementParser.Parsers.Brokers.MorganStanley
 {
-	public class MorganStanleyStatementPdfParser : ITransactionParser
+	internal class MorganStanleyStatementPdfParser : ITransactionParser
 	{
 		private bool CanParse(string statementFilePath)
 		{

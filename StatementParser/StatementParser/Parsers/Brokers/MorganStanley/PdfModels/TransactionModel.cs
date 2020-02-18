@@ -4,7 +4,7 @@ using StatementParser.Parsers.Pdf.Attributes;
 namespace StatementParser.Parsers.Brokers.MorganStanley.PdfModels
 {
 	[DeserializeByRegex("(?<Date>[0-9]{2}/[0-9]{2}/[0-9]{2})(?<Type>Share Deposit|Dividend Credit|Withholding Tax|Dividend Reinvested|Sale|Proceeds Disbursement) +(?<Quantity>[0-9]+\\.[0-9]{3})? +\\$?(?<Price>[0-9]+\\.[0-9]{4})? +\\$?(?<GrossAmount>[0-9]+\\.[0-9]{2})? +\\$?(?<Commissions>[0-9]+\\.[0-9]{2})? +\\$?(?<DistributionFees>[0-9]+\\.[0-9]{2})? +\\$?(?<OtherCosts>[0-9]+\\.[0-9]{2})? +\\$?(?<NetAmountRaw>\\(?[0-9]+\\.[0-9]{2}\\)?)?")]
-	public class TransactionModel
+	internal class TransactionModel
 	{
 		public DateTime Date { get; set; }
 

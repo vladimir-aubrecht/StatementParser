@@ -11,7 +11,7 @@ namespace ExchangeRateProvider.Providers.Czk
 	{
 		private string apiUrl = "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.xml?date=";
 
-		public Task<CurrencyList> FetchCurrencyListByDateAsync(DateTime date)
+		public Task<ICurrencyList> FetchCurrencyListByDateAsync(DateTime date)
 		{
 			var url = this.CreateUrlByDate(date);
 			var xmlDocument = new XmlDocument();
@@ -31,7 +31,7 @@ namespace ExchangeRateProvider.Providers.Czk
 				list.Add(new CurrencyDescriptor(code, name, price, amount, country));
 			}
 
-			return Task.FromResult(new CurrencyList(list));
+			return Task.FromResult<ICurrencyList>(new CurrencyList(list));
 		}
 
 		private string CreateUrlByDate(DateTime date)

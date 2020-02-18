@@ -9,7 +9,7 @@ using StatementParser.Models;
 
 namespace TaxReporterCLI
 {
-	public class Output
+	internal class Output
 	{
 		private Dictionary<string, List<EnrichedTransaction>> GroupTransactions(IList<EnrichedTransaction> transactions)
 		{

@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 namespace StatementParser.Parsers.Pdf.Attributes
 {
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-	public class DeserializeCollectionByRegexAttribute : Attribute
+	internal class DeserializeCollectionByRegexAttribute : Attribute
 	{
 		public DeserializeCollectionByRegexAttribute(string collectionRegexPattern, string bodyRegexPattern)
 		{
