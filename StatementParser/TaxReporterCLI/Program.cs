@@ -78,6 +78,7 @@ namespace TaxReporterCLI
 				}
 			}
 
+            Console.WriteLine("Downloading exchange rates ...");
 			var enrichedTransactions = await CreateEnrichedTransactions(transactions, kurzyCzProvider, cnbProvider);
 
 			Print(option, enrichedTransactions);
