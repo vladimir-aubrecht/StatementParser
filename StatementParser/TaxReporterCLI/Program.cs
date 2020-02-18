@@ -13,130 +13,130 @@ using StatementParser.Models;
 
 namespace TaxReporterCLI
 {
-    public class Program
-    {
-        public static async Task Main(string[] args)
-        {
-            var parser = new CommanderParser<Options>();
+	public class Program
+	{
+		public static async Task Main(string[] args)
+		{
+			var parser = new CommanderParser<Options>();
 
-            try
-            {
-                var options = parser.Parse(args);
-                await RunAsync(options);
-            }
-            catch (ParameterMissingException)
-            {
-                Console.WriteLine(parser.Usage());
-            }
+			try
+			{
+				var options = parser.Parse(args);
+				await RunAsync(options);
+			}
+			catch (ParameterMissingException)
+			{
+				Console.WriteLine(parser.Usage());
+			}
 
-        }
+		}
 
-        private static IList<string> ResolveFilePaths(string[] paths)
-        {
-            var output = new List<string>();
-            foreach (var path in paths)
-            {
-                var sanitizedPath = path.TrimEnd('/', '\\');
+		private static IList<string> ResolveFilePaths(string[] paths)
+		{
+			var output = new List<string>();
+			foreach (var path in paths)
+			{
+				var sanitizedPath = path.TrimEnd('/', '\\');
 
-                if (Directory.Exists(sanitizedPath))
-                {
-                    var directoryFiles = Directory.GetFiles(sanitizedPath, "*.*", SearchOption.AllDirectories);
-                    output.AddRange(directoryFiles);
-                }
-                else if (File.Exists(sanitizedPath))
-                {
-                    output.Add(sanitizedPath);
-                }
-            }
+				if (Directory.Exists(sanitizedPath))
+				{
+					var directoryFiles = Directory.GetFiles(sanitizedPath, "*.*", SearchOption.AllDirectories);
+					output.AddRange(directoryFiles);
+				}
+				else if (File.Exists(sanitizedPath))
+				{
+					output.Add(sanitizedPath);
+				}
+			}
 
-            return output;
-        }
+			return output;
+		}
 
-        private static async Task RunAsync(Options option)
-        {
-            var cnbProvider = new CzechNationalBankProvider();
-            var kurzyCzProvider = new KurzyCzProvider();
+		private static async Task RunAsync(Options option)
+		{
+			var cnbProvider = new CzechNationalBankProvider();
+			var kurzyCzProvider = new KurzyCzProvider();
 
-            var parser = new TransactionParser();
-            var transactions = new List<Transaction>();
-            var filePaths = ResolveFilePaths(option.StatementFilePaths);
+			var parser = new TransactionParser();
+			var transactions = new List<Transaction>();
+			var filePaths = ResolveFilePaths(option.StatementFilePaths);
 
-            if (filePaths.Count == 0)
-            {
-                Console.WriteLine("No valid path to scan found. Check that file or directory exist.");
-                return;
-            }
+			if (filePaths.Count == 0)
+			{
+				Console.WriteLine("No valid path to scan found. Check that file or directory exist.");
+				return;
+			}
 
-            foreach (var file in filePaths)
-            {
-                Console.WriteLine($"Processing file: {file}");
-                var result = await parser.ParseAsync(file);
+			foreach (var file in filePaths)
+			{
+				Console.WriteLine($"Processing file: {file}");
+				var result = await parser.ParseAsync(file);
 
-                if (result != null)
-                {
-                    transactions.AddRange(result);
-                }
-            }
+				if (result != null)
+				{
+					transactions.AddRange(result);
+				}
+			}
 
-            var enrichedTransactions = await CreateEnrichedTransactions(transactions, kurzyCzProvider, cnbProvider);
+			var enrichedTransactions = await CreateEnrichedTransactions(transactions, kurzyCzProvider, cnbProvider);
 
-            Print(option, enrichedTransactions);
-        }
+			Print(option, enrichedTransactions);
+		}
 
-        private static void Print(Options option, IList<EnrichedTransaction> transactions)
-        {
-            var printer = new Output();
-            if (option.ShouldPrintAsJson)
-            {
-                printer.PrintAsJson(transactions);
-            }
-            else if (option.ExcelSheetPath != null)
-            {
-                printer.SaveAsExcelSheet(option.ExcelSheetPath, transactions);
-            }
-            else
-            {
-                printer.PrintAsPlainText(transactions);
-            }
-        }
+		private static void Print(Options option, IList<EnrichedTransaction> transactions)
+		{
+			var printer = new Output();
+			if (option.ShouldPrintAsJson)
+			{
+				printer.PrintAsJson(transactions);
+			}
+			else if (option.ExcelSheetPath != null)
+			{
+				printer.SaveAsExcelSheet(option.ExcelSheetPath, transactions);
+			}
+			else
+			{
+				printer.PrintAsPlainText(transactions);
+			}
+		}
 
-        private static async Task<IList<EnrichedTransaction>> CreateEnrichedTransactions(IList<Transaction> transactions, IExchangeProvider exchangeProviderPerYear, IExchangeProvider exchangeProviderPerDay)
-        {
-            var kurzyPerYear = await FetchExchangeRatesForEveryYearAsync(exchangeProviderPerYear, transactions);
+		private static async Task<IList<EnrichedTransaction>> CreateEnrichedTransactions(IList<Transaction> transactions, IExchangeProvider exchangeProviderPerYear, IExchangeProvider exchangeProviderPerDay)
+		{
+			var kurzyPerYear = await FetchExchangeRatesForEveryYearAsync(exchangeProviderPerYear, transactions);
 
-            var enrichedTransactions = new List<EnrichedTransaction>();
-            foreach (var transaction in transactions)
-            {
-                var cnbCurrencyList = await exchangeProviderPerDay.FetchCurrencyListByDateAsync(transaction.Date);
+			var enrichedTransactions = new List<EnrichedTransaction>();
+			foreach (var transaction in transactions)
+			{
+				var cnbCurrencyList = await exchangeProviderPerDay.FetchCurrencyListByDateAsync(transaction.Date);
 
-                var currency = transaction.Currency.ToString();
-                decimal exchangeRatePerYear = 0;
-                
-                if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
-                {
-                    exchangeRatePerYear = kurzyPerYear[transaction.Date.Year][currency].Price;
-                }
-                
-                var exchangeRatePerDay = cnbCurrencyList[currency].Price;
+				var currency = transaction.Currency.ToString();
+				decimal exchangeRatePerYear = 0;
 
-                enrichedTransactions.Add(new EnrichedTransaction(transaction, exchangeRatePerDay, exchangeRatePerYear));
-            }
+				if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
+				{
+					exchangeRatePerYear = kurzyPerYear[transaction.Date.Year][currency].Price;
+				}
 
-            return enrichedTransactions;
-        }
+				var exchangeRatePerDay = cnbCurrencyList[currency].Price;
 
-        private static async Task<IDictionary<int, CurrencyList>> FetchExchangeRatesForEveryYearAsync(IExchangeProvider provider, IList<Transaction> transactions)
-        {
-            var years = transactions.Select(i => i.Date.Year).ToHashSet();
+				enrichedTransactions.Add(new EnrichedTransaction(transaction, exchangeRatePerDay, exchangeRatePerYear));
+			}
 
-            var output = new Dictionary<int, CurrencyList>();
+			return enrichedTransactions;
+		}
 
-            foreach (var year in years)
-            {
-                output.Add(year, await provider.FetchCurrencyListByDateAsync(new DateTime(year, 1, 1)));
-            }
+		private static async Task<IDictionary<int, CurrencyList>> FetchExchangeRatesForEveryYearAsync(IExchangeProvider provider, IList<Transaction> transactions)
+		{
+			var years = transactions.Select(i => i.Date.Year).ToHashSet();
 
-            return output;
-        }
-    }
+			var output = new Dictionary<int, CurrencyList>();
+
+			foreach (var year in years)
+			{
+				output.Add(year, await provider.FetchCurrencyListByDateAsync(new DateTime(year, 1, 1)));
+			}
+
+			return output;
+		}
+	}
 }

@@ -20,6 +20,20 @@ namespace ExchangeRateProvider.Models
         {
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is CurrencyDescriptor descriptor &&
+                   Code == descriptor.Code &&
+                   Name == descriptor.Name &&
+                   Price == descriptor.Price &&
+                   Country == descriptor.Country;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Code, Name, Price, Country);
+        }
+
         public override string ToString()
         {
             return String.Format("{0} {1} {2} {3}", this.Code, this.Name, this.Price, this.Country);

@@ -3,26 +3,33 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="PdfPig" Version="0.0.11"/>
-    <PackageReference Include="NPOI" Version="2.4.1"/>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.17"/>
-    <PackageReference Include="CsvHelper" Version="14.0.0"/>
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Extensions\**" />
+    <None Remove="Resources\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\"/>
-    <Folder Include="Parsers\"/>
-    <Folder Include="Extensions\"/>
-    <Folder Include="Resources\"/>
-    <Folder Include="Parsers\Pdf\"/>
-    <Folder Include="Parsers\Brokers\"/>
-    <Folder Include="Parsers\Brokers\Fidelity\"/>
-    <Folder Include="Parsers\Brokers\MorganStanley\"/>
-    <Folder Include="Parsers\Brokers\Fidelity\PdfModels\"/>
-    <Folder Include="Parsers\Brokers\FxChoice\"/>
-    <Folder Include="Parsers\Pdf\Attributes\"/>
-    <Folder Include="Parsers\Pdf\Extensions\"/>
-    <Folder Include="Parsers\Pdf\Exceptions\"/>
-    <Folder Include="Parsers\Brokers\MorganStanley\PdfModels\"/>
+    <PackageReference Include="PdfPig" Version="0.0.11" />
+    <PackageReference Include="NPOI" Version="2.4.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.17" />
+    <PackageReference Include="CsvHelper" Version="14.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Parsers\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Parsers\Pdf\" />
+    <Folder Include="Parsers\Brokers\" />
+    <Folder Include="Parsers\Brokers\Fidelity\" />
+    <Folder Include="Parsers\Brokers\MorganStanley\" />
+    <Folder Include="Parsers\Brokers\Fidelity\PdfModels\" />
+    <Folder Include="Parsers\Brokers\FxChoice\" />
+    <Folder Include="Parsers\Pdf\Attributes\" />
+    <Folder Include="Parsers\Pdf\Extensions\" />
+    <Folder Include="Parsers\Pdf\Exceptions\" />
+    <Folder Include="Parsers\Brokers\MorganStanley\PdfModels\" />
   </ItemGroup>
 </Project>

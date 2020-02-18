@@ -11,83 +11,83 @@ using StatementParser.Parsers.Brokers.Lynx.Extensions;
 
 namespace StatementParser.Parsers.Brokers.Lynx
 {
-    internal class LynxCsvParser : ITransactionParser
-    {
-        private bool CanParse(string statementFilePath)
-        {
-            if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".csv")
-            {
-                return false;
-            }
+	internal class LynxCsvParser : ITransactionParser
+	{
+		private bool CanParse(string statementFilePath)
+		{
+			if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".csv")
+			{
+				return false;
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        public IList<Transaction> Parse(string statementFilePath)
-        {
-            if (!CanParse(statementFilePath))
-            {
-                return null;
-            }
+		public IList<Transaction> Parse(string statementFilePath)
+		{
+			if (!CanParse(statementFilePath))
+			{
+				return null;
+			}
 
-            var statement = LoadStatementModel(statementFilePath);
+			var statement = LoadStatementModel(statementFilePath);
 
-            if (statement == null || statement.Statement[0].FieldValue != "Activity Statement")
-            {
-                return null;
-            }
+			if (statement == null || statement.Statement[0].FieldValue != "Activity Statement")
+			{
+				return null;
+			}
 
-            var output = new List<Transaction>();
-            foreach (var dividend in statement.Dividends)
-            {
-                var currency = Enum.Parse<Currency>(dividend.Currency);
-                var tax = SearchForTax(dividend, statement.WithholdingTaxes);
+			var output = new List<Transaction>();
+			foreach (var dividend in statement.Dividends)
+			{
+				var currency = Enum.Parse<Currency>(dividend.Currency);
+				var tax = SearchForTax(dividend, statement.WithholdingTaxes);
 
-                var transaction = new DividendTransaction(Broker.Lynx, dividend.Date.Value, dividend.Description, dividend.Amount, tax, currency);   
-                output.Add(transaction);
-            }
+				var transaction = new DividendTransaction(Broker.Lynx, dividend.Date.Value, dividend.Description, dividend.Amount, tax, currency);
+				output.Add(transaction);
+			}
 
-            return output;
-        }
+			return output;
+		}
 
-        private decimal SearchForTax(DividendsRowModel dividend, List<WithholdingTaxRowModel> withholdingTaxes)
-        {
-            var tax = withholdingTaxes.Where(i => dividend.Description.Contains(Regex.Replace(i.Description, " - [^ ]+ Tax", "", RegexOptions.Compiled)) && i.Date == dividend.Date).FirstOrDefault();
+		private decimal SearchForTax(DividendsRowModel dividend, List<WithholdingTaxRowModel> withholdingTaxes)
+		{
+			var tax = withholdingTaxes.Where(i => dividend.Description.Contains(Regex.Replace(i.Description, " - [^ ]+ Tax", "", RegexOptions.Compiled)) && i.Date == dividend.Date).FirstOrDefault();
 
-            return (tax == null) ? 0 : tax.Amount;
-        }
+			return (tax == null) ? 0 : tax.Amount;
+		}
 
-        private StatementModel LoadStatementModel(string statementFilePath)
-        {
-            try
-            {
-                var ci = CultureInfo.InvariantCulture.Clone() as CultureInfo;
-                ci.DateTimeFormat = new DateTimeFormatInfo()
-                {
-                    ShortDatePattern = "yyyy-MM-dd"
-                };
+		private StatementModel LoadStatementModel(string statementFilePath)
+		{
+			try
+			{
+				var ci = CultureInfo.InvariantCulture.Clone() as CultureInfo;
+				ci.DateTimeFormat = new DateTimeFormatInfo()
+				{
+					ShortDatePattern = "yyyy-MM-dd"
+				};
 
-                using (var reader = new StreamReader(statementFilePath))
-                using (var csv = new CsvReader(reader, ci))
-                {    
-                    var statement = csv.ReadObject<StatementModel>(0, () => csv.GetField(1) == "Header");
-                    
-                    if (statement == null)
-                    {
-                        return null;
-                    }
+				using (var reader = new StreamReader(statementFilePath))
+				using (var csv = new CsvReader(reader, ci))
+				{
+					var statement = csv.ReadObject<StatementModel>(0, () => csv.GetField(1) == "Header");
 
-                    statement.Dividends = statement.Dividends.Where(i => i.Date != null).ToList();
-                    statement.WithholdingTaxes = statement.WithholdingTaxes.Where(i => i.Date != null).ToList();
-                    
-                    return statement;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
-        }
-    }
+					if (statement == null)
+					{
+						return null;
+					}
+
+					statement.Dividends = statement.Dividends.Where(i => i.Date != null).ToList();
+					statement.WithholdingTaxes = statement.WithholdingTaxes.Where(i => i.Date != null).ToList();
+
+					return statement;
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				return null;
+			}
+		}
+	}
 }
