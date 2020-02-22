@@ -11,9 +11,9 @@
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/StatementParser/TaxReporterCLI/bin/Debug/netcoreapp3.0/TaxReporterCLI.dll",
-            "args": ["-x", "/Users/vladimiraubrecht/Documents/Taxes/2019/Report2019.xlsx", "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements"],
-            //"args": ["/Users/vladimiraubrecht/Downloads/dividends.csv"],
-            //"args": ["/Users/vladimiraubrecht/Documents/Taxes/2019/Statements/Lynx/activity_report_2019.csv"],
+            //"args": ["-x", "/Users/vladimiraubrecht/Documents/Taxes/2019/Report2019.xlsx", "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements"],
+            //"args": ["/Users/vladimiraubrecht/Downloads/03-31-stat.pdf"],
+            "args": ["-x", "/Users/vladimiraubrecht/Documents/Taxes/2019/test.xlsx", "/Users/vladimiraubrecht/Documents/Taxes/2019/Statements/"],
             "cwd": "${workspaceFolder}/StatementParser/TaxReporterCLI",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",

@@ -6,6 +6,8 @@ namespace StatementParser.Models
 		public decimal PurchasePrice { get; }
 		public decimal MarketPrice { get; }
 		public decimal Amount { get; }
+		public decimal Profit { get; }
+		public decimal TotalProfit { get; }
 
 		public ESPPTransaction(ESPPTransaction eSPPTransaction) : this(eSPPTransaction.Broker, eSPPTransaction.Date, eSPPTransaction.Name, eSPPTransaction.Currency, eSPPTransaction.PurchasePrice, eSPPTransaction.MarketPrice, eSPPTransaction.Amount)
 		{
@@ -17,11 +19,13 @@ namespace StatementParser.Models
 			this.PurchasePrice = purchasePrice;
 			this.MarketPrice = marketPrice;
 			this.Amount = amount;
+			this.Profit = marketPrice - purchasePrice;
+			this.TotalProfit = Profit * amount;
 		}
 
 		public override string ToString()
 		{
-			return $"{base.ToString()} Purchase Price: {PurchasePrice} Market Price: {MarketPrice} Amount: {Amount}";
+			return $"{base.ToString()} {nameof(PurchasePrice)}: {PurchasePrice} {nameof(MarketPrice)}: {MarketPrice} {nameof(Amount)}: {Amount} {nameof(Profit)}: {Profit} {nameof(TotalProfit)}: {TotalProfit}";
 		}
 	}
 }

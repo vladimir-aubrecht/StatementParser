@@ -1,15 +1,15 @@
 using StatementParser.Models;
 
-namespace TaxReporterCLI
+namespace TaxReporterCLI.Models.Views
 {
-	public class EnrichedTransaction
+	public class TransactionView
 	{
 		public Transaction Transaction { get; }
 
-		public decimal ExchangeRatePerDay;
-		public decimal ExchangeRatePerYear;
+		public decimal? ExchangeRatePerDay { get; }
+		public decimal? ExchangeRatePerYear { get; }
 
-		public EnrichedTransaction(Transaction transaction, decimal exchangeRatePerDay, decimal exchangeRatePerYear)
+		public TransactionView(Transaction transaction, decimal? exchangeRatePerDay, decimal? exchangeRatePerYear)
 		{
 			this.Transaction = transaction;
 			this.ExchangeRatePerDay = exchangeRatePerDay;

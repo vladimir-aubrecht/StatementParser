@@ -5,11 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Commander.NET;
 using Commander.NET.Exceptions;
-using ExchangeRateProvider.Models;
-using ExchangeRateProvider.Providers;
 using ExchangeRateProvider.Providers.Czk;
 using StatementParser;
 using StatementParser.Models;
+using TaxReporterCLI.Models;
 
 namespace TaxReporterCLI
 {
@@ -79,12 +78,14 @@ namespace TaxReporterCLI
 			}
 
             Console.WriteLine("Downloading exchange rates ...");
-			var enrichedTransactions = await CreateEnrichedTransactions(transactions, kurzyCzProvider, cnbProvider);
 
-			Print(option, enrichedTransactions);
+			var builder = new TransactionViewBuilder(kurzyCzProvider, cnbProvider);
+			var transactionViews = await builder.BuildAsync(transactions);
+
+			Print(option, transactionViews.Cast<object>().ToList());
 		}
 
-		private static void Print(Options option, IList<EnrichedTransaction> transactions)
+		private static void Print(Options option, IList<object> transactions)
 		{
 			var printer = new Output();
 			if (option.ShouldPrintAsJson)
@@ -99,45 +100,6 @@ namespace TaxReporterCLI
 			{
 				printer.PrintAsPlainText(transactions);
 			}
-		}
-
-		private static async Task<IList<EnrichedTransaction>> CreateEnrichedTransactions(IList<Transaction> transactions, IExchangeProvider exchangeProviderPerYear, IExchangeProvider exchangeProviderPerDay)
-		{
-			var kurzyPerYear = await FetchExchangeRatesForEveryYearAsync(exchangeProviderPerYear, transactions);
-
-			var enrichedTransactions = new List<EnrichedTransaction>();
-			foreach (var transaction in transactions)
-			{
-				var cnbCurrencyList = await exchangeProviderPerDay.FetchCurrencyListByDateAsync(transaction.Date);
-
-				var currency = transaction.Currency.ToString();
-				decimal exchangeRatePerYear = 0;
-
-				if (!kurzyPerYear[transaction.Date.Year].IsEmpty)
-				{
-					exchangeRatePerYear = kurzyPerYear[transaction.Date.Year][currency].Price;
-				}
-
-				var exchangeRatePerDay = cnbCurrencyList[currency].Price;
-
-				enrichedTransactions.Add(new EnrichedTransaction(transaction, exchangeRatePerDay, exchangeRatePerYear));
-			}
-
-			return enrichedTransactions;
-		}
-
-		private static async Task<IDictionary<int, ICurrencyList>> FetchExchangeRatesForEveryYearAsync(IExchangeProvider provider, IList<Transaction> transactions)
-		{
-			var years = transactions.Select(i => i.Date.Year).ToHashSet();
-
-			var output = new Dictionary<int, ICurrencyList>();
-
-			foreach (var year in years)
-			{
-				output.Add(year, await provider.FetchCurrencyListByDateAsync(new DateTime(year, 1, 1)));
-			}
-
-			return output;
 		}
 	}
 }

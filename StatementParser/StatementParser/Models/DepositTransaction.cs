@@ -7,6 +7,8 @@ namespace StatementParser.Models
 
 		public decimal Price { get; }
 
+		public decimal TotalPrice { get; }
+
 		public DepositTransaction(DepositTransaction depositTransaction) : this(depositTransaction.Broker, depositTransaction.Date, depositTransaction.Name, depositTransaction.Amount, depositTransaction.Price, depositTransaction.Currency)
 		{
 		}
@@ -15,11 +17,12 @@ namespace StatementParser.Models
 		{
 			this.Amount = amount;
 			this.Price = price;
+			this.TotalPrice = amount * price;
 		}
 
 		public override string ToString()
 		{
-			return $"{base.ToString()} Amount: {Amount} Price: {Price}";
+			return $"{base.ToString()} {nameof(Amount)}: {Amount} {nameof(Price)}: {Price} {nameof(TotalPrice)}: {TotalPrice}";
 		}
 	}
 }
