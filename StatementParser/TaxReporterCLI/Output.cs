@@ -6,8 +6,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using StatementParser.Models;
-using TaxReporterCLI.Models;
+using TaxReporterCLI.Models.Attributes;
 
 namespace TaxReporterCLI
 {
@@ -59,18 +58,19 @@ namespace TaxReporterCLI
 			var sheet = workbook.CreateSheet(sheetName);
 
 			var headerProperties = CollectPublicProperties(objects[0]);
-			CreateRow(sheet, 0, headerProperties.Keys);
+			var haeders = headerProperties.Select( i => DescriptionAttribute.ConstructDescription(i.Key, objects[0])).ToList();
+			CreateRow(sheet, 0, haeders);
 
 			for (int rowIndex = 1; rowIndex < objects.Count() + 1; rowIndex++)
 			{
 				var properties = CollectPublicProperties(objects[rowIndex - 1]);
-				CreateRow(sheet, rowIndex, properties.Values);
+				CreateRow(sheet, rowIndex, properties.Values.ToList());
 			}
 
 			return sheet;
 		}
 
-		private IRow CreateRow(ISheet sheet, int rowIndex, ICollection<string> rowValues)
+		private IRow CreateRow(ISheet sheet, int rowIndex, IList<string> rowValues)
 		{
 			var row = sheet.CreateRow(rowIndex);
 
@@ -95,12 +95,15 @@ namespace TaxReporterCLI
 			return row;
 		}
 
-		private IDictionary<string, string> CollectPublicProperties(Object instance)
+		private IDictionary<PropertyInfo, string> CollectPublicProperties(Object instance)
 		{
 			var properties = instance.GetType().GetProperties();
-			var dictionary = properties.Reverse().ToDictionary(k => k.Name, i => i.GetValue(instance));
+			
+			var dictionary = properties.Reverse().ToDictionary(
+				k => k,
+				i => i.GetValue(instance));
 
-			var output = new Dictionary<string, string>();
+			var output = new Dictionary<PropertyInfo, string>();
 			foreach (var pair in dictionary)
 			{
 				if (pair.Value is null)

@@ -1,4 +1,6 @@
 ﻿using System;
+using TaxReporterCLI.Models.Attributes;
+
 namespace StatementParser.Models
 {
 	public class SaleTransaction : Transaction
@@ -21,7 +23,11 @@ namespace StatementParser.Models
 
 		public int Laverage { get; }
 		public decimal Amount { get; }
+
+		[Description("Purchase Price")]
 		public decimal PurchasePrice { get; }
+
+		[Description("Sale Price")]
 		public decimal SalePrice { get; }
 		public decimal Commission { get; }
 		public decimal Taxes { get; }

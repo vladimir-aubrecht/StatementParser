@@ -1,13 +1,17 @@
 using StatementParser.Models;
+using TaxReporterCLI.Models.Attributes;
 
 namespace TaxReporterCLI.Models.Views
 {
 	public class DepositTransactionView : TransactionView
 	{
+        [Description("Total Price in {ExchangedToCurrency} per Day")]
         public decimal? ExchangedPerDayTotalPrice { get; }
+        
+        [Description("Total Price in {ExchangedToCurrency} per Year")]
         public decimal? ExchangedPerYearTotalPrice { get; }
 
-		public DepositTransactionView(DepositTransaction transaction, decimal? exchangeRatePerDay, decimal? exchangeRatePerYear) : base(transaction, exchangeRatePerDay, exchangeRatePerYear)
+		public DepositTransactionView(DepositTransaction transaction, decimal? exchangeRatePerDay, decimal? exchangeRatePerYear, Currency exchangedToCurrency) : base(transaction, exchangeRatePerDay, exchangeRatePerYear, exchangedToCurrency)
 		{
             ExchangedPerDayTotalPrice = transaction.TotalPrice * exchangeRatePerDay;
             ExchangedPerYearTotalPrice = transaction.TotalPrice * exchangeRatePerYear;

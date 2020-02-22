@@ -1,4 +1,6 @@
 ﻿using System;
+using TaxReporterCLI.Models.Attributes;
+
 namespace StatementParser.Models
 {
 	public class DepositTransaction : Transaction
@@ -7,6 +9,7 @@ namespace StatementParser.Models
 
 		public decimal Price { get; }
 
+		[Description("Total Price")]
 		public decimal TotalPrice { get; }
 
 		public DepositTransaction(DepositTransaction depositTransaction) : this(depositTransaction.Broker, depositTransaction.Date, depositTransaction.Name, depositTransaction.Amount, depositTransaction.Price, depositTransaction.Currency)

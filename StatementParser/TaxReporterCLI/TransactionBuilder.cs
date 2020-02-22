@@ -37,28 +37,28 @@ namespace TaxReporterCLI
 
                 var exchangeRatePerDay = cnbCurrencyListPerDay[transaction.Date.Date][currency].Price;
 
-                output.Add(CreateTransactionView(transaction, exchangeRatePerDay, exchangeRatePerYear));
+                output.Add(CreateTransactionView(transaction, exchangeRatePerDay, exchangeRatePerYear, Currency.CZK));
             }
 
             return output;
         }
 
-        private static TransactionView CreateTransactionView(Transaction transaction, decimal? exchangeRatePerDay, decimal? exchangeRatePerYear)
+        private static TransactionView CreateTransactionView(Transaction transaction, decimal? exchangeRatePerDay, decimal? exchangeRatePerYear, Currency exchangedToCurrency)
         {
             var type = transaction.GetType();
             
             var typeToCreate = new Dictionary<Type, Func<TransactionView>>()
             {
                 {typeof(DividendTransaction),
-                    () => new DividendTransactionView(transaction as DividendTransaction, exchangeRatePerDay, exchangeRatePerYear)},
+                    () => new DividendTransactionView(transaction as DividendTransaction, exchangeRatePerDay, exchangeRatePerYear, exchangedToCurrency)},
                 {typeof(DepositTransaction),
-                    () => new DepositTransactionView(transaction as DepositTransaction, exchangeRatePerDay, exchangeRatePerYear)},
+                    () => new DepositTransactionView(transaction as DepositTransaction, exchangeRatePerDay, exchangeRatePerYear, exchangedToCurrency)},
                 {typeof(ESPPTransaction),
-                    () => new ESPPTransactionView(transaction as ESPPTransaction, exchangeRatePerDay, exchangeRatePerYear)},
+                    () => new ESPPTransactionView(transaction as ESPPTransaction, exchangeRatePerDay, exchangeRatePerYear, exchangedToCurrency)},
                 {typeof(SaleTransaction),
-                    () => new SaleTransactionView(transaction as SaleTransaction, exchangeRatePerDay, exchangeRatePerYear)},
+                    () => new SaleTransactionView(transaction as SaleTransaction, exchangeRatePerDay, exchangeRatePerYear, exchangedToCurrency)},
                 {typeof(Transaction),
-                    () => new TransactionView(transaction, exchangeRatePerDay, exchangeRatePerYear)}
+                    () => new TransactionView(transaction, exchangeRatePerDay, exchangeRatePerYear, exchangedToCurrency)}
             };
 
             if (!typeToCreate.ContainsKey(type))

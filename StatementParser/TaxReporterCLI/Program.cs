@@ -121,20 +121,20 @@ namespace TaxReporterCLI
             return summaryViews;
         }
 
-        private static void Print(Options option, IList<object> transactions)
+        private static void Print(Options option, IList<object> views)
 		{
 			var printer = new Output();
 			if (option.ShouldPrintAsJson)
 			{
-				printer.PrintAsJson(transactions);
+				printer.PrintAsJson(views);
 			}
 			else if (option.ExcelSheetPath != null)
 			{
-				printer.SaveAsExcelSheet(option.ExcelSheetPath, transactions);
+				printer.SaveAsExcelSheet(option.ExcelSheetPath, views);
 			}
 			else
 			{
-				printer.PrintAsPlainText(transactions);
+				printer.PrintAsPlainText(views);
 			}
 		}
 	}

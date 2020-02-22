@@ -1,12 +1,19 @@
 ﻿using System;
+using TaxReporterCLI.Models.Attributes;
+
 namespace StatementParser.Models
 {
 	public class ESPPTransaction : Transaction
 	{
+		[Description("Purchase Price")]
 		public decimal PurchasePrice { get; }
+
+		[Description("Market Price")]
 		public decimal MarketPrice { get; }
 		public decimal Amount { get; }
 		public decimal Profit { get; }
+
+		[Description("Total Profit")]
 		public decimal TotalProfit { get; }
 
 		public ESPPTransaction(ESPPTransaction eSPPTransaction) : this(eSPPTransaction.Broker, eSPPTransaction.Date, eSPPTransaction.Name, eSPPTransaction.Currency, eSPPTransaction.PurchasePrice, eSPPTransaction.MarketPrice, eSPPTransaction.Amount)

@@ -1,4 +1,5 @@
 using StatementParser.Models;
+using TaxReporterCLI.Models.Attributes;
 
 namespace TaxReporterCLI.Models.Views
 {
@@ -6,19 +7,26 @@ namespace TaxReporterCLI.Models.Views
 	{
 		public Transaction Transaction { get; }
 
+		[Description("Exchange rate per Day")]
 		public decimal? ExchangeRatePerDay { get; }
+
+		[Description("Exchange rate per Year")]
 		public decimal? ExchangeRatePerYear { get; }
 
-		public TransactionView(Transaction transaction, decimal? exchangeRatePerDay, decimal? exchangeRatePerYear)
+		[Description("Exchanged to currency")]
+        public Currency ExchangedToCurrency { get; }
+
+        public TransactionView(Transaction transaction, decimal? exchangeRatePerDay, decimal? exchangeRatePerYear, Currency exchangedToCurrency)
 		{
 			this.Transaction = transaction;
 			this.ExchangeRatePerDay = exchangeRatePerDay;
 			this.ExchangeRatePerYear = exchangeRatePerYear;
-		}
+            ExchangedToCurrency = exchangedToCurrency;
+        }
 
 		public override string ToString()
 		{
-			return $"{Transaction} {nameof(ExchangeRatePerDay)}: {ExchangeRatePerDay} {nameof(ExchangeRatePerYear)}: {ExchangeRatePerYear}";
+			return $"{Transaction} {nameof(ExchangedToCurrency)}:{ExchangedToCurrency} {nameof(ExchangeRatePerDay)}: {ExchangeRatePerDay} {nameof(ExchangeRatePerYear)}: {ExchangeRatePerYear}";
 		}
 	}
 }
