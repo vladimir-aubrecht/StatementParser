@@ -5,9 +5,8 @@ using StatementParser.Models;
 
 namespace TaxReporterCLI.Models.Views
 {
-	public class DividendBrokerSummaryView
+	public class DividendCurrencySummaryView
 	{
-		public Broker Broker { get; }
 		public Currency Currency { get; }
 		public decimal TotalIncome { get; }
 		public decimal TotalTax { get; }
@@ -17,12 +16,11 @@ namespace TaxReporterCLI.Models.Views
 		public decimal ExchangedPerDayTotalTax { get; }
 		public decimal ExchangedPerYearTotalTax { get; }
 
-		public DividendBrokerSummaryView(IList<DividendTransactionView> transactions, Broker broker, Currency currency)
+		public DividendCurrencySummaryView(IList<DividendTransactionView> transactions, Currency currency)
 		{
-			this.Broker = broker;
 			this.Currency = currency;
 
-			var brokerTransactions = transactions.Where(i => i.Transaction.Broker == broker && i.Transaction.Currency == currency);
+			var brokerTransactions = transactions.Where(i => i.Transaction.Currency == currency);
 
 			foreach (var transaction in brokerTransactions)
 			{
@@ -55,7 +53,7 @@ namespace TaxReporterCLI.Models.Views
 
 		public override string ToString()
 		{
-			return $"{nameof(Broker)}: {Broker} {nameof(Currency)}: {Currency} {nameof(TotalIncome)}: {TotalIncome} {nameof(TotalTax)}: {TotalTax} {nameof(ExchangedPerDayTotalIncome)}: {ExchangedPerDayTotalIncome} {nameof(ExchangedPerYearTotalIncome)}: {ExchangedPerYearTotalIncome} {nameof(ExchangedPerDayTotalTax)}: {ExchangedPerDayTotalTax} {nameof(ExchangedPerYearTotalTax)}: {ExchangedPerYearTotalTax}";
+			return $"{nameof(Currency)}: {Currency} {nameof(TotalIncome)}: {TotalIncome} {nameof(TotalTax)}: {TotalTax} {nameof(ExchangedPerDayTotalIncome)}: {ExchangedPerDayTotalIncome} {nameof(ExchangedPerYearTotalIncome)}: {ExchangedPerYearTotalIncome} {nameof(ExchangedPerDayTotalTax)}: {ExchangedPerDayTotalTax} {nameof(ExchangedPerYearTotalTax)}: {ExchangedPerYearTotalTax}";
 		}
 	}
 }

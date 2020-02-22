@@ -9,6 +9,7 @@ using ExchangeRateProvider.Providers.Czk;
 using StatementParser;
 using StatementParser.Models;
 using TaxReporterCLI.Models;
+using TaxReporterCLI.Models.Views;
 
 namespace TaxReporterCLI
 {
@@ -52,40 +53,75 @@ namespace TaxReporterCLI
 		}
 
 		private static async Task RunAsync(Options option)
-		{
-			var cnbProvider = new CzechNationalBankProvider();
-			var kurzyCzProvider = new KurzyCzProvider();
+        {
+            var cnbProvider = new CzechNationalBankProvider();
+            var kurzyCzProvider = new KurzyCzProvider();
 
-			var parser = new TransactionParser();
-			var transactions = new List<Transaction>();
-			var filePaths = ResolveFilePaths(option.StatementFilePaths);
+            var parser = new TransactionParser();
+            var transactions = new List<Transaction>();
+            var filePaths = ResolveFilePaths(option.StatementFilePaths);
 
-			if (filePaths.Count == 0)
-			{
-				Console.WriteLine("No valid path to scan found. Check that file or directory exist.");
-				return;
-			}
+            if (filePaths.Count == 0)
+            {
+                Console.WriteLine("No valid path to scan found. Check that file or directory exist.");
+                return;
+            }
 
-			foreach (var file in filePaths)
-			{
-				Console.WriteLine($"Processing file: {file}");
-				var result = await parser.ParseAsync(file);
+            foreach (var file in filePaths)
+            {
+                Console.WriteLine($"Processing file: {file}");
+                var result = await parser.ParseAsync(file);
 
-				if (result != null)
-				{
-					transactions.AddRange(result);
-				}
-			}
+                if (result != null)
+                {
+                    transactions.AddRange(result);
+                }
+            }
 
             Console.WriteLine("Downloading exchange rates ...");
 
-			var builder = new TransactionViewBuilder(kurzyCzProvider, cnbProvider);
-			var transactionViews = await builder.BuildAsync(transactions);
+            var builder = new TransactionViewBuilder(kurzyCzProvider, cnbProvider);
+            var transactionViews = await builder.BuildAsync(transactions);
 
-			Print(option, transactionViews.Cast<object>().ToList());
-		}
+            var summaryViews = CreateDividendSummaryViews(transactionViews);
 
-		private static void Print(Options option, IList<object> transactions)
+            var views = new List<object>(transactionViews);
+            views.AddRange(summaryViews);
+
+            Print(option, views);
+        }
+
+        private static IList<object> CreateDividendSummaryViews(IList<TransactionView> transactionViews)
+        {
+            var summaryViews = new List<object>();
+
+            var usedBrokers = transactionViews.Select(i => i.Transaction.Broker).Distinct();
+            var usedCurrencies = transactionViews.Select(i => i.Transaction.Currency).Distinct();
+
+			foreach (var currency in usedCurrencies)
+			{
+				foreach (var broker in usedBrokers)
+				{
+					var brokerSummaryView = new DividendBrokerSummaryView(transactionViews.OfType<DividendTransactionView>().ToList(), broker, currency);
+
+					if (brokerSummaryView.TotalIncome > 0)
+					{
+						summaryViews.Add(brokerSummaryView);
+					}
+				}
+
+				var currencySummaryView = new DividendCurrencySummaryView(transactionViews.OfType<DividendTransactionView>().ToList(), currency);
+
+				if (currencySummaryView.TotalIncome > 0)
+				{
+					summaryViews.Add(currencySummaryView);
+				}
+            }
+
+            return summaryViews;
+        }
+
+        private static void Print(Options option, IList<object> transactions)
 		{
 			var printer = new Output();
 			if (option.ShouldPrintAsJson)

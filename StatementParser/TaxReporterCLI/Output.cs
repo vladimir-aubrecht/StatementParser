@@ -103,8 +103,11 @@ namespace TaxReporterCLI
 			var output = new Dictionary<string, string>();
 			foreach (var pair in dictionary)
 			{
-				var type = pair.Value.GetType();
-				if (pair.Value is IFormattable || pair.Value is string)
+				if (pair.Value is null)
+				{
+					output.Add(pair.Key, null);
+				}
+				else if (pair.Value is IFormattable || pair.Value is string)
 				{
 					output.Add(pair.Key, pair.Value.ToString());
 				}
