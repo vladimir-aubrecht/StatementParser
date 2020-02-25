@@ -38,12 +38,12 @@ XSLT conversion:
 
 # Supported file formats for brokers
 
-| Type / Broker         | Fidelity | Morgan Stanley | MetaTrader | FxChoice | Degiro       | Lynx | Interactive Broker |
-| --------------------- | -------- | -------------- | ---------- | -------- | ------------ | ---- | ------------------ |
-| Sale transactions     | -        | -              | Htm        | Htm      | -            | -    | -                  |
-| Dividend transactions | Pdf      | Pdf, Xls       | -          | -        | Csv in Czech | Csv  | Csv                |
-| ESPP transactions     | Pdf      | -              | -          | -        | -            | -    | -                  |
-| Deposit transactions  | Pdf      | Pdf, Xls       | -          | -        | -            | -    | -                  |
+|Type / Broker        |Fidelity|Morgan Stanley|MetaTrader|FxChoice|Degiro      |Lynx|Interactive Broker|Revolut|
+|---------------------|--------|--------------|----------|--------|------------|----|------------------|-------|
+|Sale transactions    | -      | -            |Htm       |Htm     | -          | -  | -                | -     |
+|Dividend transactions|Pdf     |Pdf, Xls      | -        | -      |Csv in Czech|Csv |Csv               | -     |
+|ESPP transactions    |Pdf     | -            | -        | -      | -          | -  | -                | -     |
+|Deposit transactions |Pdf     |Pdf, Xls      | -        | -      | -          | -  | -                | -     |
 
 # Supported output formats
 - JSON
