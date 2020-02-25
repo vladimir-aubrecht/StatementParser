@@ -50,6 +50,10 @@ XSLT conversion:
 - Plain text
 - XSLX
 
+# Future plans
+- Support for Revolut broker
+- Add support for sale transactions in FIFO way for all brokers.
+
 # Guarantees
 Use on your own risk.
 Official guidance is, verify all generated numbers manually. Currently there are no known bugs.
