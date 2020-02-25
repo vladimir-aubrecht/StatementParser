@@ -49,3 +49,7 @@ XSLT conversion:
 - JSON
 - Plain text
 - XSLX
+
+# Guarantees
+Use on your own risk.
+Official guidance is, verify all generated numbers manually. Currently there are no known bugs.
