@@ -53,6 +53,7 @@ XSLT conversion:
 # Future plans
 - Support for Revolut broker
 - Add support for sale transactions in FIFO way for all brokers.
+- Add support for auto-download of statements.
 
 # Guarantees
 Use on your own risk.
