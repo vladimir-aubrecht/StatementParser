@@ -33,8 +33,8 @@ namespace StatementParser.Parsers.Brokers.FxChoice
 			var currencyCell = pageDocument.DocumentNode.SelectSingleNode("/html/body/div/table/tr[1]/td[3]").InnerText;
 			var currency = (Currency)Enum.Parse(typeof(Currency), currencyCell.Substring(currencyCell.LastIndexOf(':') + 2));
 
-			var levarageCell = pageDocument.DocumentNode.SelectSingleNode("/html/body/div/table/tr[1]/td[4]").InnerText;
-			var levarage = Convert.ToInt32(levarageCell.Substring(levarageCell.LastIndexOf(':') + 1));
+			var leverageCell = pageDocument.DocumentNode.SelectSingleNode("/html/body/div/table/tr[1]/td[4]").InnerText;
+			var leverage = Convert.ToInt32(leverageCell.Substring(leverageCell.LastIndexOf(':') + 1));
 
 			var rows = pageDocument.DocumentNode.SelectNodes("/html/body/div/table/tr").Skip(3);
 
@@ -56,12 +56,12 @@ namespace StatementParser.Parsers.Brokers.FxChoice
 					var purchasePrice = Convert.ToDecimal(row.SelectSingleNode("./td[6]").InnerText);
 					var date = DateTime.Parse(row.SelectSingleNode("./td[09]").InnerText);
 					var salePrice = Convert.ToDecimal(row.SelectSingleNode("./td[10]").InnerText);
-					var commision = Convert.ToDecimal(row.SelectSingleNode("./td[11]").InnerText);
+					var commission = Convert.ToDecimal(row.SelectSingleNode("./td[11]").InnerText);
 					var taxes = Convert.ToDecimal(row.SelectSingleNode("./td[12]").InnerText);
 					var swap = Convert.ToDecimal(row.SelectSingleNode("./td[13]").InnerText);
 					var profit = Convert.ToDecimal(row.SelectSingleNode("./td[14]").InnerText);
 
-					var transaction = new SaleTransaction(Broker.FxChoice, date, name, currency, levarage, amount, purchasePrice, salePrice, commision, taxes, swap, profit);
+					var transaction = new SaleTransaction(Broker.FxChoice, date, name, currency, leverage, amount, purchasePrice, salePrice, commission, taxes, swap, profit);
 					transactions.Add(transaction);
 				}
 			}
