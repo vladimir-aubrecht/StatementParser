@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StatementParserCLI": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\vladi\\Downloads\\0228.pdf\""
+    }
+  }
+}
