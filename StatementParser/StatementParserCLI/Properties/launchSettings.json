@@ -2,7 +2,7 @@
   "profiles": {
     "StatementParserCLI": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\vladi\\Downloads\\0228.pdf\""
+      "commandLineArgs": "\"C:\\Users\\vladi\\Downloads\\03-31-stat.pdf.pdf\""
     }
   }
 }

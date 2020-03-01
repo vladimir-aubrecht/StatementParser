@@ -73,7 +73,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
 		private decimal SearchForTaxString(ActivityTaxesModel[] activityTaxesModels, DateTime date)
 		{
-			return activityTaxesModels.Where(i => i.Date == date.ToString("MM/dd")).FirstOrDefault()?.Tax ?? 0;
+			return activityTaxesModels.Where(i => i.Date == date.ToString("MM/dd", CultureInfo.InvariantCulture)).FirstOrDefault()?.Tax ?? 0;
 		}
 
 		private ESPPTransaction CreateESPPTransaction(ActivityBuyModel[] activityBuyModels, ESPPModel esppRow)
