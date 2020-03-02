@@ -36,6 +36,20 @@ XSLT conversion:
 
 ``dotnet StatementParserCLI.dll -x <path to file with output xslt file> <path to the file or folder containing statements>``
 
+# Future plans
+- Support for Revolut broker
+- Add support for sale transactions in FIFO way for all brokers.
+- Add support for auto-download of statements.
+
+# Guarantees
+Use on your own risk.
+Official guidance is, verify all generated numbers manually. Currently there are no known bugs.
+
+# Supported output formats
+- JSON
+- Plain text
+- XSLX
+
 # Supported file formats for brokers
 
 |Type / Broker        |Fidelity|Morgan Stanley|MetaTrader|FxChoice|Degiro      |Lynx|Interactive Broker|Revolut|
@@ -45,16 +59,21 @@ XSLT conversion:
 |ESPP transactions    |Pdf     | -            | -        | -      | -          | -  | -                | -     |
 |Deposit transactions |Pdf     |Pdf, Xls      | -        | -      | -          | -  | -                | -     |
 
-# Supported output formats
-- JSON
-- Plain text
-- XSLX
+## Examples of how parsable statements looks like
 
-# Future plans
-- Support for Revolut broker
-- Add support for sale transactions in FIFO way for all brokers.
-- Add support for auto-download of statements.
+### Fidelity Statement
+![Fidelity Statement][Fidelity]
 
-# Guarantees
-Use on your own risk.
-Official guidance is, verify all generated numbers manually. Currently there are no known bugs.
+### FXChoice Statement
+![FXChoice Statement][FXChoice]
+
+### MorganStanley Statement
+![MorganStanley Statement][MorganStanley]
+
+### Lynx Statement
+![Lynx Statement][Lynx]
+
+[Fidelity]: Docs/Images/FidelityStatement.png
+[FXChoice]: Docs/Images/FXChoiceStatement.png
+[MorganStanley]: Docs/Images/MorganStanleyStatement.png
+[Lynx]: Docs/Images/LynxStatement.png
