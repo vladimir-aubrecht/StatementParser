@@ -1,5 +1,5 @@
+using StatementParser.Attributes;
 using StatementParser.Models;
-using TaxReporterCLI.Models.Attributes;
 
 namespace TaxReporterCLI.Models.Views
 {

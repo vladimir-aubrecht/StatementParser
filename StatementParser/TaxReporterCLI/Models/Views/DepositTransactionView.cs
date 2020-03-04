@@ -1,5 +1,5 @@
+using StatementParser.Attributes;
 using StatementParser.Models;
-using TaxReporterCLI.Models.Attributes;
 
 namespace TaxReporterCLI.Models.Views
 {
@@ -7,7 +7,7 @@ namespace TaxReporterCLI.Models.Views
 	{
         [Description("Total Price in {ExchangedToCurrency} per Day")]
         public decimal? ExchangedPerDayTotalPrice { get; }
-        
+
         [Description("Total Price in {ExchangedToCurrency} per Year")]
         public decimal? ExchangedPerYearTotalPrice { get; }
 

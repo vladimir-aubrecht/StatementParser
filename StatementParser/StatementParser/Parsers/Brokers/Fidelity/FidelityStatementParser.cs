@@ -13,14 +13,9 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 	internal class FidelityStatementParser : ITransactionParser
 	{
 		private bool CanParse(string statementFilePath)
-		{
-			if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".pdf")
-			{
-				return false;
-			}
-
-			return true;
-		}
+        {
+            return File.Exists(statementFilePath) && Path.GetExtension(statementFilePath).ToLowerInvariant() == ".pdf";
+        }
 
 		public IList<Transaction> Parse(string statementFilePath)
 		{
@@ -52,7 +47,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
 		public string SearchForCompanyName(ActivityBuyModel[] activityBuyModels, ESPPModel esppRow)
 		{
-			string removeLastCharFunc(decimal number)
+            static string removeLastCharFunc(decimal number)
 			{
 				return number.ToString().Remove(number.ToString().Length - 1);
 			}
@@ -73,7 +68,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
 
 		private decimal SearchForTaxString(ActivityTaxesModel[] activityTaxesModels, DateTime date)
 		{
-			return activityTaxesModels.Where(i => i.Date == date.ToString("MM/dd", CultureInfo.InvariantCulture)).FirstOrDefault()?.Tax ?? 0;
+			return activityTaxesModels.FirstOrDefault(i => i.Date == date.ToString("MM/dd", CultureInfo.InvariantCulture))?.Tax ?? 0;
 		}
 
 		private ESPPTransaction CreateESPPTransaction(ActivityBuyModel[] activityBuyModels, ESPPModel esppRow)

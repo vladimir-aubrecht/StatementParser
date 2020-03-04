@@ -8,12 +8,11 @@ using Commander.NET.Exceptions;
 using ExchangeRateProvider.Providers.Czk;
 using StatementParser;
 using StatementParser.Models;
-using TaxReporterCLI.Models;
 using TaxReporterCLI.Models.Views;
 
 namespace TaxReporterCLI
 {
-	public class Program
+	public static class Program
 	{
 		public static async Task Main(string[] args)
 		{
@@ -28,7 +27,6 @@ namespace TaxReporterCLI
 			{
 				Console.WriteLine(parser.Usage());
 			}
-
 		}
 
 		private static IList<string> ResolveFilePaths(string[] paths)

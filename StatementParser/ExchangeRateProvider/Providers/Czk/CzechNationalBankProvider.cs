@@ -9,7 +9,7 @@ namespace ExchangeRateProvider.Providers.Czk
 {
 	public class CzechNationalBankProvider : IExchangeProvider
 	{
-		private string apiUrl = "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.xml?date=";
+		private const string ApiUrl = "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.xml?date=";
 
 		public Task<ICurrencyList> FetchCurrencyListByDateAsync(DateTime date)
 		{
@@ -38,7 +38,7 @@ namespace ExchangeRateProvider.Providers.Czk
 		{
 			var czechDate = date.Day + "." + date.Month + "." + date.Year;
 
-			return apiUrl + czechDate;
+			return ApiUrl + czechDate;
 		}
 	}
 }

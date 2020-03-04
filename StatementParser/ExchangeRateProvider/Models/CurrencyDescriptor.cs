@@ -36,7 +36,7 @@ namespace ExchangeRateProvider.Models
 
         public override string ToString()
         {
-            return String.Format("{0} {1} {2} {3}", this.Code, this.Name, this.Price, this.Country);
+            return $"{this.Code} {this.Name} {this.Price} {this.Country}";
         }
 
         public static bool operator ==(CurrencyDescriptor cd1, CurrencyDescriptor cd2)

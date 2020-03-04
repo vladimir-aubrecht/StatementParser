@@ -91,7 +91,7 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
 
 		private ISheet GetSheet(string statementFilePath)
 		{
-			HSSFWorkbook workbook = null;
+			HSSFWorkbook workbook;
 			using (FileStream stream = new FileStream(statementFilePath, FileMode.Open, FileAccess.Read))
 			{
 				workbook = new HSSFWorkbook(stream);

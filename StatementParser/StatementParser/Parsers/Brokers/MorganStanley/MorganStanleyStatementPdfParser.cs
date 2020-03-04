@@ -11,14 +11,9 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
 	internal class MorganStanleyStatementPdfParser : ITransactionParser
 	{
 		private bool CanParse(string statementFilePath)
-		{
-			if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".pdf")
-			{
-				return false;
-			}
-
-			return true;
-		}
+        {
+            return File.Exists(statementFilePath) && Path.GetExtension(statementFilePath).ToLowerInvariant() == ".pdf";
+        }
 
 		public IList<Transaction> Parse(string statementFilePath)
 		{
@@ -60,7 +55,6 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
 			output.AddRange(statementModel.Transactions
 				.Where(i => i.Type == "Share Deposit")
 				.Select(i => new DepositTransaction(Broker.MorganStanley, i.Date, statementModel.Name, i.Quantity, i.Price, Currency.USD)));
-
 
 			output.AddRange(statementModel.Transactions
 				.Where(i => i.Type == "Dividend Credit")

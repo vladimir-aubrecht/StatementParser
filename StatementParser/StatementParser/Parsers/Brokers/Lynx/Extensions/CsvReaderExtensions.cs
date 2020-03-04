@@ -45,7 +45,7 @@ namespace StatementParser.Parsers.Brokers.Lynx.Extensions
 					dataSets[key].SetValue(output, value);
 				}
 
-				dataSets[key].PropertyType.GetMethod("Add").Invoke(value, new object[] { record });
+				dataSets[key].PropertyType.GetMethod("Add").Invoke(value, new[] { record });
 			}
 			return output;
 		}

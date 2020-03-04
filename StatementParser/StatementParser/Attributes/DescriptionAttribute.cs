@@ -1,13 +1,14 @@
 using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using StatementParser.Models;
 
-namespace TaxReporterCLI.Models.Attributes
+namespace StatementParser.Attributes
 {
+    [AttributeUsage(AttributeTargets.Property)]
     public class DescriptionAttribute : Attribute
     {
-        private static readonly Regex placeHolderRegex = new Regex("\\{([^\\}]+)\\}", RegexOptions.Compiled);
+        private static readonly Regex PlaceHolderRegex = new Regex("\\{([^\\}]+)\\}", RegexOptions.Compiled);
+
         private string Description { get; }
 
         public DescriptionAttribute(string description)
@@ -18,14 +19,14 @@ namespace TaxReporterCLI.Models.Attributes
         public static string ConstructDescription(PropertyInfo propertyInfo, object instanceHoldingProperty)
         {
             var attribute = propertyInfo.GetCustomAttribute<DescriptionAttribute>(true);
-            
+
             if (attribute == null)
             {
                 return propertyInfo.Name;
             }
 
             var output = attribute.Description;
-            var matches = placeHolderRegex.Matches(attribute.Description);
+            var matches = PlaceHolderRegex.Matches(attribute.Description);
 
             foreach (Match match in matches)
             {

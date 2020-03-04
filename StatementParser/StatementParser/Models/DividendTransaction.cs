@@ -9,6 +9,7 @@ namespace StatementParser.Models
 		public decimal Income { get; }
 
 		public decimal Tax { get; }
+
 		public DividendTransaction(DividendTransaction dividendTransaction) : this(dividendTransaction.Broker, dividendTransaction.Date, dividendTransaction.Name, dividendTransaction.Income, dividendTransaction.Tax, dividendTransaction.Currency)
 		{
 		}
