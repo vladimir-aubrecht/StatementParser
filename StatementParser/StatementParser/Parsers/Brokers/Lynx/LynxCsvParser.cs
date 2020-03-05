@@ -14,14 +14,9 @@ namespace StatementParser.Parsers.Brokers.Lynx
 	internal class LynxCsvParser : ITransactionParser
 	{
 		private bool CanParse(string statementFilePath)
-		{
-			if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".csv")
-			{
-				return false;
-			}
-
-			return true;
-		}
+        {
+            return File.Exists(statementFilePath) && Path.GetExtension(statementFilePath).ToLowerInvariant() == ".csv";
+        }
 
 		public IList<Transaction> Parse(string statementFilePath)
 		{
@@ -52,9 +47,9 @@ namespace StatementParser.Parsers.Brokers.Lynx
 
 		private decimal SearchForTax(DividendsRowModel dividend, List<WithholdingTaxRowModel> withholdingTaxes)
 		{
-			var tax = withholdingTaxes.Where(i => dividend.Description.Contains(Regex.Replace(i.Description, " - [^ ]+ Tax", "", RegexOptions.Compiled)) && i.Date == dividend.Date).FirstOrDefault();
+			var tax = withholdingTaxes.FirstOrDefault(i => dividend.Description.Contains(Regex.Replace(i.Description, " - [^ ]+ Tax", "", RegexOptions.Compiled)) && i.Date == dividend.Date);
 
-			return (tax == null) ? 0 : tax.Amount;
+			return tax?.Amount ?? 0;
 		}
 
 		private StatementModel LoadStatementModel(string statementFilePath)
@@ -67,22 +62,21 @@ namespace StatementParser.Parsers.Brokers.Lynx
 					ShortDatePattern = "yyyy-MM-dd"
 				};
 
-				using (var reader = new StreamReader(statementFilePath))
-				using (var csv = new CsvReader(reader, ci))
-				{
-					var statement = csv.ReadObject<StatementModel>(0, () => csv.GetField(1) == "Header");
+                using var reader = new StreamReader(statementFilePath);
+                using var csv = new CsvReader(reader, ci);
 
-					if (statement == null)
-					{
-						return null;
-					}
+                var statement = csv.ReadObject<StatementModel>(0, () => csv.GetField(1) == "Header");
 
-					statement.Dividends = statement.Dividends.Where(i => i.Date != null).ToList();
-					statement.WithholdingTaxes = statement.WithholdingTaxes.Where(i => i.Date != null).ToList();
+                if (statement == null)
+                {
+                    return null;
+                }
 
-					return statement;
-				}
-			}
+                statement.Dividends = statement.Dividends.Where(i => i.Date != null).ToList();
+                statement.WithholdingTaxes = statement.WithholdingTaxes.Where(i => i.Date != null).ToList();
+
+                return statement;
+            }
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);

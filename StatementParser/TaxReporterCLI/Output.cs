@@ -6,7 +6,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using TaxReporterCLI.Models.Attributes;
+using StatementParser.Attributes;
 
 namespace TaxReporterCLI
 {
@@ -28,18 +28,16 @@ namespace TaxReporterCLI
 		{
 			var groupedTransactions = GroupTransactions(transactions);
 
-			using (FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
-			{
-				var wb1 = new XSSFWorkbook();
+            using FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
+            var wb1 = new XSSFWorkbook();
 
-				foreach (var group in groupedTransactions)
-				{
-					wb1.Add(CreateSheet(wb1, group.Key, group.Value));
-				}
+            foreach (var group in groupedTransactions)
+            {
+                wb1.Add(CreateSheet(wb1, @group.Key, @group.Value));
+            }
 
-				wb1.Write(file);
-			}
-		}
+            wb1.Write(file);
+        }
 
 		public void PrintAsPlainText(IList<object> transactions)
 		{
@@ -61,7 +59,7 @@ namespace TaxReporterCLI
 			var haeders = headerProperties.Select( i => DescriptionAttribute.ConstructDescription(i.Key, objects[0])).ToList();
 			CreateRow(sheet, 0, haeders);
 
-			for (int rowIndex = 1; rowIndex < objects.Count() + 1; rowIndex++)
+			for (int rowIndex = 1; rowIndex <= objects.Count; rowIndex++)
 			{
 				var properties = CollectPublicProperties(objects[rowIndex - 1]);
 				CreateRow(sheet, rowIndex, properties.Values.ToList());
@@ -98,7 +96,7 @@ namespace TaxReporterCLI
 		private IDictionary<PropertyInfo, string> CollectPublicProperties(Object instance)
 		{
 			var properties = instance.GetType().GetProperties();
-			
+
 			var dictionary = properties.Reverse().ToDictionary(
 				k => k,
 				i => i.GetValue(instance));

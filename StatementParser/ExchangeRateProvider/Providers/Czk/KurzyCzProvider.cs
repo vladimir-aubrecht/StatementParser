@@ -13,7 +13,7 @@ namespace ExchangeRateProvider.Providers.Czk
 {
 	public class KurzyCzProvider : IExchangeProvider
 	{
-		private string apiUrl = "https://www.kurzy.cz/kurzy-men/jednotny-kurz/";
+		private const string ApiUrl = "https://www.kurzy.cz/kurzy-men/jednotny-kurz/";
 
 		public KurzyCzProvider()
 		{
@@ -32,12 +32,12 @@ namespace ExchangeRateProvider.Providers.Czk
 			{
 				var responseStream = response.GetResponseStream();
 				var encoding = Encoding.GetEncoding(response.CharacterSet);
-				using (var sr = new StreamReader(responseStream, encoding))
-				{
-					var htmlContent = sr.ReadToEnd();
-					htmlDocument.LoadHtml(htmlContent);
-				}
-			}
+
+                using var sr = new StreamReader(responseStream, encoding);
+
+                var htmlContent = sr.ReadToEnd();
+                htmlDocument.LoadHtml(htmlContent);
+            }
 
 			var table = htmlDocument.DocumentNode.SelectNodes("//*[@id=\"leftcolumn\"]/div[2]/div[2]/table/tr");
 
@@ -50,7 +50,7 @@ namespace ExchangeRateProvider.Providers.Czk
 				var name = this.SanitizeValue(cellNode[0].SelectNodes("a/span")[1].InnerHtml);
 				var code = this.SanitizeValue(cellNode[2].InnerHtml);
 				var amount = Convert.ToDecimal(this.SanitizeValue(cellNode[3].InnerHtml));
-				var price = Decimal.Parse(this.SanitizeValue(cellNode[4].InnerHtml), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.GetCultureInfo("en-US"));
+				var price = Decimal.Parse(this.SanitizeValue(cellNode[4].InnerHtml), NumberStyles.AllowDecimalPoint, CultureInfo.GetCultureInfo("en-US"));
 
 				output.Add(new CurrencyDescriptor(code, name, price, amount, country));
 			}
@@ -65,7 +65,7 @@ namespace ExchangeRateProvider.Providers.Czk
 
 		private string CreateUrlByDate(DateTime date)
 		{
-			return apiUrl + date.Year;
+			return ApiUrl + date.Year;
 		}
 	}
 }

@@ -1,4 +1,3 @@
-
 using System;
 using CsvHelper.Configuration.Attributes;
 using StatementParser.Models;
@@ -27,8 +26,8 @@ namespace StatementParser.Parsers.Brokers.Degiro.CsvModels
 
 		public override string ToString()
 		{
-			var dateString = Date.HasValue ? Date.Value.ToShortDateString() : null;
-			var incomeString = Income.HasValue ? Income.Value : 0;
+			var dateString = Date?.ToShortDateString();
+			var incomeString = Income ?? 0;
 			return $"{nameof(Date)}: {dateString} {nameof(Name)}: {Name} {nameof(ISIN)}: {ISIN} {nameof(Description)}: {Description} {nameof(Currency)}: {Currency} {nameof(Income)}: {incomeString}";
 		}
 	}

@@ -1,5 +1,5 @@
 ﻿using System;
-using TaxReporterCLI.Models.Attributes;
+using StatementParser.Attributes;
 
 namespace StatementParser.Models
 {

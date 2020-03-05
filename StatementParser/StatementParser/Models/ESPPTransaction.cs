@@ -1,5 +1,5 @@
 ﻿using System;
-using TaxReporterCLI.Models.Attributes;
+using StatementParser.Attributes;
 
 namespace StatementParser.Models
 {
@@ -10,7 +10,9 @@ namespace StatementParser.Models
 
 		[Description("Market Price")]
 		public decimal MarketPrice { get; }
+
 		public decimal Amount { get; }
+
 		public decimal Profit { get; }
 
 		[Description("Total Profit")]
@@ -18,7 +20,6 @@ namespace StatementParser.Models
 
 		public ESPPTransaction(ESPPTransaction eSPPTransaction) : this(eSPPTransaction.Broker, eSPPTransaction.Date, eSPPTransaction.Name, eSPPTransaction.Currency, eSPPTransaction.PurchasePrice, eSPPTransaction.MarketPrice, eSPPTransaction.Amount)
 		{
-
 		}
 
 		public ESPPTransaction(Broker broker, DateTime date, string name, Currency currency, decimal purchasePrice, decimal marketPrice, decimal amount) : base(broker, date, name, currency)

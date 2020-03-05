@@ -12,14 +12,9 @@ namespace StatementParser.Parsers.Brokers.Degiro
 	internal class DegiroParser : ITransactionParser
 	{
 		private bool CanParse(string statementFilePath)
-		{
-			if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".csv")
-			{
-				return false;
-			}
-
-			return true;
-		}
+        {
+            return File.Exists(statementFilePath) && Path.GetExtension(statementFilePath).ToLowerInvariant() == ".csv";
+        }
 
 		public IList<Transaction> Parse(string statementFilePath)
 		{
@@ -51,7 +46,7 @@ namespace StatementParser.Parsers.Brokers.Degiro
 
 		private decimal SearchForTax(IList<StatementRowModel> statementRows, string isin, DateTime date)
 		{
-			var row = statementRows.Where(i => i.Date.Value == date && i.ISIN == isin && i.Description.Contains("z dividendy")).FirstOrDefault();
+			var row = statementRows.FirstOrDefault(i => i.Date.Value == date && i.ISIN == isin && i.Description.Contains("z dividendy"));
 			return row.Income.Value;
 		}
 
@@ -65,12 +60,11 @@ namespace StatementParser.Parsers.Brokers.Degiro
 					ShortDatePattern = "dd-MM-yyyy"
 				};
 
-				using (var reader = new StreamReader(statementFilePath))
-				using (var csv = new CsvReader(reader, ci))
-				{
-					return csv.GetRecords<StatementRowModel>().Where(i => i.Date != null).ToList();
-				}
-			}
+                using var reader = new StreamReader(statementFilePath);
+                using var csv = new CsvReader(reader, ci);
+
+                return csv.GetRecords<StatementRowModel>().Where(i => i.Date != null).ToList();
+            }
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);

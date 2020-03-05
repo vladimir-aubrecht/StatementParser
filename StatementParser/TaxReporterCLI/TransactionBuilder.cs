@@ -29,7 +29,6 @@ namespace TaxReporterCLI
             var kurzyCurrencyListPerYear = await exchangeProviderPerYear.FetchCurrencyListsForDatesAsync(transactions.Select(i => new DateTime(i.Date.Year, 1, 1)).ToHashSet());
             var cnbCurrencyListPerDay = await exchangeProviderPerDay.FetchCurrencyListsForDatesAsync(transactions.Select(i => i.Date.Date).ToHashSet());
 
-
             foreach (var transaction in transactions)
             {
                 var currency = transaction.Currency.ToString();
@@ -46,7 +45,7 @@ namespace TaxReporterCLI
         private static TransactionView CreateTransactionView(Transaction transaction, decimal? exchangeRatePerDay, decimal? exchangeRatePerYear, Currency exchangedToCurrency)
         {
             var type = transaction.GetType();
-            
+
             var typeToCreate = new Dictionary<Type, Func<TransactionView>>()
             {
                 {typeof(DividendTransaction),

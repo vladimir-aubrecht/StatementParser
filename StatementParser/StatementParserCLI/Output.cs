@@ -27,31 +27,29 @@ namespace StatementParserCLI
 		{
 			var groupedTransactions = GroupTransactions(transactions);
 
-			using (FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
-			{
-				var wb1 = new XSSFWorkbook();
+            using FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
+            var wb1 = new XSSFWorkbook();
 
-				foreach (var group in groupedTransactions)
-				{
-					var sheet = wb1.CreateSheet(group.Key);
+            foreach (var group in groupedTransactions)
+            {
+                var sheet = wb1.CreateSheet(@group.Key);
 
-					var headerRow = sheet.CreateRow(0);
-					var headerProperties = GetPublicProperties(group.Value[0]);
-					SetRowValues(headerRow, headerProperties.Keys);
+                var headerRow = sheet.CreateRow(0);
+                var headerProperties = GetPublicProperties(@group.Value[0]);
+                SetRowValues(headerRow, headerProperties.Keys);
 
-					for (int rowIndex = 1; rowIndex < group.Value.Count() + 1; rowIndex++)
-					{
-						var row = sheet.CreateRow(rowIndex);
-						var properties = GetPublicProperties(group.Value[rowIndex - 1]);
+                for (int rowIndex = 1; rowIndex <= @group.Value.Count; rowIndex++)
+                {
+                    var row = sheet.CreateRow(rowIndex);
+                    var properties = GetPublicProperties(@group.Value[rowIndex - 1]);
 
-						SetRowValues(row, properties.Values);
-					}
-					wb1.Add(sheet);
-				}
+                    SetRowValues(row, properties.Values);
+                }
+                wb1.Add(sheet);
+            }
 
-				wb1.Write(file);
-			}
-		}
+            wb1.Write(file);
+        }
 
 		public void PrintAsPlainText(IList<Transaction> transactions)
 		{

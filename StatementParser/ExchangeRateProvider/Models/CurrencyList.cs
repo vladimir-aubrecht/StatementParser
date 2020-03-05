@@ -4,13 +4,13 @@ namespace ExchangeRateProvider.Models
 {
 	internal class CurrencyList : ICurrencyList
 	{
-		private Dictionary<string, CurrencyDescriptor> currencyList = new Dictionary<string, CurrencyDescriptor>();
+		private readonly Dictionary<string, CurrencyDescriptor> currencyList = new Dictionary<string, CurrencyDescriptor>();
 
 		public CurrencyDescriptor this[string currencyCode] => currencyList[currencyCode.ToLower()];
 
-		public bool IsEmpty { get { return currencyList.Count == 0; } }
+		public bool IsEmpty => currencyList.Count == 0;
 
-		public CurrencyList(IList<CurrencyDescriptor> currencyList)
+        public CurrencyList(IList<CurrencyDescriptor> currencyList)
 		{
 			foreach (var currencyDescriptor in currencyList)
 			{

@@ -1,5 +1,5 @@
+using StatementParser.Attributes;
 using StatementParser.Models;
-using TaxReporterCLI.Models.Attributes;
 
 namespace TaxReporterCLI.Models.Views
 {
@@ -46,9 +46,9 @@ namespace TaxReporterCLI.Models.Views
 
         public override string ToString()
         {
-            return base.ToString() 
-            + $" {nameof(ExchangedPerDayProfit)}: {ExchangedPerDayProfit} {nameof(ExchangedPerYearProfit)}: {ExchangedPerYearProfit} {nameof(ExchangedPerDaySwap)}: {ExchangedPerDaySwap} {nameof(ExchangedPerYearSwap)}: {ExchangedPerYearSwap}"
-            + $" {nameof(ExchangedPerDayTaxes)}: {ExchangedPerDayTaxes} {nameof(ExchangedPerYearTaxes)}: {ExchangedPerYearTaxes} {nameof(ExchangedPerDayCommission)}: {ExchangedPerDayCommission} {nameof(ExchangedPerYearCommission)}: {ExchangedPerYearCommission}";
+            return base.ToString()
+                + $" {nameof(ExchangedPerDayProfit)}: {ExchangedPerDayProfit} {nameof(ExchangedPerYearProfit)}: {ExchangedPerYearProfit} {nameof(ExchangedPerDaySwap)}: {ExchangedPerDaySwap} {nameof(ExchangedPerYearSwap)}: {ExchangedPerYearSwap}"
+                + $" {nameof(ExchangedPerDayTaxes)}: {ExchangedPerDayTaxes} {nameof(ExchangedPerYearTaxes)}: {ExchangedPerYearTaxes} {nameof(ExchangedPerDayCommission)}: {ExchangedPerDayCommission} {nameof(ExchangedPerYearCommission)}: {ExchangedPerYearCommission}";
         }
 	}
 }

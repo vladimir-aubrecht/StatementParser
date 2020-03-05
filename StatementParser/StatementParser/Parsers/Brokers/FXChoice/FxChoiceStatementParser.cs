@@ -11,14 +11,9 @@ namespace StatementParser.Parsers.Brokers.FxChoice
 	internal class FxChoiceStatementParser : ITransactionParser
 	{
 		private bool CanParse(string statementFilePath)
-		{
-			if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".htm")
-			{
-				return false;
-			}
-
-			return true;
-		}
+        {
+            return File.Exists(statementFilePath) && Path.GetExtension(statementFilePath).ToLowerInvariant() == ".htm";
+        }
 
 		public IList<Transaction> Parse(string statementFilePath)
 		{

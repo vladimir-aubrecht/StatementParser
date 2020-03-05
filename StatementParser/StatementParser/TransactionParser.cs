@@ -12,7 +12,7 @@ namespace StatementParser
 {
 	public class TransactionParser
 	{
-		private IList<ITransactionParser> parsers = new List<ITransactionParser>();
+		private readonly IList<ITransactionParser> parsers = new List<ITransactionParser>();
 
 		public TransactionParser()
 		{

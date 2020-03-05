@@ -1,5 +1,5 @@
 ﻿using System;
-using TaxReporterCLI.Models.Attributes;
+using StatementParser.Attributes;
 
 namespace StatementParser.Models
 {
@@ -29,9 +29,13 @@ namespace StatementParser.Models
 
 		[Description("Sale Price")]
 		public decimal SalePrice { get; }
+
 		public decimal Commission { get; }
+
 		public decimal Taxes { get; }
+
 		public decimal Swap { get; }
+
 		public decimal Profit { get; }
 
 		public override string ToString()

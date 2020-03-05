@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using StatementParser.Attributes;
 using StatementParser.Models;
-using TaxReporterCLI.Models.Attributes;
 
 namespace TaxReporterCLI.Models.Views
 {
@@ -10,12 +10,14 @@ namespace TaxReporterCLI.Models.Views
 	{
 		[Description("Exchanged to currency")]
 		public Currency ExchangedToCurrency { get; }
+
 		public Broker Broker { get; }
+
 		public Currency Currency { get; }
-	
+
 		[Description("Total Income")]
 		public decimal TotalIncome { get; }
-		
+
 		[Description("Total Tax")]
 		public decimal TotalTax { get; }
 

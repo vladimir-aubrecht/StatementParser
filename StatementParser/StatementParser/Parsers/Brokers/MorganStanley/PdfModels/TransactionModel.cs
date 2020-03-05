@@ -24,15 +24,9 @@ namespace StatementParser.Parsers.Brokers.MorganStanley.PdfModels
 
 		public string NetAmountRaw { get; set; }
 
-		public decimal NetAmount
-		{
-			get
-			{
-				return Convert.ToDecimal(NetAmountRaw?.Replace('(', '-').TrimEnd(')'));
-			}
-		}
+		public decimal NetAmount => Convert.ToDecimal(NetAmountRaw?.Replace('(', '-').TrimEnd(')'));
 
-		public override string ToString()
+        public override string ToString()
 		{
 			return $"{nameof(Date)}: {Date} {nameof(Type)}: {Type} {nameof(Quantity)}: {Quantity} {nameof(Price)}: {Price} {nameof(GrossAmount)}: {GrossAmount} {nameof(Commissions)}: {Commissions} {nameof(DistributionFees)}: {DistributionFees} {nameof(OtherCosts)}: {OtherCosts} {nameof(NetAmount)}: {NetAmount}";
 		}
