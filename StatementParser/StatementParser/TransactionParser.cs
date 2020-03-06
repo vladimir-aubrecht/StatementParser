@@ -7,6 +7,7 @@ using StatementParser.Parsers.Brokers.Fidelity;
 using StatementParser.Parsers.Brokers.FxChoice;
 using StatementParser.Parsers.Brokers.Lynx;
 using StatementParser.Parsers.Brokers.MorganStanley;
+using StatementParser.Parsers.Brokers.Revolut;
 
 namespace StatementParser
 {
@@ -22,6 +23,7 @@ namespace StatementParser
 			parsers.Add(new FxChoiceStatementParser());
 			parsers.Add(new LynxCsvParser());
 			parsers.Add(new DegiroParser());
+			parsers.Add(new RevolutStatementParser());
 		}
 
 		public Task<IList<Transaction>> ParseAsync(string statementFilePath)
