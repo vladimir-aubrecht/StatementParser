@@ -73,7 +73,11 @@ Official guidance is, verify all generated numbers manually. Currently there are
 ### Lynx Statement
 ![Lynx Statement][Lynx]
 
+### Revolut Statement
+![Revolut Statement][Revolut]
+
 [Fidelity]: Docs/Images/FidelityStatement.png
 [FXChoice]: Docs/Images/FXChoiceStatement.png
 [MorganStanley]: Docs/Images/MorganStanleyStatement.png
 [Lynx]: Docs/Images/LynxStatement.png
+[Revolut]: Docs/Images/RevolutStatement.png
