@@ -36,10 +36,6 @@ XSLT conversion:
 
 ``dotnet StatementParserCLI.dll -x <path to file with output xslt file> <path to the file or folder containing statements>``
 
-# Future plans
-- Add support for sale transactions in FIFO way for all brokers.
-- Add support for auto-download of statements.
-
 # Guarantees
 Use on your own risk.
 Official guidance is, verify all generated numbers manually. Currently there are no known bugs.
