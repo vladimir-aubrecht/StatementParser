@@ -37,7 +37,6 @@ XSLT conversion:
 ``dotnet StatementParserCLI.dll -x <path to file with output xslt file> <path to the file or folder containing statements>``
 
 # Future plans
-- Support for Revolut broker
 - Add support for sale transactions in FIFO way for all brokers.
 - Add support for auto-download of statements.
 
