@@ -71,8 +71,8 @@ Official guidance is, verify all generated numbers manually. Currently there are
 ### Revolut Statement
 ![Revolut Statement][Revolut]
 
-[Fidelity]: Docs/Images/FidelityStatement.png
-[FXChoice]: Docs/Images/FXChoiceStatement.png
-[MorganStanley]: Docs/Images/MorganStanleyStatement.png
-[Lynx]: Docs/Images/LynxStatement.png
-[Revolut]: Docs/Images/RevolutStatement.png
+[Fidelity]: docs/Images/FidelityStatement.png
+[FXChoice]: docs/Images/FXChoiceStatement.png
+[MorganStanley]: docs/Images/MorganStanleyStatement.png
+[Lynx]: docs/Images/LynxStatement.png
+[Revolut]: docs/Images/RevolutStatement.png
