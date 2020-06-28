@@ -30,6 +30,9 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         [XmlAttribute("krok_c_pop")]
         public string TaxYearLastDayStreetDescriptionNumber { get; set; }
 
+        /// <remarks>
+        /// Row 2.
+        /// </remarks>
         [XmlAttribute("rod_c")]
         public string BirthNumber { get; set; }
 
@@ -90,6 +93,9 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         [XmlAttribute("stat")]
         public string CurrentCountry { get; set; }
 
+        /// <remarks>
+        /// Row 1.
+        /// </remarks>
         [XmlAttribute("dic")]
         public string TaxNumber { get; set; }
 

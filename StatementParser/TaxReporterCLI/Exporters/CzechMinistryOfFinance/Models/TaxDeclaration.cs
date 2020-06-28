@@ -6,8 +6,14 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
     [Serializable]
     public class TaxDeclaration
     {
+        [XmlElement("VetaD")]
+        public Taxes Taxes { get; set; }
+
         [XmlElement("VetaP")]
         public PersonalInformation PersonalInformation { get; set; }
+
+        [XmlElement("VetaO")]
+        public VetaO VetaO { get; set; }
 
         [XmlElement("VetaJ")]
         public Appendix2[] Appendix2 { get; set; }
