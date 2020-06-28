@@ -13,7 +13,7 @@ namespace ExchangeRateProvider.Providers.Extensions
 
 			foreach (var date in dates)
 			{
-				output.Add(date, await exchangeProvider.FetchCurrencyListByDateAsync(date));
+				output.Add(date, await exchangeProvider.FetchCurrencyListByDateAsync(date).ConfigureAwait(false));
 			}
 
 			return output;

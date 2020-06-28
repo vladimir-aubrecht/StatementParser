@@ -3,30 +3,36 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+
 using Newtonsoft.Json;
+
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+
 using StatementParser.Attributes;
+
+using TaxReporterCLI.Exporters.CzechMinistryOfFinance;
+using TaxReporterCLI.Models.Views;
 
 namespace TaxReporterCLI
 {
-	internal class Output
-	{
-		private Dictionary<string, List<object>> GroupTransactions(IList<object> transactions)
-		{
-			return transactions.GroupBy(i => i.GetType()).ToDictionary(k => k.Key.Name, i => i.Select(a => a).ToList());
-		}
+    internal class Output
+    {
+        private Dictionary<string, List<object>> GroupTransactions(IList<object> transactions)
+        {
+            return transactions.GroupBy(i => i.GetType()).ToDictionary(k => k.Key.Name, i => i.Select(a => a).ToList());
+        }
 
-		public void PrintAsJson(IList<object> transactions)
-		{
-			var groupedTransactions = GroupTransactions(transactions);
+        public void PrintAsJson(IList<object> transactions)
+        {
+            var groupedTransactions = GroupTransactions(transactions);
 
-			Console.WriteLine(JsonConvert.SerializeObject(groupedTransactions));
-		}
+            Console.WriteLine(JsonConvert.SerializeObject(groupedTransactions));
+        }
 
-		public void SaveAsExcelSheet(string filePath, IList<object> transactions)
-		{
-			var groupedTransactions = GroupTransactions(transactions);
+        public void SaveAsExcelSheet(string filePath, IList<object> transactions)
+        {
+            var groupedTransactions = GroupTransactions(transactions);
 
             using FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
             var wb1 = new XSSFWorkbook();
@@ -39,89 +45,95 @@ namespace TaxReporterCLI
             wb1.Write(file);
         }
 
-		public void PrintAsPlainText(IList<object> transactions)
-		{
-			var groupedTransactions = GroupTransactions(transactions);
+        public void SaveAsXml(string filePath, DividendBrokerSummaryView dividendBrokerSummaryView, TransactionView transactionView)
+        {
+            var exporter = new CzechMinistryOfFinanceExporter(dividendBrokerSummaryView, transactionView);
+            exporter.Save(filePath);
+        }
 
-			foreach (var group in groupedTransactions)
-			{
-				Console.WriteLine();
-				Console.WriteLine(group.Key);
-				Console.WriteLine(String.Join("\r\n", group.Value));
-			}
-		}
+        public void PrintAsPlainText(IList<object> transactions)
+        {
+            var groupedTransactions = GroupTransactions(transactions);
 
-		private ISheet CreateSheet(XSSFWorkbook workbook, string sheetName, IList<object> objects)
-		{
-			var sheet = workbook.CreateSheet(sheetName);
+            foreach (var group in groupedTransactions)
+            {
+                Console.WriteLine();
+                Console.WriteLine(group.Key);
+                Console.WriteLine(String.Join("\r\n", group.Value));
+            }
+        }
 
-			var headerProperties = CollectPublicProperties(objects[0]);
-			var haeders = headerProperties.Select( i => DescriptionAttribute.ConstructDescription(i.Key, objects[0])).ToList();
-			CreateRow(sheet, 0, haeders);
+        private ISheet CreateSheet(XSSFWorkbook workbook, string sheetName, IList<object> objects)
+        {
+            var sheet = workbook.CreateSheet(sheetName);
 
-			for (int rowIndex = 1; rowIndex <= objects.Count; rowIndex++)
-			{
-				var properties = CollectPublicProperties(objects[rowIndex - 1]);
-				CreateRow(sheet, rowIndex, properties.Values.ToList());
-			}
+            var headerProperties = CollectPublicProperties(objects[0]);
+            var haeders = headerProperties.Select(i => DescriptionAttribute.ConstructDescription(i.Key, objects[0])).ToList();
+            CreateRow(sheet, 0, haeders);
 
-			return sheet;
-		}
+            for (int rowIndex = 1; rowIndex <= objects.Count; rowIndex++)
+            {
+                var properties = CollectPublicProperties(objects[rowIndex - 1]);
+                CreateRow(sheet, rowIndex, properties.Values.ToList());
+            }
 
-		private IRow CreateRow(ISheet sheet, int rowIndex, IList<string> rowValues)
-		{
-			var row = sheet.CreateRow(rowIndex);
+            return sheet;
+        }
 
-			var columnIndex = 0;
-			foreach (var rowValue in rowValues)
-			{
-				var cell = row.CreateCell(columnIndex);
+        private IRow CreateRow(ISheet sheet, int rowIndex, IList<string> rowValues)
+        {
+            var row = sheet.CreateRow(rowIndex);
 
-				// In case it's a number lets store it as a number
-				if (Decimal.TryParse(rowValue, out var value))
-				{
-					cell.SetCellValue((double)value);
-				}
-				else
-				{
-					cell.SetCellValue(rowValue);
-				}
+            var columnIndex = 0;
+            foreach (var rowValue in rowValues)
+            {
+                var cell = row.CreateCell(columnIndex);
 
-				columnIndex++;
-			}
+                // In case it's a number lets store it as a number
+                if (Decimal.TryParse(rowValue, out var value))
+                {
+                    cell.SetCellValue((double)value);
+                }
+                else
+                {
+                    cell.SetCellValue(rowValue);
+                }
 
-			return row;
-		}
+                columnIndex++;
+            }
 
-		private IDictionary<PropertyInfo, string> CollectPublicProperties(Object instance)
-		{
-			var properties = instance.GetType().GetProperties();
+            return row;
+        }
 
-			var dictionary = properties.Reverse().ToDictionary(
-				k => k,
-				i => i.GetValue(instance));
+        private IDictionary<PropertyInfo, string> CollectPublicProperties(Object instance)
+        {
+            var properties = instance.GetType().GetProperties();
 
-			var output = new Dictionary<PropertyInfo, string>();
-			foreach (var pair in dictionary)
-			{
-				if (pair.Value is null)
-				{
-					output.Add(pair.Key, null);
-				}
-				else if (pair.Value is IFormattable || pair.Value is string)
-				{
-					output.Add(pair.Key, pair.Value.ToString());
-				}
-				else
-				{
-					foreach (var prop in CollectPublicProperties(pair.Value))
-					{
-						output.Add(prop.Key, prop.Value);
-					}
-				}
-			}
+            var dictionary = properties.Reverse().ToDictionary(
+                k => k,
+                i => i.GetValue(instance));
 
-			return output;
-		}
-	}
+            var output = new Dictionary<PropertyInfo, string>();
+            foreach (var pair in dictionary)
+            {
+                if (pair.Value is null)
+                {
+                    output.Add(pair.Key, null);
+                }
+                else if (pair.Value is IFormattable || pair.Value is string)
+                {
+                    output.Add(pair.Key, pair.Value.ToString());
+                }
+                else
+                {
+                    foreach (var prop in CollectPublicProperties(pair.Value))
+                    {
+                        output.Add(prop.Key, prop.Value);
+                    }
+                }
+            }
+
+            return output;
+        }
+    }
 }

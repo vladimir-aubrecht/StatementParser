@@ -18,7 +18,7 @@ namespace StatementParserCLI
 			try
 			{
 				var options = parser.Parse(args);
-				await RunAsync(options);
+                await RunAsync(options).ConfigureAwait(false);
 			}
 			catch (ParameterMissingException)
 			{
@@ -63,7 +63,7 @@ namespace StatementParserCLI
 			foreach (var file in filePaths)
 			{
 				Console.WriteLine($"Processing file: {file}");
-				var result = await parser.ParseAsync(file);
+				var result = await parser.ParseAsync(file).ConfigureAwait(false);
 
 				if (result != null)
 				{
