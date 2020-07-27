@@ -30,8 +30,8 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                         Row5 = "N",
                         Row5a = "N",
                         Row30 = "N",
-                        Row58 = "55.00",
-                        Row60 = "55",
+                        Row58 = "0.00",
+                        Row60 = "0",
                         Row61 = "0",
                         Row62 = "60",
                         Row63 = "61",
@@ -89,9 +89,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                         TaxYearLastDayCity = "PABĚNICE",
                         MinistryOfFinanceId = "3312",
                         Lastname = "3",
-                        TaxYearFaxNumber = "22",
                         TaxYearPhone = "21",
-                        CurrentFaxNumber = "13",
                         TaxYearStreetDescriptionNumber = "19",
                         CurrentCountry = "ČESKÁ REPUBLIKA",
                         TaxNumber = "1",
@@ -115,17 +113,16 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                         Row37 = "31",
                         Row38 = "32",
                         Row39 = "33",
-                        Row40 = "34",
-                        Row41 = "35",
-                        Row41a = "36",
-                        Row42 = "37",
+                        Row40 = "0",
+                        Row41 = "96",
+                        Row41a = "96",
+                        Row42 = "126",
                         Row43 = "38",
-                        Row44 = "39",
-                        Row45 = "40"
+                        Row45 = "126"
                     },
                     Section3 = new Section3()
                     {
-                        Row56 = "300",
+                        Row56 = "0",
                         Row49 = "44",
                         Row50 = "45",
                         Row54 = "52",
@@ -134,10 +131,10 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                         Row48 = "43",
                         Row47 = "42",
                         Row53MonthsCell = "50",
-                        Row55 = "337",
+                        Row55 = "74",
                         Row53ValueCell = "51",
                         Row53DescriptionCell = "49",
-                        Row57 = "45",
+                        Row57 = "0",
                         Row52 = "47",
                         Row52a = "48"
                     },
@@ -174,7 +171,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                     {
                         Row328 = 0.00M,
                         Row329 = 99.00M,
-                        Row330 = 45.00M
+                        Row330 = 0.00M
                     },
                     Appendix2 = new Appendix2()
                     {

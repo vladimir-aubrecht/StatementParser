@@ -148,22 +148,10 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         public string Lastname { get; set; }
 
         /// <summary>
-        /// Adresa místa pobytu na území České republiky, kde se poplatník obvykle ve zdaňovacím období zdržoval - Fax
-        /// </summary>
-        [XmlAttribute("z_c_faxu")]
-        public string TaxYearFaxNumber { get; set; }
-
-        /// <summary>
         /// Adresa místa pobytu na území České republiky, kde se poplatník obvykle ve zdaňovacím období zdržoval - Telefon/mobilní telefon
         /// </summary>
         [XmlAttribute("z_c_telef")]
         public string TaxYearPhone { get; set; }
-
-        /// <summary>
-        /// Kontaktní informace - Fax
-        /// </summary>
-        [XmlAttribute("c_faxu")]
-        public string CurrentFaxNumber { get; set; }
 
         /// <summary>
         /// Adresa místa pobytu na území České republiky, kde se poplatník obvykle ve zdaňovacím období zdržoval - Číslo popisné
@@ -215,6 +203,18 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         /// </summary>
         [XmlAttribute("krok_c_orient")]
         public string TaxYearLastDayStreetNumber { get; set; }
+
+        /// <summary>
+        /// Adresa místa pobytu na území České republiky, kde se poplatník obvykle ve zdaňovacím období zdržoval - Fax
+        /// </summary>
+        [XmlAttribute("z_c_faxu")]
+        public string TaxYearFaxNumber { get; set; }
+
+        /// <summary>
+        /// Kontaktní informace - Fax
+        /// </summary>
+        [XmlAttribute("c_faxu")]
+        public string CurrentFaxNumber { get; set; }
 
         /// <summary>
         /// Identifikace daňového subjektu - Jméno
