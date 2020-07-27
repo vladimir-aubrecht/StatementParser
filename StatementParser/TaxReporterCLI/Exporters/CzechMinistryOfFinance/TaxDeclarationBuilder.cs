@@ -66,41 +66,41 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                     },
                     PersonalInformation = new PersonalInformation()
                     {
-                        BirthLastname = "Aubrecht",
-                        BirthNumber = "0000000000",
-                        City = "PRAHA 4",
-                        CurrentCityId = "500119",
-                        TaxYearCityId = "500119",
-                        TaxYearLastDayCityId = "500119",
-                        CurrentCountry = "ČESKÁ REPUBLIKA",
-                        CurrentEmail = "vladimir.aubrecht@me.com",
-                        TaxYearEmail = "vladimir.aubrecht@me.com",
-                        CurrentFaxNumber = null,
-                        TaxYearFaxNumber = null,
-                        CurrentPhone = "+420606000000",
-                        TaxYearPhone = "+420606000000",
-                        CurrentStreet = "Ulice",
-                        TaxYearStreet = "Ulice",
-                        TaxYearLastDayStreet = "Ulice",
-                        Firstname = "Vladimír",
-                        Lastname = "Aubrecht",
-                        CurrentZip = "14000",
-                        TaxYearLastDayZip = "14000",
-                        TaxYearZip = "14000",
+                        CurrentStreet = "9",
+                        CurrentZip = "11000",
+                        CurrentEmail = "14",
+                        TaxYearStreet = "18",
+                        TaxYearLastDayCityId = "531278",
+                        TaxYearEmail = "23",
                         TaxCountry = "CZ",
-                        Nationality = "ČR",
-                        TaxNumber = null,
-                        TaxYearCity = "PRAHA 4",
-                        TaxYearLastDayCity = "PRAHA 4",
-                        PassportNumber = null,
-                        Title = "Ing.",
-                        TaxYearLastDayStreetDescriptionNumber = "000",
-                        CurrentStreetDescriptionNumber = "000",
-                        TaxYearStreetDescriptionNumber = "000",
-                        CurrentStreetNumber = "000",
-                        TaxYearLastDayStreetNumber = "000",
-                        TaxYearStreetNumber = "000",
-                        MinistryOfFinanceId = "2004"
+                        TaxYearLastDayStreetDescriptionNumber = "16",
+                        BirthNumber = "2",
+                        PassportNumber = "8",
+                        Title = "6",
+                        BirthLastname = "5",
+                        TaxYearLastDayZip = "28543",
+                        CurrentStreetDescriptionNumber = "10",
+                        TaxYearZip = "56802",
+                        CurrentCityId = "500054",
+                        CurrentStreetNumber = "11",
+                        TaxYearCityId = "572748",
+                        CurrentPhone = "12",
+                        TaxYearCity = "KARLE",
+                        TaxYearLastDayCity = "PABĚNICE",
+                        MinistryOfFinanceId = "3312",
+                        Lastname = "3",
+                        TaxYearFaxNumber = "22",
+                        TaxYearPhone = "21",
+                        CurrentFaxNumber = "13",
+                        TaxYearStreetDescriptionNumber = "19",
+                        CurrentCountry = "ČESKÁ REPUBLIKA",
+                        TaxNumber = "1",
+                        TaxYearLastDayStreet = "15",
+                        Nationality = "7",
+                        City = "PRAHA 1",
+                        TaxYearStreetNumber = "20",
+                        TaxYearLastDayStreetNumber = "17",
+                        Firstname = "4",
 
                     },
                     Section2 = new Section2()
@@ -125,22 +125,20 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                     },
                     Appendix2 = new Appendix2[]
                     {
-                        new Appendix2() { Code = "Z", Type = "D", Description = "Příjmy z prodeje indexů", Expenses = "3919", Income = "20500", Profit = "16581" }
+                        new Appendix2() { Code = "Z", Type = "D", Description = "94", Expenses = "96", Income = "95", Profit = "-1" }
                     },
                     AppendixIncomeTable = new AppendixIncomeTable[]
                     {
-                        new AppendixIncomeTable() { Income = "1791494", Insurance = "552066", TakenDeposit = "345159" },
-                        new AppendixIncomeTable() { Income = "378327" },
-                        new AppendixIncomeTable() { Income = "27372" }
+                        new AppendixIncomeTable() { Income = "101", Insurance = "102", TakenDeposit = "103", TakenTaxByArticle36Paragraph8 = "106", TakenTaxByArticle36Paragraph7 = "105", PaidMontlyBonuses = "104" },
+                        new AppendixIncomeTable() { Income = "107", Insurance = "108", TakenDeposit = "109", TakenTaxByArticle36Paragraph8 = "112", TakenTaxByArticle36Paragraph7 = "111", PaidMontlyBonuses = "110" },
                     },
                     Appendix3 = new Appendix3[]
                     {
-                        new Appendix3() { Coeficient = 0.01, Country = "PL", Income = 263, MaximumRecognizedTax = 46.33M, RecognizedTax = 46.33M, Tax = 50, UnrecognisedTax = 3.67M }
+                        new Appendix3() { Coeficient = 0.00M, Country = "US", Income = 97, MaximumRecognizedTax = 0.00M, RecognizedTax = 0.00M, Tax = 99, UnrecognisedTax = 99.00M, Expenses = 98M }
                     },
                     AppendixSeznam = new AppendixSeznam[]
                     {
-                        new AppendixSeznam() { BrokerName = "LYNX B.V.", Country = "PL", IncomeInCZK = 263, TaxInCZK = 50, TaxInOriginalCurrency = 8 },
-                        new AppendixSeznam() { BrokerName = "RaiffeisenBank", Country = "US", IncomeInCZK = 4932, TaxInCZK = 740, TaxInOriginalCurrency = 32 }
+                        new AppendixSeznam() { BrokerName = "107", Country = "AZ", IncomeInCZK = 110, TaxInCZK = 109, TaxInOriginalCurrency = 108 },
                     }
                 }
             };
