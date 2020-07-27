@@ -13,7 +13,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         public PersonalInformation PersonalInformation { get; set; }
 
         [XmlElement("VetaO")]
-        public VetaO VetaO { get; set; }
+        public Section2 Section2 { get; set; }
 
         [XmlElement("VetaJ")]
         public Appendix2[] Appendix2 { get; set; }
