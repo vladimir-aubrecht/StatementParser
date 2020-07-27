@@ -123,6 +123,24 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                         Row44 = "39",
                         Row45 = "40"
                     },
+                    Section3 = new Section3()
+                    {
+                        Row56 = "300",
+                        Row49 = "44",
+                        Row50 = "45",
+                        Row54 = "52",
+                        Row51 = "46",
+                        Row46 = "41",
+                        Row48 = "43",
+                        Row47 = "42",
+                        Row53MonthsCell = "50",
+                        Row55 = "337",
+                        Row53ValueCell = "51",
+                        Row53DescriptionCell = "49",
+                        Row57 = "45",
+                        Row52 = "47",
+                        Row52a = "48"
+                    },
                     Appendix2 = new Appendix2[]
                     {
                         new Appendix2() { Code = "Z", Type = "D", Description = "94", Expenses = "96", Income = "95", Profit = "-1" }

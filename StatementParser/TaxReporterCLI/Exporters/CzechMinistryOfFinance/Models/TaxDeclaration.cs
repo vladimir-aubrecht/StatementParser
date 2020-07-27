@@ -15,6 +15,9 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         [XmlElement("VetaO")]
         public Section2 Section2 { get; set; }
 
+        [XmlElement("VetaS")]
+        public Section3 Section3 { get; set; }
+
         [XmlElement("VetaJ")]
         public Appendix2[] Appendix2 { get; set; }
 
