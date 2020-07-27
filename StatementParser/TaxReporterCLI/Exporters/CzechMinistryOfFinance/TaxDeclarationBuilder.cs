@@ -157,6 +157,18 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                     AppendixSeznam = new AppendixSeznam[]
                     {
                         new AppendixSeznam() { BrokerName = "107", Country = "AZ", IncomeInCZK = 110, TaxInCZK = 109, TaxInOriginalCurrency = 108 },
+                    },
+                    AppendixOther = new AppendixOther()
+                    {
+                        AppendixText = "94"
+                    },
+                    AppendixSummary = new AppendixSummary()
+                    {
+                        TotalAmountOfAppendixes = "5",
+                        TotalAmountOfAppendixes2 = "1",
+                        TotalAmountOfAppendixes3 = "1",
+                        TotalAmountOfAppendixesEmployeeIncomeConfirmation = "2",
+                        TotalAmountOfAppendixesSeznam = "1"
                     }
                 }
             };

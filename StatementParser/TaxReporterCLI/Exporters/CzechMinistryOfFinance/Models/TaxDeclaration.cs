@@ -18,8 +18,14 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         [XmlElement("VetaS")]
         public Section3 Section3 { get; set; }
 
+        [XmlElement("VetaB")]
+        public AppendixSummary AppendixSummary { get; set; }
+
         [XmlElement("VetaJ")]
         public Appendix2[] Appendix2 { get; set; }
+
+        [XmlElement("VetaR")]
+        public AppendixOther AppendixOther { get; set; }
 
         [XmlElement("VetaL")]
         public Appendix3[] Appendix3 { get; set; }
