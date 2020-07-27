@@ -141,18 +141,18 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                         Row52 = "47",
                         Row52a = "48"
                     },
-                    Appendix2 = new Appendix2[]
+                    Appendix2OtherIncomeRow = new Appendix2OtherIncomeRow[]
                     {
-                        new Appendix2() { Code = "Z", Type = "D", Description = "94", Expenses = "96", Income = "95", Profit = "-1" }
+                        new Appendix2OtherIncomeRow() { Code = "Z", Type = "D", Description = "94", Expenses = "96", Income = "95", Profit = "-1" }
                     },
                     AppendixIncomeTable = new AppendixIncomeTable[]
                     {
                         new AppendixIncomeTable() { Income = "101", Insurance = "102", TakenDeposit = "103", TakenTaxByArticle36Paragraph8 = "106", TakenTaxByArticle36Paragraph7 = "105", PaidMontlyBonuses = "104" },
                         new AppendixIncomeTable() { Income = "107", Insurance = "108", TakenDeposit = "109", TakenTaxByArticle36Paragraph8 = "112", TakenTaxByArticle36Paragraph7 = "111", PaidMontlyBonuses = "110" },
                     },
-                    Appendix3 = new Appendix3[]
+                    Appendix3Lists = new Appendix3List[]
                     {
-                        new Appendix3() { Coeficient = 0.00M, Country = "US", Income = 97, MaximumRecognizedTax = 0.00M, RecognizedTax = 0.00M, Tax = 99, UnrecognisedTax = 99.00M, Expenses = 98M }
+                        new Appendix3List() { Coeficient = 0.00M, Country = "US", Income = 97, MaximumRecognizedTax = 0.00M, RecognizedTax = 0.00M, Tax = 99, UnrecognisedTax = 99.00M, Expenses = 98M }
                     },
                     AppendixSeznam = new AppendixSeznam[]
                     {
@@ -169,6 +169,27 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                         TotalAmountOfAppendixes3 = "1",
                         TotalAmountOfAppendixesEmployeeIncomeConfirmation = "2",
                         TotalAmountOfAppendixesSeznam = "1"
+                    },
+                    Appendix3 = new Appendix3()
+                    {
+                        Row328 = 0.00M,
+                        Row329 = 99.00M,
+                        Row330 = 45.00M
+                    },
+                    Appendix2 = new Appendix2()
+                    {
+                        Row207 = "95",
+                        Row208 = "95",
+                        Row209 = "0",
+                        TotalExpenses = "96",
+                        TotalIncomes = "95",
+                        TotalProfit = "0",
+                        ApplyForExpensesGivenByFixedPercentage = "N",
+                        IncomesFromPartnerSharedWealth = "N"
+                    },
+                    Appendix1 = new Appendix1()
+                    {
+                        ApplyForExpensesGivenByFixedPercentage = "N"
                     }
                 }
             };

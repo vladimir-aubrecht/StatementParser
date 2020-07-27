@@ -21,14 +21,23 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         [XmlElement("VetaB")]
         public AppendixSummary AppendixSummary { get; set; }
 
+        [XmlElement("VetaT")]
+        public Appendix1 Appendix1 { get; set; }
+
+        [XmlElement("VetaV")]
+        public Appendix2 Appendix2 { get; set; }
+
         [XmlElement("VetaJ")]
-        public Appendix2[] Appendix2 { get; set; }
+        public Appendix2OtherIncomeRow[] Appendix2OtherIncomeRow { get; set; }
+
+        [XmlElement("VetaW")]
+        public Appendix3 Appendix3 { get; set; }
 
         [XmlElement("VetaR")]
         public AppendixOther AppendixOther { get; set; }
 
         [XmlElement("VetaL")]
-        public Appendix3[] Appendix3 { get; set; }
+        public Appendix3List[] Appendix3Lists { get; set; }
 
         [XmlElement("Vetab")]
         public AppendixIncomeTable[] AppendixIncomeTable { get; set; }
