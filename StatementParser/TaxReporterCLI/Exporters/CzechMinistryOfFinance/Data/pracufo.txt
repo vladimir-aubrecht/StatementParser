@@ -1,0 +1,202 @@
+c_pracufo|naz_pracufo|nazu_pracufo|c_ufo|d_vzniku|d_zaniku|c_pufo|
+2402|ÚP AŠ|Územní pracoviště v Aši|455|1991-01-01||123|
+3006|ÚP BLANSKO|Územní pracoviště v Blansku|461|2013-01-01||283|
+3007|ÚP BOSKOVICE|Územní pracoviště v Boskovicích|461|2013-01-01||284|
+3003|ÚP BRNO III|Územní pracoviště Brno III|461|2013-01-01||290|
+3205|ÚP BRUNTÁL|Územní pracoviště v Bruntále|463|2013-01-01||358|
+3302|ÚP BYSTŘICE POD HOSTÝNEM|Územní pracoviště v Bystřici pod Hostýnem|464|2013-01-01||322|
+2107|ÚP ČESKÝ BROD|Územní pracoviště v Českém Brodě|452|2013-01-01||35|
+2503|ÚP DĚČÍN|Územní pracoviště v Děčíně|456|2013-01-01||178|
+2704|ÚP DVŮR KRÁLOVÉ|Územní pracoviště ve Dvoře Králové nad Labem|458|2013-01-01||268|
+3209|ÚP FULNEK|Územní pracoviště ve Fulneku|463|2013-01-01||374|
+3211|ÚP HLUČÍN|Územní pracoviště v Hlučíně|463|2013-01-01||385|
+2306|ÚP HORAŽĎOVICE|Územní pracoviště v Horažďovicích|454|1991-01-01||133|
+2701|ÚP HRADEC KRÁLOVÉ|Územní pracoviště v Hradci Králové|458|2013-01-01||228|
+2403|ÚP CHEB|Územní pracoviště v Chebu|455|1991-01-01||123|
+3012|ÚP IVANČICE|Územní pracoviště v Ivančicích|461|2013-01-01||294|
+2707|ÚP JIČÍN|Územní pracoviště v Jičíně|458|2013-01-01||238|
+2505|ÚP KADAŇ|Územní pracoviště v Kadani|456|2013-01-01||183|
+2110|ÚP KLADNO|Územní pracoviště v Kladně|452|2013-01-01||30|
+3213|ÚP KOPŘIVNICE|Územní pracoviště v Kopřivnici|463|2013-01-01||376|
+2404|ÚP KRASLICE|Územní pracoviště v Kraslicích|455|2013-01-01||155|
+3013|ÚP KYJOV|Územní pracoviště v Kyjově|461|2013-01-01||310|
+2507|ÚP LITOMĚŘICE|Územní pracoviště v Litoměřicích|456|2013-01-01||196|
+2509|ÚP LOUNY|Územní pracoviště v Lounech|456|2013-01-01||201|
+3014|ÚP MIKULOV|Územní pracoviště v Mikulově|461|2013-01-01||298|
+2806|ÚP MORAVSKÁ TŘEBOVÁ|Územní pracoviště v Moravské Třebové|459|2013-01-01||263|
+2709|ÚP NÁCHOD|Územní pracoviště v Náchodě|458|2013-01-01||243|
+2710|ÚP NOVÁ PAKA|Územní pracoviště v Nové Pace|458|1991-01-01||240|
+2118|ÚP NYMBURK|Územní pracoviště v Nymburku|452|2013-01-01||53|
+3202|ÚP OSTRAVA II|Územní pracoviště Ostrava II|463|2013-01-01||389|
+3306|ÚP OTROKOVICE|Územní pracoviště v Otrokovicích|464|1991-01-01||305|
+2208|ÚP PÍSEK|Územní pracoviště v Písku|453|2013-01-01||97|
+2511|ÚP PODBOŘANY|Územní pracoviště v Podbořanech|456|2013-01-01||203|
+2010|ÚP PRAHA 10|Územní pracoviště pro Prahu 10|451|2013-01-01||10|
+2005|ÚP PRAHA 5|Územní pracoviště pro Prahu 5|451|2013-01-01||5|
+2009|ÚP PRAHA 9|Územní pracoviště pro Prahu 9|451|2013-01-01||9|
+2209|ÚP PRACHATICE|Územní pracoviště v Prachaticích|453|2013-01-01||101|
+2311|ÚP PŘEŠTICE|Územní pracoviště v Přešticích|454|2013-01-01||142|
+2512|ÚP ROUDNICE NAD LABEM|Územní pracoviště v Roudnici nad Labem|456|2013-01-01||198|
+2122|ÚP ŘÍČANY|Územní pracoviště v Říčanech|452|2013-01-01||59|
+3016|ÚP SLAVKOV U BRNA|Územní pracoviště ve Slavkově u Brna|461|2013-01-01||341|
+2314|ÚP STŘÍBRO|Územní pracoviště ve Stříbře|454|2013-01-01||160|
+3109|ÚP ŠUMPERK|Územní pracoviště v Šumperku|462|1991-01-01||398|
+2911|ÚP TELČ|Územní pracoviště v Telči|460|1991-01-01||314|
+2713|ÚP TRUTNOV|Územní pracoviště v Trutnově|458|2013-01-01||268|
+2609|ÚP TURNOV|Územní pracoviště v Turnově|457|2013-01-01||260|
+2501|ÚP ÚSTÍ NAD LABEM|Územní pracoviště v Ústí nad Labem|456|2013-01-01||214|
+2913|ÚP VELKÉ MEZIŘÍČÍ|Územní pracoviště ve Velkém Meziříčí|460|2013-01-01||353|
+2217|ÚP VODŇANY|Územní pracoviště ve Vodňanech|453|2013-01-01||105|
+2810|ÚP VYSOKÉ MÝTO|Územní pracoviště ve Vysokém Mýtě|459|2013-01-01||274|
+3020|ÚP ZNOJMO|Územní pracoviště ve Znojmě|461|2013-01-01||346|
+2610|ÚP ŽELEZNÝ BROD|Územní pracoviště v Železném Brodě|457|1991-01-01||187|
+2103|ÚP BENEŠOV|Územní pracoviště v Benešově|452|2013-01-01||21|
+2202|ÚP BLATNÁ|Územní pracoviště v Blatné|453|2013-01-01||105|
+2105|ÚP BRANDÝS N.L. - ST.BOL.|Územní pracoviště v Brandýse n.L.-Staré Bol.|452|2013-01-01||57|
+3004|ÚP BRNO IV|Územní pracoviště Brno IV|461|2013-01-01||291|
+3008|ÚP BŘECLAV|Územní pracoviště v Břeclavi|461|2013-01-01||298|
+2106|ÚP ČÁSLAV|Územní pracoviště v Čáslavi|452|1991-01-01||39|
+2203|ÚP ČESKÝ KRUMLOV|Územní pracoviště v Českém Krumlově|453|1991-01-01||82|
+2703|ÚP DOBRUŠKA|Územní pracoviště v Dobrušce|458|2013-01-01||254|
+3207|ÚP FRÝDEK-MÍSTEK|Územní pracoviště ve Frýdku-Místku|463|2013-01-01||362|
+3210|ÚP HAVÍŘOV|Územní pracoviště v Havířově|463|2013-01-01||370|
+3010|ÚP HODONÍN|Územní pracoviště v Hodoníně|461|2013-01-01||309|
+2307|ÚP HORŠOVSKÝ TÝN|Územní pracoviště v Horšovském Týně|454|1991-01-01||118|
+3102|ÚP HRANICE|Územní pracoviště v Hranicích|462|1991-01-01||394|
+2504|ÚP CHOMUTOV|Územní pracoviště v Chomutově|456|2013-01-01||182|
+2604|ÚP JABLONEC NAD NISOU|Územní pracoviště v Jablonci nad Nisou|457|2013-01-01||187|
+2901|ÚP JIHLAVA|Územní pracoviště v Jihlavě|460|2013-01-01||314|
+2206|ÚP KAPLICE|Územní pracoviště v Kaplici|453|2013-01-01||82|
+2308|ÚP KLATOVY|Územní pracoviště v Klatovech|454|2013-01-01||133|
+2708|ÚP KOSTELEC NAD ORLICÍ|Územní pracoviště v Kostelci nad Orlicí|458|2013-01-01||253|
+3214|ÚP KRNOV|Územní pracoviště v Krnově|463|2013-01-01||359|
+2906|ÚP LEDEČ NAD SÁZAVOU|Územní pracoviště v Ledči nad Sázavou|460|1991-01-01||223|
+2805|ÚP LITOMYŠL|Územní pracoviště v Litomyšli|459|2013-01-01||263|
+3305|ÚP LUHAČOVICE|Územní pracoviště v Luhačovicích|464|2013-01-01||303|
+2207|ÚP MILEVSKO|Územní pracoviště v Milevsku|453|2013-01-01||98|
+2907|ÚP MORAVSKÉ BUDĚJOVICE|Územní pracoviště v Moravských Budějovicích|460|1991-01-01||332|
+2908|ÚP NÁMĚŠŤ NAD OSLAVOU|Územní pracoviště v Náměšti nad Oslavou|460|2013-01-01||330|
+2606|ÚP NOVÝ BOR|Územní pracoviště v Novém Boru|457|1991-01-01||172|
+3101|ÚP OLOMOUC|Územní pracoviště v Olomouci|462|1991-01-01||379|
+3203|ÚP OSTRAVA III|Územní pracoviště Ostrava III|463|2013-01-01||390|
+2909|ÚP PACOV|Územní pracoviště v Pacově|460|2013-01-01||91|
+2301|ÚP PLZEŇ|Územní pracoviště v Plzni|454|2013-01-01||138|
+2119|ÚP PODĚBRADY|Územní pracoviště v Poděbradech|452|2013-01-01||55|
+2002|ÚP PRAHA 2|Územní pracoviště pro Prahu 2|451|2013-01-01||2|
+2006|ÚP PRAHA 6|Územní pracoviště pro Prahu 6|451|2013-01-01||6|
+2011|ÚP PRAHA-JIŽNÍ MĚSTO|Územní pracoviště pro Prahu - Jižní Město|451|2013-01-01||11|
+3106|ÚP PROSTĚJOV|Územní pracoviště v Prostějově|462|1991-01-01||325|
+2120|ÚP PŘÍBRAM|Územní pracoviště v Příbrami|452|2013-01-01||63|
+3307|ÚP ROŽNOV POD RADH.|Územní pracoviště v Rožnově pod Radhoštěm|464|2013-01-01||404|
+2123|ÚP SEDLČANY|Územní pracoviště v Sedlčanech|452|2013-01-01||66|
+2210|ÚP SOBĚSLAV|Územní pracoviště v Soběslavi|453|2013-01-01||111|
+2315|ÚP SUŠICE|Územní pracoviště v Sušici|454|2013-01-01||133|
+2212|ÚP TÁBOR|Územní pracoviště v Táboře|453|2013-01-01||110|
+2514|ÚP TEPLICE|Územní pracoviště v Teplicích|456|2013-01-01||210|
+2912|ÚP TŘEBÍČ|Územní pracoviště v Třebíči|460|2013-01-01||330|
+2215|ÚP TÝN NAD VLTAVOU|Územní pracoviště v Týně nad Vltavou|453|2013-01-01||79|
+2809|ÚP ÚSTÍ NAD ORLICÍ|Územní pracoviště v Ústí nad Orlicí|459|2013-01-01||273|
+3018|ÚP VESELÍ NAD MORAVOU|Územní pracoviště ve Veselí nad Moravou|461|2013-01-01||311|
+2126|ÚP VOTICE|Územní pracoviště ve Voticích|452|2013-01-01||21|
+3019|ÚP VYŠKOV|Územní pracoviště ve Vyškově|461|2013-01-01||341|
+2811|ÚP ŽAMBERK|Územní pracoviště v Žamberku|459|2013-01-01||275|
+2104|ÚP BEROUN|Územní pracoviště v Berouně|452|2013-01-01||26|
+2304|ÚP BLOVICE|Územní pracoviště v Blovicích|454|2013-01-01||141|
+3001|ÚP BRNO I|Územní pracoviště Brno I|461|2013-01-01||288|
+3005|ÚP BRNO VENKOV|Územní pracoviště Brno-venkov|461|2013-01-01||293|
+3009|ÚP BUČOVICE|Územní pracoviště v Bučovicích|461|2013-01-01||341|
+2602|ÚP ČESKÁ LÍPA|Územní pracoviště v České Lípě|457|2013-01-01||172|
+3206|ÚP ČESKÝ TĚŠÍN|Územní pracoviště v Českém Těšíně|463|2013-01-01||367|
+2108|ÚP DOBŘÍŠ|Územní pracoviště v Dobříši|452|2013-01-01||63|
+2603|ÚP FRÝDLANT|Územní pracoviště ve Frýdlantě|457|1991-01-01||192|
+2903|ÚP HAVLÍČKŮV BROD|Územní pracoviště v Havlíčkově Brodě|460|2013-01-01||223|
+3303|ÚP HOLEŠOV|Územní pracoviště v Holešově|464|2013-01-01||322|
+2705|ÚP HOŘICE|Územní pracoviště v Hořicích|458|2013-01-01||238|
+2904|ÚP HUMPOLEC|Územní pracoviště v Humpolci|460|2013-01-01||92|
+2905|ÚP CHOTĚBOŘ|Územní pracoviště v Chotěboři|460|2013-01-01||223|
+2706|ÚP JAROMĚŘ|Územní pracoviště v Jaroměři|458|2013-01-01||243|
+2605|ÚP JILEMNICE|Územní pracoviště v Jilemnici|457|2013-01-01||259|
+2401|ÚP KARLOVY VARY|Územní pracoviště v Karlových Varech|455|2013-01-01||128|
+2111|ÚP KOLÍN|Územní pracoviště v Kolíně|452|2013-01-01||34|
+2309|ÚP KRALOVICE|Územní pracoviště v Kralovicích|454|2013-01-01||145|
+3304|ÚP KROMĚŘÍŽ|Územní pracoviště v Kroměříži|464|2013-01-01||320|
+2601|ÚP LIBEREC|Územní pracoviště v Liberci|457|2013-01-01||192|
+3105|ÚP LITOVEL|Územní pracoviště v Litovli|462|1991-01-01||381|
+2405|ÚP MARIÁNSKÉ LÁZNĚ|Územní pracoviště v Mariánských Lázních|455|1991-01-01||123|
+2115|ÚP MLADÁ BOLESLAV|Územní pracoviště v Mladé Boleslavi|452|2013-01-01||48|
+3015|ÚP MORAVSKÝ KRUMLOV|Územní pracoviště v Moravském Krumlově|461|2013-01-01||346|
+2310|ÚP NEPOMUK|Územní pracoviště v Nepomuku|454|2013-01-01||141|
+2711|ÚP NOVÝ BYDŽOV|Územní pracoviště v Novém Bydžově|458|2013-01-01||228|
+3216|ÚP OPAVA|Územní pracoviště v Opavě|463|2013-01-01||384|
+3201|ÚP OSTRAVA I.|Územní pracoviště Ostrava I|463|1991-01-01||388|
+2801|ÚP PARDUBICE|Územní pracoviště v Pardubicích|459|2013-01-01||248|
+2303|ÚP PLZEŇ-JIH|Územní pracoviště Plzeň-jih|454|2013-01-01||140|
+2102|ÚP PRAHA ZÁPAD|Územní pracoviště Praha-západ|452|2013-01-01||60|
+2003|ÚP PRAHA 3|Územní pracoviště pro Prahu 3|451|2013-01-01||3|
+2007|ÚP PRAHA 7|Územní pracoviště pro Prahu 7|451|2013-01-01||7|
+2012|ÚP PRAHA-MODŘANY|Územní pracoviště v Praze - Modřanech|451|2013-01-01||12|
+2807|ÚP PŘELOUČ|Územní pracoviště v Přelouči|459|2013-01-01||248|
+2121|ÚP RAKOVNÍK|Územní pracoviště v Rakovníku|452|2013-01-01||69|
+2513|ÚP RUMBURK|Územní pracoviště v Rumburku|456|2013-01-01||179|
+2607|ÚP SEMILY|Územní pracoviště v Semilech|457|2013-01-01||258|
+2407|ÚP SOKOLOV|Územní pracoviště v Sokolově|455|2013-01-01||155|
+2808|ÚP SVITAVY|Územní pracoviště ve Svitavách|459|2013-01-01||263|
+2313|ÚP TACHOV|Územní pracoviště v Tachově|454|2013-01-01||160|
+3017|ÚP TIŠNOV|Územní pracoviště v Tišnově|461|1991-01-01||295|
+2214|ÚP TŘEBOŇ|Územní pracoviště v Třeboni|453|2013-01-01||88|
+3309|ÚP UHERSKÉ HRADIŠTĚ|Územní pracoviště v Uherském Hradišti|464|2013-01-01||336|
+3311|ÚP VALAŠSKÉ KLOBOUKY|Územní pracoviště ve Valašských Kloboukách|464|1991-01-01||403|
+2216|ÚP VIMPERK|Územní pracoviště ve Vimperku|453|2013-01-01||102|
+2714|ÚP VRCHLABÍ|Územní pracoviště ve Vrchlabí|458|2013-01-01||270|
+3110|ÚP ZÁBŘEH|Územní pracoviště v Zábřehu|462|1991-01-01||400|
+2515|ÚP ŽATEC|Územní pracoviště v Žatci|456|2013-01-01||203|
+2502|ÚP BÍLINA|Územní pracoviště v Bílině|456|2013-01-01||210|
+3204|ÚP BOHUMÍN|Územní pracoviště v Bohumíně|463|2013-01-01||367|
+3002|ÚP BRNO II|Územní pracoviště Brno II|461|2013-01-01||289|
+2702|ÚP BROUMOV|Územní pracoviště v Broumově|458|2013-01-01||243|
+2902|ÚP BYSTŘICE NAD PERN.|Územní pracoviště v Bystřici nad Pernštejnem|460|2013-01-01||351|
+2201|ÚP ČESKÉ BUDĚJOVICE|Územní pracoviště v Českých Budějovicích|453|2013-01-01||77|
+2204|ÚP DAČICE|Územní pracoviště v Dačicích|453|2013-01-01||86|
+2305|ÚP DOMAŽLICE|Územní pracoviště v Domažlicích|454|2013-01-01||118|
+3208|ÚP FRÝDLANT NAD OSTRAV.|Územní pracoviště ve Frýdlantě nad Ostravicí|463|2013-01-01||362|
+2802|ÚP HLINSKO|Územní pracoviště v Hlinsku|459|2013-01-01||233|
+2803|ÚP HOLICE|Územní pracoviště v Holicích|459|2013-01-01||248|
+2109|ÚP HOŘOVICE|Územní pracoviště v Hořovicích|452|2013-01-01||27|
+3011|ÚP HUSTOPEČE|Územní pracoviště v Hustopečích|461|2013-01-01||299|
+2804|ÚP CHRUDIM|Územní pracoviště v Chrudimi|459|2013-01-01||233|
+3103|ÚP JESENÍK|Územní pracoviště v Jeseníku|462|1991-01-01||399|
+2205|ÚP JINDŘICHŮV HRADEC|Územní pracoviště v Jindřichově Hradci|453|2013-01-01||86|
+3212|ÚP KARVINÁ|Územní pracoviště v Karviné|463|1991-01-01||367|
+3104|ÚP KONICE|Územní pracoviště v Konici|462|1991-01-01||325|
+2112|ÚP KRALUPY NAD VLTAVOU|Územní pracoviště v Kralupech nad Vltavou|452|2013-01-01||44|
+2113|ÚP KUTNÁ HORA|Územní pracoviště v Kutné Hoře|452|2013-01-01||38|
+2506|ÚP LIBOCHOVICE|Územní pracoviště v Libochovicích|456|2013-01-01||198|
+2508|ÚP LITVÍNOV|Územní pracoviště v Litvínově|456|2013-01-01||207|
+2114|ÚP MĚLNÍK|Územní pracoviště v Mělníce|452|2013-01-01||43|
+2116|ÚP MNICHOVO HRADIŠTĚ|Územní pracoviště v Mnichově Hradišti|452|2013-01-01||50|
+2510|ÚP MOST|Územní pracoviště v Mostě|456|2013-01-01||206|
+2117|ÚP NERATOVICE|Územní pracoviště v Neratovicích|452|2013-01-01||45|
+3215|ÚP NOVÝ JIČÍN|Územní pracoviště v Novém Jičíně|463|2013-01-01||374|
+3217|ÚP ORLOVÁ|Územní pracoviště v Orlové|463|2013-01-01||367|
+2406|ÚP OSTROV NAD OHŘÍ|Územní pracoviště v Ostrově|455|2013-01-01||128|
+2910|ÚP PELHŘIMOV|Územní pracoviště v Pelhřimově|460|2013-01-01||91|
+2302|ÚP PLZEŇ-SEVER|Územní pracoviště Plzeň-sever|454|2013-01-01||145|
+2001|ÚP PRAHA 1|Územní pracoviště pro Prahu 1|451|2013-01-01||1|
+2004|ÚP PRAHA 4|Územní pracoviště pro Prahu 4|451|2013-01-01||4|
+2008|ÚP PRAHA 8|Územní pracoviště pro Prahu 8|451|2013-01-01||8|
+2101|ÚP PRAHA-VÝCHOD|Územní pracoviště Praha-východ|452|1991-01-01||57|
+3107|ÚP PŘEROV|Územní pracoviště v Přerově|462|1991-01-01||393|
+2312|ÚP ROKYCANY|Územní pracoviště v Rokycanech|454|2013-01-01||150|
+2712|ÚP RYCHNOV NAD KNĚŽ.|Územní pracoviště v Rychnově nad Kněžnou|458|2013-01-01||253|
+2124|ÚP SLANÝ|Územní pracoviště ve Slaném|452|2013-01-01||31|
+2211|ÚP STRAKONICE|Územní pracoviště ve Strakonicích|453|2013-01-01||105|
+3108|ÚP ŠTERNBERK|Územní pracoviště ve Šternberku|462|1991-01-01||381|
+2608|ÚP TANVALD|Územní pracoviště v Tanvaldě|457|2013-01-01||187|
+2213|ÚP TRHOVÉ SVINY|Územní pracoviště v Trhových Svinech|453|1991-01-01||77|
+3218|ÚP TŘINEC|Územní pracoviště v Třinci|463|2013-01-01||364|
+3308|ÚP UHERSKÝ BROD|Územní pracoviště v Uherském Brodě|464|2013-01-01||338|
+3310|ÚP VALAŠSKÉ MEZIŘÍČÍ|Územní pracoviště ve Valašském Meziříčí|464|2013-01-01||405|
+2125|ÚP VLAŠIM|Územní pracoviště ve Vlašimi|452|2013-01-01||22|
+3312|ÚP VSETÍN|Územní pracoviště ve Vsetíně|464|2013-01-01||403|
+3301|ÚP ZLÍN|Územní pracoviště ve Zlíně|464|2013-01-01||303|
+2914|ÚP ŽĎÁR NAD SÁZAVOU|Územní pracoviště ve Žďáru nad Sázavou|460|2013-01-01||351|

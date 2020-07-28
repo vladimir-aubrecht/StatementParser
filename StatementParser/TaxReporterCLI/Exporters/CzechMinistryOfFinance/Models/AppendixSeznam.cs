@@ -4,19 +4,19 @@ using System.Xml.Serialization;
 namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
 {
     [Serializable]
-    public class AppendixSeznam
+    public class AppendixSeznamRow
     {
         /// <summary>
         /// 4. daňpokyny k vyplnění 
         /// </summary>
         [XmlAttribute("dan_seznam")]
-        public int TaxInCZK { get; set; }
+        public decimal TaxInCZK { get; set; }
 
         /// <summary>
         /// 3. zaplacená daňpokyny k vyplnění 
         /// </summary>
         [XmlAttribute("zapl_dan")]
-        public int TaxInOriginalCurrency { get; set; }
+        public decimal TaxInOriginalCurrency { get; set; }
 
         /// <summary>
         /// 2. stát zdroje příjmůpokyny k vyplnění
@@ -34,6 +34,6 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         /// 5. příjmypokyny k vyplnění 
         /// </summary>
         [XmlAttribute("prijmy_seznam")]
-        public int IncomeInCZK { get; set; }
+        public decimal IncomeInCZK { get; set; }
     }
 }

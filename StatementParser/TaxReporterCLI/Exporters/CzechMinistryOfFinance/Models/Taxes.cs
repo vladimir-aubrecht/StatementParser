@@ -34,7 +34,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         /// Za zdaňovací období (kalendářní rok)
         /// </summary>
         [XmlAttribute("rok")]
-        public string Year { get; set; }
+        public int Year { get; set; }
 
         /// <summary>
         /// DAP zpracoval a předkládá daňový poradce na základě plné moci k zastupování, která byla podána správci daně před uplynutím neprodloužené lhůty

@@ -1,0 +1,334 @@
+c_zaznamu|d_pocpl|d_ukopl|kod2|kod3|naz_zeme_c60|naz_zeme_c25|naz_zeme_a60|naz_zeme_a25|kod2_eu|d_pocpl_eu|d_ukopl_eu|
+833|1900-01-01|2100-06-30|IM|IMN|Ostrov Man|OSTROV MAN|ISLE OF MAN|ISLE OF MAN|IM|||
+12|1900-01-01||DZ|DZA|Alžírská lidová demokratická republika|ALŽÍRSKO|People's Democratic Republic of Algeria|ALGERIA|DZ|||
+28|1900-01-01||AG|ATG|Antigua a Barbuda|ANTIGUA A BARBUDA|Antigua and Barbuda|ANTIGUA AND BARBUDA|AG|||
+44|1900-01-01||BS|BHS|Bahamské společenství|BAHAMY|Commonwealth of the Bahamas|BAHAMAS|BS|||
+52|1900-01-01||BB|BRB|Barbados|BARBADOS|Barbados|BARBADOS|BB|||
+70|1900-01-01||BA|BIH|Republika Bosna a Hercegovina|BOSNA A HERCEGOVINA|Republik of Bosnia and Herzegovina|BOSNIA AND HERZEGOVINA|BA|||
+84|1900-01-01||BZ|BLZ|Belize|BELIZE|Belize|BELIZE|BZ|||
+96|1900-01-01|2100-06-30|BN|BRN|Brunej Darussalam|BRUNEJ DARUSSALAM|Brunei Darussalam|BRUNEI DARUSSALAM|BN|||
+112|1900-01-01||BY|BLR|Běloruská republika|BĚLORUSKO|Republic of Belarus|BELARUS|BY|||
+132|1900-01-01||CV|CPV|Kapverdská republika|KAPVERDY|Republic of Cape Verde|CAPE VERDE|CV|||
+148|1900-01-01||TD|TCD|Čadská republika|ČAD|Republic of Chad|CHAD|TD|||
+162|1900-01-01|2100-06-30|CX|CXR|Vánoční ostrov|VÁNOČNÍ OSTROV|Christmas Island|CHRISTMAS ISLAND|CX|||
+175|1994-01-01|2100-06-30|YT|MYT|Mayotte|MAYOTTE|Mayotte|MAYOTTE|YT|||
+191|1900-01-01||HR|HRV|Chorvatská republika|CHORVATSKO|Republic of Croatia|CROATIA|HR|2013-07-01||
+212|1900-01-01||DM|DMA|Dominické společenství|DOMINIKA|Commonwealth of Dominica|DOMINICA|DM|||
+226|1900-01-01||GQ|GNQ|Republika Rovníková Guinea|ROVNÍKOVÁ GUINEA|Republic of Equatorial Guinea|EQUATORIAL GUINEA|GQ|||
+234|1900-01-01||FO|FRO|Faerské ostrovy|FAERSKÉ OSTROVY|Faroe Islands|FAROE ISLANDS|FO|||
+246|1900-01-01||FI|FIN|Finská republika|FINSKO|Republic of Finland|FINLAND|FI|1995-01-01||
+260|1900-01-01|2100-06-30|TF|ATF|Francouzská jižní území|FRANCOUZSKÁ JIŽNÍ ÚZEMÍ|French Southern Territories|FRENCH SOUTHERN TERRIT.|TF|||
+270|1900-01-01||GM|GMB|Gambijská republika|GAMBIE|Republic of the Gambia|GAMBIA|GM|||
+296|1900-01-01||KI|KIR|Kiribati|KIRIBATI|Kiribati|KIRIBATI|KI|||
+316|1900-01-01|2100-06-30|GU|GUM|Guam|GUAM|Guam|GUAM|GU|||
+332|1900-01-01||HT|HTI|Haitská republika|HAITI|Republic of Haiti|HAITI|HT|||
+344|1900-01-01|2100-06-30|HK|HKG|Hongkong|HONGKONG|Hong Kong|HONG KONG|HK|||
+360|1900-01-01||ID|IDN|Indonéská republika|INDONÉSIE|Republic of Indonesia|INDONESIA|ID|||
+380|1900-01-01||IT|ITA|Italská republika|ITÁLIE|Italian Republic|ITALY|IT|1900-01-01||
+398|1900-01-01||KZ|KAZ|Republika Kazachstán|KAZACHSTÁN|Republic of Kazakstan|KAZAKSTAN|KZ|||
+410|1900-01-01||KR|KOR|Korejská republika|KOREJSKÁ REPUBLIKA|Republic of Korea|KOREA, REPUBLIC OF|KR|||
+422|1900-01-01||LB|LBN|Libanonská republika|LIBANON|Lebanese Republic|LEBANON|LB|||
+434|1900-01-01|2012-06-30|LY|LBY|Libyjská arabská lidová socialistická džamáhírije|LIBYE|Socialist People's Libyan Arab Jamahiriya|LIBYAN ARAB JAMAHIRIYA|LY|||
+450|1900-01-01||MG|MDG|Madagaskarská republika|MADAGASKAR|Republic of Madagascar|MADAGASCAR|MG|||
+466|1900-01-01||ML|MLI|Maliská republika|MALI|Republic of Mali|MALI|ML|||
+480|1900-01-01||MU|MUS|Mauricijská republika|MAURICIUS|Republic of Mauritius|MAURITIUS|MU|||
+498|1900-01-01|2012-06-30|MD|MDA|Moldavská republika|MOLDAVSKO|Republic of Moldova|MOLDOVA, REPUBLIC OF|MD|||
+512|1900-01-01||OM|OMN|Sultanát Omán|OMÁN|Sultanate of Oman|OMAN|OM|||
+530|1994-01-01|2011-06-30|AN|ANT|Nizozemské Antily|NIZOZEMSKÉ ANTILY|Netherlands Antilles|NETHERLANDS ANTILLES|AN|||
+554|1900-01-01||NZ|NZL|Nový Zéland|NOVÝ ZÉLAND|New Zealand|NEW ZEALAND|NZ|||
+570|1900-01-01||NU|NIU|Niue|NIUE|Niue|NIUE|NU|||
+581|1900-01-01||UM|UMI|Menší odlehlé ostrovy USA|MENŠÍ ODLEH.OSTROVY USA|United States Minor Outlying Islands|UNITED STATES MINOR OUT|UM|||
+586|1900-01-01||PK|PAK|Pákistánská islámská republika|PÁKISTÁN|Islamic Republic of Pakistan|PAKISTAN|PK|||
+604|1900-01-01||PE|PER|Peruánská republika|PERU|Republic of Peru|PERU|PE|||
+624|1900-01-01||GW|GNB|Republika Guinea-Bissau|GUINEA-BISSAU|Republic of Guinea-Bissau|GUINEA-BISSAU|GW|||
+638|1900-01-01|2100-06-30|RE|REU|Réunion|RÉUNION|Réunion|RÉUNION|RE|||
+654|1900-01-01|2100-06-30|SH|SHN|Svatá Helena|SVATÁ HELENA|Saint Helena|SAINT HELENA|SH|||
+666|1900-01-01|2100-06-30|PM|SPM|Svatý Pierre a Miquelon|SVATÝ PIERRE A MIQUELON|Saint Pierre and Miquelon|SAINT PIERRE AND MIQUEL|PM|||
+682|1900-01-01||SA|SAU|Saúdskoarabské království|SAÚDSKÁ ARÁBIE|Kingdom of Saudi Arabia|SAUDI ARABIA|SA|||
+702|1900-01-01||SG|SGP|Singapurská republika|SINGAPUR|Republic of Singapore|SINGAPORE|SG|||
+706|1900-01-01|2100-06-30|SO|SOM|Somálská demokratická republika|SOMÁLSKO|Somali Democratic Republic|SOMALIA|SO|||
+736|1900-01-01|2011-12-31|SD|SDN|Súdánská republika|SÚDÁN|Republic of the Sudan|SUDAN|SD|||
+756|1900-01-01||CH|CHE|Švýcarská konfederace|ŠVÝCARSKO|Swiss Confederation|SWITZERLAND|CH|||
+768|1900-01-01|2100-06-30|TG|TGO|Tožská republika|TOGO|Togolese Republic|TOGO|TG|||
+784|1900-01-01||AE|ARE|Spojené arabské emiráty|SPOJENÉ ARABSKÉ EMIRÁTY|United Arab Emirates|UNITED ARAB EMIRATES|AE|||
+796|1900-01-01|2100-06-30|TC|TCA|Turks a Caicos|TURKS A CAICOS|Turks and Caicos Islands|TURKS AND CAICOS ISLAND|TC|||
+818|1900-01-01||EG|EGY|Egyptská arabská republika|EGYPT|Arab Republic of Egypt|EGYPT|EG|||
+894|1900-01-01||ZM|ZMB|Zambijská republika|ZAMBIE|Republic of Zambia|ZAMBIA|ZM|||
+858|1900-01-01||UY|URY|Uruguayská východní republika|URUGUAY|Eastern Republic of Uruguay|URUGUAY|UY|||
+882|1900-01-01||WS|WSM|Nezávislý stát Samoa|SAMOA|Independent State of Western Samoa|SAMOA|WS|||
+275|2002-07-01|2100-06-30|PS|PSE|Okupované palestinské území|PALESTINA|Occupied Palestinian Territory|PALESTINIAN|PS|||
+954|1997-11-01|2003-12-31|GG|XGG|Guernsey (Spojené království)|GUERNSEY (SPOJEN.KRÁL.)|Guernsey|GUERNSEY|GG|||
+752|1900-01-01||SE|SWE|Švédské království|ŠVÉDSKO|Kingdom of Sweden|SWEDEN|SE|1995-01-01||
+56|1900-01-01||BE|BEL|Belgické království|BELGIE|Kingdom of Belgium|BELGIUM|BE|1900-01-01||
+528|1900-01-01||NL|NLD|Nizozemské království|NIZOZEMSKO|Kingdom of the Netherlands|NETHERLANDS|NL|1900-01-01||
+975|2007-01-01||BG|BGN|Bulharská republika|BULHARSKO|Republic of Bulgaria|BULGARIA|BG|2007-01-01||
+16|2100-07-01||AS|ASM|Území Americká Samoa|AMERICKÁ SAMOA|American Samoa|AMERICAN SAMOA|AS|||
+862|2012-07-01|2100-06-30|VE|VEN|Bolívarovská republika Venezuela|Bolívarovská r. Venezuela|The Bolivarian Republic of Venezuela|Venezuela,Bolivarian Rep.|VE|||
+663|2012-07-01|2100-06-30|MF|MAF|Svatý Martin (francouzská část)|Sv.Martin (francouz.část)|Saint Martin (French part)|Saint Martin(French part)|MF|||
+832|2004-01-01|2100-06-30|JE|JEY|Jersey|Jersey|Jersey|Jersey|JE|||
+728|2012-01-01||SS|SSD|Jihosúdánská republika|Jižní Súdán|the Republic of South Sudan|South Sudan|SS|||
+86|2100-07-01||IO|IOT|Britské území v Indickém oceánu|BRITSKÉ INDICKOOC. ÚZEMÍ|British Indian Ocean Territory|BRITISH INDIAN OCEAN TE|IO|||
+434|2100-07-01||LY|LBY|Libyjský stát|LIBYE|LYBIA|LIBYA|LY|||
+663|2100-07-01||MF|MAF|Společenství Svatý Martin|SVATÝ MARTIN (FR)|Saint Martin (French part)|Saint Martin(French part)|MF|||
+454|2100-07-01||MW|MWI|Malawiská republika|MALAWI|Republic of Malawi|MALAWI|MW|||
+598|2100-07-01||PG|PNG|Nezávislý stát Papua Nová Guinea|PAPUA NOVÁ GUINEA|Independent State of Papua New Guinea|PAPUA NEW GUINEA|PG|||
+646|2100-07-01||RW|RWA|Rwandská republika|RWANDA|Rwandese Republic|RWANDA|RW|||
+688|2100-07-01||RS|SRB|Srbská republika|SRBSKO|Republic of Serbia|SERBIA|RS|||
+336|2100-07-01||VA|VAT|Vatikánský městský stát|VATIKÁN|Holy See (Vatican city state)|HOLY SEE (VATICAN C.S.)|VA|||
+68|2100-07-01||BO|BOL|Mnohonárodní stát Bolívie|BOLÍVIE|the Plurinational State of Bolivia|Bolivia,Plurinational St.|BO|||
+498|2100-07-01||MD|MDA|Moldavská republika|MOLDAVSKO|the Republic of Moldova|Moldova, the Republic of|MD|||
+796|2100-07-01||TC|TCA|Ostrovy Turks a Caicos|TURKS A CAICOS|Turks and Caicos Islands|TURKS AND CAICOS ISLAND|TC|||
+652|2100-07-01||BL|BLM|Společenství Svatý Bartoloměj|SVATÝ BARTOLOMĚJ|Saint Barthélemy|Saint Barthélemy|BL|||
+384|2100-07-01||CI|CIV|Republika Pobřeží slonoviny|POBŘEŽÍ SLONOVINY|Republic of Côte d'Ivoire|CÔTE D'IVOIRE|CI|||
+238|2100-07-01||FK|FLK|Falklandské ostrovy|FALKLANDY|Falkland Islands (Malvinas)|FALKLAND ISL.(MALVINAS)|FK|||
+254|2100-07-01||GF|GUF|Region Francouzská Guyana|FRANCOUZSKÁ GUYANA|French Guiana|FRENCH GUIANA|GF|||
+334|2100-07-01||HM|HMD|Heardův ostrov a MacDonaldovy ostrovy|HEARDŮV O. A MACDONALD.O.|Heard Island and McDonald Islands|HEARD ISLAND AND MCDONA|HM|||
+4|1900-01-01|2100-06-30|AF|AFG|Islámský stát Afghánistán|AFGHÁNISTÁN|Islamic State of Afghanistan|AFGHANISTAN|AF|||
+16|1900-01-01|2100-06-30|AS|ASM|Americká Samoa|AMERICKÁ SAMOA|American Samoa|AMERICAN SAMOA|AS|||
+31|1900-01-01||AZ|AZE|Ázerbájdžánská republika|ÁZERBÁJDŽÁN|Azerbaijani Republic|AZERBAIJAN|AZ|||
+48|1900-01-01||BH|BHR|Bahrajnský stát|BAHRAJN|State of Bahrain|BAHRAIN|BH|||
+60|1900-01-01||BM|BMU|Bermudy|BERMUDY|Bermuda|BERMUDA|BM|||
+72|1900-01-01|2100-06-30|BW|BWA|Botswanská republika|BOTSWANA|Republic of Botswana|BOTSWANA|BW|||
+86|1900-01-01|2100-06-30|IO|IOT|Britské indickooceánské území|BRITSKÉ INDICKOOC.ÚZEMÍ|British Indian Ocean Territory|BRITISH INDIAN OCEAN TE|IO|||
+95|2011-01-01|2100-06-30|XK|XKO|Republika Kosovo|Kosovo|Kosovo|Kosovo|XK|||
+116|1900-01-01||KH|KHM|Kambodžské království|KAMBODŽA|Kingdom of Cambodia|CAMBODIA|KH|||
+136|1900-01-01||KY|CYM|Kajmanské ostrovy|KAJMANSKÉ OSTROVY|Cayman Islands|CAYMAN ISLANDS|KY|||
+152|1900-01-01||CL|CHL|Chilská republika|CHILE|Republic of Chile|CHILE|CL|||
+166|1900-01-01|2100-06-30|CC|CCK|Kokosové ostrovy|KOKOSOVÉ OSTROVY|Cocos (Keeling) Islands|COCOS (KEELING) ISLANDS|CC|||
+178|1900-01-01|2100-06-30|CG|COG|Konžská republika|KONGO|Republic of the Congo|CONGO|CG|||
+192|1900-01-01||CU|CUB|Kubánská republika|KUBA|Republic of Cuba|CUBA|CU|||
+214|1900-01-01||DO|DOM|Dominikánská republika|DOMINIKÁNSKÁ REPUBLIKA|Dominican Republic|DOMINICAN REPUBLIC|DO|||
+231|1994-01-01||ET|ETH|Etiopská federativní demokratická republika|ETIOPIE|Federal Democratic Republic of Ethiopia|ETHIOPIA|ET|||
+238|1900-01-01|2100-06-30|FK|FLK|Falklandy (Malvíny)|FALKLANDY (MALVÍNY)|Falkland Islands (Malvinas)|FALKLAND ISL.(MALVINAS)|FK|||
+250|1900-01-01||FR|FRA|Francouzská republika|FRANCIE|French Republic|FRANCE|FR|1900-01-01||
+262|1900-01-01||DJ|DJI|Džibutská republika|DŽIBUTSKO|Republic of Djibouti|DJIBOUTI|DJ|||
+276|1900-01-01||DE|DEU|Spolková republika Německo|NĚMECKO|Federal Republic of Germany|GERMANY|DE|1900-01-01||
+304|1900-01-01||GL|GRL|Grónsko|GRÓNSKO|Greenland|GREENLAND|GL|||
+320|1900-01-01||GT|GTM|Guatemalská republika|GUATEMALA|Republic of Guatemala|GUATEMALA|GT|||
+334|1900-01-01|2100-06-30|HM|HMD|Heardův ostrov a McDonaldovy ostrovy|HEARDŮV O.A MCDONALD O.|Heard Island and McDonald Islands|HEARD ISLAND AND MCDONA|HM|||
+348|1900-01-01||HU|HUN|Maďarská republika|MAĎARSKO|Republic of Hungary|HUNGARY|HU|2004-05-01||
+364|1900-01-01||IR|IRN|Íránská islámská republika|ÍRÁN|Islamic Republic of Iran|IRAN /ISLAMIC REPUBLIC|IR|||
+384|1900-01-01|2100-06-30|CI|CIV|Republika Pobřeží slonoviny|POBŘEŽÍ SLONOVINY|Republic of Côte d'Ivoire|CÔTE D'IVOIRE|CI|||
+400|1900-01-01||JO|JOR|Jordánské hášimovské království|JORDÁNSKO|Hashemite Kingdom of Jordan|JORDAN|JO|||
+414|1900-01-01|2100-06-30|KW|KWT|Kuvajtský stát|KUVAJT|State of Kuwait|KUWAIT|KW|||
+426|1900-01-01|2100-06-30|LS|LSO|Lesothské království|LESOTHO|Kingdom of Lesotho|LESOTHO|LS|||
+438|1900-01-01||LI|LIE|Lichtenštejnské knížectví|LICHTENŠTEJNSKO|Principality of Liechtenstein|LIECHTENSTEIN|LI|||
+454|1900-01-01|2100-06-30|MW|MWI|Malawská republika|MALAWI|Republic of Malawi|MALAWI|MW|||
+470|1900-01-01||MT|MLT|Maltská republika|MALTA|Republic of Malta|MALTA|MT|2004-05-01||
+484|1900-01-01||MX|MEX|Spojené státy mexické|MEXIKO|United Mexican States|MEXICO|MX|||
+500|1900-01-01||MS|MSR|Montserrat|MONTSERRAT|Montserrat|MONTSERRAT|MS|||
+516|1900-01-01||NA|NAM|Namibijská republika|NAMIBIE|Republic of Namibia|NAMIBIA|NA|||
+533|1900-01-01||AW|ABW|Aruba|ARUBA|Aruba|ARUBA|AW|||
+558|1900-01-01||NI|NIC|Nikaragujská republika|NIKARAGUA|Republic of Nicaragua|NICARAGUA|NI|||
+574|1900-01-01|2100-06-30|NF|NFK|Norfolk|NORFOLK|Norfolk Island|NORFOLK ISLAND|NF|||
+583|1900-01-01||FM|FSM|Federativní státy Mikronésie|MIKRONÉSIE|Federated States of Micronesia|MICRONESIA /FED.STAT.OF|FM|||
+591|1994-01-01||PA|PAN|Panamská republika|PANAMA|Republic of Panama|PANAMA|PA|||
+608|1900-01-01||PH|PHL|Filipínská republika|FILIPÍNY|Republic of the Philippines|PHILIPPINES|PH|||
+626|1900-01-01|2012-06-30|TP|TMP|Východní Timor|VÝCHODNÍ TIMOR|East Timor|EAST TIMOR|TP|||
+642|1900-01-01||RO|ROM|Rumunsko|RUMUNSKO|Romania|ROMANIA|RO|2007-01-01||
+659|1900-01-01|2100-06-30|KN|KNA|Svatý Kryštof a Nevis|SVATÝ KRYŠTOF A NEVIS|Saint Kitts and Nevis|SAINT KITTS AND NEVIS|KN|||
+670|1900-01-01||VC|VCT|Svatý Vincenc a Grenadiny|SV.VINCENC A GRENADINY|Saint Vincent and the Grenadines|SAINT VINCENT AND THE G|VC|||
+686|1900-01-01||SN|SEN|Senegalská republika|SENEGAL|Republic of Senegal|SENEGAL|SN|||
+703|1900-01-01||SK|SVK|Slovenská republika|SLOVENSKO|Slovak Republic|SLOVAKIA|SK|2004-05-01||
+710|1900-01-01||ZA|ZAF|Jihoafrická republika|JIHOAFRICKÁ REPUBLIKA|Republic of South Africa|SOUTH AFRICA|ZA|||
+740|1900-01-01||SR|SUR|Surinamská republika|SURINAM|Republic of Suriname|SURINAME|SR|||
+760|1900-01-01||SY|SYR|Syrská arabská republika|SÝRIE|Syrian Arab Republic|SYRIAN ARAB REPUBLIC|SY|||
+772|1900-01-01||TK|TKL|Tokelau|TOKELAU|Tokelau|TOKELAU|TK|||
+788|1900-01-01||TN|TUN|Tuniská republika|TUNISKO|Republic of Tunisia|TUNISIA|TN|||
+798|1900-01-01||TV|TUV|Tuvalu|TUVALU|Tuvalu|TUVALU|TV|||
+826|1900-01-01||GB|GBR|Spojené království Velké Británie a Severního Irska|SPOJENÉ KRÁLOVSTVÍ|United Kingdom of Great Britain and Northern Ireland|UNITED KINGDOM|GB|1900-01-01||
+840|1900-01-01||US|USA|Spojené státy americké|SPOJENÉ STÁTY|United States of America|UNITED STATES|US|||
+860|1900-01-01||UZ|UZB|Republika Uzbekistán|UZBEKISTÁN|Republic of Uzbekistan|UZBEKISTAN|UZ|||
+887|1900-01-01||YE|YEM|Jemenská republika|JEMEN|Republic of Yemen|YEMEN|YE|||
+807|1997-05-30|2100-06-30|MK|MKD|Republika Makedonie|MAKEDONIE|Republic of Macedonia|Macedonia|MK|||
+955|1997-11-01|2003-12-31|JE|JEY|Jersey (Spojené království)|JERSEY (SPOJENÉ KRÁL.)|Jersey|JERSEY|JE|||
+100|1900-01-01|2006-12-31|BG|BGR|Bulharská republika|BULHARSKO|Republic of Bulgaria|BULGARIA|BG|||
+208|1900-01-01||DK|DNK|Dánské království|DÁNSKO|Kingdom of Denmark|DENMARK|DK|1900-01-01||
+620|1900-01-01||PT|PRT|Portugalská republika|PORTUGALSKO|Portuguese Republic|PORTUGAL|PT|1900-01-01||
+688|2007-01-01|2100-06-30|RS|SRB|Srbsko|SRBSKO|Republic of Serbia|SERBIA|RS|||
+203|1900-01-01||CZ|CZE|Česká republika|ČESKÁ REPUBLIKA|the Czech Republic|the Czech Republic|CZ|2004-05-01||
+534|2012-07-01|2100-06-30|SX|SXM|Svatý Martin (nizozemská část)|Sv. Martin (nizozem.část)|Sint Maarten (Dutch part)|Sint Maarten (Dutch part)|SX|||
+531|2012-07-01||CW|CUW|Curaçao|Curaçao|Curaçao|Curaçao|CW|||
+242|2012-01-01||FJ|FJI|Fidžijská republika|FIDŽI|the Republic of Fiji|FIJI|FJ|||
+535|2012-01-01||BQ|BES|Bonaire, Svatý Eustach a SABA|Bonaire,Sv.Eustach,SABA|Bonaire, Sint Eustatius and Saba|Bonaire,St.Eustatius,Saba|BQ|||
+832|2100-07-01||JE|JEY|Bailiwick Jersey|JERSEY|Jersey|Jersey|JE|||
+144|2100-07-01||LK|LKA|Šrílanská demokratická socialistická republika|ŠRÍ LANKA|Democratic Socialist Republic of Sri Lanka|SRI LANKA|LK|||
+807|2100-07-01||MK|MKD|Bývalá jugoslávská republika Makedonie|MAKEDONIE|Republic of Macedonia|Macedonia|MK|||
+175|2100-07-01||YT|MYT|Departementní společenství Mayotte|MAYOTTE|Mayotte|MAYOTTE|YT|||
+630|2100-07-01||PR|PRI|Portorické společenství|PORTORIKO|Puerto Rico|PUERTO RICO|PR|||
+744|2100-07-01||SJ|SJM|Špicberky a Jan Mayen|ŠPICBERKY A JAN MAYEN|Svalbard and Jan Mayen|SVALBARD AND JAN MAYEN|SJ|||
+534|2100-07-01||SX|SXM|Svatý Martin (NL)|SVATÝ MARTIN (NL)|Sint Maarten (Dutch part)|Sint Maarten (Dutch part)|SX|||
+876|2100-07-01||WF|WLF|Teritorium Wallisovy ostrovy a Futuna|WALLIS A FUTUNA|Wallis and Futuna|WALLIS AND FUTUNA|WF|||
+180|2100-07-01||CD|COD|Demokratická republika Kongo|DEMOKRATICKÁ REPUB. KONGO|The Democratic Republic of the Congo|CONGO, THE DEMOCR.R.OF|CD|||
+862|2100-07-01||VE|VEN|Bolívarovská republika Venezuela|VENEZUELA|The Bolivarian Republic of Venezuela|Venezuela,Bolivarian Rep.|VE|||
+260|2100-07-01||TF|ATF|Teritorium Francouzská jižní a antarktická území|FRANC.JIŽNÍ A ANTAR.ÚZEMÍ|French Southern Territories|FRENCH SOUTHERN TERRIT.|TF|||
+96|2100-07-01||BN|BRN|Stát Brunej Darussalam|BRUNEJ|Brunei Darussalam|BRUNEI DARUSSALAM|BN|||
+162|2100-07-01||CX|CXR|Území Vánoční ostrov|VÁNOČNÍ OSTROV|Christmas Island|CHRISTMAS ISLAND|CX|||
+831|2100-07-01||GG|GGY|Bailiwick Guernsey|GUERNSEY|Guernsey|Guernsey|GG|||
+316|2100-07-01||GU|GUM|Teritorium Guam|GUAM|Guam|GUAM|GU|||
+8|1900-01-01||AL|ALB|Albánská republika|ALBÁNIE|Republic of Albania|ALBANIA|AL|||
+20|1900-01-01||AD|AND|Andorrské knížectví|ANDORRA|Principality of Andorra|ANDORRA|AD|||
+32|1900-01-01||AR|ARG|Argentinská republika|ARGENTINA|Argentine Republic|ARGENTINA|AR|||
+50|1900-01-01||BD|BGD|Bangladéšská lidová republika|BANGLADÉŠ|People's Republic of Bangladesh|BANGLADESH|BD|||
+64|1900-01-01||BT|BTN|Bhútánské království|BHÚTÁN|Kingdom of Bhutan|BHUTAN|BT|||
+74|1900-01-01||BV|BVT|Bouvetův ostrov|BOUVETŮV OSTROV|Bouvet Island|BOUVET ISLAND|BV|||
+90|1900-01-01||SB|SLB|Šalamounovy ostrovy|ŠALAMOUNOVY OSTROVY|Solomon Islands|SOLOMON ISLANDS|SB|||
+104|1900-01-01|2011-12-31|MM|MMR|Myanmarský svaz|MYANMAR|Union of Myanmar|MYANMAR|MM|||
+120|1900-01-01||CM|CMR|Kamerunská republika|KAMERUN|Republic of Cameroon|CAMEROON|CM|||
+140|1900-01-01||CF|CAF|Středoafrická republika|STŘEDOAFRICKÁ REPUBLIKA|Central African Republic|CENTRAL AFRICAN REPUBL.|CF|||
+156|1900-01-01||CN|CHN|Čínská lidová republika|ČÍNA|People's Republic of China|CHINA|CN|||
+170|1900-01-01||CO|COL|Kolumbijská republika|KOLUMBIE|Republic of Colombia|COLOMBIA|CO|||
+184|1900-01-01||CK|COK|Cookovy ostrovy|COOKOVY OSTROVY|Cook Islands|COOK ISLANDS|CK|||
+196|1900-01-01||CY|CYP|Kyperská republika|KYPR|Republic of Cyprus|CYPRUS|CY|2004-05-01||
+218|1900-01-01||EC|ECU|Ekvádorská republika|EKVÁDOR|Republic of Ecuador|ECUADOR|EC|||
+232|1994-01-01|2100-06-30|ER|ERI|Eritrea|ERITREA|Eritrea|ERITREA|ER|||
+239|1994-01-01||GS|SGS|Jižní Georgie a Jižní Sandwichovy ostrovy|J.GEORGIE A J.SANDW.OS.|South Georgia and the South Sandwich Islands|SOUTH GEORGIA AND S.S.I|GS|||
+254|1900-01-01|2100-06-30|GF|GUF|Francouzská Guyana|FRANCOUZSKÁ GUYANA|French Guiana|FRENCH GUIANA|GF|||
+266|1900-01-01||GA|GAB|Gabonská republika|GABON|Gabonese Republic|GABON|GA|||
+288|1900-01-01||GH|GHA|Ghanská republika|GHANA|Republic of Ghana|GHANA|GH|||
+308|1900-01-01|2100-06-30|GD|GRD|Grenada|GRENADA|Grenada|GRENADA|GD|||
+324|1900-01-01||GN|GIN|Guinejská republika|GUINEA|Republic of Guinea|GUINEA|GN|||
+336|1900-01-01|2100-06-30|VA|VAT|Svatý stolec (Vatikánský městský stát)|SVATÝ STOLEC|Holy See (Vatican city state)|HOLY SEE (VATICAN C.S.)|VA|||
+352|1900-01-01||IS|ISL|Islandská republika|ISLAND|Republic of Iceland|ICELAND|IS|||
+368|1900-01-01||IQ|IRQ|Irácká republika|IRÁK|Republic of Iraq|IRAQ|IQ|||
+388|1900-01-01||JM|JAM|Jamajka|JAMAJKA|Jamaica|JAMAICA|JM|||
+404|1900-01-01||KE|KEN|Keňská republika|KEŇA|Republic of Kenya|KENYA|KE|||
+417|1900-01-01||KG|KGZ|Republika Kyrgyzstán|KYRGYZSTÁN|Kyrgyz Republic|KYRGYZSTAN|KG|||
+428|1900-01-01||LV|LVA|Lotyšská republika|LOTYŠSKO|Republic of Latvia|LATVIA|LV|2004-05-01||
+440|1900-01-01||LT|LTU|Litevská republika|LITVA|Republic of Lithuania|LITHUANIA|LT|2004-05-01||
+458|1900-01-01||MY|MYS|Malajsie|MALAJSIE|Malaysia|MALAYSIA|MY|||
+474|1900-01-01|2100-06-30|MQ|MTQ|Martinik|MARTINIK|Martinique|MARTINIQUE|MQ|||
+492|1900-01-01||MC|MCO|Monacké knížectví|MONAKO|Principality of Monaco|MONACO|MC|||
+504|1900-01-01||MA|MAR|Marocké království|MAROKO|Kingdom of Morocco|MOROCCO|MA|||
+520|1900-01-01||NR|NRU|Nauruská republika|NAURU|Republic of Nauru|NAURU|NR|||
+540|1900-01-01||NC|NCL|Nová Kaledonie|NOVÁ KALEDONIE|New Caledonia|NEW CALEDONIA|NC|||
+562|1900-01-01||NE|NER|Nigerská republika|NIGER|Republic of the Niger|NIGER|NE|||
+578|1900-01-01||NO|NOR|Norské království|NORSKO|Kingdom of Norway|NORWAY|NO|||
+584|1900-01-01||MH|MHL|Republika Marshallovy ostrovy|MARSHALLOVY OSTROVY|Republic of the Marshall Islands|MARSHALL ISLANDS|MH|||
+598|1900-01-01|2100-06-30|PG|PNG|Papua Nová Guinea|PAPUA NOVÁ GUINEA|Papua New Guinea|PAPUA NEW GUINEA|PG|||
+612|1900-01-01|2100-06-30|PN|PCN|Pitcairn|PITCAIRN|Pitcairn|PITCAIRN|PN|||
+630|1900-01-01|2100-06-30|PR|PRI|Portoriko|PORTORIKO|Puerto Rico|PUERTO RICO|PR|||
+643|1900-01-01||RU|RUS|Ruská federace|RUSKO|Russian Federation|RUSSIAN FEDERATION|RU|||
+660|1900-01-01||AI|AIA|Anguilla|ANGUILLA|Anguilla|ANGUILLA|AI|||
+674|1900-01-01||SM|SMR|Sanmarinská republika|SAN MARINO|Republic of San Marino|SAN MARINO|SM|||
+690|1900-01-01||SC|SYC|Seychelská republika|SEYCHELY|Republic of Seychelles|SEYCHELLES|SC|||
+704|1900-01-01||VN|VNM|Vietnamská socialistická republika|VIETNAM|Socialist Republic of Viet Nam|VIET NAM|VN|||
+716|1900-01-01|2100-06-30|ZW|ZWE|Zimbabwská republika|ZIMBABWE|Republic of Zimbabwe|ZIMBABWE|ZW|||
+744|1900-01-01|2100-06-30|SJ|SJM|Svalbard a ostrov Jan Mayen|SVALBARD A O. JAN MAYEN|Svalbard and Jan Mayen|SVALBARD AND JAN MAYEN|SJ|||
+762|1900-01-01||TJ|TJK|Republika Tádžikistán|TÁDŽIKISTÁN|Republic of Tajikistan|TAJIKISTAN|TJ|||
+776|1900-01-01||TO|TON|Království Tonga|TONGA|Kingdom of Tonga|TONGA|TO|||
+792|1900-01-01||TR|TUR|Turecká republika|TURECKO|Republic of Turkey|TURKEY|TR|||
+800|1900-01-01||UG|UGA|Ugandská republika|UGANDA|Republic of Uganda|UGANDA|UG|||
+834|1900-01-01|2100-06-30|TZ|TZA|Sjednocená republika Tanzanie|TANZANIE|United Republic of Tanzania|TANZANIA, UNITED REPUBL|TZ|||
+850|1900-01-01||VI|VIR|Americké Panenské ostrovy|AMERICKÉ PANENSKÉ OSTR.|Virgin Islands of the United States|VIRGIN ISLANDS /U.S./|VI|||
+862|1900-01-01|2012-06-30|VE|VEN|Venezuelská republika|VENEZUELA|Republic of Venezuela|VENEZUELA|VE|||
+180|1998-01-01|2100-06-30|CD|COD|Konžská demokratická republika|KONGO, DEMOKRAT.REPUB.|The Democratic Republic of the Congo|CONGO, THE DEMOCR.R.OF|CD|||
+952|1997-11-01|2003-12-31|XM|XMR|Suverénní vojenský a špitální řád sv. Jana Jeruzalémského z|ŘÁD MALTÉZSKÝCH RYTÍŘŮ|Knights of Malta|Knights of Malta|XM|||
+956|1998-01-01|2003-12-31|EO|XEO|Evropské sdružení volného obchodu|EVR.SDRUŽ.V.O.(ESVO)|European Free Trade Association|EFTA|EO|||
+300|1900-01-01||GR|GRC|Řecká republika|ŘECKO|Hellenic Republic|GREECE|EL|1900-01-01||
+372|1900-01-01||IE|IRL|Irsko|IRSKO|Ireland|IRELAND|IE|1900-01-01||
+724|1900-01-01||ES|ESP|Španělské království|ŠPANĚLSKO|Kingdom of Spain|SPAIN|ES|1900-01-01||
+499|2007-01-01||ME|MNE|Černá Hora|ČERNÁ HORA|Republic of Montenegro|MONTENEGRO|ME|||
+498|2012-07-01|2100-06-30|MD|MDA|Moldavská republika|Moldavská republika|the Republic of Moldova|Moldova, the Republic of|MD|||
+652|2012-07-01|2100-06-30|BL|BLM|Svatý Bartoloměj|Svatý Bartoloměj|Saint Barthélemy|Saint Barthélemy|BL|||
+626|2012-07-01||TL|TLS|Demokratická republika Východní Timor|Východní Timor|The Democratic Republic of Timor-Leste|Timor-Leste|TL|||
+104|2012-01-01||MM|MMR|Republika Myanmarský svaz|MYANMAR|The Republic of the Union of Myanmar|MYANMAR|MM|||
+4|2100-07-01||AF|AFG|Afghánská islámská republika|AFGHÁNISTÁN|Islamic State of Afghanistan|AFGHANISTAN|AF|||
+659|2100-07-01||KN|KNA|Federace Svatý Kryštof a Nevis|SVATÝ KRYŠTOF A NEVIS|Saint Kitts and Nevis|SAINT KITTS AND NEVIS|KN|||
+426|2100-07-01||LS|LSO|Lesothské království|LESOTHO|Kingdom of Lesotho|LESOTHO|LS|||
+580|2100-07-01||MP|MNP|Společenství Severní Mariany|SEVERNÍ MARIANY|Commonwealth of the Northern Mariana Islands|NORTHERN MARIANA ISLAND|MP|||
+574|2100-07-01||NF|NFK|Území Norfolk|NORFOLK|Norfolk Island|NORFOLK ISLAND|NF|||
+275|2100-07-01||PS|PSE|Palestinská autonomní území|PALESTINA|the State of Palestine|PALESTINE, STATE OF|PS|||
+706|2100-07-01||SO|SOM|Somálská federativní republika|SOMÁLSKO|Federal Republic of Somalia|SOMALIA|SO|||
+768|2100-07-01||TG|TGO|Tožská republika|TOGO|Togolese Republic|TOGO|TG|||
+95|2100-07-01||XK|XKO|Kosovská republika|KOSOVO|Kosovo|Kosovo|XK|||
+178|2100-07-01||CG|COG|Konžská republika|KONŽSKÁ REPUBLIKA|Republic of the Congo|CONGO|CG|||
+834|2100-07-01||TZ|TZA|Tanzanská sjednocená republika|TANZANIE|United Republic of Tanzania|TANZANIA, UNITED REPUBL|TZ|||
+36|2100-07-01||AU|AUS|Australské společenství|AUSTRÁLIE|Australia|AUSTRALIA|AU|||
+72|2100-07-01||BW|BWA|Botswanská republika|BOTSWANA|Republic of Botswana|BOTSWANA|BW|||
+232|2100-07-01||ER|ERI|Stát Eritrea|ERITREA|the State of Eritrea|ERITREA|ER|||
+312|2100-07-01||GP|GLP|Region Guadeloupe|GUADELOUPE|Guadeloupe|GUADELOUPE|GP|||
+328|2100-07-01||GY|GUY|Guyanská kooperativní republika|GUYANA|Republic of Guyana|GUYANA|GY|||
+10|1900-01-01||AQ|ATA|Antarktida|ANTARKTIDA|Antarctica|ANTARCTICA|AQ|||
+24|1900-01-01||AO|AGO|Angolská republika|ANGOLA|Republic of Angola|ANGOLA|AO|||
+36|1900-01-01|2100-06-30|AU|AUS|Austrálie|AUSTRÁLIE|Australia|AUSTRALIA|AU|||
+51|1900-01-01||AM|ARM|Arménská republika|ARMÉNIE|Republic of Armenia|ARMENIA|AM|||
+68|1900-01-01|2012-06-30|BO|BOL|Bolivijská republika|BOLÍVIE|Republic of Bolivia|BOLIVIA|BO|||
+76|1900-01-01||BR|BRA|Brazilská federativní republika|BRAZÍLIE|Federative Republic of Brazil|BRAZIL|BR|||
+92|1900-01-01||VG|VGB|Britské Panenské ostrovy|BRITSKÉ PANENSKÉ OSTR.|British Virgin Islands|VIRGIN ISLANDS, BRITISH|VG|||
+108|1900-01-01|2100-06-30|BI|BDI|Burundská republika|BURUNDI|Republic of Burundi|BURUNDI|BI|||
+124|1900-01-01||CA|CAN|Kanada|KANADA|Canada|CANADA|CA|||
+144|1900-01-01|2100-06-30|LK|LKA|Srílanská demokratická socialistická republika|SRÍ LANKA|Democratic Socialist Republic of Sri Lanka|SRI LANKA|LK|||
+158|1900-01-01|2100-06-30|TW|TWN|Tchaj-wan, čínská provincie|TCHAJ-WAN|Taiwan, Province of China|TAIWAN, PROVINCE OF CH.|TW|||
+174|1900-01-01||KM|COM|Komorská federativní islámská republika|KOMORY|Islamic Federal Republic of the Comoros|COMOROS|KM|||
+188|1900-01-01||CR|CRI|Kostarická republika|KOSTARIKA|Republic of Costa Rica|COSTA RICA|CR|||
+204|1900-01-01||BJ|BEN|Beninská republika|BENIN|Republic of Benin|BENIN|BJ|||
+222|1900-01-01||SV|SLV|Salvadorská republika|SALVADOR|Republic of El Salvador|EL SALVADOR|SV|||
+233|1900-01-01||EE|EST|Estonská republika|ESTONSKO|Republic of Estonia|ESTONIA|EE|2004-05-01||
+242|1900-01-01|2011-12-31|FJ|FJI|Fidžijská republika|FIDŽI|Republic of Fiji|FIJI|FJ|||
+258|1900-01-01||PF|PYF|Francouzská Polynésie|FRANCOUZSKÁ POLYNÉSIE|French Polynesia|FRENCH POLYNESIA|PF|||
+268|1900-01-01||GE|GEO|Gruzie|GRUZIE|Georgia|GEORGIA|GE|||
+292|1900-01-01||GI|GIB|Gibraltar|GIBRALTAR|Gibraltar|GIBRALTAR|GI|||
+312|1900-01-01|2100-06-30|GP|GLP|Guadeloupe|GUADELOUPE|Guadeloupe|GUADELOUPE|GP|||
+328|1900-01-01|2100-06-30|GY|GUY|Guyanská republika|GUYANA|Republic of Guyana|GUYANA|GY|||
+340|1900-01-01||HN|HND|Honduraská republika|HONDURAS|Republic of Honduras|HONDURAS|HN|||
+356|1900-01-01||IN|IND|Indická republika|INDIE|Republic of India|INDIA|IN|||
+376|1900-01-01||IL|ISR|Izraelský stát|IZRAEL|State of Israel|ISRAEL|IL|||
+392|1900-01-01||JP|JPN|Japonsko|JAPONSKO|Japan|JAPAN|JP|||
+408|1900-01-01||KP|PRK|Korejská lidově demokratická republika|KOREJSKÁ LID.DEM.REP.|Democratic People's Republic of Korea|KOREA, DEMOCRATIC PEOPL|KP|||
+418|1900-01-01||LA|LAO|Laoská lidově demokratická republika|LAOS|Lao People's Democratic Republic|LAO PEOPLE'S DEMOCRATIC|LA|||
+430|1900-01-01||LR|LBR|Liberijská republika|LIBÉRIE|Republic of Liberia|LIBERIA|LR|||
+446|1900-01-01|2100-06-30|MO|MAC|Macao|MACAO|Macau|MACAU|MO|||
+462|1900-01-01||MV|MDV|Maledivská republika|MALEDIVY|Republic of Maldives|MALDIVES|MV|||
+478|1900-01-01||MR|MRT|Mauritánská islámská republika|MAURITÁNIE|Islamic Republic of Mauritania|MAURITANIA|MR|||
+496|1900-01-01||MN|MNG|Mongolsko|MONGOLSKO|Mongolia|MONGOLIA|MN|||
+508|1900-01-01||MZ|MOZ|Mosambická republika|MOSAMBIK|Republic of Mozambique|MOZAMBIQUE|MZ|||
+524|1900-01-01||NP|NPL|Nepálské království|NEPÁL|Kingdom of Nepal|NEPAL|NP|||
+548|1900-01-01||VU|VUT|Vanuatská republika|VANUATU|Republic of Vanuatu|VANUATU|VU|||
+566|1900-01-01||NG|NGA|Nigérijská federativní republika|NIGÉRIE|Federal Republic of Nigeria|NIGERIA|NG|||
+580|1900-01-01|2100-06-30|MP|MNP|Společenství Severních Marian|SEVERNÍ MARIANY|Commonwealth of the Northern Mariana Islands|NORTHERN MARIANA ISLAND|MP|||
+585|1900-01-01||PW|PLW|Palauská republika|PALAU|Republic of Palau|PALAU|PW|||
+600|1900-01-01||PY|PRY|Paraguayská republika|PARAGUAY|Republic of Paraguay|PARAGUAY|PY|||
+616|1900-01-01||PL|POL|Polská republika|POLSKO|Republic of Poland|POLAND|PL|2004-05-01||
+634|1900-01-01||QA|QAT|Stát Katar|KATAR|State of Qatar|QATAR|QA|||
+646|1900-01-01|2100-06-30|RW|RWA|Rwandská republika|RWANDA|Rwandese Republic|RWANDA|RW|||
+662|1900-01-01||LC|LCA|Svatá Lucie|SVATÁ LUCIE|Saint Lucia|SAINT LUCIA|LC|||
+678|1900-01-01||ST|STP|Demokratická republika Svatý Tomáš a Princův ostrov|SVATÝ TOMÁŠ|Democratic Republic of Sao Tome and Principe|SAO TOME AND PRINCIPE|ST|||
+694|1900-01-01||SL|SLE|Republika Sierra Leone|SIERRA LEONE|Republic of Sierra Leone|SIERRA LEONE|SL|||
+705|1900-01-01||SI|SVN|Slovinská republika|SLOVINSKO|Republic of Slovenia|SLOVENIA|SI|2004-05-01||
+732|1900-01-01|2100-06-30|EH|ESH|Západní Sahara|ZÁPADNÍ SAHARA|Western Sahara|WESTERN SAHARA|EH|||
+748|1900-01-01||SZ|SWZ|Svazijské království|SVAZIJSKO|Kingdom of Swaziland|SWAZILAND|SZ|||
+764|1900-01-01||TH|THA|Thajské království|THAJSKO|Kingdom of Thailand|THAILAND|TH|||
+780|1900-01-01||TT|TTO|Republika Trinidad a Tobago|TRINIDAD A TOBAGO|Republic of Trinidad and Tobago|TRINIDAD AND TOBAGO|TT|||
+795|1900-01-01||TM|TKM|Turkmenistán|TURKMENISTÁN|Turkmenistan|TURKMENISTAN|TM|||
+804|1900-01-01||UA|UKR|Ukrajina|UKRAJINA|Ukraine|UKRAINE|UA|||
+891|1900-01-01|2003-12-31|YU|YUG|Svazová republika Jugoslávie|JUGOSLÁVIE|Federal Republic of Yugoslavia|YUGOSLAVIA|YU|||
+854|1900-01-01||BF|BFA|Burkina Faso|BURKINA FASO|Burkina Faso|BURKINA FASO|BF|||
+876|1900-01-01|2100-06-30|WF|WLF|Wallis a Futuna|WALLIS A FUTUNA|Wallis and Futuna|WALLIS AND FUTUNA|WF|||
+957|1998-01-01|2004-01-19|EU|XEU|Evropská unie|EVROPSKÁ UNIE|European Union|European Union|EU|||
+953|1997-11-01|2003-12-31|XF|XFA|Alandy (Finsko)|ALANDY (FINSKO)|Aland|ALAND|XF|||
+958|1998-01-01|2003-12-31|SQ|XSQ|Středoevropská dohoda o oblasti volného obchodu|STŘEDOEVR.DOH.O V.O.|Central European Free Trade Agreement|CEFTA|SQ|||
+40|1900-01-01||AT|AUT|Rakouská republika|RAKOUSKO|Republic of Austria|AUSTRIA|AT|1995-01-01||
+442|1900-01-01||LU|LUX|Lucemburské velkovévodství|LUCEMBURSKO|Grand Duchy of Luxembourg|LUXEMBOURG|LU|1900-01-01||
+891|2004-01-01|2006-12-31|CS|SCG|Srbsko a Černá Hora|SRBSKO A ČERNÁ HORA|Serbia and Montenegro|SERBIA AND MONTENEGRO|CS|||
+248|2004-01-01|2100-06-30|AX|ALA|Alandské ostrovy|Alandské ostrovy|Aland Islands|Aland Islands|AX|||
+68|2012-07-01|2100-06-30|BO|BOL|Mnohonárodní stát Bolívie|Mnohonárodní stát Bolívie|the Plurinational State of Bolivia|Bolivia,Plurinational St.|BO|||
+434|2012-07-01|2100-06-30|LY|LBY|LIBYE|LIBYE|LYBIA|LIBYA|LY|||
+831|2004-01-01|2100-06-30|GG|GGY|Guernsey|Guernsey|Guernsey|Guernsey|GG|||
+729|2012-01-01||SD|SDN|Súdánská republika|SÚDÁN|the republic of the Sudan|SUDAN|SD|||
+248|2100-07-01||AX|ALA|Provincie Alandy|ALANDY|Aland Islands|Aland Islands|AX|||
+414|2100-07-01||KW|KWT|Kuvajtský stát|KUVAJT|State of Kuwait|KUWAIT|KW|||
+446|2100-07-01||MO|MAC|Zvláštní administrativní oblast Čínské lidové republ. Macao|MACAO|Macau|MACAU|MO|||
+474|2100-07-01||MQ|MTQ|Region Martinik|MARTINIK|Martinique|MARTINIQUE|MQ|||
+612|2100-07-01||PN|PCN|Pitcairnovy ostrovy|PITCAIRN|Pitcairn|PITCAIRN|PN|||
+638|2100-07-01||RE|REU|Region Réunion|RÉUNION|Réunion|RÉUNION|RE|||
+666|2100-07-01||PM|SPM|Územní společenství Saint Pierre a Miquelon|SAINT PIERRE A MIQUELON|Saint Pierre and Miquelon|SAINT PIERRE AND MIQUEL|PM|||
+158|2100-07-01||TW|TWN|Čínská republika (Tchaj-wan)|TCHAJ-WAN|Taiwan, Province of China|TAIWAN, PROVINCE OF CH.|TW|||
+716|2100-07-01||ZW|ZWE|Zimbabwská republika|ZIMBABWE|Republic of Zimbabwe|ZIMBABWE|ZW|||
+833|2100-07-01||IM|IMN|Ostrov Man|MAN|ISLE OF MAN|ISLE OF MAN|IM|||
+654|2100-07-01||SH|SHN|Svatá Helena, Ascension a Tristan da Cunha|SVATÁ HELENA|Saint Helena|SAINT HELENA|SH|||
+108|2100-07-01||BI|BDI|Burundská republika|BURUNDI|Republic of Burundi|BURUNDI|BI|||
+166|2100-07-01||CC|CCK|Území Kokosové (Keelingovy) ostrovy|KOKOSOVÉ (KEELINGOVY) OS.|Cocos (Keeling) Islands|COCOS (KEELING) ISLANDS|CC|||
+732|2100-07-01||EH|ESH|Saharská arabská demokratická republika|ZÁPADNÍ SAHARA|Western Sahara|WESTERN SAHARA|EH|||
+308|2100-07-01||GD|GRD|Grenadský stát|GRENADA|Grenada|GRENADA|GD|||
+344|2100-07-01||HK|HKG|Zvláštní administrativní oblast Čínské lidové rep. Hongkong|HONGKONG|Hong Kong|HONG KONG|HK|||

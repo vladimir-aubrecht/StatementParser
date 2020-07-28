@@ -1,23 +1,62 @@
 ﻿
+using System;
+
 using TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models;
 
 namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
 {
     public class TaxDeclarationBuilder
     {
-
-        public Declarations Build()
+        private static readonly Declaration defaultDeclaration = new Declaration()
         {
-            return new Declarations()
+            TaxDeclaration = new TaxDeclaration()
+            {
+                Taxes = new Taxes()
+                {
+                }
+            }
+        };
+
+        private DateTime taxPeriodStart = new DateTime(DateTime.Today.Year, 1, 1);
+
+        private Declaration declaration;
+
+        public TaxDeclarationBuilder() : this(defaultDeclaration)
+        {
+
+        }
+
+        public TaxDeclarationBuilder(Declaration declaration)
+        {
+            this.declaration = declaration;
+        }
+
+        public void WithTaxYear(int year)
+        {
+            this.taxPeriodStart = new DateTime(year, 1, 1);
+        }
+
+        public Declaration Build()
+        {
+            declaration.TaxDeclaration.Taxes.Year = taxPeriodStart.Year;
+            declaration.TaxDeclaration.Taxes.TaxPeriodStart = String.Format("{0:dd.MM.yyyy}", taxPeriodStart);
+            declaration.TaxDeclaration.Taxes.TaxPeriodEnds = String.Format("{0:dd.MM.yyyy}", taxPeriodStart.AddYears(1).AddDays(-1));
+
+            return declaration;
+        }
+
+        private Declaration CreateTestingDeclaration()
+        {
+            return new Declaration()
             {
                 TaxDeclaration = new TaxDeclaration()
                 {
                     Taxes = new Taxes()
                     {
                         UnknownConstantField2 = "Z",
-                        Year = "2019",
-                        TaxPeriodStart = "01.01.2019",
-                        TaxPeriodEnds = "31.12.2019",
+                        Year = 2019,//
+                        TaxPeriodStart = "01.01.2019",//
+                        TaxPeriodEnds = "31.12.2019",//
                         DestinationMinistryOfFinanceId = "464",
 
                         SpouseTitle = "64",
@@ -142,18 +181,18 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                     {
                         new Appendix2OtherIncomeRow() { Code = "Z", Type = "D", Description = "94", Expenses = "96", Income = "95", Profit = "-1" }
                     },
-                    AppendixIncomeTable = new AppendixIncomeTable[]
+                    AppendixIncomeTable = new AppendixIncomeTableRow[]
                     {
-                        new AppendixIncomeTable() { Income = "101", Insurance = "102", TakenDeposit = "103", TakenTaxByArticle36Paragraph8 = "106", TakenTaxByArticle36Paragraph7 = "105", PaidMontlyBonuses = "104" },
-                        new AppendixIncomeTable() { Income = "107", Insurance = "108", TakenDeposit = "109", TakenTaxByArticle36Paragraph8 = "112", TakenTaxByArticle36Paragraph7 = "111", PaidMontlyBonuses = "110" },
+                        new AppendixIncomeTableRow() { Income = 101, Insurance = "102", TakenDeposit = "103", TakenTaxByArticle36Paragraph8 = "106", TakenTaxByArticle36Paragraph7 = "105", PaidMontlyBonuses = "104" },
+                        new AppendixIncomeTableRow() { Income = 107, Insurance = "108", TakenDeposit = "109", TakenTaxByArticle36Paragraph8 = "112", TakenTaxByArticle36Paragraph7 = "111", PaidMontlyBonuses = "110" },
                     },
                     Appendix3Lists = new Appendix3List[]
                     {
                         new Appendix3List() { Coeficient = 0.00M, Country = "US", Income = 97, MaximumRecognizedTax = 0.00M, RecognizedTax = 0.00M, Tax = 99, UnrecognisedTax = 99.00M, Expenses = 98M }
                     },
-                    AppendixSeznam = new AppendixSeznam[]
+                    AppendixSeznam = new AppendixSeznamRow[]
                     {
-                        new AppendixSeznam() { BrokerName = "107", Country = "AZ", IncomeInCZK = 110, TaxInCZK = 109, TaxInOriginalCurrency = 108 },
+                        new AppendixSeznamRow() { BrokerName = "107", Country = "AZ", IncomeInCZK = 110, TaxInCZK = 109, TaxInOriginalCurrency = 108 },
                     },
                     AppendixOther = new AppendixOther()
                     {
@@ -190,6 +229,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                     }
                 }
             };
+
         }
     }
 }

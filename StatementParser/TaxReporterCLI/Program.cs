@@ -9,10 +9,11 @@ using Commander.NET.Exceptions;
 
 using ExchangeRateProvider.Providers.Czk;
 
+using Microsoft.Extensions.Logging;
+
 using StatementParser;
 using StatementParser.Models;
 
-using TaxReporterCLI.Exporters.CzechMinistryOfFinance;
 using TaxReporterCLI.Models.Views;
 
 namespace TaxReporterCLI
@@ -21,10 +22,6 @@ namespace TaxReporterCLI
     {
         public static async Task Main(string[] args)
         {
-            var exporter = new CzechMinistryOfFinanceExporter(null, null);
-            exporter.Save("C:\\Users\\vladi\\Downloads\\test.xml");
-            return;
-
             var parser = new CommanderParser<Options>();
 
             try
@@ -61,41 +58,44 @@ namespace TaxReporterCLI
 
         private static async Task RunAsync(Options option)
         {
-            var cnbProvider = new CzechNationalBankProvider();
-            var kurzyCzProvider = new KurzyCzProvider();
-
-            var parser = new TransactionParser();
-            var transactions = new List<Transaction>();
-            var filePaths = ResolveFilePaths(option.StatementFilePaths);
-
-            if (filePaths.Count == 0)
+            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole().SetMinimumLevel(LogLevel.Debug)))
             {
-                Console.WriteLine("No valid path to scan found. Check that file or directory exist.");
-                return;
-            }
+                var cnbProvider = new CzechNationalBankProvider();
+                var kurzyCzProvider = new KurzyCzProvider();
 
-            foreach (var file in filePaths)
-            {
-                Console.WriteLine($"Processing file: {file}");
-                var result = await parser.ParseAsync(file).ConfigureAwait(false);
+                var parser = new TransactionParser(loggerFactory);
+                var transactions = new List<Transaction>();
+                var filePaths = ResolveFilePaths(option.StatementFilePaths);
 
-                if (result != null)
+                if (filePaths.Count == 0)
                 {
-                    transactions.AddRange(result);
+                    Console.WriteLine("No valid path to scan found. Check that file or directory exist.");
+                    return;
                 }
+
+                foreach (var file in filePaths)
+                {
+                    Console.WriteLine($"Processing file: {file}");
+                    var result = await parser.ParseAsync(file).ConfigureAwait(false);
+
+                    if (result != null)
+                    {
+                        transactions.AddRange(result);
+                    }
+                }
+
+                Console.WriteLine("Downloading exchange rates ...");
+
+                var builder = new TransactionViewBuilder(kurzyCzProvider, cnbProvider);
+                var transactionViews = await builder.BuildAsync(transactions).ConfigureAwait(false);
+
+                var summaryViews = CreateDividendSummaryViews(transactionViews);
+
+                var views = new List<object>(transactionViews);
+                views.AddRange(summaryViews);
+
+                Print(option, views);
             }
-
-            Console.WriteLine("Downloading exchange rates ...");
-
-            var builder = new TransactionViewBuilder(kurzyCzProvider, cnbProvider);
-            var transactionViews = await builder.BuildAsync(transactions).ConfigureAwait(false);
-
-            var summaryViews = CreateDividendSummaryViews(transactionViews);
-
-            var views = new List<object>(transactionViews);
-            views.AddRange(summaryViews);
-
-            Print(option, views);
         }
 
         private static IList<object> CreateDividendSummaryViews(IList<TransactionView> transactionViews)
@@ -143,6 +143,8 @@ namespace TaxReporterCLI
             {
                 printer.PrintAsPlainText(views);
             }
+
+            printer.SaveAsXml("C:\\Users\\vladi\\Downloads\\test2.xml", "C:\\Users\\vladi\\Downloads\\test.xml", views);
         }
     }
 }

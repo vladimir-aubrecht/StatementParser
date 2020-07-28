@@ -2,125 +2,135 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+using Microsoft.Extensions.Logging;
+
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+
 using StatementParser.Models;
 
 namespace StatementParser.Parsers.Brokers.MorganStanley
 {
-	internal class MorganStanleyStatementXlsParser : ITransactionParser
-	{
-		private const int HeaderRowOffset = 8;
-		private const int FooterRowOffset = 6;
-		private const string SheetName = "4_Stock Award Plan_Completed";
-		private const string Signature = "Morgan Stanley Smith Barney LLC. Member SIPC.";
+    internal class MorganStanleyStatementXlsParser : ITransactionParser
+    {
+        private const int HeaderRowOffset = 8;
+        private const int FooterRowOffset = 6;
+        private const string SheetName = "4_Stock Award Plan_Completed";
+        private const string Signature = "Morgan Stanley Smith Barney LLC. Member SIPC.";
+        private readonly ILogger<MorganStanleyStatementXlsParser> logger;
 
-		private bool CanParse(string statementFilePath)
-		{
-			if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".xls")
-			{
-				return false;
-			}
+        public MorganStanleyStatementXlsParser(ILogger<MorganStanleyStatementXlsParser> logger)
+        {
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
 
-			var sheet = GetSheet(statementFilePath);
+        private bool CanParse(string statementFilePath)
+        {
+            if (!File.Exists(statementFilePath) || Path.GetExtension(statementFilePath).ToLowerInvariant() != ".xls")
+            {
+                return false;
+            }
 
-			return sheet.GetRow(sheet.LastRowNum).Cells[0].StringCellValue == Signature;
-		}
+            var sheet = GetSheet(statementFilePath);
 
-		public IList<Transaction> Parse(string statementFilePath)
-		{
-			if (!CanParse(statementFilePath))
-			{
-				return null;
-			}
+            return sheet.GetRow(sheet.LastRowNum).Cells[0].StringCellValue == Signature;
+        }
 
-			var sheet = GetSheet(statementFilePath);
+        public IList<Transaction> Parse(string statementFilePath)
+        {
+            if (!CanParse(statementFilePath))
+            {
+                return null;
+            }
 
-			var name = sheet.GetRow(3).Cells[1].StringCellValue;
+            var sheet = GetSheet(statementFilePath);
 
-			return GetTransactionRows(sheet).Select(i => ParseTransaction(sheet, ParseTransactionType(i), i, name)).Where(i => i != null).ToList();
-		}
+            var name = sheet.GetRow(3).Cells[1].StringCellValue;
 
-		private Transaction ParseTransaction(ISheet sheet, string type, IRow row, string name)
-		{
-			switch (type)
-			{
-				case "Share Deposit":
-					return ParseDepositTransaction(row, name);
+            return GetTransactionRows(sheet).Select(i => ParseTransaction(sheet, ParseTransactionType(i), i, name)).Where(i => i != null).ToList();
+        }
 
-				case "Dividend Credit":
-					var taxRow = SearchTaxRow(sheet, row);
-					return ParseDividendTransaction(row, taxRow, name);
+        private Transaction ParseTransaction(ISheet sheet, string type, IRow row, string name)
+        {
+            switch (type)
+            {
+                case "Share Deposit":
+                    return ParseDepositTransaction(row, name);
 
-				case "IRS Withholding":
-				case "Dividend Reinvested":
-				case "Sale":
-				case "Wire Transfer":
-					// no usecase for now, lets ignore them.
-					return null;
-			}
+                case "Dividend Credit":
+                    var taxRow = SearchTaxRow(sheet, row);
+                    return ParseDividendTransaction(row, taxRow, name);
 
-			return null;
-		}
+                case "IRS Withholding":
+                case "Dividend Reinvested":
+                case "Sale":
+                case "Wire Transfer":
+                    // no usecase for now, lets ignore them.
+                    return null;
+            }
 
-		private DividendTransaction ParseDividendTransaction(IRow dividendRow, IRow taxRow, string name)
-		{
-			var date = ParseTransactionDate(dividendRow);
-			var grossProceed = Convert.ToDecimal(dividendRow.Cells[5].NumericCellValue);
-			var tax = Convert.ToDecimal(taxRow?.Cells[5].NumericCellValue);
-			var income = grossProceed + tax;
+            return null;
+        }
 
-			return new DividendTransaction(Broker.MorganStanley, date, name, income, tax, Currency.USD);
-		}
+        private DividendTransaction ParseDividendTransaction(IRow dividendRow, IRow taxRow, string name)
+        {
+            var date = ParseTransactionDate(dividendRow);
+            var grossProceed = Convert.ToDecimal(dividendRow.Cells[5].NumericCellValue);
+            var tax = Convert.ToDecimal(taxRow?.Cells[5].NumericCellValue);
+            var income = grossProceed + tax;
 
-		private DepositTransaction ParseDepositTransaction(IRow row, string name)
-		{
-			var date = ParseTransactionDate(row);
-			var amount = Convert.ToDecimal(row.Cells[3].NumericCellValue);
-			var price = Convert.ToDecimal(row.Cells[4].NumericCellValue);
+            return new DividendTransaction(Broker.MorganStanley, date, name, income, tax, Currency.USD);
+        }
 
-			return new DepositTransaction(Broker.MorganStanley, date, name, amount, price, Currency.USD);
-		}
+        private DepositTransaction ParseDepositTransaction(IRow row, string name)
+        {
+            var date = ParseTransactionDate(row);
+            var amount = Convert.ToDecimal(row.Cells[3].NumericCellValue);
+            var price = Convert.ToDecimal(row.Cells[4].NumericCellValue);
 
-		private IRow SearchTaxRow(ISheet sheet, IRow creditRow)
-		{
-			var creditRowDate = ParseTransactionDate(creditRow);
+            return new DepositTransaction(Broker.MorganStanley, date, name, amount, price, Currency.USD);
+        }
 
-			return GetTransactionRows(sheet).FirstOrDefault(i => ParseTransactionType(i) == "IRS Withholding" && ParseTransactionDate(i) == creditRowDate);
-		}
+        private IRow SearchTaxRow(ISheet sheet, IRow creditRow)
+        {
+            var creditRowDate = ParseTransactionDate(creditRow);
 
-		private ISheet GetSheet(string statementFilePath)
-		{
-			HSSFWorkbook workbook;
-			using (FileStream stream = new FileStream(statementFilePath, FileMode.Open, FileAccess.Read))
-			{
-				workbook = new HSSFWorkbook(stream);
-			}
+            return GetTransactionRows(sheet).FirstOrDefault(i => ParseTransactionType(i) == "IRS Withholding" && ParseTransactionDate(i) == creditRowDate);
+        }
 
-			return workbook.GetSheet(SheetName);
-		}
+        private ISheet GetSheet(string statementFilePath)
+        {
+            HSSFWorkbook workbook;
+            using (FileStream stream = new FileStream(statementFilePath, FileMode.Open, FileAccess.Read))
+            {
+                workbook = new HSSFWorkbook(stream);
+            }
 
-		private IList<IRow> GetTransactionRows(ISheet sheet)
-		{
-			var output = new List<IRow>();
+            return workbook.GetSheet(SheetName);
+        }
 
-			for (int i = HeaderRowOffset; i <= sheet.LastRowNum - FooterRowOffset; i++)
-			{
-				var row = sheet.GetRow(i);
-				output.Add(row);
-			}
+        private IList<IRow> GetTransactionRows(ISheet sheet)
+        {
+            var output = new List<IRow>();
 
-			return output;
-		}
+            for (int i = HeaderRowOffset; i <= sheet.LastRowNum - FooterRowOffset; i++)
+            {
+                var row = sheet.GetRow(i);
+                output.Add(row);
+            }
 
-		private DateTime ParseTransactionDate(IRow row)
-		{
-			return DateTime.Parse(row.Cells[0].StringCellValue);
-		}
+            return output;
+        }
 
-		private string ParseTransactionType(IRow row)
-		{
-			return row.Cells[1].StringCellValue;
-		}
-	}
+        private DateTime ParseTransactionDate(IRow row)
+        {
+            return DateTime.Parse(row.Cells[0].StringCellValue);
+        }
+
+        private string ParseTransactionType(IRow row)
+        {
+            return row.Cells[1].StringCellValue;
+        }
+    }
 }

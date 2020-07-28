@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
@@ -11,7 +11,8 @@
     <None Remove="Resources\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ASoft.TextDeserializer" Version="1.0.0.19-prerelease" />
+    <PackageReference Include="ASoft.TextDeserializer" Version="1.0.0.23-prerelease" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
     <PackageReference Include="PdfPig" Version="0.0.11" />
     <PackageReference Include="NPOI" Version="2.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />

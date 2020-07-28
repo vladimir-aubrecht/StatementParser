@@ -1,0 +1,224 @@
+c_ufo|nazu_ufo|nazu_predl|ufo_predl|c_komit|k_bank|d_vzniku|d_zaniku|k_ufo_vema|
+551|Finanční ředitelství pro hlavní město Prahu|hlavní město Prahu|pro|||1991-01-01|2012-12-31|\ |
+558|Finanční ředitelství v Ostravě|Ostravě|v|8028761|710|1991-01-01|2012-12-31|\ |
+288|Finanční úřad Brno I|Brno I||97629621|710|1991-01-01|2012-12-31|3001|
+293|Finanční úřad Brno-venkov|Brno-venkov||7624641|710|1991-01-01|2012-12-31|3005|
+140|Finanční úřad Plzeň-jih|Plzeň-jih||7625361|710|1991-01-01|2012-12-31|2303|
+453|Finanční úřad pro Jihočeský kraj|Jihočeský kraj|pro|77627231|710|2013-01-01||2200|
+458|Finanční úřad pro Královéhradecký kraj|Královéhradecký kraj|pro|77626511|710|2013-01-01||2700|
+459|Finanční úřad pro Pardubický kraj|Pardubický kraj|pro|77622561|710|2013-01-01||2800|
+10|Finanční úřad pro Prahu 10|Prahu 10|pro|7622101|710|1991-01-01|2012-12-31|2010|
+5|Finanční úřad pro Prahu 5|Prahu 5|pro|7624051|710|1991-01-01|2012-12-31|2005|
+9|Finanční úřad pro Prahu 9|Prahu 9|pro|7623091|710|1991-01-01|2012-12-31|2009|
+124|Finanční úřad v Aši|Aši|v|17629331|710|1991-01-01|2012-12-31|2402|
+283|Finanční úřad v Blansku|Blansku|v|7627631|710|1991-01-01|2012-12-31|3006|
+284|Finanční úřad v Boskovicích|Boskovicích|v|47629631|710|1991-01-01|2012-12-31|3007|
+298|Finanční úřad v Břeclavi|Břeclavi|v|7621651|710|1991-01-01|2012-12-31|3008|
+39|Finanční úřad v Čáslavi|Čáslavi|v|17621161|710|1991-01-01|2012-12-31|2106|
+369|Finanční úřad v Českém Těšíně|Českém Těšíně|v|37621791|710|1991-01-01|2012-12-31|3206|
+254|Finanční úřad v Dobrušce|Dobrušce|v|27622571|710|1991-01-01|2012-12-31|2703|
+223|Finanční úřad v Havlíčkově Brodě|Havlíčkově Brodě|v|97622681|710|1991-01-01|2012-12-31|2903|
+322|Finanční úřad v Holešově|Holešově|v|27621691|710|1991-01-01|2012-12-31|3303|
+239|Finanční úřad v Hořicích|Hořicích|v|67622541|710|1991-01-01|2012-12-31|2705|
+92|Finanční úřad v Humpolci|Humpolci|v|27628711|710|1991-01-01|2012-12-31|2904|
+224|Finanční úřad v Chotěboři|Chotěboři|v|77621681|710|1991-01-01|2012-12-31|2905|
+245|Finanční úřad v Jaroměři|Jaroměři|v|47629551|710|1991-01-01|2012-12-31|2706|
+259|Finanční úřad v Jilemnici|Jilemnici|v|77620451|710|1991-01-01|2012-12-31|2605|
+128|Finanční úřad v Karlových Varech|Karlových Varech|v|7620341|710|1991-01-01|2012-12-31|2401|
+34|Finanční úřad v Kolíně|Kolíně|v|7629151|710|1991-01-01|2012-12-31|2111|
+146|Finanční úřad v Kralovicích|Kralovicích|v|47624371|710|1991-01-01|2012-12-31|2309|
+320|Finanční úřad v Kroměříži|Kroměříži|v|7620691|710|1991-01-01|2012-12-31|3304|
+192|Finanční úřad v Liberci|Liberci|v|97629461|710|1991-01-01|2012-12-31|2601|
+380|Finanční úřad v Litovli|Litovli|v|27622811|710|1991-01-01|2012-12-31|3105|
+125|Finanční úřad v Mariánských Lázních|Mariánských Lázních|v|27624331|710|1991-01-01|2012-12-31|2405|
+48|Finanční úřad v Mladé Boleslavi|Mladé Boleslavi|v|7620181|710|1991-01-01|2012-12-31|2115|
+332|Finanční úřad v Moravských Budějovicích|Moravských Budějovicích|v|77625711|710|1991-01-01|2012-12-31|2907|
+45|Finanční úřad v Neratovicích|Neratovicích|v|27624171|710|1991-01-01|2012-12-31|2117|
+374|Finanční úřad v Novém Jičíně|Novém Jičíně|v|7624801|710|1991-01-01|2012-12-31|3215|
+371|Finanční úřad v Orlové|Orlové|v|67628791|710|1991-01-01|2012-12-31|3217|
+248|Finanční úřad v Pardubicích|Pardubicích|v|7624561|710|1991-01-01|2012-12-31|2801|
+202|Finanční úřad v Podbořanech|Podbořanech|v|27625481|710|1991-01-01|2012-12-31|2511|
+325|Finanční úřad v Prostějově|Prostějově|v|97620811|710|1991-01-01|2012-12-31|3106|
+63|Finanční úřad v Příbrami|Příbrami|v|7624211|710|1991-01-01|2012-12-31|2120|
+404|Finanční úřad v Rožnově pod Radhoštěm|Rožnově pod Radhoštěm|v|77627661|710|1991-01-01|2012-12-31|3307|
+66|Finanční úřad v Sedlčanech|Sedlčanech|v|57621211|710|1991-01-01|2012-12-31|2123|
+135|Finanční úřad v Sušici|Sušici|v|27629351|710|1991-01-01|2012-12-31|2315|
+188|Finanční úřad v Tanvaldě|Tanvaldě|v|17628451|710|1991-01-01|2012-12-31|2608|
+78|Finanční úřad v Trhových Svinech|Trhových Svinech|v|17624231|710|1991-01-01|2012-12-31|2213|
+364|Finanční úřad v Třinci|Třinci|v|87621781|710|1991-01-01|2012-12-31|3218|
+336|Finanční úřad v Uherském Hradišti|Uherském Hradišti|v|7624721|710|1991-01-01|2012-12-31|3309|
+275|Finanční úřad v Žamberku|Žamberku|v|67625611|710|1991-01-01|2012-12-31|2811|
+362|Finanční úřad ve Frýdku-Místku|Frýdku-Místku|ve|7628781|710|1991-01-01|2012-12-31|3207|
+31|Finanční úřad ve Slaném|Slaném|ve|27622141|710|1991-01-01|2012-12-31|2124|
+263|Finanční úřad ve Svitavách|Svitavách|ve|7626591|710|1991-01-01|2012-12-31|2808|
+353|Finanční úřad ve Velkém Meziříčí|Velkém Meziříčí|ve|37622751|710|1991-01-01|2012-12-31|2913|
+107|Finanční úřad ve Vodňanech|Vodňanech|ve|37629291|710|1991-01-01|2012-12-31|2217|
+274|Finanční úřad ve Vysokém Mýtě|Vysokém Mýtě|ve|47624611|710|1991-01-01|2012-12-31|2810|
+351|Finanční úřad ve Žďáru nad Sázavou|Žďáru nad Sázavou|ve|7626751|710|1991-01-01|2012-12-31|2914|
+557|Finanční ředitelství v Brně|Brně|v|||1991-01-01|2012-12-31|\ |
+554|Finanční ředitelství v Plzni|Plzni|v|||1991-01-01|2012-12-31|\ |
+289|Finanční úřad Brno II|Brno II||47621621|710|1991-01-01|2012-12-31|3002|
+388|Finanční úřad Ostrava I|Ostrava I||7623761|710|1991-01-01|2012-12-31|3201|
+145|Finanční úřad Plzeň-sever|Plzeň-sever||7622371|710|1991-01-01|2012-12-31|2302|
+461|Finanční úřad pro Jihomoravský kraj|Jihomoravský kraj|pro|77628621|710|2013-01-01||3000|
+457|Finanční úřad pro Liberecký kraj|Liberecký kraj|pro|77628461|710|2013-01-01||2600|
+454|Finanční úřad pro Plzeňský kraj|Plzeňský kraj|pro|77627311|710|2013-01-01||2300|
+2|Finanční úřad pro Prahu 2|Prahu 2|pro|7622021|710|1991-01-01|2012-12-31|2002|
+6|Finanční úřad pro Prahu 6|Prahu 6|pro|7621061|710|1991-01-01|2012-12-31|2006|
+452|Finanční úřad pro Středočeský kraj|Středočeský kraj|pro|77628111|710|2013-01-01||2100|
+21|Finanční úřad v Benešově|Benešově|v|7627121|710|1991-01-01|2012-12-31|2103|
+106|Finanční úřad v Blatné|Blatné|v|47624291|710|1991-01-01|2012-12-31|2202|
+57|Finanční úřad v Brandýse n.L.-Staré Boleslavi|Brandýse n.L.-Staré Boleslavi|v|57624201|710|1991-01-01|2012-12-31|2105|
+342|Finanční úřad v Bučovicích|Bučovicích|v|27622731|710|1991-01-01|2012-12-31|3009|
+172|Finanční úřad v České Lípě|České Lípě|v|7620421|710|1991-01-01|2012-12-31|2602|
+77|Finanční úřad v Českých Budějovicích|Českých Budějovicích|v|7629231|710|1991-01-01|2012-12-31|2201|
+65|Finanční úřad v Dobříši|Dobříši|v|47626211|710|1991-01-01|2012-12-31|2108|
+235|Finanční úřad v Hlinsku|Hlinsku|v|37629531|710|1991-01-01|2012-12-31|2802|
+249|Finanční úřad v Holicích|Holicích|v|57621561|710|1991-01-01|2012-12-31|2803|
+27|Finanční úřad v Hořovicích|Hořovicích|v|27625131|710|1991-01-01|2012-12-31|2109|
+299|Finanční úřad v Hustopečích|Hustopečích|v|27622651|710|1991-01-01|2012-12-31|3011|
+233|Finanční úřad v Chrudimi|Chrudimi|v|7622531|710|1991-01-01|2012-12-31|2804|
+399|Finanční úřad v Jeseníku|Jeseníku|v|7628861|710|1991-01-01|2012-12-31|3103|
+86|Finanční úřad v Jindřichově Hradci|Jindřichově Hradci|v|7623251|710|1991-01-01|2012-12-31|2205|
+367|Finanční úřad v Karviné|Karviné|v|7625791|710|1991-01-01|2012-12-31|3212|
+326|Finanční úřad v Konici|Konici|v|67624811|710|1991-01-01|2012-12-31|3104|
+44|Finanční úřad v Kralupech nad Vltavou|Kralupech nad Vltavou|v|47625171|710|1991-01-01|2012-12-31|2112|
+38|Finanční úřad v Kutné Hoře|Kutné Hoře|v|7626161|710|1991-01-01|2012-12-31|2113|
+197|Finanční úřad v Libochovicích|Libochovicích|v|47629471|710|1991-01-01|2012-12-31|2506|
+207|Finanční úřad v Litvínově|Litvínově|v|27622491|710|1991-01-01|2012-12-31|2508|
+43|Finanční úřad v Mělníce|Mělníce|v|7623171|710|1991-01-01|2012-12-31|2114|
+50|Finanční úřad v Mnichově Hradišti|Mnichově Hradišti|v|47622181|710|1991-01-01|2012-12-31|2116|
+206|Finanční úřad v Mostě|Mostě|v|7621491|710|1991-01-01|2012-12-31|2510|
+240|Finanční úřad v Nové Pace|Nové Pace|v|47621541|710|1991-01-01|2012-12-31|2710|
+53|Finanční úřad v Nymburku|Nymburku|v|7628191|710|1991-01-01|2012-12-31|2118|
+129|Finanční úřad v Ostrově|Ostrově|v|17626341|710|1991-01-01|2012-12-31|2406|
+91|Finanční úřad v Pelhřimově|Pelhřimově|v|97626711|710|1991-01-01|2012-12-31|2910|
+55|Finanční úřad v Poděbradech|Poděbradech|v|27629191|710|1991-01-01|2012-12-31|2119|
+250|Finanční úřad v Přelouči|Přelouči|v|47626561|710|1991-01-01|2012-12-31|2807|
+69|Finanční úřad v Rakovníku|Rakovníku|v|7621221|710|1991-01-01|2012-12-31|2121|
+179|Finanční úřad v Rumburku|Rumburku|v|27629431|710|1991-01-01|2012-12-31|2513|
+258|Finanční úřad v Semilech|Semilech|v|97621451|710|1991-01-01|2012-12-31|2607|
+398|Finanční úřad v Šumperku|Šumperku|v|7623841|710|1991-01-01|2012-12-31|3109|
+317|Finanční úřad v Telči|Telči|v|27624681|710|1991-01-01|2012-12-31|2911|
+268|Finanční úřad v Trutnově|Trutnově|v|7625601|710|1991-01-01|2012-12-31|2713|
+260|Finanční úřad v Turnově|Turnově|v|87626451|710|1991-01-01|2012-12-31|2609|
+214|Finanční úřad v Ústí nad Labem|Ústí nad Labem|v|7623411|710|1991-01-01|2012-12-31|2501|
+203|Finanční úřad v Žatci|Žatci|v|47626481|710|1991-01-01|2012-12-31|2515|
+193|Finanční úřad ve Frýdlantě|Frýdlantě|ve|37626461|710|1991-01-01|2012-12-31|2603|
+343|Finanční úřad ve Slavkově u Brna|Slavkově u Brna|ve|37628731|710|1991-01-01|2012-12-31|3016|
+381|Finanční úřad ve Šternberku|Šternberku|ve|37628811|710|1991-01-01|2012-12-31|3108|
+311|Finanční úřad ve Veselí nad Moravou|Veselí nad Moravou|ve|37622671|710|1991-01-01|2012-12-31|3018|
+23|Finanční úřad ve Voticích|Voticích|ve|57624121|710|1991-01-01|2012-12-31|2126|
+341|Finanční úřad ve Vyškově|Vyškově|ve|7621731|710|1991-01-01|2012-12-31|3019|
+0|Generální finanční ředitelství|MF ČR|pro|11122011|710|2011-01-01||7000|
+553|Finanční ředitelství v Českých Budějovicích|Českých Budějovicích|v|||1991-01-01|2012-12-31|\ |
+552|Finanční ředitelství v Praze|Praze|v|||1991-01-01|2012-12-31|\ |
+290|Finanční úřad Brno III|Brno III||37626621|710|1991-01-01|2012-12-31|3003|
+389|Finanční úřad Ostrava II|Ostrava II||27624761|710|1991-01-01|2012-12-31|3202|
+60|Finanční úřad Praha-západ|Praha-západ||97629111|710|1991-01-01|2012-12-31|2102|
+455|Finanční úřad pro Karlovarský kraj|Karlovarský kraj|pro|77629341|710|2013-01-01||2400|
+463|Finanční úřad pro Moravskoslezský kraj|Moravskoslezský kraj|pro|77621761|710|2013-01-01||3200|
+11|Finanční úřad pro Prahu - Jižní Město|Prahu - Jižní Město|pro|27628041|710|1991-01-01|2012-12-31|2011|
+3|Finanční úřad pro Prahu 3|Prahu 3|pro|27623101|710|1991-01-01|2012-12-31|2003|
+7|Finanční úřad pro Prahu 7|Prahu 7|pro|7629071|710|1991-01-01|2012-12-31|2007|
+456|Finanční úřad pro Ústecký kraj|Ústecký kraj|pro|77621411|710|2013-01-01||2500|
+26|Finanční úřad v Berouně|Berouně|v|7624131|710|1991-01-01|2012-12-31|2104|
+141|Finanční úřad v Blovicích|Blovicích|v|27626361|710|1991-01-01|2012-12-31|2304|
+244|Finanční úřad v Broumově|Broumově|v|57624551|710|1991-01-01|2012-12-31|2702|
+352|Finanční úřad v Bystřici nad Pernštejnem|Bystřici nad Pernštejnem|v|17621751|710|1991-01-01|2012-12-31|2902|
+35|Finanční úřad v Českém Brodě|Českém Brodě|v|37625151|710|1991-01-01|2012-12-31|2107|
+87|Finanční úřad v Dačicích|Dačicích|v|17629251|710|1991-01-01|2012-12-31|2204|
+118|Finanční úřad v Domažlicích|Domažlicích|v|7626321|710|1991-01-01|2012-12-31|2305|
+385|Finanční úřad v Hlučíně|Hlučíně|v|17624821|710|1991-01-01|2012-12-31|3211|
+134|Finanční úřad v Horažďovicích|Horažďovicích|v|37624351|710|1991-01-01|2012-12-31|2306|
+228|Finanční úřad v Hradci Králové|Hradci Králové|v|7628511|710|1991-01-01|2012-12-31|2701|
+123|Finanční úřad v Chebu|Chebu|v|7623331|710|1991-01-01|2012-12-31|2403|
+294|Finanční úřad v Ivančicích|Ivančicích|v|57621641|710|1991-01-01|2012-12-31|3012|
+238|Finanční úřad v Jičíně|Jičíně|v|97629541|710|1991-01-01|2012-12-31|2707|
+183|Finanční úřad v Kadani|Kadani|v|27626441|710|1991-01-01|2012-12-31|2505|
+30|Finanční úřad v Kladně|Kladně|v|7621141|710|1991-01-01|2012-12-31|2110|
+376|Finanční úřad v Kopřivnici|Kopřivnici|v|47626801|710|1991-01-01|2012-12-31|3213|
+157|Finanční úřad v Kraslicích|Kraslicích|v|27628391|710|1991-01-01|2012-12-31|2404|
+310|Finanční úřad v Kyjově|Kyjově|v|47628671|710|1991-01-01|2012-12-31|3013|
+196|Finanční úřad v Litoměřicích|Litoměřicích|v|7627471|710|1991-01-01|2012-12-31|2507|
+201|Finanční úřad v Lounech|Lounech|v|7624481|710|1991-01-01|2012-12-31|2509|
+300|Finanční úřad v Mikulově|Mikulově|v|37628651|710|1991-01-01|2012-12-31|3014|
+265|Finanční úřad v Moravské Třebové|Moravské Třebové|v|37622591|710|1991-01-01|2012-12-31|2806|
+243|Finanční úřad v Náchodě|Náchodě|v|7627551|710|1991-01-01|2012-12-31|2709|
+175|Finanční úřad v Novém Boru|Novém Boru|v|47622421|710|1991-01-01|2012-12-31|2606|
+379|Finanční úřad v Olomouci|Olomouci|v|7621811|710|1991-01-01|2012-12-31|3101|
+305|Finanční úřad v Otrokovicích|Otrokovicích|v|37625661|710|1991-01-01|2012-12-31|3306|
+97|Finanční úřad v Písku|Písku|v|7628271|710|1991-01-01|2012-12-31|2208|
+101|Finanční úřad v Prachaticích|Prachaticích|v|7625281|710|1991-01-01|2012-12-31|2209|
+393|Finanční úřad v Přerově|Přerově|v|7626831|710|1991-01-01|2012-12-31|3107|
+150|Finanční úřad v Rokycanech|Rokycanech|v|97629381|710|1991-01-01|2012-12-31|2312|
+253|Finanční úřad v Rychnově nad Kněžnou|Rychnově nad Kněžnou|v|7621571|710|1991-01-01|2012-12-31|2712|
+111|Finanční úřad v Soběslavi|Soběslavi|v|27622301|710|1991-01-01|2012-12-31|2210|
+110|Finanční úřad v Táboře|Táboře|v|7621301|710|1991-01-01|2012-12-31|2212|
+210|Finanční úřad v Teplicích|Teplicích|v|7620501|710|1991-01-01|2012-12-31|2514|
+330|Finanční úřad v Třebíči|Třebíči|v|7627711|710|1991-01-01|2012-12-31|2912|
+79|Finanční úřad v Týně nad Vltavou|Týně nad Vltavou|v|37625231|710|1991-01-01|2012-12-31|2215|
+273|Finanční úřad v Ústí nad Orlicí|Ústí nad Orlicí|v|7622611|710|1991-01-01|2012-12-31|2809|
+189|Finanční úřad v Železném Brodě|Železném Brodě|v|37629451|710|1991-01-01|2012-12-31|2610|
+363|Finanční úřad ve Frýdlantě nad Ostravicí|Frýdlantě nad Ostravicí|ve|37624781|710|1991-01-01|2012-12-31|3208|
+105|Finanční úřad ve Strakonicích|Strakonicích|ve|7622291|710|1991-01-01|2012-12-31|2211|
+405|Finanční úřad ve Valašském Meziříčí|Valašském Meziříčí|ve|87622661|710|1991-01-01|2012-12-31|3310|
+102|Finanční úřad ve Vimperku|Vimperku|ve|27626281|710|1991-01-01|2012-12-31|2216|
+270|Finanční úřad ve Vrchlabí|Vrchlabí|ve|37621601|710|1991-01-01|2012-12-31|2714|
+303|Finanční úřad ve Zlíně|Zlíně|ve|7629661|710|1991-01-01|2012-12-31|3301|
+13|Specializovaný finanční úřad|Specializovaný finanční úřad|pro|77620021|710|2012-01-01||4000|
+556|Finanční ředitelství v Hradci Králové|Hradci Králové|v|||1991-01-01|2012-12-31|\ |
+555|Finanční ředitelství v Ústí nad Labem|Ústí nad Labem|v|||1991-01-01|2012-12-31|\ |
+291|Finanční úřad Brno IV|Brno IV||67622621|710|1991-01-01|2012-12-31|3004|
+390|Finanční úřad Ostrava III|Ostrava III||47625761|710|1991-01-01|2012-12-31|3203|
+451|Finanční úřad pro hlavní město Prahu|hlavní město Prahu|pro|77628031|710|2013-01-01||2000|
+460|Finanční úřad pro Kraj Vysočina|Kraj Vysočina|pro|67626681|710|2013-01-01||2900|
+462|Finanční úřad pro Olomoucký kraj|Olomoucký kraj|pro|47623811|710|2013-01-01||3100|
+1|Finanční úřad pro Prahu 1|Prahu 1|pro|7625011|710|1991-01-01|2012-12-31|2001|
+4|Finanční úřad pro Prahu 4|Prahu 4|pro|7627041|710|1991-01-01|2012-12-31|2004|
+8|Finanční úřad pro Prahu 8|Prahu 8|pro|7626081|710|1991-01-01|2012-12-31|2008|
+464|Finanční úřad pro Zlínský kraj|Zlínský kraj|pro|47620661|710|2013-01-01||3300|
+211|Finanční úřad v Bílině|Bílině|v|17626501|710|1991-01-01|2012-12-31|2502|
+368|Finanční úřad v Bohumíně|Bohumíně|v|27626791|710|1991-01-01|2012-12-31|3204|
+358|Finanční úřad v Bruntále|Bruntále|v|7620771|710|1991-01-01|2012-12-31|3205|
+321|Finanční úřad v Bystřici pod Hostýnem|Bystřici pod Hostýnem|v|47622691|710|1991-01-01|2012-12-31|3302|
+82|Finanční úřad v Českém Krumlově|Českém Krumlově|v|7626241|710|1991-01-01|2012-12-31|2203|
+178|Finanční úřad v Děčíně|Děčíně|v|7628431|710|1991-01-01|2012-12-31|2503|
+370|Finanční úřad v Havířově|Havířově|v|57622791|710|1991-01-01|2012-12-31|3210|
+309|Finanční úřad v Hodoníně|Hodoníně|v|7626671|710|1991-01-01|2012-12-31|3010|
+119|Finanční úřad v Horšovském Týně|Horšovském Týně|v|47628321|710|1991-01-01|2012-12-31|2307|
+394|Finanční úřad v Hranicích|Hranicích|v|47628831|710|1991-01-01|2012-12-31|3102|
+182|Finanční úřad v Chomutově|Chomutově|v|7625441|710|1991-01-01|2012-12-31|2504|
+187|Finanční úřad v Jablonci nad Nisou|Jablonci nad Nisou|v|7622451|710|1991-01-01|2012-12-31|2604|
+314|Finanční úřad v Jihlavě|Jihlavě|v|7623681|710|1991-01-01|2012-12-31|2901|
+83|Finanční úřad v Kaplici|Kaplici|v|17621241|710|1991-01-01|2012-12-31|2206|
+133|Finanční úřad v Klatovech|Klatovech|v|7628351|710|1991-01-01|2012-12-31|2308|
+255|Finanční úřad v Kostelci nad Orlicí|Kostelci nad Orlicí|v|37628571|710|1991-01-01|2012-12-31|2708|
+359|Finanční úřad v Krnově|Krnově|v|17626771|710|1991-01-01|2012-12-31|3214|
+225|Finanční úřad v Ledči nad Sázavou|Ledči nad Sázavou|v|87627681|710|1991-01-01|2012-12-31|2906|
+264|Finanční úřad v Litomyšli|Litomyšli|v|47628591|710|1991-01-01|2012-12-31|2805|
+304|Finanční úřad v Luhačovicích|Luhačovicích|v|17624661|710|1991-01-01|2012-12-31|3305|
+98|Finanční úřad v Milevsku|Milevsku|v|27629271|710|1991-01-01|2012-12-31|2207|
+348|Finanční úřad v Moravském Krumlově|Moravském Krumlově|v|37625741|710|1991-01-01|2012-12-31|3015|
+333|Finanční úřad v Náměšti nad Oslavou|Náměšti nad Oslavou|v|47629711|710|1991-01-01|2012-12-31|2908|
+230|Finanční úřad v Novém Bydžově|Novém Bydžově|v|37624511|710|1991-01-01|2012-12-31|2711|
+384|Finanční úřad v Opavě|Opavě|v|7629821|710|1991-01-01|2012-12-31|3216|
+94|Finanční úřad v Pacově|Pacově|v|87620711|710|1991-01-01|2012-12-31|2909|
+138|Finanční úřad v Plzni|Plzni|v|7629311|710|1991-01-01|2012-12-31|2301|
+12|Finanční úřad v Praze - Modřanech|Praze - Modřanech|v|17622041|710|1991-01-01|2012-12-31|2012|
+142|Finanční úřad v Přešticích|Přešticích|v|37621361|710|1991-01-01|2012-12-31|2311|
+198|Finanční úřad v Roudnici nad Labem|Roudnici nad Labem|v|27628471|710|1991-01-01|2012-12-31|2512|
+59|Finanční úřad v Říčanech|Říčanech|v|47629201|710|1991-01-01|2012-12-31|2122|
+155|Finanční úřad v Sokolově|Sokolově|v|7627391|710|1991-01-01|2012-12-31|2407|
+160|Finanční úřad v Tachově|Tachově|v|7626401|710|1991-01-01|2012-12-31|2313|
+295|Finanční úřad v Tišnově|Tišnově|v|47626641|710|1991-01-01|2012-12-31|3017|
+88|Finanční úřad v Třeboni|Třeboni|v|47625251|710|1991-01-01|2012-12-31|2214|
+338|Finanční úřad v Uherském Brodě|Uherském Brodě|v|47626721|710|1991-01-01|2012-12-31|3308|
+400|Finanční úřad v Zábřehu|Zábřehu|v|27624841|710|1991-01-01|2012-12-31|3110|
+269|Finanční úřad ve Dvoře Králové nad Labem|Dvoře Králové nad Labem|ve|27626601|710|1991-01-01|2012-12-31|2704|
+375|Finanční úřad ve Fulneku|Fulneku|ve|27625801|710|1991-01-01|2012-12-31|3209|
+162|Finanční úřad ve Stříbře|Stříbře|ve|37622401|710|1991-01-01|2012-12-31|2314|
+306|Finanční úřad ve Valašských Kloboukách|Valašských Kloboukách|ve|57626661|710|1991-01-01|2012-12-31|3311|
+22|Finanční úřad ve Vlašimi|Vlašimi|ve|47629121|710|1991-01-01|2012-12-31|2125|
+403|Finanční úřad ve Vsetíně|Vsetíně|ve|97628661|710|1991-01-01|2012-12-31|3312|
+346|Finanční úřad ve Znojmě|Znojmě|ve|7629741|710|1991-01-01|2012-12-31|3020|

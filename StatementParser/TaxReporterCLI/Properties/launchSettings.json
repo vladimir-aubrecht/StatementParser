@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TaxReporterCLI": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\vladi\\iCloudDrive\\Documents\\Taxes\\2019\\Statements\""
+    }
+  }
+}

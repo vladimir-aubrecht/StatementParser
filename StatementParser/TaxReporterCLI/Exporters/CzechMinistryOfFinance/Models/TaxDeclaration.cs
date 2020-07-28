@@ -40,10 +40,10 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         public Appendix3List[] Appendix3Lists { get; set; }
 
         [XmlElement("Vetab")]
-        public AppendixIncomeTable[] AppendixIncomeTable { get; set; }
+        public AppendixIncomeTableRow[] AppendixIncomeTable { get; set; }
 
         [XmlElement("Vetad")]
-        public AppendixSeznam[] AppendixSeznam { get; set; }
+        public AppendixSeznamRow[] AppendixSeznam { get; set; }
 
         [XmlAttribute("verzePis")]
         public string TaxDeclarationVersion { get; set; } = "06.02";

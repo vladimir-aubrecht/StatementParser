@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
 {
     [Serializable]
-    public class AppendixIncomeTable
+    public class AppendixIncomeTableRow
     {
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         /// Úhrn příjmů ze závislé činnosti (2013: a funkčních požitků)
         /// </summary>
         [XmlAttribute("kc_prij6p")]
-        public string Income { get; set; }
+        public decimal Income { get; set; }
 
         /// <summary>
         /// Sražená daň podle § 36 odst. 7 (2014: nebo 8) ZDP

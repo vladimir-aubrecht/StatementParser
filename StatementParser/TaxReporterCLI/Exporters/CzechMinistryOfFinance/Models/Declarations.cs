@@ -5,7 +5,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
 {
     [Serializable]
     [XmlRoot(ElementName = "Pisemnost")]
-    public class Declarations
+    public class Declaration
     {
         [XmlElement("DPFDP5")]
         public TaxDeclaration TaxDeclaration { get; set; }

@@ -12,6 +12,7 @@ using NPOI.XSSF.UserModel;
 using StatementParser.Attributes;
 
 using TaxReporterCLI.Exporters.CzechMinistryOfFinance;
+using TaxReporterCLI.Models.Converters;
 using TaxReporterCLI.Models.Views;
 
 namespace TaxReporterCLI
@@ -45,10 +46,27 @@ namespace TaxReporterCLI
             wb1.Write(file);
         }
 
-        public void SaveAsXml(string filePath, DividendBrokerSummaryView dividendBrokerSummaryView, TransactionView transactionView)
+        public void SaveAsXml(string originalTaxDeclarationFilePath, string newTaxDeclarationFilePath, IList<object> transactions)
         {
-            var exporter = new CzechMinistryOfFinanceExporter(dividendBrokerSummaryView, transactionView);
-            exporter.Save(filePath);
+            var converter = new DividendBrokerSummaryViewConverter();
+
+            var groupedTransactions = GroupTransactions(transactions);
+
+            var dividendBrokerSummeryView = groupedTransactions[nameof(DividendBrokerSummaryView)].Cast<DividendBrokerSummaryView>().ToList();
+            var esppTransactionView = groupedTransactions[nameof(ESPPTransactionView)].Cast<ESPPTransactionView>().ToList();
+            var depositTransactionView = groupedTransactions[nameof(DepositTransactionView)].Cast<DepositTransactionView>().ToList();
+
+            var importer = new CzechMinistryOfFinanceImporter();
+            var declaration = importer.Load(originalTaxDeclarationFilePath);
+
+            var builder = new TaxDeclarationBuilder(declaration);
+            builder.WithTaxYear(2019);
+            var newDeclaration = builder.Build();
+            newDeclaration.TaxDeclaration.AppendixSeznam = converter.ConvertToAppendixSeznamRows(dividendBrokerSummeryView);
+            newDeclaration.TaxDeclaration.AppendixIncomeTable = converter.ConvertToAppendixIncomeTableRow(esppTransactionView, depositTransactionView);
+
+            var exporter = new CzechMinistryOfFinanceExporter();
+            exporter.Save(newTaxDeclarationFilePath, newDeclaration);
         }
 
         public void PrintAsPlainText(IList<object> transactions)
