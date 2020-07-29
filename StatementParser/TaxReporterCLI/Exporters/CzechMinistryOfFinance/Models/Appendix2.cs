@@ -11,13 +11,13 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         /// </summary>
         /// <remarks>Row 209.</remarks>
         [XmlAttribute("kc_zd10p")]
-        public string Row209 { get; set; }
+        public decimal Row209 { get; set; }
 
         /// <summary>
         /// Výpočet dílčího základu daně z ostatních příjmů (§ 10 zákona) - Úhrn jednotlivých výdajů dle § 10 zákona
         /// </summary>
         [XmlAttribute("uhrn_vydaje10")]
-        public string TotalExpenses { get; set; }
+        public decimal TotalExpenses { get; set; }
 
         /// <summary>
         /// Výpočet dílčího základu daně z příjmů z nájmu (§ 9 zákona) - Dosáhl jsem příjmů ze společného jmění manželů
@@ -36,25 +36,25 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         /// </summary>
         /// <remarks>Row 207.</remarks>
         [XmlAttribute("kc_prij10")]
-        public string Row207 { get; set; }
+        public decimal Row207 { get; set; }
 
         /// <summary>
         /// Výpočet dílčího základu daně z ostatních příjmů (§ 10 zákona) - Úhrn kladných rozdílů jednotlivých druhů příjmů
         /// </summary>
         [XmlAttribute("uhrn_rozdil10")]
-        public string TotalProfit { get; set; }
+        public decimal TotalProfit { get; set; }
 
         /// <summary>
         /// Výdaje podle § 10 zákona (maximálně do výše příjmů)
         /// </summary>
         /// <remarks>Row 208.</remarks>
         [XmlAttribute("kc_vyd10")]
-        public string Row208 { get; set; }
+        public decimal Row208 { get; set; }
 
         /// <summary>
         /// Výpočet dílčího základu daně z ostatních příjmů (§ 10 zákona) - Úhrn jednotlivých příjmů dle § 10 zákona
         /// </summary>
         [XmlAttribute("uhrn_prijmy10")]
-        public string TotalIncomes { get; set; }
+        public decimal TotalIncomes { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -80,7 +81,7 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
             var tax = Convert.ToDecimal(taxRow?.Cells[5].NumericCellValue);
             var income = grossProceed + tax;
 
-            return new DividendTransaction(Broker.MorganStanley, date, name, income, tax, Currency.USD);
+            return new DividendTransaction(Broker.MorganStanley, date, name, income, tax, new RegionInfo("US"), Currency.USD);
         }
 
         private DepositTransaction ParseDepositTransaction(IRow row, string name)

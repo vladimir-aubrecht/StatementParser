@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -64,7 +65,7 @@ namespace StatementParser.Parsers.Brokers.Revolut
         {
             decimal tax = SearchForTax(activityDividendRow, activities);
             var currency = (Currency)Enum.Parse(typeof(Currency), activityDividendRow.Currency);
-            return new DividendTransaction(Broker.Revolut, activityDividendRow.SettleDate, activityDividendRow.Description, activityDividendRow.Amount, tax, currency);
+            return new DividendTransaction(Broker.Revolut, activityDividendRow.SettleDate, activityDividendRow.Description, activityDividendRow.Amount, tax, new RegionInfo("US"), currency);
         }
 
         private decimal SearchForTax(ActivityDividendModel dividendTransactionRow, ActivityDividendModel[] activities)

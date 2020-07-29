@@ -94,7 +94,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
             var date = CreateDateTime(activityDividendRow.Date, year);
             var tax = SearchForTaxString(activityTaxesModels, date);
 
-            return new DividendTransaction(Broker.Fidelity, date, activityDividendRow.Name, activityDividendRow.Income, tax, Currency.USD);
+            return new DividendTransaction(Broker.Fidelity, date, activityDividendRow.Name, activityDividendRow.Income, tax, new RegionInfo("US"), Currency.USD);
         }
 
         private DepositTransaction CreateOtherTransaction(ActivityOtherModel activityOtherRow, int year)

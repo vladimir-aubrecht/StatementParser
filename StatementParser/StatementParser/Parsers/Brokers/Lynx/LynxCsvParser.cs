@@ -48,18 +48,27 @@ namespace StatementParser.Parsers.Brokers.Lynx
             {
                 var currency = Enum.Parse<Currency>(dividend.Currency);
                 var tax = SearchForTax(dividend, statement.WithholdingTaxes);
+                var taxCountry = SearchForTaxCountry(dividend, statement.WithholdingTaxes);
 
-                var transaction = new DividendTransaction(Broker.Lynx, dividend.Date.Value, dividend.Description, dividend.Amount, tax, currency);
+                var transaction = new DividendTransaction(Broker.Lynx, dividend.Date.Value, dividend.Description, dividend.Amount, tax, taxCountry, currency);
                 output.Add(transaction);
             }
 
             return output;
         }
 
+        private RegionInfo SearchForTaxCountry(DividendsRowModel dividend, List<WithholdingTaxRowModel> withholdingTaxes)
+        {
+            var tax = withholdingTaxes.FirstOrDefault(i => dividend.Description.Contains(Regex.Replace(i.Description, " - [^ ]+ Tax", "", RegexOptions.Compiled)) && i.Date == dividend.Date);
+            var taxCountryPostfix = tax.Description.Substring(tax.Description.LastIndexOf('-') + 2);
+            var country = taxCountryPostfix.Substring(0, taxCountryPostfix.LastIndexOf(' '));
+
+            return new RegionInfo(country);
+        }
+
         private decimal SearchForTax(DividendsRowModel dividend, List<WithholdingTaxRowModel> withholdingTaxes)
         {
             var tax = withholdingTaxes.FirstOrDefault(i => dividend.Description.Contains(Regex.Replace(i.Description, " - [^ ]+ Tax", "", RegexOptions.Compiled)) && i.Date == dividend.Date);
-
             return Math.Abs(tax?.Amount ?? 0);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -71,7 +72,7 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
 
             output.AddRange(statementModel.Transactions
                 .Where(i => i.Type == "Dividend Credit")
-                .Select(i => new DividendTransaction(Broker.MorganStanley, i.Date, statementModel.Name, i.GrossAmount, SearchForTax(statementModel, i), Currency.USD)));
+                .Select(i => new DividendTransaction(Broker.MorganStanley, i.Date, statementModel.Name, i.GrossAmount, SearchForTax(statementModel, i), new RegionInfo("US"), Currency.USD)));
 
             return output;
         }

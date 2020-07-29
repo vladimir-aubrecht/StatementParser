@@ -150,9 +150,9 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                         Row36 = "29",
                         Row36a = "30",
                         Row37 = "31",
-                        Row38 = "32",
+                        Row38 = 32,
                         Row39 = "33",
-                        Row40 = "0",
+                        Row40 = 0,
                         Row41 = "96",
                         Row41a = "96",
                         Row42 = "126",
@@ -179,7 +179,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                     },
                     Appendix2OtherIncomeRow = new Appendix2OtherIncomeRow[]
                     {
-                        new Appendix2OtherIncomeRow() { Code = "Z", Type = "D", Description = "94", Expenses = "96", Income = "95", Profit = "-1" }
+                        new Appendix2OtherIncomeRow() { Code = "Z", Type = "D", Description = "94", Expenses = 96, Income = 95, Profit = -1 }
                     },
                     AppendixIncomeTable = new AppendixIncomeTableRow[]
                     {
@@ -214,12 +214,12 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance
                     },
                     Appendix2 = new Appendix2()
                     {
-                        Row207 = "95",
-                        Row208 = "95",
-                        Row209 = "0",
-                        TotalExpenses = "96",
-                        TotalIncomes = "95",
-                        TotalProfit = "0",
+                        Row207 = 95,
+                        Row208 = 95,
+                        Row209 = 0,
+                        TotalExpenses = 96,
+                        TotalIncomes = 95,
+                        TotalProfit = 0,
                         ApplyForExpensesGivenByFixedPercentage = "N",
                         IncomesFromPartnerSharedWealth = "N"
                     },

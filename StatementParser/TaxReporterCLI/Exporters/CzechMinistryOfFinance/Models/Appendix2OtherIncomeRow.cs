@@ -10,7 +10,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         /// Výpočet dílčího základu daně z ostatních příjmů (§ 10 zákona) - Příjmy
         /// </summary>
         [XmlAttribute("prijmy10")]
-        public string Income { get; set; }
+        public decimal Income { get; set; }
 
         /// <summary>
         /// Výpočet dílčího základu daně z ostatních příjmů (§ 10 zákona) - Kód
@@ -28,13 +28,13 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         /// Výpočet dílčího základu daně z ostatních příjmů (§ 10 zákona) - Rozdíl (příjmy - výdaje)
         /// </summary>
         [XmlAttribute("rozdil10")]
-        public string Profit { get; set; }
+        public decimal Profit { get; set; }
 
         /// <summary>
         /// Výpočet dílčího základu daně z ostatních příjmů (§ 10 zákona) - Výdaje
         /// </summary>
         [XmlAttribute("vydaje10")]
-        public string Expenses { get; set; }
+        public decimal Expenses { get; set; }
 
         /// <summary>
         /// Výpočet dílčího základu daně z ostatních příjmů (§ 10 zákona) - Označení druhu příjmů podle § 10 odst. 1 zákona

@@ -66,7 +66,7 @@ namespace StatementParser.Parsers.Brokers.FxChoice
                     var salePrice = Convert.ToDecimal(row.SelectSingleNode("./td[10]").InnerText, CultureInfo.InvariantCulture);
                     var commission = Math.Abs(Convert.ToDecimal(row.SelectSingleNode("./td[11]").InnerText, CultureInfo.InvariantCulture));
                     var taxes = Math.Abs(Convert.ToDecimal(row.SelectSingleNode("./td[12]").InnerText, CultureInfo.InvariantCulture));
-                    var swap = Convert.ToDecimal(row.SelectSingleNode("./td[13]").InnerText, CultureInfo.InvariantCulture);
+                    var swap = -Convert.ToDecimal(row.SelectSingleNode("./td[13]").InnerText, CultureInfo.InvariantCulture);
                     var profit = Convert.ToDecimal(row.SelectSingleNode("./td[14]").InnerText, CultureInfo.InvariantCulture);
 
                     var transaction = new SaleTransaction(Broker.FxChoice, date, name, currency, leverage, amount, purchasePrice, salePrice, commission, taxes, swap, profit);

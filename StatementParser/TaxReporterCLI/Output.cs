@@ -55,6 +55,7 @@ namespace TaxReporterCLI
             var dividendBrokerSummeryView = groupedTransactions[nameof(DividendBrokerSummaryView)].Cast<DividendBrokerSummaryView>().ToList();
             var esppTransactionView = groupedTransactions[nameof(ESPPTransactionView)].Cast<ESPPTransactionView>().ToList();
             var depositTransactionView = groupedTransactions[nameof(DepositTransactionView)].Cast<DepositTransactionView>().ToList();
+            var saleTransactionView = groupedTransactions[nameof(SaleTransactionView)].Cast<SaleTransactionView>().ToList();
 
             var importer = new CzechMinistryOfFinanceImporter();
             var declaration = importer.Load(originalTaxDeclarationFilePath);
@@ -64,6 +65,11 @@ namespace TaxReporterCLI
             var newDeclaration = builder.Build();
             newDeclaration.TaxDeclaration.AppendixSeznam = converter.ConvertToAppendixSeznamRows(dividendBrokerSummeryView);
             newDeclaration.TaxDeclaration.AppendixIncomeTable = converter.ConvertToAppendixIncomeTableRow(esppTransactionView, depositTransactionView);
+            newDeclaration.TaxDeclaration.Appendix3Lists = converter.ConvertToAppendix3List(dividendBrokerSummeryView);
+            newDeclaration.TaxDeclaration.Appendix2 = converter.ConvertToAppendix2(saleTransactionView);
+            newDeclaration.TaxDeclaration.Appendix2OtherIncomeRow = converter.ConvertToAppendix2OtherIncomeRow(saleTransactionView);
+            newDeclaration.TaxDeclaration.Section2.Row38 = newDeclaration.TaxDeclaration.Appendix3Lists.Select(i => i.Income).Sum();
+            newDeclaration.TaxDeclaration.Section2.Row40 = newDeclaration.TaxDeclaration.Appendix2.TotalProfit;
 
             var exporter = new CzechMinistryOfFinanceExporter();
             exporter.Save(newTaxDeclarationFilePath, newDeclaration);

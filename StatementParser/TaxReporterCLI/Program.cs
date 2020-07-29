@@ -102,14 +102,15 @@ namespace TaxReporterCLI
         {
             var summaryViews = new List<object>();
 
-            var usedBrokers = transactionViews.Select(i => i.Transaction.Broker).Distinct();
-            var usedCurrencies = transactionViews.Select(i => i.Transaction.Currency).Distinct();
+            var dividendTransactionViews = transactionViews.OfType<DividendTransactionView>().ToList();
+            var usedBrokers = dividendTransactionViews.Select(i => i.Transaction.Broker).Distinct();
+            var usedCountries = dividendTransactionViews.Select(i => (i.Transaction as DividendTransaction).TaxCountry).Distinct();
 
-            foreach (var currency in usedCurrencies)
+            foreach (var country in usedCountries)
             {
                 foreach (var broker in usedBrokers)
                 {
-                    var brokerSummaryView = new DividendBrokerSummaryView(transactionViews.OfType<DividendTransactionView>().ToList(), broker, currency);
+                    var brokerSummaryView = new DividendBrokerSummaryView(dividendTransactionViews, broker, country);
 
                     if (brokerSummaryView.TotalIncome > 0)
                     {
@@ -117,7 +118,7 @@ namespace TaxReporterCLI
                     }
                 }
 
-                var currencySummaryView = new DividendCurrencySummaryView(transactionViews.OfType<DividendTransactionView>().ToList(), currency);
+                var currencySummaryView = new DividendCurrencySummaryView(dividendTransactionViews, country);
 
                 if (currencySummaryView.TotalIncome > 0)
                 {

@@ -58,7 +58,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         /// Row 40.
         /// </remarks>
         [XmlAttribute("kc_zd10")]
-        public string Row40 { get; set; }
+        public decimal Row40 { get; set; }
 
         /// <summary>
         /// Úhrn příjmů plynoucí ze zahraničí zvýšený o povinné pojistné podle § 6 odst. 12 zákona
@@ -121,7 +121,7 @@ namespace TaxReporterCLI.Exporters.CzechMinistryOfFinance.Models
         /// Row 38.
         /// </remarks>
         [XmlAttribute("kc_zakldan8")]
-        public string Row38 { get; set; }
+        public decimal Row38 { get; set; }
 
         /// <summary>
         /// Dílčí základ daně nebo ztráta z nájmu podle § 9 zákona (ř. 206 přílohy č. 2 DAP)

@@ -47,7 +47,7 @@ namespace StatementParser.Parsers.Brokers.Degiro
                 if (row.Description.Contains("Dividenda"))
                 {
                     var tax = SearchForTax(statementRows, row.ISIN, row.Date.Value);
-                    var transaction = new DividendTransaction(Broker.Degiro, row.Date.Value, row.Name, row.Income.Value, tax, row.Currency.Value);
+                    var transaction = new DividendTransaction(Broker.Degiro, row.Date.Value, row.Name, row.Income.Value, tax, new RegionInfo("US"), row.Currency.Value);
                     output.Add(transaction);
                 }
             }
