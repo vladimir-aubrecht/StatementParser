@@ -39,7 +39,7 @@ namespace ExchangeRateProvider.Providers.Czk
                 htmlDocument.LoadHtml(htmlContent);
             }
 
-			var table = htmlDocument.DocumentNode.SelectNodes("//*[@id=\"leftcolumn\"]/div[2]/div[2]/table/tr");
+			var table = htmlDocument.DocumentNode.SelectNodes("//*[@id=\"leftcolumn\"]/div[2]/div[1]/table/tr");
 
 			var output = new List<CurrencyDescriptor>();
 			for (int i = 1; i < table.Count; i++)
