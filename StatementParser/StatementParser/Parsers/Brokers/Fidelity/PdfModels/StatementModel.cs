@@ -19,7 +19,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity.PdfModels
 
 		[DeserializeCollectionByRegex(
 			"([0-9]{2}/[0-9]{2} )",
-			"Other Activity In SettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceTransactionCostAmount(.+?)Total Other Activity In")]
+			"Other Activity In (?:\\(continued\\))?SettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPrice(?:TotalCost Basis)?TransactionCostAmount(.+?)(?:Total Other Activity In|$)")]
 		public ActivityOtherModel[] ActivityOther { get; set; }
 
 		[DeserializeCollectionByRegex(
