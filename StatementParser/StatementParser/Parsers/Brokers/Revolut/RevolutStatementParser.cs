@@ -9,27 +9,27 @@ using StatementParser.Parsers.Brokers.Revolut.PdfModels;
 
 namespace StatementParser.Parsers.Brokers.Revolut
 {
-	internal class RevolutStatementParser : ITransactionParser
-	{
-		private bool CanParse(string statementFilePath)
+    internal class RevolutStatementParser : ITransactionParser
+    {
+        private bool CanParse(string statementFilePath)
         {
             return File.Exists(statementFilePath) && Path.GetExtension(statementFilePath).ToLowerInvariant() == ".pdf";
         }
 
-		public IList<Transaction> Parse(string statementFilePath)
-		{
-			if (!CanParse(statementFilePath))
-			{
-				return null;
-			}
+        public IList<Transaction> Parse(string statementFilePath)
+        {
+            if (!CanParse(statementFilePath))
+            {
+                return null;
+            }
 
-			var transactions = new List<Transaction>();
+            var transactions = new List<Transaction>();
 
-			using (var textSource = new TextSource(statementFilePath))
-			{
-				try
-				{
-					var parsedDocument = new TextDocumentParser<StatementModel>().Parse(textSource);
+            using (var textSource = new TextSource(statementFilePath))
+            {
+                try
+                {
+                    var parsedDocument = new TextDocumentParser<StatementModel>().Parse(textSource);
 
                     foreach (var transaction in parsedDocument.ActivityDividend)
                     {
@@ -39,26 +39,26 @@ namespace StatementParser.Parsers.Brokers.Revolut
                         }
                     }
 
-				}
-				catch (TextException)
-				{
-					return null;
-				}
-			}
+                }
+                catch (TextException)
+                {
+                    return null;
+                }
+            }
 
-			return transactions;
-		}
+            return transactions;
+        }
 
         private DividendTransaction CreateDividendTransaction(ActivityDividendModel activityDividendRow, ActivityDividendModel[] activities)
-		{
+        {
             decimal tax = SearchForTax(activityDividendRow, activities);
             var currency = (Currency)Enum.Parse(typeof(Currency), activityDividendRow.Currency);
-			return new DividendTransaction(Broker.Revolut, activityDividendRow.SettleDate, activityDividendRow.Description, activityDividendRow.Amount, tax, currency);
-		}
+            return new DividendTransaction(Broker.Revolut, activityDividendRow.SettleDate, activityDividendRow.Description, activityDividendRow.Amount, tax, currency);
+        }
 
         private decimal SearchForTax(ActivityDividendModel dividendTransactionRow, ActivityDividendModel[] activities)
         {
-            var transactionRow = activities.FirstOrDefault(i => 
+            var transactionRow = activities.FirstOrDefault(i =>
                 i.ActivityType == "DIVNRA" &&
                 i.TradeDate == dividendTransactionRow.TradeDate &&
                 i.SettleDate == dividendTransactionRow.SettleDate &&
@@ -67,5 +67,5 @@ namespace StatementParser.Parsers.Brokers.Revolut
 
             return transactionRow?.Amount ?? 0;
         }
-	}
+    }
 }
