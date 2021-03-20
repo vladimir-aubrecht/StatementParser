@@ -29,7 +29,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity.PdfModels
 
 		[DeserializeCollectionByRegex(
 			"([0-9]{2}/[0-9]{2} )",
-			"Securities Bought & SoldSettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPriceTransactionCostAmounti(.+?)Total Securities Bought")]
+			"Securities Bought & SoldSettlementDateSecurity NameSymbol/CUSIPDescriptionQuantityPrice(?:TotalCost Basis)?TransactionCostAmounti(.+?)Total Securities Bought")]
 		public ActivityBuyModel[] ActivityBuy { get; set; }
 	}
 }
