@@ -21,12 +21,12 @@ namespace StatementParser.Parsers.Brokers.Lynx.Extensions
                     continue;
                 }
 
-                if (csvReader.Context.HeaderRecord == null)
+                if (csvReader.HeaderRecord == null)
                 {
                     return null;
                 }
 
-                var key = csvReader.Context.HeaderRecord[headerFieldIndex];
+                var key = csvReader.HeaderRecord[headerFieldIndex];
 
                 if (!dataSets.ContainsKey(key))
                 {
