@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CsvHelper;
+using CsvHelper.Configuration;
 using StatementParser.Models;
 using StatementParser.Parsers.Brokers.Lynx.CsvModels;
 using StatementParser.Parsers.Brokers.Lynx.Extensions;
@@ -62,9 +63,15 @@ namespace StatementParser.Parsers.Brokers.Lynx
                     ShortDatePattern = "yyyy-MM-dd"
                 };
 
+                var csvConfig = new CsvConfiguration(ci)
+                {
+                    BadDataFound = readingContext =>
+                    {
+                        /* Some legal notes may be invalid csv, lets ignore them */
+                    }
+                };
                 using var reader = new StreamReader(statementFilePath);
-                using var csv = new CsvReader(reader, ci);
-                csv.Configuration.BadDataFound = (readingContext) => { /* Some legal notes may be invalid csv, lets ignore them */ };
+                using var csv = new CsvReader(reader, csvConfig);
 
                 var statement = csv.ReadObject<StatementModel>(0, () => csv.GetField(1) == "Header");
 
