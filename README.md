@@ -1,4 +1,4 @@
-# StatementParser ![.NET Core](https://github.com/vladimir-aubrecht/StatementParser/workflows/.NET%20Core/badge.svg)
+# StatementParser ![.NET Core](https://github.com/vladimir-aubrecht/StatementParser/workflows/.NET/badge.svg)
 
 Idea behind the StatementParser is, that it would be nice to be able to process financial data from different kind of statements in automatized way.
 This is often pretty hard as brokers are giving these data only in form of xls/xlst/pdf or other format which is not directly processable and here comes StatmentParser.
