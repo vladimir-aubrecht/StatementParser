@@ -23,7 +23,6 @@ namespace ExchangeRateProvider.Providers.Czk
 		{
 			var url = this.CreateUrlByDate(date);
 
-			// var request = WebRequest.CreateHttp(url);
 			var request = new HttpClient(new HttpClientHandler());
 			var htmlDocument = new HtmlAgilityPack.HtmlDocument();
 
@@ -31,9 +30,9 @@ namespace ExchangeRateProvider.Providers.Czk
 			{
 				if (response.IsSuccessStatusCode)
 				{
-					var responseStream = await response.Content.ReadAsStringAsync();
+					var htmlContent = await response.Content.ReadAsStringAsync();
 
-					htmlDocument.LoadHtml(responseStream);
+					htmlDocument.LoadHtml(htmlContent);
 				}
 			}
 
