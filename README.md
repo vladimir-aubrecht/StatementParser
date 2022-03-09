@@ -47,12 +47,16 @@ Official guidance is, verify all generated numbers manually. Currently there are
 
 # Supported file formats for brokers
 
-|Type / Broker        |Fidelity|Morgan Stanley|MetaTrader|FxChoice|Degiro      |Lynx|Interactive Broker|Revolut|
-|---------------------|--------|--------------|----------|--------|------------|----|------------------|-------|
-|Sale transactions    | -      | -            |Htm       |Htm     | -          | -  | -                | Activity Statement Csv for year >= 2021 |
-|Dividend transactions|Pdf     |Pdf, Xls      | -        | -      |Csv in Czech|Csv |Csv               | Pdf for year < 2021, Account Statement Csv for year >= 2021 |
-|ESPP transactions    |Pdf     | -            | -        | -      | -          | -  | -                | -     |
-|Deposit transactions |Pdf     |Pdf, Xls      | -        | -      | -          | -  | -                | -     |
+|Type / Broker        |Fidelity|Morgan Stanley|MetaTrader|FxChoice|Degiro      |Lynx|Interactive Broker|Revolut                               |
+|---------------------|--------|--------------|----------|--------|------------|----|------------------|--------------------------------------|
+|Sale transactions    | -      | -            |Htm       |Htm     | -          | -  | -                | Csv Activity Statement<sup>[1]</sup> |
+|Dividend transactions|Pdf     |Pdf, Xls      | -        | -      |Csv in Czech|Csv |Csv               | Pdf for year<sup>[2]</sup><br/>Csv&nbsp;Account&nbsp;Statement<sup>[1]</sup> |
+|ESPP transactions    |Pdf     | -            | -        | -      | -          | -  | -                | -                                    |
+|Deposit transactions |Pdf     |Pdf, Xls      | -        | -      | -          | -  | -                | -                                    |
+
+
+[1] Only Csv statements generated in 2022 and later are supported. At this moment can be exported only through mobile app.
+[2] Only Pdfs generated before roughly middle of 2021 are supported.
 
 ## Examples of how parsable statements looks like
 
