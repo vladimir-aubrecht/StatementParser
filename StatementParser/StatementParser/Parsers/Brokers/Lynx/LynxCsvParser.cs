@@ -68,7 +68,8 @@ namespace StatementParser.Parsers.Brokers.Lynx
                     BadDataFound = _ => { /* Some legal notes may be invalid csv, lets ignore them */ }
                 };
                 using var reader = new StreamReader(statementFilePath);
-                using var csv = new CsvReader(reader, csvConfig);
+                using var csv = new CsvReader(reader, ci);
+                csv.Configuration.BadDataFound = (readingContext) => { /* Some legal notes may be invalid csv, lets ignore them */ };
 
                 var statement = csv.ReadObject<StatementModel>(0, () => csv.GetField(1) == "Header");
 
