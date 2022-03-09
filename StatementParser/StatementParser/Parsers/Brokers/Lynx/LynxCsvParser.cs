@@ -81,7 +81,7 @@ namespace StatementParser.Parsers.Brokers.Lynx
                 }
 
                 statement.Dividends = statement.Dividends.Where(i => i.Date != null).ToList();
-                statement.WithholdingTaxes = statement.WithholdingTaxes.Where(i => i.Date != null).ToList();
+                statement.WithholdingTaxes = statement.WithholdingTaxes.ToList();
 
                 return statement;
             }
