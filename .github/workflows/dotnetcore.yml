@@ -1,4 +1,4 @@
-name: .NET Core
+name: .NET
 
 on: [push]
 
@@ -14,10 +14,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Setup .NET 6
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.100
+        dotnet-version: 6.0.100
     - name: Build with dotnet
       run: dotnet build StatementParser/StatementParser.sln --configuration Release
     - name: Publish with dotnet
@@ -26,9 +26,9 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: StatementParserCLI_${{matrix.platform}}
-        path: StatementParser/StatementParserCLI/bin/Release/netcoreapp3.0/${{matrix.platform}}/publish
+        path: StatementParser/StatementParserCLI/bin/Release/net6.0/${{matrix.platform}}/publish
     - name: Publish TaxReporterCLI artifacts to GitHub
       uses: actions/upload-artifact@v1
       with:
         name: TaxReporterCLI_${{matrix.platform}}
-        path: StatementParser/TaxReporterCLI/bin/Release/netcoreapp3.0/${{matrix.platform}}/publish
+        path: StatementParser/TaxReporterCLI/bin/Release/net6.0/${{matrix.platform}}/publish

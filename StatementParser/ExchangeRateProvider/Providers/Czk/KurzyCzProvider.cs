@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -20,24 +19,22 @@ namespace ExchangeRateProvider.Providers.Czk
 			Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 		}
 
-		public Task<ICurrencyList> FetchCurrencyListByDateAsync(DateTime date)
+		public async Task<ICurrencyList> FetchCurrencyListByDateAsync(DateTime date)
 		{
 			var url = this.CreateUrlByDate(date);
 
-			var request = WebRequest.CreateHttp(url);
+			var request = new HttpClient(new HttpClientHandler());
 			var htmlDocument = new HtmlAgilityPack.HtmlDocument();
 
-			// TODO: Why async version doesn't work on Mac?
-			using (var response = (HttpWebResponse)request.GetResponse())
+			using (var response = await request.GetAsync(url))
 			{
-				var responseStream = response.GetResponseStream();
-				var encoding = Encoding.GetEncoding(response.CharacterSet);
+				if (response.IsSuccessStatusCode)
+				{
+					var htmlContent = await response.Content.ReadAsStringAsync();
 
-                using var sr = new StreamReader(responseStream, encoding);
-
-                var htmlContent = sr.ReadToEnd();
-                htmlDocument.LoadHtml(htmlContent);
-            }
+					htmlDocument.LoadHtml(htmlContent);
+				}
+			}
 
 			var table = htmlDocument.DocumentNode.SelectNodes("//*[@id=\"leftcolumn\"]/div[2]/div[1]/table/tr");
 
@@ -55,7 +52,7 @@ namespace ExchangeRateProvider.Providers.Czk
 				output.Add(new CurrencyDescriptor(code, name, price, amount, country));
 			}
 
-			return Task.FromResult<ICurrencyList>(new CurrencyList(output));
+			return new CurrencyList(output);
 		}
 
 		private string SanitizeValue(string value)
