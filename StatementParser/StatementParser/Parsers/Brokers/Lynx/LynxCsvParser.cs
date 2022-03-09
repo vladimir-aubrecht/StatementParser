@@ -65,11 +65,13 @@ namespace StatementParser.Parsers.Brokers.Lynx
 
                 var csvConfig = new CsvConfiguration(ci)
                 {
-                    BadDataFound = _ => { /* Some legal notes may be invalid csv, lets ignore them */ }
+                    BadDataFound = readingContext =>
+                    {
+                        /* Some legal notes may be invalid csv, lets ignore them */
+                    }
                 };
                 using var reader = new StreamReader(statementFilePath);
-                using var csv = new CsvReader(reader, ci);
-                csv.Configuration.BadDataFound = (readingContext) => { /* Some legal notes may be invalid csv, lets ignore them */ };
+                using var csv = new CsvReader(reader, csvConfig);
 
                 var statement = csv.ReadObject<StatementModel>(0, () => csv.GetField(1) == "Header");
 
@@ -79,7 +81,7 @@ namespace StatementParser.Parsers.Brokers.Lynx
                 }
 
                 statement.Dividends = statement.Dividends.Where(i => i.Date != null).ToList();
-                statement.WithholdingTaxes = statement.WithholdingTaxes.ToList();
+                statement.WithholdingTaxes = statement.WithholdingTaxes.Where(i => i.Date != null).ToList();
 
                 return statement;
             }
