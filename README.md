@@ -49,8 +49,8 @@ Official guidance is, verify all generated numbers manually. Currently there are
 
 |Type / Broker        |Fidelity|Morgan Stanley|MetaTrader|FxChoice|Degiro      |Lynx|Interactive Broker|Revolut|
 |---------------------|--------|--------------|----------|--------|------------|----|------------------|-------|
-|Sale transactions    | -      | -            |Htm       |Htm     | -          | -  | -                | -     |
-|Dividend transactions|Pdf     |Pdf, Xls      | -        | -      |Csv in Czech|Csv |Csv               | Pdf   |
+|Sale transactions    | -      | -            |Htm       |Htm     | -          | -  | -                | Activity Statement Csv for year >= 2021 |
+|Dividend transactions|Pdf     |Pdf, Xls      | -        | -      |Csv in Czech|Csv |Csv               | Pdf for year < 2021, Account Statement Csv for year >= 2021 |
 |ESPP transactions    |Pdf     | -            | -        | -      | -          | -  | -                | -     |
 |Deposit transactions |Pdf     |Pdf, Xls      | -        | -      | -          | -  | -                | -     |
 
