@@ -24,6 +24,7 @@ namespace StatementParser
 			parsers.Add(new LynxCsvParser());
 			parsers.Add(new DegiroParser());
 			parsers.Add(new RevolutStatementParser());
+			parsers.Add(new RevolutStatementParser2021());
 		}
 
 		public Task<IList<Transaction>> ParseAsync(string statementFilePath)
