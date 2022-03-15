@@ -1,4 +1,4 @@
-# StatementParser ![.NET Core](https://github.com/vladimir-aubrecht/StatementParser/workflows/.NET%20Core/badge.svg)
+# StatementParser ![.NET Core](https://github.com/vladimir-aubrecht/StatementParser/workflows/.NET/badge.svg)
 
 Idea behind the StatementParser is, that it would be nice to be able to process financial data from different kind of statements in automatized way.
 This is often pretty hard as brokers are giving these data only in form of xls/xlst/pdf or other format which is not directly processable and here comes StatmentParser.
@@ -47,12 +47,16 @@ Official guidance is, verify all generated numbers manually. Currently there are
 
 # Supported file formats for brokers
 
-|Type / Broker        |Fidelity|Morgan Stanley|MetaTrader|FxChoice|Degiro      |Lynx|Interactive Broker|Revolut|
-|---------------------|--------|--------------|----------|--------|------------|----|------------------|-------|
-|Sale transactions    | -      | -            |Htm       |Htm     | -          | -  | -                | -     |
-|Dividend transactions|Pdf     |Pdf, Xls      | -        | -      |Csv in Czech|Csv |Csv               | Pdf   |
-|ESPP transactions    |Pdf     | -            | -        | -      | -          | -  | -                | -     |
-|Deposit transactions |Pdf     |Pdf, Xls      | -        | -      | -          | -  | -                | -     |
+|Type / Broker        |Fidelity|Morgan Stanley|MetaTrader|FxChoice|Degiro      |Lynx|Interactive Broker|Revolut                               |
+|---------------------|--------|--------------|----------|--------|------------|----|------------------|--------------------------------------|
+|Sale transactions    | -      | -            |Htm       |Htm     | -          | -  | -                | Csv Activity Statement<sup>[1]</sup> |
+|Dividend transactions|Pdf     |Pdf, Xls      | -        | -      |Csv in Czech|Csv |Csv               | Pdf for year<sup>[2]</sup><br/>Csv&nbsp;Account&nbsp;Statement<sup>[1]</sup> |
+|ESPP transactions    |Pdf     | -            | -        | -      | -          | -  | -                | -                                    |
+|Deposit transactions |Pdf     |Pdf, Xls      | -        | -      | -          | -  | -                | -                                    |
+
+
+[1] Only Csv statements generated in 2022 and later are supported. At this moment can be exported only through mobile app.
+[2] Only Pdfs generated before roughly middle of 2021 are supported.
 
 ## Examples of how parsable statements looks like
 
