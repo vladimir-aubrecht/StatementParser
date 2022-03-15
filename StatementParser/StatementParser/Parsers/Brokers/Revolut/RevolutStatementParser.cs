@@ -31,12 +31,16 @@ namespace StatementParser.Parsers.Brokers.Revolut
                 {
                     var parsedDocument = new TextDocumentParser<StatementModel>().Parse(textSource);
 
-                    foreach (var transaction in parsedDocument.ActivityDividend)
+                    foreach (var dividend in parsedDocument.Dividends)
                     {
-                        if (transaction.ActivityType == "DIV")
-                        {
-                            transactions.Add(CreateDividendTransaction(transaction, parsedDocument.ActivityDividend));
-                        }
+                        var transaction = new DividendTransaction(Broker.Revolut, dividend.Date, dividend.Symbol, dividend.Dividend, dividend.WithholdingTax, Currency.USD);
+                        transactions.Add(transaction);
+                    }
+
+                    foreach (var sale in parsedDocument.Sales)
+                    {
+                        var transaction = new SaleTransaction(Broker.Revolut, sale.DateSold, sale.Symbol,  Currency.USD, 0, sale.Quantity, sale.CostBasis, sale.GrossProceeds, 0, 0, 0, sale.PnL);
+                        transactions.Add(transaction);
                     }
 
                 }
@@ -47,25 +51,6 @@ namespace StatementParser.Parsers.Brokers.Revolut
             }
 
             return transactions;
-        }
-
-        private DividendTransaction CreateDividendTransaction(ActivityDividendModel activityDividendRow, ActivityDividendModel[] activities)
-        {
-            decimal tax = SearchForTax(activityDividendRow, activities);
-            var currency = (Currency)Enum.Parse(typeof(Currency), activityDividendRow.Currency);
-            return new DividendTransaction(Broker.Revolut, activityDividendRow.SettleDate, activityDividendRow.Description, activityDividendRow.Amount, tax, currency);
-        }
-
-        private decimal SearchForTax(ActivityDividendModel dividendTransactionRow, ActivityDividendModel[] activities)
-        {
-            var transactionRow = activities.FirstOrDefault(i =>
-                i.ActivityType == "DIVNRA" &&
-                i.TradeDate == dividendTransactionRow.TradeDate &&
-                i.SettleDate == dividendTransactionRow.SettleDate &&
-                i.Description.Substring(0, i.Description.IndexOf(" - DIV")) == dividendTransactionRow.Description.Substring(0, dividendTransactionRow.Description.IndexOf(" - DIV"))
-            );
-
-            return transactionRow?.Amount ?? 0;
         }
     }
 }

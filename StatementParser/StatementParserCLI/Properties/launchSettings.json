@@ -2,7 +2,7 @@
   "profiles": {
     "StatementParserCLI": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\vladi\\Downloads\\Revolut\""
+      "commandLineArgs": "\"C:\\Users\\vladi\\Downloads\\ProfitAndLostStatement.pdf\""
     }
   }
 }

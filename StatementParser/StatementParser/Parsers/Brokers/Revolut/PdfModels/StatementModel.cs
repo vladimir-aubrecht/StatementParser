@@ -2,14 +2,19 @@ using ASoft.TextDeserializer.Attributes;
 
 namespace StatementParser.Parsers.Brokers.Revolut.PdfModels
 {
-    [DeserializeByRegex("(?<AccountNumber>[^ ]+)Account Name")]
+    [DeserializeByRegex("Account number(?<AccountNumber>[^ ]+\\d)")]
     internal class StatementModel
     {
         public string AccountNumber { get; set; }
 
         [DeserializeCollectionByRegex(
-            "([0-9]{2}/[0-9]{2}/[0-9]{4}[0-9]{2}/[0-9]{2}/[0-9]{4})",
-            "ACTIVITYTrade DateSettle DateCurrencyActivity TypeSymbol / DescriptionQuantityPriceAmount(.+)Page \\d+ of \\d+")]
-        public ActivityDividendModel[] ActivityDividend { get; set; }
+            "(\\d{4}-\\d{2}-\\d{2})",
+            "DividendsDateSymbolDividendWithholding TaxAmount(.+?)Total")]
+        public DividendModel[] Dividends { get; set; }
+
+        [DeserializeCollectionByRegex(
+            "(\\d{4}-\\d{2}-\\d{2}\\d{4}-\\d{2}-\\d{2})",
+            "Date acquiredDate soldSymbolQuantityCost basisGross ProceedsPnL.([\\s\\S]*)")]
+        public SaleModel[] Sales { get; set; }
     }
 }
