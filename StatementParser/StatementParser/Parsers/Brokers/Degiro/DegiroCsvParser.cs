@@ -67,7 +67,7 @@ namespace StatementParser.Parsers.Brokers.Degiro
             }
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.Message);
+				Console.WriteLine($"{nameof(DegiroParser)} failed to parse statement.");
 				return null;
 			}
 		}

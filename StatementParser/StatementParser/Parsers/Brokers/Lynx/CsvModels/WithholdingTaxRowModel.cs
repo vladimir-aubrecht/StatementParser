@@ -6,22 +6,22 @@ namespace StatementParser.Parsers.Brokers.Lynx.CsvModels
 {
     internal class WithholdingTaxRowModel
     {
-        [Index(0)]
+        [Name("Withholding Tax")]
         public string Section { get; set; }
 
-        [Index(2)]
+        [Name("Currency")]
         public string Currency { get; set; }
 
-        [Index(3)]
+        [Name("Date")]
         public DateTime Date { get; set; }
 
-        [Index(4)]
+        [Name("Description")]
         public string Description { get; set; }
 
-        [Index(5)]
+        [Name("Amount")]
         public decimal Amount { get; set; }
 
-        [Index(6)]
+        [Name("Code")]
         public string Code { get; set; }
 
         public override string ToString()

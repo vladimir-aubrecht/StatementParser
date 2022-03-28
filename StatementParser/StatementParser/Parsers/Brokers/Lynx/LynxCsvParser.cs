@@ -28,8 +28,15 @@ namespace StatementParser.Parsers.Brokers.Lynx
 
             var statement = LoadStatementModel(statementFilePath);
 
-            if (statement == null || statement.Statement[0].FieldValue != "Activity Statement")
+            if (statement == null)
             {
+                return null;
+            }
+
+            var titleField = statement.Statement.Where(i => i.FieldName == "Title");
+            if (titleField.First()?.FieldValue.StartsWith("Activity") != true)
+            {
+                Console.WriteLine("Statement was parsed, but it's not recognized as Activity Statement neither Activity Summary, so throwing the result away.");
                 return null;
             }
 

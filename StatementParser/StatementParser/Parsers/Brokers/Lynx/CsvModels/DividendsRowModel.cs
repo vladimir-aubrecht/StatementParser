@@ -6,19 +6,19 @@ namespace StatementParser.Parsers.Brokers.Lynx.CsvModels
 {
 	internal class DividendsRowModel
 	{
-		[Index(0)]
+		[Name("Dividends")]
 		public string Section { get; set; }
 
-		[Index(2)]
+		[Name("Currency")]
 		public string Currency { get; set; }
 
-		[Index(3)]
+		[Name("Date")]
 		public DateTime? Date { get; set; }
 
-		[Index(4)]
+		[Name("Description")]
 		public string Description { get; set; }
 
-		[Index(5)]
+		[Name("Amount")]
 		public decimal Amount { get; set; }
 
 		public override string ToString()
