@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+
 using ASoft.TextDeserializer.Attributes;
 
 namespace StatementParser.Parsers.Brokers.MorganStanley.PdfModels
@@ -24,7 +26,7 @@ namespace StatementParser.Parsers.Brokers.MorganStanley.PdfModels
 
 		public string NetAmountRaw { get; set; }
 
-		public decimal NetAmount => Convert.ToDecimal(NetAmountRaw?.Replace('(', '-').TrimEnd(')'));
+		public decimal NetAmount => Convert.ToDecimal(NetAmountRaw?.Replace('(', '-').TrimEnd(')'), new CultureInfo("en-US"));
 
         public override string ToString()
 		{

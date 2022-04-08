@@ -8,6 +8,9 @@ namespace StatementParser.Models
 		/// </summary>
 		public decimal Income { get; }
 
+		/// <summary>
+		/// Tax represented as positive number
+		/// </summary>
 		public decimal Tax { get; }
 
 		public DividendTransaction(DividendTransaction dividendTransaction) : this(dividendTransaction.Broker, dividendTransaction.Date, dividendTransaction.Name, dividendTransaction.Income, dividendTransaction.Tax, dividendTransaction.Currency)
@@ -17,7 +20,7 @@ namespace StatementParser.Models
 		public DividendTransaction(Broker broker, DateTime date, string name, decimal income, decimal tax, Currency currency) : base(broker, date, name, currency)
 		{
 			this.Income = income;
-			this.Tax = tax;
+			this.Tax = Math.Abs(tax);
 		}
 
 		public override string ToString()

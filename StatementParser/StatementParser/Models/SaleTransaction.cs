@@ -15,8 +15,8 @@ namespace StatementParser.Models
 			this.Amount = amount;
 			this.PurchasePrice = purchasePrice;
 			this.SalePrice = salePrice;
-			this.Commission = commission;
-			this.Taxes = taxes;
+			this.Commission = Math.Abs(commission);
+			this.Taxes = Math.Abs(taxes);
 			this.Swap = swap;
 			this.Profit = profit;
 		}
