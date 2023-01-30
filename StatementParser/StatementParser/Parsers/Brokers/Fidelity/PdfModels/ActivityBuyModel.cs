@@ -2,7 +2,7 @@
 
 namespace StatementParser.Parsers.Brokers.Fidelity.PdfModels
 {
-	[DeserializeByRegex("(?<Date>[0-9]{2}/[0-9]{2}) (?<Name>.+?) ESPP.+You Bought (?<Amount>[0-9]+\\.[0-9]{3})\\$(?<Price>[0-9]+\\.[0-9]{5})")]
+	[DeserializeByRegex("(?<Date>[0-9]{2}/[0-9]{2}) (?<Name>.+?) ESPP.+You Bought (?<Amount>[0-9]+\\.[0-9]{3})\\$?(?<Price>[0-9]+\\.[0-9]{5})")]
 	internal class ActivityBuyModel
 	{
 		public string Date { get; set; }
