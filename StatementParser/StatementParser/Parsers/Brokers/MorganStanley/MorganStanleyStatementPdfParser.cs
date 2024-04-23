@@ -26,11 +26,11 @@ namespace StatementParser.Parsers.Brokers.MorganStanley
 			using var textSource = new TextSource(statementFilePath, true);
 			try
 			{
-				if (Regex.IsMatch(textSource.Title, @"^Morgan Stanley Smith Barney Document SP10 History Statements "))
+				if (Regex.IsMatch(textSource.Title ?? "", @"^Morgan Stanley Smith Barney Document SP10 History Statements "))
 				{
 					return ParseLegacyStatement(textSource);
 				}
-				else if (Regex.IsMatch(textSource.Title, @"^Morgan Stanley Smith Barney Document EPS217CCC linux-TTF New$"))
+				else if (Regex.IsMatch(textSource.Title ?? "", @"^Morgan Stanley Smith Barney Document EPS217CCC linux-TTF New$"))
 				{
 					return Parse2022Statement(textSource);
 				}
