@@ -13,7 +13,7 @@ namespace StatementParserCLI
 	{
 		private Dictionary<string, List<Transaction>> GroupTransactions(IList<Transaction> transactions)
 		{
-			return transactions.GroupBy(i => i.GetType()).ToDictionary(k => k.Key.Name, i => i.Select(a => a).ToList());
+			return transactions.GroupBy(i => i.GetType()).ToDictionary(k => k.Key.Name, i => i.Select(a => a).OrderBy(t => t.Date).ToList());
 		}
 
 		public void PrintAsJson(IList<Transaction> transactions)
