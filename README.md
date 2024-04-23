@@ -32,9 +32,9 @@ JSON conversion:
 
 ``dotnet StatementParserCLI.dll -j <path to the file or folder containing statements>``
 
-XSLT conversion:
+XSLX (Excel) conversion:
 
-``dotnet StatementParserCLI.dll -x <path to file with output xslt file> <path to the file or folder containing statements>``
+``dotnet StatementParserCLI.dll -x <path to file with output xslx file> <path to the file or folder containing statements>``
 
 # Guarantees
 Use on your own risk.
