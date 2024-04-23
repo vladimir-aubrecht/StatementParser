@@ -70,7 +70,14 @@ namespace StatementParserCLI
 			{
 				var cell = row.CreateCell(columnIndex);
 
-				cell.SetCellValue(rowValue);
+				if(DateTime.TryParse(rowValue, out var dateValue))
+				{
+					cell.SetCellValue(dateValue.ToString("s"));
+				}
+				else
+				{
+					cell.SetCellValue(rowValue);
+				}
 
 				columnIndex++;
 			}
