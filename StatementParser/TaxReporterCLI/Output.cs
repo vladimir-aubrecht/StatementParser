@@ -82,6 +82,11 @@ namespace TaxReporterCLI
 				{
 					cell.SetCellValue((double)value);
 				}
+				//For dates using the sortable format so excel can treat it better or at least sort as a string
+				else if(DateTime.TryParse(rowValue, out var dateValue))
+				{
+					cell.SetCellValue(dateValue.ToString("s"));
+				}
 				else
 				{
 					cell.SetCellValue(rowValue);
