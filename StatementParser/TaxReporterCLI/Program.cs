@@ -83,15 +83,15 @@ namespace TaxReporterCLI
 
             var summaryViews = CreateDividendSummaryViews(transactionViews);
 
-            var views = new List<object>(transactionViews);
+            var views = new List<IView>(transactionViews);
             views.AddRange(summaryViews);
 
             Print(option, views);
         }
 
-        private static IList<object> CreateDividendSummaryViews(IList<TransactionView> transactionViews)
+        private static IList<IView> CreateDividendSummaryViews(IList<TransactionView> transactionViews)
         {
-            var summaryViews = new List<object>();
+            var summaryViews = new List<IView>();
 
             var usedBrokers = transactionViews.Select(i => i.Transaction.Broker).Distinct();
             var usedCurrencies = transactionViews.Select(i => i.Transaction.Currency).Distinct();
@@ -119,7 +119,7 @@ namespace TaxReporterCLI
             return summaryViews;
         }
 
-        private static void Print(Options option, IList<object> views)
+        private static void Print(Options option, IList<IView> views)
 		{
 			var printer = new Output();
 			if (option.ShouldPrintAsJson)

@@ -7,31 +7,32 @@ using Newtonsoft.Json;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using StatementParser.Attributes;
+using TaxReporterCLI.Models.Views;
 
 namespace TaxReporterCLI
 {
 	internal class Output
 	{
-		private Dictionary<string, List<object>> GroupTransactions(IList<object> transactions)
+		private Dictionary<string, List<IView>> GroupViews(IList<IView> views)
 		{
-			return transactions.GroupBy(i => i.GetType()).ToDictionary(k => k.Key.Name, i => i.Select(a => a).ToList());
+			return views.GroupBy(i => i.GetType()).ToDictionary(k => k.Key.Name, i => i.Select(a => a).OrderBy(x => x).ToList());
 		}
 
-		public void PrintAsJson(IList<object> transactions)
+		public void PrintAsJson(IList<IView> views)
 		{
-			var groupedTransactions = GroupTransactions(transactions);
+			var groupedTransactions = GroupViews(views);
 
 			Console.WriteLine(JsonConvert.SerializeObject(groupedTransactions));
 		}
 
-		public void SaveAsExcelSheet(string filePath, IList<object> transactions)
+		public void SaveAsExcelSheet(string filePath, IList<IView> views)
 		{
-			var groupedTransactions = GroupTransactions(transactions);
+			var groupedViews = GroupViews(views);
 
             using FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
             var wb1 = new XSSFWorkbook();
 
-            foreach (var group in groupedTransactions)
+            foreach (var group in groupedViews)
             {
                 wb1.Add(CreateSheet(wb1, @group.Key, @group.Value));
             }
@@ -39,11 +40,11 @@ namespace TaxReporterCLI
             wb1.Write(file);
         }
 
-		public void PrintAsPlainText(IList<object> transactions)
+		public void PrintAsPlainText(IList<IView> views)
 		{
-			var groupedTransactions = GroupTransactions(transactions);
+			var groupedViews = GroupViews(views);
 
-			foreach (var group in groupedTransactions)
+			foreach (var group in groupedViews)
 			{
 				Console.WriteLine();
 				Console.WriteLine(group.Key);
@@ -51,7 +52,7 @@ namespace TaxReporterCLI
 			}
 		}
 
-		private ISheet CreateSheet(XSSFWorkbook workbook, string sheetName, IList<object> objects)
+		private ISheet CreateSheet(XSSFWorkbook workbook, string sheetName, IList<IView> objects)
 		{
 			var sheet = workbook.CreateSheet(sheetName);
 

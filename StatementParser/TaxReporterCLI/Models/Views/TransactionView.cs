@@ -1,9 +1,10 @@
+using System;
 using StatementParser.Attributes;
 using StatementParser.Models;
 
 namespace TaxReporterCLI.Models.Views
 {
-	public class TransactionView
+	public class TransactionView : IView
 	{
 		public Transaction Transaction { get; }
 
@@ -28,5 +29,14 @@ namespace TaxReporterCLI.Models.Views
 		{
 			return $"{Transaction} {nameof(ExchangedToCurrency)}:{ExchangedToCurrency} {nameof(ExchangeRatePerDay)}: {ExchangeRatePerDay} {nameof(ExchangeRatePerYear)}: {ExchangeRatePerYear}";
 		}
-	}
+
+        public int CompareTo(IView other)
+        {
+			if(!(other is TransactionView))
+			{
+				return 0;
+			}
+            return this.Transaction.Date.CompareTo((other as TransactionView).Transaction.Date);
+        }
+    }
 }

@@ -6,7 +6,7 @@ using StatementParser.Models;
 
 namespace TaxReporterCLI.Models.Views
 {
-	public class DividendCurrencySummaryView
+	public class DividendCurrencySummaryView : IView
 	{
 		[Description("Exchanged to currency")]
 		public Currency ExchangedToCurrency { get; }
@@ -71,5 +71,10 @@ namespace TaxReporterCLI.Models.Views
 		{
 			return $"{nameof(ExchangedToCurrency)}: {ExchangedToCurrency} {nameof(Currency)}: {Currency} {nameof(TotalIncome)}: {TotalIncome} {nameof(TotalTax)}: {TotalTax} {nameof(ExchangedPerDayTotalIncome)}: {ExchangedPerDayTotalIncome} {nameof(ExchangedPerYearTotalIncome)}: {ExchangedPerYearTotalIncome} {nameof(ExchangedPerDayTotalTax)}: {ExchangedPerDayTotalTax} {nameof(ExchangedPerYearTotalTax)}: {ExchangedPerYearTotalTax}";
 		}
-	}
+
+        public int CompareTo(IView other)
+        {
+            return 0;
+        }
+    }
 }
