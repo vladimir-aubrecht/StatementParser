@@ -5,7 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Commander.NET;
 using Commander.NET.Exceptions;
+using ExchangeRateProvider.Providers;
 using ExchangeRateProvider.Providers.Czk;
+using Newtonsoft.Json;
 using StatementParser;
 using StatementParser.Models;
 using TaxReporterCLI.Models.Views;
@@ -53,7 +55,13 @@ namespace TaxReporterCLI
 		private static async Task RunAsync(Options option)
         {
             var cnbProvider = new CzechNationalBankProvider();
-            var kurzyCzProvider = new KurzyCzProvider();
+            IExchangeProvider yearlyExchangeRateProvider = new KurzyCzProvider();
+
+            if (option.OverrideYearlyExchangeRate != null)
+			{
+				var overridenExchangeRates = JsonConvert.DeserializeObject<Dictionary<string, decimal>>(option.OverrideYearlyExchangeRate);
+                yearlyExchangeRateProvider = new StaticExchangeRateProvider(overridenExchangeRates);
+			}
 
             var parser = new TransactionParser();
             var transactions = new List<Transaction>();
@@ -78,7 +86,7 @@ namespace TaxReporterCLI
 
             Console.WriteLine("Downloading exchange rates ...");
 
-            var builder = new TransactionViewBuilder(kurzyCzProvider, cnbProvider);
+            var builder = new TransactionViewBuilder(yearlyExchangeRateProvider, cnbProvider);
             var transactionViews = await builder.BuildAsync(transactions);
 
             var summaryViews = CreateDividendSummaryViews(transactionViews);

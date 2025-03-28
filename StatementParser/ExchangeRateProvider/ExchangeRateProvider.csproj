@@ -4,8 +4,6 @@
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <Folder Include="Providers\" />
-        <Folder Include="Providers\Czk\" />
         <Folder Include="Models\" />
     </ItemGroup>
     <ItemGroup>
