@@ -9,7 +9,7 @@ namespace StatementParser.Parsers.Brokers.Revolut.PdfModels
 
         [DeserializeCollectionByRegex(
             "(\\d{4}-\\d{2}-\\d{2})",
-            "DividendsDateSymbolSecurity nameISINCountryGross AmountWithholding TaxNet Amount(.+?)Total")]
+            "Other income & feesDateDescriptionSecurity nameISINCountryGross AmountWithholding TaxNet Amount(.+?)Total")]
         public DividendModel[] Dividends { get; set; }
 
         [DeserializeCollectionByRegex(

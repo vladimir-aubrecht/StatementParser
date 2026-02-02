@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using ASoft.TextDeserializer;
 using ASoft.TextDeserializer.Exceptions;
+using NPOI.HSSF.Record;
 using StatementParser.Models;
 using StatementParser.Parsers.Brokers.Revolut.PdfModels;
 
@@ -33,7 +34,11 @@ namespace StatementParser.Parsers.Brokers.Revolut
 
                     foreach (var dividend in parsedDocument.Dividends)
                     {
-                        var transaction = new DividendTransaction(Broker.Revolut, dividend.Date, dividend.Symbol, dividend.Dividend, dividend.WithholdingTax, Currency.USD);
+                        var rate = FindRateAmount(dividend.Dividend);
+                        var reconstructedDividends = ReconstructUsdAmount(dividend.Dividend, rate);
+                        var reconstructedTax = ReconstructUsdAmount(dividend.WithholdingTax, rate);
+
+                        var transaction = new DividendTransaction(Broker.Revolut, dividend.Date, dividend.Symbol, reconstructedDividends, reconstructedTax, Currency.USD);
                         transactions.Add(transaction);
                     }
 
@@ -52,5 +57,44 @@ namespace StatementParser.Parsers.Brokers.Revolut
 
             return transactions;
         }
+
+        private decimal FindRateAmount(string dividend)
+        {
+            var rateIndex = dividend.IndexOf("Rate: ");
+            var rate = Convert.ToDecimal(dividend.Substring(rateIndex + 6));
+
+            return rate;
+        }
+
+        private decimal ReconstructUsdAmount(string dividend, decimal rate)
+        {
+            var czkIndex = dividend.IndexOf("CZK");
+            var numbersString = dividend.Substring(0, czkIndex - 1);
+
+            var readString = "";
+            for (var i = 0; i < numbersString.Length; i++)
+            {
+                readString += dividend[i];
+
+                var usdSuggestion = Convert.ToDecimal(readString);
+                var leftover = numbersString.Substring(readString.Length);
+
+                // In case we have multiple decimal dots skip testing
+                if (leftover.Split('.').Length > 2)
+                    continue;
+
+                var czkSuggestion = Convert.ToDecimal(leftover);
+
+                var calculatedCZK = usdSuggestion * rate;
+
+                if (Math.Abs(czkSuggestion - calculatedCZK) < 1)
+                {
+                    return usdSuggestion;
+                }
+            }
+
+            return -1;
+        }
+
     }
 }

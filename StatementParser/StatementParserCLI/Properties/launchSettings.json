@@ -2,7 +2,7 @@
   "profiles": {
     "StatementParserCLI": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Statements\\Fidelity\\"
+      "commandLineArgs": "C:\\Statements\\Revolut\\"
     }
   }
 }
