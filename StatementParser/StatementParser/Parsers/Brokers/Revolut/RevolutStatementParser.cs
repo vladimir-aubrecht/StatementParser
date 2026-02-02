@@ -44,7 +44,15 @@ namespace StatementParser.Parsers.Brokers.Revolut
 
                     foreach (var sale in parsedDocument.Sales)
                     {
-                        var transaction = new SaleTransaction(Broker.Revolut, sale.DateSold, sale.Symbol,  Currency.USD, 0, sale.Quantity, sale.CostBasis, sale.GrossProceeds, 0, 0, 0, sale.PnL);
+                        var buyRate = FindRateAmount(sale.CostBasis);
+                        var saleRate = FindRateAmount(sale.GrossProceeds);
+
+                        var reconstructedCostBasis = ReconstructUsdAmount(sale.CostBasis, buyRate);
+                        var reconstructedGrossProceeds = ReconstructUsdAmount(sale.GrossProceeds, saleRate);
+
+                        var pnl = reconstructedGrossProceeds - reconstructedCostBasis;
+
+                        var transaction = new SaleTransaction(Broker.Revolut, sale.DateSold, sale.Symbol,  Currency.USD, 0, sale.Quantity, reconstructedCostBasis, reconstructedGrossProceeds, 0, 0, 0, pnl);
                         transactions.Add(transaction);
                     }
 
@@ -69,27 +77,36 @@ namespace StatementParser.Parsers.Brokers.Revolut
         private decimal ReconstructUsdAmount(string dividend, decimal rate)
         {
             var czkIndex = dividend.IndexOf("CZK");
-            var numbersString = dividend.Substring(0, czkIndex - 1);
+
+            if (czkIndex == -1)
+            {
+                czkIndex = dividend.Length - 3;
+            }
+
+            var numbersString = dividend.Replace("US$", "").Substring(0, czkIndex - 1);
 
             var readString = "";
             for (var i = 0; i < numbersString.Length; i++)
             {
-                readString += dividend[i];
+                readString += numbersString[i];
 
-                var usdSuggestion = Convert.ToDecimal(readString);
-                var leftover = numbersString.Substring(readString.Length);
-
-                // In case we have multiple decimal dots skip testing
-                if (leftover.Split('.').Length > 2)
-                    continue;
-
-                var czkSuggestion = Convert.ToDecimal(leftover);
-
-                var calculatedCZK = usdSuggestion * rate;
-
-                if (Math.Abs(czkSuggestion - calculatedCZK) < 1)
+                try
                 {
-                    return usdSuggestion;
+                    var usdSuggestion = Convert.ToDecimal(readString);
+                    var leftover = numbersString.Substring(readString.Length);
+
+                    var czkSuggestion = Convert.ToDecimal(leftover);
+
+                    var calculatedCZK = usdSuggestion * rate;
+
+                    if (Math.Abs(czkSuggestion - calculatedCZK) < 1)
+                    {
+                        return usdSuggestion;
+                    }
+                }
+                catch
+                {
+                    continue;
                 }
             }
 
