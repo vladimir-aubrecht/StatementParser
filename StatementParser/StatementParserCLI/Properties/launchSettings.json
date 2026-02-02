@@ -2,7 +2,7 @@
   "profiles": {
     "StatementParserCLI": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\vladi\\Downloads\\Statements"
+      "commandLineArgs": "C:\\Statements\\Fidelity\\"
     }
   }
 }
