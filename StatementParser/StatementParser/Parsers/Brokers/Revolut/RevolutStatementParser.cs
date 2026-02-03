@@ -80,6 +80,8 @@ namespace StatementParser.Parsers.Brokers.Revolut
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(dividend);
             }
+
+            return 0;
         }
 
         private decimal ReconstructUsdAmount(string dividend, decimal rate)
