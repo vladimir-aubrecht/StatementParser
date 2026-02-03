@@ -68,20 +68,12 @@ namespace StatementParser.Parsers.Brokers.Revolut
 
         private decimal FindRateAmount(string dividend)
         {
-            try
-            {
-                var rateIndex = dividend.IndexOf("Rate: ");
-                var rate = Convert.ToDecimal(dividend.Substring(rateIndex + 6));
+            var rateIndex = dividend.IndexOf("Rate: ");
+            var detectedRate = dividend.Substring(rateIndex + 6);
+            Console.WriteLine(detectedRate);
+            var rate = Convert.ToDecimal(detectedRate);
 
-                return rate;
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(dividend);
-            }
-
-            return 0;
+            return rate;
         }
 
         private decimal ReconstructUsdAmount(string dividend, decimal rate)
