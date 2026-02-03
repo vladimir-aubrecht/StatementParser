@@ -72,14 +72,14 @@ namespace StatementParser.Parsers.Brokers.Revolut
             {
                 var rateIndex = dividend.IndexOf("Rate: ");
                 var rate = Convert.ToDecimal(dividend.Substring(rateIndex + 6));
+
+                return rate;
             }
             catch (FormatException ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(dividend);
             }
-
-            return rate;
         }
 
         private decimal ReconstructUsdAmount(string dividend, decimal rate)
