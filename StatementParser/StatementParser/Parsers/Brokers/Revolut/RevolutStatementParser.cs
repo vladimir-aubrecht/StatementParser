@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using ASoft.TextDeserializer;
 using ASoft.TextDeserializer.Exceptions;
 using NPOI.HSSF.Record;
 using StatementParser.Models;
 using StatementParser.Parsers.Brokers.Revolut.PdfModels;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 
 namespace StatementParser.Parsers.Brokers.Revolut
 {
@@ -70,8 +71,8 @@ namespace StatementParser.Parsers.Brokers.Revolut
         {
             var rateIndex = dividend.IndexOf("Rate: ");
             var detectedRate = dividend.Substring(rateIndex + 6);
-            Console.WriteLine(detectedRate);
-            var rate = Convert.ToDecimal(detectedRate);
+
+            var rate = Convert.ToDecimal(detectedRate, CultureInfo.InvariantCulture);
 
             return rate;
         }
@@ -94,10 +95,10 @@ namespace StatementParser.Parsers.Brokers.Revolut
 
                 try
                 {
-                    var usdSuggestion = Convert.ToDecimal(readString);
+                    var usdSuggestion = Convert.ToDecimal(readString, CultureInfo.InvariantCulture);
                     var leftover = numbersString.Substring(readString.Length);
 
-                    var czkSuggestion = Convert.ToDecimal(leftover);
+                    var czkSuggestion = Convert.ToDecimal(leftover, CultureInfo.InvariantCulture);
 
                     var calculatedCZK = usdSuggestion * rate;
 
