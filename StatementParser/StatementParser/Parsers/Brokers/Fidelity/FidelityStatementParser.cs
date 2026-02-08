@@ -1,12 +1,15 @@
-﻿using System;
+﻿using ASoft.TextDeserializer;
+using ASoft.TextDeserializer.Exceptions;
+using NPOI.SS.Formula.Functions;
+using StatementParser.Models;
+using StatementParser.Parsers.Brokers.Fidelity.PdfModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using ASoft.TextDeserializer;
-using ASoft.TextDeserializer.Exceptions;
-using StatementParser.Models;
-using StatementParser.Parsers.Brokers.Fidelity.PdfModels;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace StatementParser.Parsers.Brokers.Fidelity
 {
@@ -30,8 +33,15 @@ namespace StatementParser.Parsers.Brokers.Fidelity
             {
                 try
                 {
-                    var parsedDocument = new TextDocumentParser<StatementModel>().Parse(textSource);
+                    //if (Debugger.IsAttached)
+                    //{
+                    //    foreach (var item in textSource.GetPagesText())
+                    //    {
+                    //        Console.WriteLine(item);
+                    //    }
+                    //}
 
+                    var parsedDocument = new TextDocumentParser<StatementModel>().Parse(textSource);
                     transactions.AddRange(parsedDocument.ActivityOther.Select(i => CreateOtherTransaction(i, parsedDocument.Year)));
                     transactions.AddRange(parsedDocument.ActivityDividend.Select(i => CreateDividendTransaction(parsedDocument.ActivityTaxes, i, parsedDocument.Year)));
                     transactions.AddRange(parsedDocument.ESPP.Select(i => CreateESPPTransaction(parsedDocument.ActivityBuy, i)));
