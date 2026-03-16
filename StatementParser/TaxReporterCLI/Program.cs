@@ -84,6 +84,14 @@ namespace TaxReporterCLI
                 }
             }
 
+            transactions = FilterTransactionsByYear(transactions);
+
+            if (transactions.Count == 0)
+            {
+                Console.WriteLine("No transactions to process.");
+                return;
+            }
+
             Console.WriteLine("Downloading exchange rates ...");
 
             var builder = new TransactionViewBuilder(yearlyExchangeRateProvider, cnbProvider);
@@ -95,6 +103,51 @@ namespace TaxReporterCLI
             views.AddRange(summaryViews);
 
             Print(option, views);
+        }
+
+        private static List<Transaction> FilterTransactionsByYear(List<Transaction> transactions)
+        {
+            var years = transactions.Select(t => t.Date.Year).Distinct().OrderBy(y => y).ToList();
+
+            if (years.Count <= 1)
+            {
+                return transactions;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine($"Warning: Transactions span multiple years: {string.Join(", ", years)}");
+            Console.WriteLine("Tax reports are typically filed per year. Please choose:");
+            Console.WriteLine();
+
+            for (int i = 0; i < years.Count; i++)
+            {
+                var count = transactions.Count(t => t.Date.Year == years[i]);
+                Console.WriteLine($"  {i + 1}) {years[i]} only ({count} transactions)");
+            }
+            Console.WriteLine($"  {years.Count + 1}) All years combined");
+            Console.WriteLine();
+
+            while (true)
+            {
+                Console.Write($"Enter choice (1-{years.Count + 1}): ");
+                var input = Console.ReadLine();
+
+                if (int.TryParse(input, out var choice) && choice >= 1 && choice <= years.Count + 1)
+                {
+                    if (choice == years.Count + 1)
+                    {
+                        Console.WriteLine("Proceeding with all transactions.");
+                        return transactions;
+                    }
+
+                    var selectedYear = years[choice - 1];
+                    var filtered = transactions.Where(t => t.Date.Year == selectedYear).ToList();
+                    Console.WriteLine($"Proceeding with {filtered.Count} transactions from {selectedYear}.");
+                    return filtered;
+                }
+
+                Console.WriteLine("Invalid choice. Please try again.");
+            }
         }
 
         private static IList<IView> CreateDividendSummaryViews(IList<TransactionView> transactionViews)
