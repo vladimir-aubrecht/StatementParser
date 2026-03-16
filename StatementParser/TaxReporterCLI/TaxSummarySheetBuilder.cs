@@ -30,6 +30,7 @@ namespace TaxReporterCLI
 				("Deposits - Price", "DepositTransactionView", "Total Price", "per Day", "Total Price", "per Year"),
 			};
 
+			int firstDataRow = 2; // Excel 1-based: row 2 is the first data row
 			int summaryRowIndex = 1;
 			foreach (var (label, sheetName, dailyPrefix, dailySuffix, yearlyPrefix, yearlySuffix) in sections)
 			{
@@ -50,14 +51,15 @@ namespace TaxReporterCLI
 				summaryRowIndex++;
 			}
 
-			// Total row (SUM of the 4 section rows above)
+			// Total row (SUM of all section rows above)
+			int lastDataRow = summaryRowIndex; // Excel 1-based: current summaryRowIndex equals last data Excel row
 			var totalRow = summarySheet.CreateRow(summaryRowIndex);
 			totalRow.CreateCell(0).SetCellValue("Total");
 			var totalDailyCell = totalRow.CreateCell(1);
-			totalDailyCell.SetCellFormula("SUM(B2:B5)");
+			totalDailyCell.SetCellFormula($"SUM(B{firstDataRow}:B{lastDataRow})");
 			totalDailyCell.CellStyle = czkStyle;
 			var totalYearlyCell = totalRow.CreateCell(2);
-			totalYearlyCell.SetCellFormula("SUM(C2:C5)");
+			totalYearlyCell.SetCellFormula($"SUM(C{firstDataRow}:C{lastDataRow})");
 			totalYearlyCell.CellStyle = czkStyle;
 			summaryRowIndex++;
 

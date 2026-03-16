@@ -132,6 +132,12 @@ namespace TaxReporterCLI
                 Console.Write($"Enter choice (1-{years.Count + 1}): ");
                 var input = Console.ReadLine();
 
+                if (input == null)
+                {
+                    Console.WriteLine("No input available. Proceeding with all transactions.");
+                    return transactions;
+                }
+
                 if (int.TryParse(input, out var choice) && choice >= 1 && choice <= years.Count + 1)
                 {
                     if (choice == years.Count + 1)

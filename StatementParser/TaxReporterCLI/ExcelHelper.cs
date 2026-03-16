@@ -23,7 +23,7 @@ namespace TaxReporterCLI
 			for (int i = 0; i < headerRow.LastCellNum; i++)
 			{
 				var cell = headerRow.GetCell(i);
-				if (cell == null) continue;
+				if (cell == null || cell.CellType != CellType.String) continue;
 
 				var value = cell.StringCellValue;
 				if (value != null && value.StartsWith(startsWith) && value.EndsWith(endsWith))
