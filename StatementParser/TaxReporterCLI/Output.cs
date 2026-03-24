@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,10 +32,17 @@ namespace TaxReporterCLI
             using FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
             var wb1 = new XSSFWorkbook();
 
+            var sheetMeta = new Dictionary<string, (ISheet Sheet, int DataRowCount)>();
+
             foreach (var group in groupedViews)
             {
-                wb1.Add(CreateSheet(wb1, @group.Key, @group.Value));
+                var sheet = CreateSheet(wb1, @group.Key, @group.Value);
+                wb1.Add(sheet);
+                sheetMeta[@group.Key] = (sheet, @group.Value.Count);
             }
+
+            var summaryBuilder = new TaxSummarySheetBuilder();
+            wb1.Add(summaryBuilder.Build(wb1, sheetMeta));
 
             wb1.Write(file);
         }
