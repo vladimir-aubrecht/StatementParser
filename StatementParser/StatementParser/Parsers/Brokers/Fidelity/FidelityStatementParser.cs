@@ -71,7 +71,7 @@ namespace StatementParser.Parsers.Brokers.Fidelity
         {
             var name = SearchForCompanyName(activityBuyModels, esppRow);
 
-            return new ESPPTransaction(Broker.Fidelity, esppRow.Date, name, Currency.USD, esppRow.PurchasePrice, esppRow.MarketPrice, esppRow.Amount);
+            return new ESPPTransaction(Broker.Fidelity, esppRow.Date, name, Currency.USD, esppRow.PurchasePrice, esppRow.MarketPrice, esppRow.Amount, esppRow.GainFromPurchase);
         }
 
         private DividendTransaction CreateDividendTransaction(ActivityTaxesModel[] activityTaxesModels, ActivityDividendModel activityDividendRow, int year)
