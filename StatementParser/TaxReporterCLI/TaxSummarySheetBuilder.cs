@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -82,9 +83,12 @@ namespace TaxReporterCLI
 			}
 
 			// Auto-size columns
-			for (int col = 0; col <= 2; col++)
+			if (Environment.OSVersion.Platform == PlatformID.Win32NT)
 			{
-				summarySheet.AutoSizeColumn(col);
+				for (int col = 0; col <= 2; col++)
+				{
+					summarySheet.AutoSizeColumn(col);
+				}
 			}
 
 			return summarySheet;
