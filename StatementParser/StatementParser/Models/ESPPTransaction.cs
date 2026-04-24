@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using StatementParser.Attributes;
 
 namespace StatementParser.Models
@@ -13,12 +13,14 @@ namespace StatementParser.Models
 
 		public decimal Amount { get; }
 
+		// Per-share price difference. May not equal TotalProfit / Amount due to
+		// broker-side rounding when GainFromPurchase is provided.
 		public decimal Profit { get; }
 
 		[Description("Total Profit")]
 		public decimal TotalProfit { get; }
 
-		public ESPPTransaction(ESPPTransaction eSPPTransaction) : this(eSPPTransaction.Broker, eSPPTransaction.Date, eSPPTransaction.Name, eSPPTransaction.Currency, eSPPTransaction.PurchasePrice, eSPPTransaction.MarketPrice, eSPPTransaction.Amount)
+		public ESPPTransaction(ESPPTransaction eSPPTransaction) : this(eSPPTransaction.Broker, eSPPTransaction.Date, eSPPTransaction.Name, eSPPTransaction.Currency, eSPPTransaction.PurchasePrice, eSPPTransaction.MarketPrice, eSPPTransaction.Amount, eSPPTransaction.TotalProfit)
 		{
 		}
 
@@ -29,6 +31,15 @@ namespace StatementParser.Models
 			this.Amount = amount;
 			this.Profit = marketPrice - purchasePrice;
 			this.TotalProfit = Profit * amount;
+		}
+
+		public ESPPTransaction(Broker broker, DateTime date, string name, Currency currency, decimal purchasePrice, decimal marketPrice, decimal amount, decimal gainFromPurchase) : base(broker, date, name, currency)
+		{
+			this.PurchasePrice = purchasePrice;
+			this.MarketPrice = marketPrice;
+			this.Amount = amount;
+			this.Profit = marketPrice - purchasePrice;
+			this.TotalProfit = gainFromPurchase;
 		}
 
 		public override string ToString()
