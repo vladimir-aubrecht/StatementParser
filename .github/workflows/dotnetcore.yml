@@ -13,22 +13,22 @@ jobs:
         platform: [linux-x64, win-x64, osx-x64]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET 6
-      uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v4
+    - name: Setup .NET 10
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 6.0.100
+        dotnet-version: 10.0.x
     - name: Build with dotnet
       run: dotnet build StatementParser/StatementParser.sln --configuration Release
     - name: Publish with dotnet
       run: dotnet publish -r ${{matrix.platform}} --configuration Release --self-contained true StatementParser/StatementParser.sln
     - name: Publish StatementParserCLI artifacts to GitHub
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: StatementParserCLI_${{matrix.platform}}
-        path: StatementParser/StatementParserCLI/bin/Release/net6.0/${{matrix.platform}}/publish
+        path: StatementParser/StatementParserCLI/bin/Release/net10.0/${{matrix.platform}}/publish
     - name: Publish TaxReporterCLI artifacts to GitHub
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: TaxReporterCLI_${{matrix.platform}}
-        path: StatementParser/TaxReporterCLI/bin/Release/net6.0/${{matrix.platform}}/publish
+        path: StatementParser/TaxReporterCLI/bin/Release/net10.0/${{matrix.platform}}/publish

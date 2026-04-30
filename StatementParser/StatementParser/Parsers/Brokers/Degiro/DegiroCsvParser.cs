@@ -65,7 +65,7 @@ namespace StatementParser.Parsers.Brokers.Degiro
 
                 return csv.GetRecords<StatementRowModel>().Where(i => i.Date != null).ToList();
             }
-			catch (Exception ex)
+			catch (Exception)
 			{
 				Console.WriteLine($"{nameof(DegiroParser)} failed to parse statement.");
 				return null;

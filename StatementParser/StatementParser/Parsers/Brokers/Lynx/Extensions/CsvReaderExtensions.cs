@@ -49,7 +49,7 @@ namespace StatementParser.Parsers.Brokers.Lynx.Extensions
 
                     dataSets[key].PropertyType.GetMethod("Add").Invoke(value, new[] { record });
                 }
-                catch (Exception ex) when (csvReader.HeaderRecord[csvReader.CurrentIndex] == "Date" && String.IsNullOrEmpty(csvReader.GetField(csvReader.CurrentIndex)))
+                catch (Exception) when (csvReader.HeaderRecord[csvReader.CurrentIndex] == "Date" && String.IsNullOrEmpty(csvReader.GetField(csvReader.CurrentIndex)))
                 {
                     //skip it, it's not interesting record as it doesn't have date (typically row with totals).
                 }
